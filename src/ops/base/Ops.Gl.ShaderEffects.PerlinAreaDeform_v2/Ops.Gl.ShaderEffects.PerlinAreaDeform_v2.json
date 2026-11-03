@@ -77,6 +77,15 @@
         ]
     },
     "summary": "displace vertices using perlin noise animation",
+    "tags": [
+        "noise",
+        "displace",
+        "organic",
+        "wobble",
+        "wave",
+        "vertex",
+        "volume"
+    ],
     "docs": {
         "ports": []
     },

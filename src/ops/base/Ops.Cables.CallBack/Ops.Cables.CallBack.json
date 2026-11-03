@@ -1,5 +1,15 @@
 {
     "summary": "Executes an external function (external javascript)",
+    "tags": [
+        "javascript",
+        "external function",
+        "embed",
+        "interop",
+        "call js",
+        "callback",
+        "api",
+        "integration"
+    ],
     "updated": 1541051030933,
     "authorName": "tim",
     "id": "33475ab9-b631-4225-92fa-c678cb2e0a24",

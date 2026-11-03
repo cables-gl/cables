@@ -17,6 +17,14 @@
         ]
     },
     "summary": "rotate an object to always face the camera",
+    "tags": [
+        "face camera",
+        "sprite",
+        "lookat",
+        "always facing",
+        "camera facing",
+        "cylindrical"
+    ],
     "docs": {
         "ports": []
     },

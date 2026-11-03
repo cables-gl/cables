@@ -49,6 +49,16 @@
         ]
     },
     "summary": "sidebar boolean toggle/switch element",
+    "tags": [
+        "checkbox",
+        "switch",
+        "boolean",
+        "on off",
+        "ui",
+        "gui",
+        "control",
+        "interface"
+    ],
     "docs": {
         "ports": []
     },

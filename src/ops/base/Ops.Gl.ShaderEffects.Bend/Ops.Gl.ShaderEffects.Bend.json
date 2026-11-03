@@ -4,6 +4,15 @@
     "id": "8d4941a9-388d-40da-8574-266070235251",
     "created": 1508772658372,
     "summary": "bend objects along an axis",
+    "tags": [
+        "curve",
+        "bow",
+        "arc",
+        "warp",
+        "deform",
+        "flex",
+        "vertex"
+    ],
     "layout": {
         "portsIn": [
             {

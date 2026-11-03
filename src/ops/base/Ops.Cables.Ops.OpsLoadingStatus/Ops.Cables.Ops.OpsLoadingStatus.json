@@ -49,6 +49,15 @@
     },
     "isReleased": true,
     "summary": "Get loading status of an array of ops",
+    "tags": [
+        "loading",
+        "progress",
+        "ops",
+        "ready",
+        "async",
+        "status",
+        "wait"
+    ],
     "docs": {
         "ports": []
     }

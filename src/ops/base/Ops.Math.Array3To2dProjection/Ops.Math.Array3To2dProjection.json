@@ -55,6 +55,13 @@
         ]
     },
     "summary": "calculate 2d positions of an array3x",
+    "tags": [
+        "project",
+        "screen space",
+        "2d positions",
+        "xyz to xy",
+        "world to screen"
+    ],
     "docs": {
         "ports": []
     },

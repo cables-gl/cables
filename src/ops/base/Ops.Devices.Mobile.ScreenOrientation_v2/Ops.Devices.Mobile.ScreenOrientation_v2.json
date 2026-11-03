@@ -1,5 +1,14 @@
 {
     "summary": "get orientation of the physical screen",
+    "tags": [
+        "landscape",
+        "portrait",
+        "rotation",
+        "phone",
+        "angle",
+        "tablet",
+        "detect"
+    ],
     "layout": {
         "portsOut": [
             {

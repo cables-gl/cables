@@ -35,6 +35,15 @@
         ]
     },
     "summary": "Interpolate between two arrays",
+    "tags": [
+        "lerp",
+        "blend",
+        "morph",
+        "mix",
+        "transition",
+        "xyz",
+        "points"
+    ],
     "docs": {
         "ports": []
     },

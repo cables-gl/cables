@@ -69,6 +69,15 @@
         ]
     },
     "summary": "information about a geometry",
+    "tags": [
+        "statistics",
+        "vertex count",
+        "faces",
+        "debug",
+        "inspect",
+        "size",
+        "triangles"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": []

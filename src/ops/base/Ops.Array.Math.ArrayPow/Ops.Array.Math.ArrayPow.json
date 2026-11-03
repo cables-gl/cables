@@ -1,5 +1,11 @@
 {
     "summary": "Apply a Pow function to an array",
+    "tags": [
+        "power",
+        "exponent",
+        "square",
+        "exponentiation"
+    ],
     "issues": "",
     "docs": {
         "ports": [

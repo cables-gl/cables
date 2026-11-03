@@ -106,6 +106,15 @@
         ]
     },
     "summary": "get values from the device motion sensor mobile",
+    "tags": [
+        "accelerometer",
+        "gyroscope",
+        "tilt",
+        "shake",
+        "phone",
+        "acceleration",
+        "devicemotion"
+    ],
     "docs": {
         "ports": []
     },

@@ -3,6 +3,9 @@
     "created": 1792056400332,
     "license": "MIT",
     "authorName": "bender",
+    "flags": [
+        "genAi"
+    ],
     "changelog": [
         {
             "message": "op created",

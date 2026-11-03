@@ -12,6 +12,15 @@
         ]
     },
     "summary": "Get a variable object",
+    "tags": [
+        "read",
+        "variable",
+        "get",
+        "wireless",
+        "global",
+        "receive",
+        "json"
+    ],
     "changelog": [
         {
             "message": "Ops.Vars.VariableObject renamed to Ops.Vars.VarGetObject",

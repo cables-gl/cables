@@ -72,6 +72,15 @@
         }
     ],
     "summary": "Change the position of all meshes inside of the area of influence",
+    "tags": [
+        "move",
+        "offset",
+        "push",
+        "volume",
+        "influence",
+        "local translate",
+        "vertex"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

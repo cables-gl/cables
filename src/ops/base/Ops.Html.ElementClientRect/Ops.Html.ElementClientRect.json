@@ -76,6 +76,15 @@
         ]
     },
     "summary": "get html element absolute position and size in pixels on screen",
+    "tags": [
+        "bounding box",
+        "getboundingclientrect",
+        "position",
+        "size",
+        "pixels",
+        "measure",
+        "screen position"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

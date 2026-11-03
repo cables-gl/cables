@@ -1,5 +1,15 @@
 {
     "summary": "draw cylinder (aka tube,pipe,round,circle)",
+    "tags": [
+        "tube",
+        "pipe",
+        "can",
+        "rod",
+        "column",
+        "pillar",
+        "barrel",
+        "circle extrude"
+    ],
     "layout": {
         "portsIn": [
             {

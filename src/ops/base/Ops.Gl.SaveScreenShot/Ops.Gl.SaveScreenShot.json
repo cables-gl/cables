@@ -39,6 +39,15 @@
         ]
     },
     "summary": "download the current screen content as png file",
+    "tags": [
+        "screenshot",
+        "capture",
+        "png",
+        "export",
+        "download",
+        "save image",
+        "print screen"
+    ],
     "exampleProjectId": "OB0Qmi",
     "coreLibs": [
         "cgl"

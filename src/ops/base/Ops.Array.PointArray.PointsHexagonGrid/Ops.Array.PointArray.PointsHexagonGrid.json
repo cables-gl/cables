@@ -72,6 +72,14 @@
         ]
     },
     "summary": "Generate 3D point coordinates for a hexagon grid",
+    "tags": [
+        "hex",
+        "honeycomb",
+        "grid",
+        "tiling",
+        "field",
+        "hexagonal"
+    ],
     "docs": {
         "ports": [
             {

@@ -26,6 +26,15 @@
         ]
     },
     "summary": "Delay the input/output of a boolean by x seconds",
+    "tags": [
+        "wait",
+        "timeout",
+        "later",
+        "lag",
+        "postpone",
+        "timer",
+        "hold"
+    ],
     "authorName": "pandur",
     "id": "4516be54-9077-490f-a094-83696b9011ba",
     "created": 1613050107456,

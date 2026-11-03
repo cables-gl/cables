@@ -38,6 +38,15 @@
         ]
     },
     "summary": "triggers when Object has changed",
+    "tags": [
+        "change",
+        "detect",
+        "event",
+        "onchange",
+        "listener",
+        "update",
+        "json changed"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

@@ -1,5 +1,17 @@
 {
     "summary": "Simple Audio Player, using HTML5 Audio, does not need WebAudio",
+    "tags": [
+        "music",
+        "sound",
+        "mp3",
+        "play",
+        "html5 audio",
+        "sample",
+        "playback",
+        "song",
+        "wav",
+        "background music"
+    ],
     "layout": {
         "portsIn": [
             {

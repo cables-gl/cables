@@ -41,6 +41,15 @@
         "portsOut": []
     },
     "summary": "Display an image on the timeline",
+    "tags": [
+        "thumbnail",
+        "picture",
+        "reference",
+        "storyboard",
+        "visual marker",
+        "preview",
+        "display"
+    ],
     "docs": {
         "ports": []
     },

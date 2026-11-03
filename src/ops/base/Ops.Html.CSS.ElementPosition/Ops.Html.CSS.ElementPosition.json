@@ -129,6 +129,17 @@
     },
     "license": "MIT",
     "summary": "Set position left/right/top/bottom of a HTML element",
+    "tags": [
+        "left",
+        "top",
+        "right",
+        "bottom",
+        "absolute",
+        "layout",
+        "css",
+        "place",
+        "offset"
+    ],
     "exampleProjectId": "JF4w9a",
     "isReleased": true
 }

@@ -114,6 +114,17 @@
         ]
     },
     "summary": "simple camera you control with W,A,S,D keys like in a FPS game",
+    "tags": [
+        "fps",
+        "first person",
+        "keyboard",
+        "fly",
+        "free camera",
+        "walk",
+        "navigation",
+        "game camera",
+        "controls"
+    ],
     "docs": {
         "ports": [
             {

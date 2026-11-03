@@ -129,6 +129,14 @@
         ]
     },
     "summary": "create a texture from an array of number values",
+    "tags": [
+        "data texture",
+        "array to image",
+        "pixels",
+        "convert",
+        "values",
+        "float texture"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

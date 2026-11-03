@@ -14,6 +14,15 @@
     ],
     "authorName": "pandur",
     "summary": "Resize canvas element to a specific pixel size or aspect ratio",
+    "tags": [
+        "resize",
+        "set size",
+        "fixed size",
+        "resolution",
+        "pixels",
+        "aspect ratio",
+        "width height"
+    ],
     "created": 1579874096606,
     "layout": {
         "portsIn": [

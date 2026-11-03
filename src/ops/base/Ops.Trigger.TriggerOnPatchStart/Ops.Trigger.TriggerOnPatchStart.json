@@ -25,5 +25,16 @@
                 "name": "Next"
             }
         ]
-    }
+    },
+    "tags": [
+        "init",
+        "initialize",
+        "startup",
+        "start",
+        "on load",
+        "first frame",
+        "begin",
+        "once",
+        "boot"
+    ]
 }

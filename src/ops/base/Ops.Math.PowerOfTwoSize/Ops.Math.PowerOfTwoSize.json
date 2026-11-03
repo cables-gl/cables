@@ -34,6 +34,16 @@
         ]
     },
     "summary": "Return the next values as power of two",
+    "tags": [
+        "pot",
+        "power of 2",
+        "texture size",
+        "next",
+        "64",
+        "128",
+        "256",
+        "512"
+    ],
     "docs": {
         "ports": []
     },

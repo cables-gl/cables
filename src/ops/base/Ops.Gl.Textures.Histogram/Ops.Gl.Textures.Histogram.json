@@ -28,6 +28,14 @@
         ]
     },
     "summary": "graphical representation of distribution of color in a texture",
+    "tags": [
+        "distribution",
+        "levels",
+        "statistics",
+        "analyze",
+        "color distribution",
+        "chart"
+    ],
     "docs": {
         "ports": []
     },

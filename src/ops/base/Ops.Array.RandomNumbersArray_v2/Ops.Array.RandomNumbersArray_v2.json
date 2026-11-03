@@ -52,6 +52,15 @@
         ]
     },
     "summary": "Generate an array of random numbers",
+    "tags": [
+        "random",
+        "rand",
+        "noise",
+        "seed",
+        "dice",
+        "generate",
+        "white noise"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -1,5 +1,14 @@
 {
     "summary": "Execute a glsl code math expression in an image compose ",
+    "tags": [
+        "math",
+        "formula",
+        "glsl",
+        "expression",
+        "code",
+        "shader",
+        "custom"
+    ],
     "layout": {
         "portsIn": [
             {

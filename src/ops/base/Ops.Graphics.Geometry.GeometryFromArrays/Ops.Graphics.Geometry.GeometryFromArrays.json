@@ -51,6 +51,16 @@
         "ports": []
     },
     "summary": "Create a geometry from array data",
+    "tags": [
+        "create",
+        "build",
+        "procedural",
+        "custom mesh",
+        "vertices",
+        "indices",
+        "faces",
+        "from data"
+    ],
     "coreLibs": [
         "cgl"
     ],

@@ -46,6 +46,14 @@
     "authorName": "pandur",
     "created": 1698309430889,
     "summary": "Get light/dark color scheme preference of the browser",
+    "tags": [
+        "dark mode",
+        "light mode",
+        "theme",
+        "prefers-color-scheme",
+        "appearance",
+        "system theme"
+    ],
     "caniusequery": "prefers-color-scheme",
     "docs": {
         "ports": [

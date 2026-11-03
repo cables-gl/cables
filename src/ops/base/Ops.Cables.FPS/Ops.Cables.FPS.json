@@ -3,6 +3,15 @@
     "id": "1bbd3b97-d8cd-4ff6-a6a4-f5121c28d29f",
     "created": 1519394197766,
     "summary": "Returns the current frames per second",
+    "tags": [
+        "frame rate",
+        "framerate",
+        "performance",
+        "speed",
+        "fps counter",
+        "stats",
+        "frames per second"
+    ],
     "docs": {
         "ports": [
             {

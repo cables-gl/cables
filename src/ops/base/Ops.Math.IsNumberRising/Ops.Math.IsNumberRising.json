@@ -26,6 +26,14 @@
         ]
     },
     "summary": "detect if a number rising or falling ",
+    "tags": [
+        "rising",
+        "falling",
+        "direction",
+        "increasing",
+        "decreasing",
+        "trend"
+    ],
     "docs": {
         "ports": []
     },

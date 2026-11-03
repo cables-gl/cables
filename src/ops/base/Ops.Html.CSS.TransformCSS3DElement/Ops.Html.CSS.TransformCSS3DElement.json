@@ -26,6 +26,14 @@
         ]
     },
     "summary": "Transform an Element in 3d space using CSS3D  ",
+    "tags": [
+        "3d",
+        "perspective",
+        "css3d",
+        "dom 3d",
+        "position in 3d",
+        "html in 3d"
+    ],
     "docs": {
         "ports": []
     },

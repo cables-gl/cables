@@ -45,6 +45,17 @@
     "authorName": "pandur",
     "created": 1645174874478,
     "summary": "Log changes of input values line by line, use like a logfile for debugging",
+    "tags": [
+        "log",
+        "console",
+        "history",
+        "debug",
+        "print",
+        "output",
+        "messages",
+        "text log",
+        "monitor"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

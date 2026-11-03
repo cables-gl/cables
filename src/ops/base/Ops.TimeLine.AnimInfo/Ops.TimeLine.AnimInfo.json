@@ -42,6 +42,15 @@
         ]
     },
     "summary": "Get information about an anim object",
+    "tags": [
+        "keyframes",
+        "debug",
+        "inspect",
+        "length",
+        "range",
+        "statistics",
+        "curve info"
+    ],
     "docs": {
         "ports": []
     },

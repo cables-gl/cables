@@ -24,6 +24,14 @@
         ]
     },
     "summary": "outputs a unique identifier string",
+    "tags": [
+        "unique id",
+        "guid",
+        "identifier",
+        "random id",
+        "generate",
+        "key"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -41,6 +41,14 @@
         ]
     },
     "summary": "Switch between multiple number inputs",
+    "tags": [
+        "add",
+        "plus",
+        "total",
+        "combine",
+        "many inputs",
+        "addition"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

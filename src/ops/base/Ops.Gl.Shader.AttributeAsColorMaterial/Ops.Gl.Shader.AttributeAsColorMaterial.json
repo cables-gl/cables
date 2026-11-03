@@ -45,6 +45,13 @@
     "id": "2963fd23-a860-461a-a3cf-394b8261159f",
     "created": 1525434279614,
     "summary": "render mesh normals as colors",
+    "tags": [
+        "debug",
+        "normals",
+        "vertex attributes",
+        "visualize",
+        "normal color"
+    ],
     "docs": {
         "ports": []
     },

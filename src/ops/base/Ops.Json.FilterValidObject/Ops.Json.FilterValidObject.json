@@ -10,6 +10,14 @@
     "authorName": "pandur",
     "created": 1587048768999,
     "summary": "Filter valid objects",
+    "tags": [
+        "null check",
+        "undefined",
+        "valid",
+        "hold last",
+        "clean",
+        "not empty"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

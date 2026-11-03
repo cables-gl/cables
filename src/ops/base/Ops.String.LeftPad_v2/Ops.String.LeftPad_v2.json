@@ -23,6 +23,15 @@
         ]
     },
     "summary": "create a fixed length string from a number 1 -> 0001",
+    "tags": [
+        "zero pad",
+        "padding",
+        "leading zeros",
+        "format",
+        "fixed length",
+        "digits",
+        "number format"
+    ],
     "authorName": "pandur",
     "id": "da8aba9f-9e9c-4fca-87c9-2726b6e101e2",
     "created": 1608735356297,

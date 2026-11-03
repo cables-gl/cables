@@ -73,6 +73,15 @@
         ]
     },
     "summary": "Opens a sharing dialog to share text and images",
+    "tags": [
+        "share",
+        "social",
+        "native share",
+        "send",
+        "mobile share",
+        "share sheet",
+        "navigator.share"
+    ],
     "issues": "",
     "caniusequery": "web-share",
     "youtubeids": [],

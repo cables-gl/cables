@@ -97,6 +97,15 @@
         ]
     },
     "summary": "dj style filter (lowpass and highpass)",
+    "tags": [
+        "dj filter",
+        "lowpass",
+        "highpass",
+        "sweep",
+        "cutoff",
+        "eq",
+        "kill"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -37,6 +37,14 @@
         ]
     },
     "summary": "Remove key-value pairs from objects in an array of objects",
+    "tags": [
+        "json",
+        "remove keys",
+        "pick",
+        "omit",
+        "properties",
+        "objects"
+    ],
     "docs": {
         "ports": [
             {

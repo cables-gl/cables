@@ -27,6 +27,14 @@
         ]
     },
     "summary": "apply color filter/effects by using a lookup texture",
+    "tags": [
+        "lut",
+        "lookup table",
+        "color grading",
+        "color filter",
+        "look",
+        "cube lut"
+    ],
     "docs": {
         "ports": []
     },

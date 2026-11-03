@@ -47,6 +47,14 @@
         ]
     },
     "summary": "Set alphachannel of current imagecompose via a texture mask",
+    "tags": [
+        "mask",
+        "cutout",
+        "matte",
+        "stencil",
+        "transparency",
+        "alpha channel"
+    ],
     "docs": {
         "ports": []
     },

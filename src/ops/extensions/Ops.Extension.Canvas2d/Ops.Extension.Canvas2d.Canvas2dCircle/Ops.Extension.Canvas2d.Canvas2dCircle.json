@@ -93,5 +93,15 @@
     "docs": {
         "ports": []
     },
-    "summary": "Draws a circle or arc on a canvas2d, filled, stroked or as clip path"
+    "summary": "Draws a circle or arc on a canvas2d, filled, stroked or as clip path",
+    "tags": [
+        "arc",
+        "disc",
+        "disk",
+        "round",
+        "ellipse",
+        "dot",
+        "pie",
+        "draw"
+    ]
 }

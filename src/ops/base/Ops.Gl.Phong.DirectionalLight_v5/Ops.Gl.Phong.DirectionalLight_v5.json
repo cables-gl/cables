@@ -144,6 +144,15 @@
         }
     ],
     "summary": "Directional light for phong shading",
+    "tags": [
+        "sun",
+        "sunlight",
+        "parallel light",
+        "shadows",
+        "lighting",
+        "distant light",
+        "day"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

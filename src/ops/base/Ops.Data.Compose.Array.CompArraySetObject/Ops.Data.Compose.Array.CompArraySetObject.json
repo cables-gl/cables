@@ -34,6 +34,19 @@
     "authorName": "pandur",
     "created": 1740660823699,
     "summary": "push/append a number to an array",
+    "tags": [
+        "push",
+        "append",
+        "add",
+        "array",
+        "compose",
+        "build",
+        "collect",
+        "list",
+        "object",
+        "json",
+        "set"
+    ],
     "docs": {
         "ports": []
     },

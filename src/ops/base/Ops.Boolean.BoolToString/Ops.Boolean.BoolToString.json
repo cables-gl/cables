@@ -33,6 +33,14 @@
         ]
     },
     "summary": "convert boolean to string",
+    "tags": [
+        "convert",
+        "text",
+        "true false",
+        "cast",
+        "stringify",
+        "label"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

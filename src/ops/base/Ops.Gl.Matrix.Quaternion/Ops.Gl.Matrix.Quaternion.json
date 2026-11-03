@@ -37,6 +37,14 @@
         ]
     },
     "summary": "multiplies current modelmatrix with a quaternion",
+    "tags": [
+        "rotation",
+        "orientation",
+        "rotate",
+        "quat",
+        "slerp",
+        "gimbal"
+    ],
     "docs": {
         "ports": []
     },

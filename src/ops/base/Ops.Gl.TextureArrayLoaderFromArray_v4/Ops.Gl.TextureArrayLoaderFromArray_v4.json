@@ -68,6 +68,15 @@
         ]
     },
     "summary": "load multiple texture from filenames given as an array",
+    "tags": [
+        "load",
+        "images",
+        "filenames",
+        "batch",
+        "preload",
+        "image list",
+        "urls"
+    ],
     "docs": {
         "ports": []
     },

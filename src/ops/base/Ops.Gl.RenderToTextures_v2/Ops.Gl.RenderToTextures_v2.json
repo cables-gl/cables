@@ -147,6 +147,15 @@
         ]
     },
     "summary": "render to multiple textures at the same time",
+    "tags": [
+        "framebuffer",
+        "fbo",
+        "mrt",
+        "multiple render targets",
+        "gbuffer",
+        "offscreen",
+        "buffers"
+    ],
     "docs": {
         "ports": []
     },

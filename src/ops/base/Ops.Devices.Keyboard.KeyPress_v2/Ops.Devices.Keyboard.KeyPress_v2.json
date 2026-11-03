@@ -37,6 +37,16 @@
         ]
     },
     "summary": "Triggers when a key is pressed",
+    "tags": [
+        "keyboard",
+        "key down",
+        "keydown",
+        "input",
+        "hotkey",
+        "shortcut",
+        "button",
+        "type"
+    ],
     "docs": {
         "ports": []
     },

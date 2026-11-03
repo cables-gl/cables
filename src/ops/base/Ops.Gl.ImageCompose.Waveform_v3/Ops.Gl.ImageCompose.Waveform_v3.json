@@ -128,6 +128,15 @@
         ]
     },
     "summary": "Draw a sine, sawtooth, triangle, or square waveform with adjustable amplitude and frequency",
+    "tags": [
+        "sine",
+        "sawtooth",
+        "triangle",
+        "square",
+        "wave",
+        "oscillator",
+        "scope"
+    ],
     "docs": {
         "ports": [
             {

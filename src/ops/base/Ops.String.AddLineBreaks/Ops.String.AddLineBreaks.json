@@ -29,6 +29,14 @@
         ]
     },
     "summary": "Insert a line break in a string of words",
+    "tags": [
+        "newline",
+        "wrap",
+        "word wrap",
+        "break",
+        "split lines",
+        "\\n"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

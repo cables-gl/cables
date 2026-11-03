@@ -36,6 +36,16 @@
         ]
     },
     "summary": "Value since the time origin in milliseconds (performance.now())",
+    "tags": [
+        "performance.now",
+        "time",
+        "clock",
+        "uptime",
+        "elapsed",
+        "ms",
+        "timer",
+        "since start"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

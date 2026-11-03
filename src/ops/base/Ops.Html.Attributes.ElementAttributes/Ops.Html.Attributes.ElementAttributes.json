@@ -42,5 +42,14 @@
         "ports": []
     },
     "summary": "Get all attributes from an element an object",
+    "tags": [
+        "properties",
+        "all attributes",
+        "read",
+        "dom",
+        "json",
+        "inspect",
+        "get attributes"
+    ],
     "isReleased": true
 }

@@ -27,6 +27,13 @@
         "subpatchop"
     ],
     "summary": "internal template when creating new subpatches",
+    "tags": [
+        "internal",
+        "template",
+        "subpatch",
+        "new subpatch",
+        "boilerplate"
+    ],
     "docs": {
         "ports": []
     },

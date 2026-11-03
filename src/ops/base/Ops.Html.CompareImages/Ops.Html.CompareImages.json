@@ -46,6 +46,14 @@
         "resemble.js"
     ],
     "summary": "compares two images and shows the difference as a pink color",
+    "tags": [
+        "diff",
+        "difference",
+        "visual regression",
+        "compare",
+        "test",
+        "pixel diff"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

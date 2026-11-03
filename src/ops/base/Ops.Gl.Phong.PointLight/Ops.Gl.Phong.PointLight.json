@@ -1,5 +1,15 @@
 {
     "summary": "point light for phongmaterial shading",
+    "tags": [
+        "lamp",
+        "bulb",
+        "omni",
+        "light source",
+        "glow",
+        "candle",
+        "lighting",
+        "omnidirectional"
+    ],
     "layout": {
         "portsIn": [
             {

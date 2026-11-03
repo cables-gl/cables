@@ -77,6 +77,14 @@
         ]
     },
     "summary": "Add a CSS shadow or glow to an HTML element",
+    "tags": [
+        "drop shadow",
+        "glow",
+        "box-shadow",
+        "text shadow",
+        "css",
+        "depth"
+    ],
     "docs": {
         "ports": []
     },

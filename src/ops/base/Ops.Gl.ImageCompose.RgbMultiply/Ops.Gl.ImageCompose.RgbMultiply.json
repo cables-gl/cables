@@ -1,5 +1,12 @@
 {
     "summary": "multiply image colors by color channel",
+    "tags": [
+        "tint",
+        "color multiply",
+        "colorize",
+        "modulate",
+        "rgb gain"
+    ],
     "layout": {
         "portsIn": [
             {

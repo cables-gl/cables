@@ -31,6 +31,15 @@
         ]
     },
     "summary": "merge two geometries to one",
+    "tags": [
+        "combine",
+        "join",
+        "add",
+        "union",
+        "concatenate",
+        "two meshes",
+        "attach"
+    ],
     "exampleProjectId": "3rCDz6",
     "changelog": [
         {

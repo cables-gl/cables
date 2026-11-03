@@ -75,6 +75,15 @@
         "ports": []
     },
     "summary": "date or datetime picker in the sidebar",
+    "tags": [
+        "calendar",
+        "date picker",
+        "time picker",
+        "datetime",
+        "input",
+        "ui",
+        "gui"
+    ],
     "exampleProjectId": "Bkzmci",
     "isReleased": true
 }

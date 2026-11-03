@@ -103,5 +103,14 @@
     "exampleProjectId": "ofPcTo",
     "license": "MIT",
     "summary": "Animate between two numbers based on a boolean value",
+    "tags": [
+        "fade",
+        "transition",
+        "on off",
+        "toggle",
+        "tween",
+        "switch animation",
+        "ease"
+    ],
     "isReleased": true
 }

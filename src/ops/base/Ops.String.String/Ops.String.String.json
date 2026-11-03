@@ -19,6 +19,15 @@
         ]
     },
     "summary": "enter a string",
+    "tags": [
+        "text",
+        "constant",
+        "value",
+        "input",
+        "label",
+        "word",
+        "characters"
+    ],
     "docs": {
         "ports": [
             {

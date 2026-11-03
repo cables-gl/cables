@@ -52,6 +52,17 @@
         ]
     },
     "summary": "Smooths out jumps in values (AverageInterpolation)",
+    "tags": [
+        "average",
+        "ease",
+        "damping",
+        "lowpass",
+        "lag",
+        "inertia",
+        "filter",
+        "interpolate",
+        "slew"
+    ],
     "issues": "",
     "youtubeids": [
         "00Rvb749wrc"

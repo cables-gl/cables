@@ -1,5 +1,13 @@
 {
     "summary": "Automatically starts the timeline playback when opening patch",
+    "tags": [
+        "start",
+        "play on load",
+        "begin",
+        "run",
+        "automatic",
+        "startup"
+    ],
     "layout": {},
     "updated": 1519734786204,
     "authorName": "pandur",

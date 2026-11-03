@@ -46,6 +46,16 @@
         ]
     },
     "summary": "gives updated information about window.location.hash",
+    "tags": [
+        "url hash",
+        "anchor",
+        "routing",
+        "navigation",
+        "deep link",
+        "#",
+        "window.location",
+        "spa"
+    ],
     "issues": "",
     "youtubeids": [
         "hUdHnFtBTNU"

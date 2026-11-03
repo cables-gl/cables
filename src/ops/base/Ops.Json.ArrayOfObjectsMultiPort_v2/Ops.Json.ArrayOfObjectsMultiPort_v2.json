@@ -42,5 +42,14 @@
         "ports": []
     },
     "summary": "create an array with multiple objects",
+    "tags": [
+        "combine",
+        "collect",
+        "list",
+        "array",
+        "group",
+        "many inputs",
+        "objects"
+    ],
     "isReleased": true
 }

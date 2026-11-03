@@ -44,5 +44,14 @@
     ],
     "license": "MIT",
     "summary": "Simple method to generate texture coordinates from object vertex coordinates",
+    "tags": [
+        "uv mapping",
+        "uv",
+        "texture coordinates",
+        "unwrap",
+        "projection",
+        "planar",
+        "generate uvs"
+    ],
     "isReleased": true
 }

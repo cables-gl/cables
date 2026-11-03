@@ -55,6 +55,15 @@
         ]
     },
     "summary": "triggers when texture has changed",
+    "tags": [
+        "change",
+        "detect",
+        "event",
+        "onchange",
+        "listener",
+        "update",
+        "image changed"
+    ],
     "issues": "",
     "docs": {
         "ports": [

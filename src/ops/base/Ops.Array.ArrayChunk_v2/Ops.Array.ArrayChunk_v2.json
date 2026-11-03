@@ -37,6 +37,14 @@
         ]
     },
     "summary": "Extracts x elements from an array",
+    "tags": [
+        "slice",
+        "extract",
+        "subarray",
+        "part",
+        "range",
+        "segment"
+    ],
     "docs": {
         "ports": [
             {

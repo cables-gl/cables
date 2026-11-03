@@ -53,6 +53,14 @@
         ]
     },
     "summary": "outputs a perlin noise value like random ",
+    "tags": [
+        "noise",
+        "random",
+        "organic",
+        "smooth",
+        "procedural",
+        "wiggle"
+    ],
     "docs": {
         "ports": [
             {

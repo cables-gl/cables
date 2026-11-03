@@ -3,6 +3,15 @@
     "id": "3f20a79f-a35f-4a4d-b2f3-c46973a4531f",
     "created": 1605452818981,
     "summary": "get URL of a file",
+    "tags": [
+        "url",
+        "path",
+        "filepath",
+        "asset",
+        "upload",
+        "select file",
+        "source"
+    ],
     "docs": {
         "ports": []
     },

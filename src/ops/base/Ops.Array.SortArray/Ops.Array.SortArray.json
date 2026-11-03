@@ -40,6 +40,13 @@
         ]
     },
     "summary": "Sort an array of numbers with one of two modes - ascending or descending",
+    "tags": [
+        "order",
+        "ascending",
+        "descending",
+        "rank",
+        "sorting"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

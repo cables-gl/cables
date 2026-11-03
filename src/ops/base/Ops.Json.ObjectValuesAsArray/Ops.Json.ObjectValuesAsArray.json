@@ -30,6 +30,14 @@
         ]
     },
     "summary": "extract all object values as an array",
+    "tags": [
+        "values",
+        "list",
+        "extract",
+        "flatten",
+        "json",
+        "enumerate"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

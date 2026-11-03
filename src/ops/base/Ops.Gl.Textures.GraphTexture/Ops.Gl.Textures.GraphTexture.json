@@ -51,6 +51,16 @@
         ]
     },
     "summary": "draw a graph of a value into a texture",
+    "tags": [
+        "plot",
+        "graph",
+        "chart",
+        "history",
+        "oscilloscope",
+        "scope",
+        "line chart",
+        "visualize"
+    ],
     "docs": {
         "ports": [
             {

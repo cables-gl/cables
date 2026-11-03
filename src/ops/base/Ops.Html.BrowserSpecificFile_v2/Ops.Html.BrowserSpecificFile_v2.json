@@ -52,6 +52,15 @@
         ]
     },
     "summary": "Select a file based on the detected browser (Chrome, Firefox, Safari, ...)",
+    "tags": [
+        "safari",
+        "chrome",
+        "firefox",
+        "detect browser",
+        "fallback",
+        "compatibility",
+        "codec"
+    ],
     "docs": {
         "ports": [
             {

@@ -37,6 +37,14 @@
         ]
     },
     "summary": "create an array from multiple string input ports",
+    "tags": [
+        "combine",
+        "collect",
+        "list",
+        "create",
+        "many inputs",
+        "words"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

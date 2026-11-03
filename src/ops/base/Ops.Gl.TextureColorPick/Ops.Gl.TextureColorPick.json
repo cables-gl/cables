@@ -90,6 +90,14 @@
         ]
     },
     "summary": "get the color of a pixel in a texture",
+    "tags": [
+        "color picker",
+        "sample",
+        "read pixel",
+        "eyedropper",
+        "get color",
+        "pixel"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

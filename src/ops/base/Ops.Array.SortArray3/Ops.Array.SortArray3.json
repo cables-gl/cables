@@ -23,6 +23,14 @@
     "id": "b0fbc366-09a8-4695-87b3-5946210bf722",
     "created": 1513100341975,
     "summary": "Sort 3D points by a selected X, Y, or Z component",
+    "tags": [
+        "order",
+        "xyz",
+        "points",
+        "rank",
+        "sorting",
+        "axis"
+    ],
     "docs": {
         "ports": [
             {

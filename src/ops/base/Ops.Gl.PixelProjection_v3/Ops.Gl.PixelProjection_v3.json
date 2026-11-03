@@ -111,6 +111,14 @@
         ]
     },
     "summary": "Remaps world coordinates to pixel coordinates.",
+    "tags": [
+        "world to screen",
+        "pixels",
+        "project",
+        "2d position",
+        "screen space",
+        "coordinates"
+    ],
     "docs": {
         "ports": [
             {

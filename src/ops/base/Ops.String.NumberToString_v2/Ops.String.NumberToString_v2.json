@@ -23,6 +23,14 @@
         ]
     },
     "summary": "Convert a number to a string",
+    "tags": [
+        "convert",
+        "text",
+        "format",
+        "stringify",
+        "to text",
+        "cast"
+    ],
     "docs": {
         "ports": []
     },

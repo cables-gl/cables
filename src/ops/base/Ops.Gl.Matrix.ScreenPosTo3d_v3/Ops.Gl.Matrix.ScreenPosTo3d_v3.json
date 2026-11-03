@@ -42,6 +42,14 @@
         ]
     },
     "summary": "Converts screen coordinates to a 3D position",
+    "tags": [
+        "unproject",
+        "raycast",
+        "mouse to world",
+        "screen to world",
+        "pick",
+        "2d to 3d"
+    ],
     "docs": {
         "ports": [
             {

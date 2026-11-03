@@ -34,6 +34,16 @@
         ]
     },
     "summary": "record objects and download as json file",
+    "tags": [
+        "record",
+        "log",
+        "save",
+        "download",
+        "history",
+        "capture",
+        "json",
+        "data logging"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

@@ -230,6 +230,19 @@
         }
     ],
     "summary": "Loads and renders a glTF or GLB 3D scene",
+    "tags": [
+        "model",
+        "3d model",
+        "glb",
+        "import",
+        "load",
+        "3d file",
+        "mesh",
+        "object",
+        "asset",
+        "blender",
+        "animation"
+    ],
     "issues": "",
     "youtubeids": [
         "QNLw21hSweg"

@@ -1,5 +1,18 @@
 {
     "summary": "request a json file from another server (ajax, url, json)",
+    "tags": [
+        "ajax",
+        "fetch",
+        "xhr",
+        "api",
+        "rest",
+        "load json",
+        "url",
+        "get",
+        "network",
+        "download",
+        "web request"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -46,6 +46,15 @@
         ]
     },
     "summary": "Will only allow an Object to be output if the pass through parameter evaluates to true",
+    "tags": [
+        "pass",
+        "block",
+        "switch",
+        "allow",
+        "if",
+        "conditional",
+        "mute"
+    ],
     "issues": "",
     "docs": {
         "ports": [

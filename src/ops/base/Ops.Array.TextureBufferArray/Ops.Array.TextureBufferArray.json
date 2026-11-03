@@ -37,6 +37,16 @@
         ]
     },
     "summary": "Store various textures in an array, starts at the beginning again when end reached",
+    "tags": [
+        "collect",
+        "store",
+        "images",
+        "list",
+        "texture list",
+        "sequence",
+        "frames",
+        "history"
+    ],
     "docs": {
         "ports": [
             {

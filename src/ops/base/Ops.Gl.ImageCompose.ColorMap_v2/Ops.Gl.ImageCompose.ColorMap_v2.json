@@ -4,6 +4,14 @@
     "id": "440c1675-122d-411f-b848-16c60b677120",
     "created": 1650967159637,
     "summary": "colorize a black and white image using a gradient texture",
+    "tags": [
+        "gradient map",
+        "colorize",
+        "false color",
+        "ramp",
+        "tint",
+        "palette"
+    ],
     "layout": {
         "portsIn": [
             {

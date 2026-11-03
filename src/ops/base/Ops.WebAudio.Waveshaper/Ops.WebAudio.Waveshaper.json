@@ -72,6 +72,15 @@
         ]
     },
     "summary": "add waveshaping (distortion, overdrive, fuzz) to an audio stream",
+    "tags": [
+        "distortion",
+        "overdrive",
+        "fuzz",
+        "saturation",
+        "clipping",
+        "crunch",
+        "guitar"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

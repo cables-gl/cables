@@ -38,6 +38,15 @@
         ]
     },
     "summary": "Set CSS margins of a html element",
+    "tags": [
+        "layer",
+        "stacking",
+        "order",
+        "front",
+        "back",
+        "depth",
+        "css"
+    ],
     "docs": {
         "ports": []
     },

@@ -85,6 +85,14 @@
         ]
     },
     "summary": "generate an array3 of grid positions from a texture",
+    "tags": [
+        "positions",
+        "points",
+        "pixels to xyz",
+        "grid",
+        "convert",
+        "coordinates"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

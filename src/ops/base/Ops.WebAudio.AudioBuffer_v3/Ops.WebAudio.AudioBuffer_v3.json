@@ -78,6 +78,16 @@
         ]
     },
     "summary": "Loads an audio file into a buffer.",
+    "tags": [
+        "load",
+        "sample",
+        "sound file",
+        "mp3",
+        "wav",
+        "ogg",
+        "audio file",
+        "decode"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

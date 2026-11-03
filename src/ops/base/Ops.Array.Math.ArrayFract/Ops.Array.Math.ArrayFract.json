@@ -17,6 +17,12 @@
         ]
     },
     "summary": "Return the fractional remainder of all values in an array",
+    "tags": [
+        "fractional",
+        "decimal part",
+        "frac",
+        "remainder"
+    ],
     "issues": "",
     "docs": {
         "ports": [

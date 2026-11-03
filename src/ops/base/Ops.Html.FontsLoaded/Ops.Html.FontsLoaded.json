@@ -19,6 +19,15 @@
     "authorName": "pandur",
     "created": 1704727937128,
     "summary": "triggers when asynchronous requests finised loading",
+    "tags": [
+        "font ready",
+        "loading",
+        "wait",
+        "preload",
+        "typeface",
+        "done",
+        "webfont"
+    ],
     "docs": {
         "ports": []
     },

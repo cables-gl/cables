@@ -76,6 +76,17 @@
         "portsOut": []
     },
     "summary": "Opens a URL in the current window or another target.",
+    "tags": [
+        "url",
+        "link",
+        "open",
+        "anchor",
+        "navigate",
+        "href",
+        "website",
+        "a tag",
+        "redirect"
+    ],
     "docs": {
         "ports": []
     },

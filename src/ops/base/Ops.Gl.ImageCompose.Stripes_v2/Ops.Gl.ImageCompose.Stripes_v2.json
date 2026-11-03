@@ -74,6 +74,14 @@
         ]
     },
     "summary": "Draw stripes into the current ImageCompose",
+    "tags": [
+        "lines",
+        "bars",
+        "stripes",
+        "pattern",
+        "zebra",
+        "hatch"
+    ],
     "docs": {
         "ports": []
     },

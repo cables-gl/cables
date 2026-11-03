@@ -53,6 +53,15 @@
     "authorName": "pandur",
     "created": 1680618025319,
     "summary": "shift/remove the first number from an array",
+    "tags": [
+        "remove first",
+        "shift",
+        "dequeue",
+        "delete",
+        "take out",
+        "array",
+        "compose"
+    ],
     "docs": {
         "ports": []
     },

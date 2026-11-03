@@ -50,6 +50,14 @@
         ]
     },
     "summary": "Set OpenGL blend functions directly",
+    "tags": [
+        "blending",
+        "gl.blendfunc",
+        "transparency",
+        "alpha",
+        "compositing",
+        "webgl"
+    ],
     "docs": {
         "ports": []
     },

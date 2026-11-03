@@ -1,5 +1,12 @@
 {
     "summary": "Returns the absolute, positive value",
+    "tags": [
+        "absolute",
+        "positive",
+        "magnitude",
+        "modulus",
+        "remove sign"
+    ],
     "layout": {
         "portsIn": [
             {

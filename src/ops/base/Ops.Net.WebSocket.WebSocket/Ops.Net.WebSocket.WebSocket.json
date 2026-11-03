@@ -31,6 +31,18 @@
     "id": "d45aca4c-1c62-4261-80b3-d338a3203bf6",
     "created": 1524496393613,
     "summary": "create a websocket connection and receive data from it",
+    "tags": [
+        "realtime",
+        "network",
+        "socket",
+        "server",
+        "connect",
+        "receive",
+        "live data",
+        "ws",
+        "messaging",
+        "osc"
+    ],
     "docs": {
         "ports": []
     },

@@ -51,5 +51,14 @@
             }
         ]
     },
-    "summary": "Draws an image, video or canvas element onto a canvas2d"
+    "summary": "Draws an image, video or canvas element onto a canvas2d",
+    "tags": [
+        "image",
+        "picture",
+        "sprite",
+        "blit",
+        "video",
+        "drawimage",
+        "texture"
+    ]
 }

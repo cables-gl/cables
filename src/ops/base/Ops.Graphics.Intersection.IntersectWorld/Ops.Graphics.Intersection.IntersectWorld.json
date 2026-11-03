@@ -56,6 +56,14 @@
     "authorName": "pandur",
     "created": 1686149045279,
     "summary": "Define a world to check for intersections and collisions",
+    "tags": [
+        "collision world",
+        "scene",
+        "physics space",
+        "hit test",
+        "setup",
+        "bodies"
+    ],
     "docs": {
         "ports": []
     },

@@ -32,6 +32,14 @@
         ]
     },
     "summary": "Extract a definable amount of values from an array",
+    "tags": [
+        "random",
+        "pick",
+        "sample",
+        "subset",
+        "choose",
+        "draw"
+    ],
     "issues": "",
     "docs": {
         "ports": [

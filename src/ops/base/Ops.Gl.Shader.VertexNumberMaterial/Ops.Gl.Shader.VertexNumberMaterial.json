@@ -17,6 +17,14 @@
     "id": "732ff263-1aeb-4f39-969f-c781d7776cc8",
     "created": 1537519830894,
     "summary": "visually debug vertices of your 3D geometry ",
+    "tags": [
+        "debug",
+        "vertex index",
+        "vertex id",
+        "numbers",
+        "visualize",
+        "topology"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -114,6 +114,19 @@
     "authorName": "pandur",
     "created": 1686660300185,
     "summary": "push/append multiple numbers to an array",
+    "tags": [
+        "push",
+        "append",
+        "add",
+        "array",
+        "compose",
+        "build",
+        "collect",
+        "list",
+        "numbers",
+        "values",
+        "multiple"
+    ],
     "docs": {
         "ports": []
     },

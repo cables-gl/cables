@@ -34,6 +34,15 @@
         ]
     },
     "summary": "A sphere mesh with uniform distributed vertices",
+    "tags": [
+        "sphere",
+        "ball",
+        "globe",
+        "low poly",
+        "triangles",
+        "geodesic",
+        "orb"
+    ],
     "docs": {
         "ports": []
     },

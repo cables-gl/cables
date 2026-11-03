@@ -8,6 +8,14 @@
         ]
     },
     "summary": "Reload the current web page",
+    "tags": [
+        "refresh",
+        "restart",
+        "reset",
+        "reload",
+        "location.reload",
+        "f5"
+    ],
     "authorName": "pandur",
     "id": "d0060a4e-ffed-4a8d-8f6d-bfd9a23319de",
     "created": 1558014677907,

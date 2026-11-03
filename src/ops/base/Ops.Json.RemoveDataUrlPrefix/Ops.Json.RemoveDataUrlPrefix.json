@@ -26,6 +26,14 @@
         ]
     },
     "summary": "Removes data URL prefix from a string",
+    "tags": [
+        "base64",
+        "data uri",
+        "strip",
+        "clean",
+        "mime",
+        "header"
+    ],
     "docs": {
         "ports": []
     },

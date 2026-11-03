@@ -79,6 +79,14 @@
         ]
     },
     "summary": "Changes color lookup for every pixel using a displacement map",
+    "tags": [
+        "displace",
+        "displacement map",
+        "warp",
+        "distort",
+        "refraction",
+        "offset"
+    ],
     "youtubeid": "cc5Vlmvlq6A",
     "docs": {
         "ports": []

@@ -50,6 +50,16 @@
         "portsOut": []
     },
     "summary": "Show pixel colors of connected texture as a table, useful for debugging",
+    "tags": [
+        "pixels",
+        "debug",
+        "visualize",
+        "values",
+        "rgba",
+        "inspect pixels",
+        "read",
+        "data view"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

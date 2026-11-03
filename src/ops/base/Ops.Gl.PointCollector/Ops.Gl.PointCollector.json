@@ -27,6 +27,16 @@
         ]
     },
     "summary": "save points/coordinates in an array",
+    "tags": [
+        "record",
+        "store",
+        "points",
+        "trail",
+        "path",
+        "history",
+        "gather",
+        "positions"
+    ],
     "docs": {
         "ports": []
     },

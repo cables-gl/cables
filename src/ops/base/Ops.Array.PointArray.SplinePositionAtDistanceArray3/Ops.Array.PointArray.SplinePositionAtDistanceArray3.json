@@ -51,6 +51,14 @@
         ]
     },
     "summary": "Get position in array3/spline at distance from start",
+    "tags": [
+        "path",
+        "curve",
+        "position along",
+        "arc length",
+        "follow",
+        "walk"
+    ],
     "docs": {
         "ports": [
             {

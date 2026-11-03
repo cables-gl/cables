@@ -38,6 +38,15 @@
         ]
     },
     "summary": "triggers when value is between min and max",
+    "tags": [
+        "range",
+        "inside",
+        "within",
+        "if",
+        "condition",
+        "trigger",
+        "branch"
+    ],
     "authorName": "pandur",
     "id": "c80437f0-f0e1-465c-9cea-8a044aa2feaa",
     "created": 1521646716030,

@@ -30,6 +30,14 @@
         ]
     },
     "summary": "get the id/index of the current set material",
+    "tags": [
+        "material index",
+        "identifier",
+        "read",
+        "current material",
+        "id",
+        "shader"
+    ],
     "docs": {
         "ports": []
     },

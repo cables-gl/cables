@@ -105,6 +105,13 @@
         ]
     },
     "summary": "Render fog as a texture effect using a depth texture",
+    "tags": [
+        "mist",
+        "haze",
+        "atmosphere",
+        "depth fade",
+        "distance"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

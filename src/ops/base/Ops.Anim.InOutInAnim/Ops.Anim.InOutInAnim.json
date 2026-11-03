@@ -76,6 +76,14 @@
         ]
     },
     "summary": "Animates after a trigger from 1 to 0 to 1",
+    "tags": [
+        "pulse",
+        "there and back",
+        "boomerang",
+        "bounce",
+        "flash",
+        "envelope"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ae46d30d-9ea6-417b-968b-e7b5726afdde",

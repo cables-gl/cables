@@ -101,6 +101,16 @@
         ]
     },
     "summary": "Material for rendering spline meshes",
+    "tags": [
+        "curve",
+        "path",
+        "ribbon",
+        "thick line",
+        "polyline",
+        "shader",
+        "color",
+        "line material"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

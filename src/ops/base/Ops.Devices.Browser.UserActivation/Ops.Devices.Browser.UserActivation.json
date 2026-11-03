@@ -50,6 +50,15 @@
     },
     "caniusequery": "mdn-api_useractivation",
     "summary": "detect if the user interacted with or activated the page",
+    "tags": [
+        "user gesture",
+        "click",
+        "interaction",
+        "autoplay",
+        "unlock audio",
+        "permission",
+        "sticky activation"
+    ],
     "exampleProjectId": "3S26Qc",
     "isReleased": true
 }

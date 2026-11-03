@@ -31,6 +31,15 @@
         ]
     },
     "summary": "Limits a number to a min and max",
+    "tags": [
+        "limit",
+        "min",
+        "max",
+        "constrain",
+        "range",
+        "saturate",
+        "bounds"
+    ],
     "docs": {
         "ports": [
             {

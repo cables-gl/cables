@@ -1,5 +1,14 @@
 {
     "summary": "Warp a texture mapped quad (projection mapping)",
+    "tags": [
+        "corner pin",
+        "perspective",
+        "projection mapping",
+        "keystone",
+        "distort",
+        "warp",
+        "quad"
+    ],
     "layout": {
         "portsIn": [
             {

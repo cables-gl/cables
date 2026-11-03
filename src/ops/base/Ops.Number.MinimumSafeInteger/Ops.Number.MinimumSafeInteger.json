@@ -13,6 +13,13 @@
         ]
     },
     "summary": "Returns the minimum safe integer (number, constant)",
+    "tags": [
+        "min int",
+        "limit",
+        "-9007199254740991",
+        "constant",
+        "smallest"
+    ],
     "docs": {
         "ports": [
             {

@@ -21,6 +21,14 @@
         ]
     },
     "summary": "Reorder 3D points by repeatedly choosing the nearest unused point",
+    "tags": [
+        "nearest neighbor",
+        "order",
+        "path",
+        "traveling salesman",
+        "tsp",
+        "connect"
+    ],
     "docs": {
         "ports": [
             {

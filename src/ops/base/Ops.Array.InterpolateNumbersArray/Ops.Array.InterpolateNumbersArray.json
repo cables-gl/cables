@@ -30,6 +30,14 @@
         ]
     },
     "summary": "Interpolate between all values of an array",
+    "tags": [
+        "sample",
+        "lookup",
+        "fractional index",
+        "lerp",
+        "curve",
+        "position"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

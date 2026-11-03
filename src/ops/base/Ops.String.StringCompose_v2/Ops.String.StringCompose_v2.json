@@ -43,6 +43,17 @@
         ]
     },
     "summary": "Combine multiple Values to a new String",
+    "tags": [
+        "format",
+        "template",
+        "combine",
+        "build",
+        "join",
+        "placeholders",
+        "sprintf",
+        "printf",
+        "interpolate"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

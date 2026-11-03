@@ -24,6 +24,15 @@
         ]
     },
     "summary": "String variable getter",
+    "tags": [
+        "read",
+        "variable",
+        "get",
+        "wireless",
+        "global",
+        "receive",
+        "text"
+    ],
     "issues": "",
     "docs": {
         "ports": [

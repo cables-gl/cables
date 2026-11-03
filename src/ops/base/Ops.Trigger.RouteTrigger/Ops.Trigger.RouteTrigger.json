@@ -133,6 +133,15 @@
         ]
     },
     "summary": "Triggers one of the out ports - value index switch case (was SwitchTrigger)",
+    "tags": [
+        "switch",
+        "select output",
+        "case",
+        "demux",
+        "branch",
+        "split",
+        "index"
+    ],
     "docs": {
         "ports": [
             {

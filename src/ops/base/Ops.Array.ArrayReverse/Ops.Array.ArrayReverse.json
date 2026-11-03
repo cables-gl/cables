@@ -23,6 +23,13 @@
         ]
     },
     "summary": "Reverse an array",
+    "tags": [
+        "flip",
+        "invert order",
+        "backwards",
+        "mirror",
+        "opposite"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

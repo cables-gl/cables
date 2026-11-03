@@ -26,6 +26,16 @@
         ]
     },
     "summary": "Outputs all the values of the properties of an array of objects given a path",
+    "tags": [
+        "query",
+        "jsonpath",
+        "pluck",
+        "extract",
+        "column",
+        "values",
+        "path",
+        "map"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

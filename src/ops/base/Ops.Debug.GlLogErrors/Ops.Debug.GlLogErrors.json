@@ -43,6 +43,14 @@
         ]
     },
     "summary": "execute glGetError after every gl command and log to browser console",
+    "tags": [
+        "webgl errors",
+        "glGetError",
+        "gpu",
+        "troubleshoot",
+        "debug",
+        "diagnose"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

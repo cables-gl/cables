@@ -44,6 +44,13 @@
         ]
     },
     "summary": "Convert an array3 to an array4 by filling it up with 1",
+    "tags": [
+        "convert",
+        "xyz to xyzw",
+        "add w",
+        "expand",
+        "stride"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

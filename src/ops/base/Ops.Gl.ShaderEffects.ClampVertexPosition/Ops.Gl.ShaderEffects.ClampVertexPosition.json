@@ -38,6 +38,15 @@
         ]
     },
     "summary": "clamp/restrict the vertex position to min/max values per axis",
+    "tags": [
+        "limit",
+        "restrict",
+        "constrain",
+        "min max",
+        "box",
+        "bounds",
+        "vertex"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

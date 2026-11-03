@@ -57,6 +57,14 @@
         ]
     },
     "summary": "add delta values to a clamped absolute value",
+    "tags": [
+        "accumulate",
+        "drag",
+        "relative",
+        "clamp",
+        "add delta",
+        "integrate"
+    ],
     "docs": {
         "ports": []
     },

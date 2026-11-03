@@ -17,6 +17,14 @@
         ]
     },
     "summary": "Remove whitespace from both ends of a string",
+    "tags": [
+        "whitespace",
+        "strip",
+        "clean",
+        "spaces",
+        "cut",
+        "remove spaces"
+    ],
     "docs": {
         "ports": []
     },

@@ -13,6 +13,16 @@
         ]
     },
     "summary": "jump to a key in the timeline",
+    "tags": [
+        "jump",
+        "seek",
+        "key",
+        "marker",
+        "time",
+        "cue",
+        "navigate",
+        "scrub"
+    ],
     "isReleased": true,
     "license": "MIT"
 }

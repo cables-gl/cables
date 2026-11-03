@@ -95,6 +95,15 @@
         ]
     },
     "summary": "Gets transforms for matching glTF nodes.",
+    "tags": [
+        "positions",
+        "rotations",
+        "multiple nodes",
+        "filter",
+        "matching",
+        "matrices",
+        "array"
+    ],
     "issues": "",
     "youtubeids": [
         "I_eD5nml_5A"

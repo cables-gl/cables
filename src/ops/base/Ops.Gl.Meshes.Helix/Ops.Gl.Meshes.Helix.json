@@ -1,5 +1,13 @@
 {
     "summary": "generates a helix, spiral spline",
+    "tags": [
+        "spiral",
+        "coil",
+        "spring",
+        "dna",
+        "twist",
+        "screw"
+    ],
     "layout": {
         "portsIn": [
             {

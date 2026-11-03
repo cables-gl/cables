@@ -46,5 +46,14 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "tags": [
+        "hsv",
+        "hue",
+        "saturation",
+        "brightness",
+        "convert",
+        "color space",
+        "hsl"
+    ]
 }

@@ -39,6 +39,14 @@
         ]
     },
     "summary": "generate random number between min and max (was: random2)",
+    "tags": [
+        "random",
+        "rand",
+        "dice",
+        "on trigger",
+        "chance",
+        "range"
+    ],
     "docs": {
         "ports": []
     },

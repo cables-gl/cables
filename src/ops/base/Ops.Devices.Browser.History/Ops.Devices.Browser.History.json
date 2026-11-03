@@ -24,6 +24,15 @@
         ]
     },
     "summary": "Move back or forward in the browser navigation history",
+    "tags": [
+        "back",
+        "forward",
+        "navigate",
+        "previous page",
+        "history api",
+        "go back",
+        "browser"
+    ],
     "docs": {
         "ports": []
     },

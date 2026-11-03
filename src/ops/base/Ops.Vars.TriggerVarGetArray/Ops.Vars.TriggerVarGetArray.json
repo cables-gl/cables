@@ -21,6 +21,15 @@
         ]
     },
     "summary": "Get an array variable value at time of trigger",
+    "tags": [
+        "read",
+        "variable",
+        "get",
+        "on trigger",
+        "value",
+        "array",
+        "lookup"
+    ],
     "coreLibs": [
         "vargetset"
     ],

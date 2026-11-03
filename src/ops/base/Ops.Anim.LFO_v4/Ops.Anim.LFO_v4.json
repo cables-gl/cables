@@ -122,6 +122,18 @@
         "ports": []
     },
     "summary": "Low frequency oscillator (sine, triangle, ramp, square, random) with built-in timer, frequency in Hz, output range -1 to 1 by default",
+    "tags": [
+        "oscillator",
+        "sine",
+        "wave",
+        "square",
+        "sawtooth",
+        "triangle",
+        "random",
+        "modulation",
+        "periodic",
+        "tremolo"
+    ],
     "exampleProjectId": "9EOrS8",
     "isReleased": false
 }

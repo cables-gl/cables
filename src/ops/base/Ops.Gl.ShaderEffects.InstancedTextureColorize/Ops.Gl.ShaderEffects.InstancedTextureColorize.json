@@ -79,6 +79,13 @@
         ]
     },
     "summary": "colorize instanced meshes using a texture",
+    "tags": [
+        "color",
+        "instances",
+        "texture driven",
+        "tint",
+        "per instance color"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -35,6 +35,15 @@
         ]
     },
     "summary": "Get 4 values from an array",
+    "tags": [
+        "xyzw",
+        "rgba",
+        "get",
+        "read",
+        "vec4",
+        "element",
+        "split"
+    ],
     "authorName": "pandur",
     "id": "95e5c82e-6cc2-4cd3-9f68-f94062e620fa",
     "created": 1612281216856,

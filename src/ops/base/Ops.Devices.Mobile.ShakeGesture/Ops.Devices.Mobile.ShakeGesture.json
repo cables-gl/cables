@@ -36,6 +36,15 @@
         ]
     },
     "summary": "Reads the accelerometer data from a mobile device",
+    "tags": [
+        "shake",
+        "accelerometer",
+        "phone",
+        "motion",
+        "detect",
+        "jolt",
+        "shaking"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

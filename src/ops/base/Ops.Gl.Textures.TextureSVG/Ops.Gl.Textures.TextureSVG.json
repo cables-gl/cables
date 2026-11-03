@@ -40,6 +40,15 @@
         ]
     },
     "summary": "Load a SVG image and convert to pixel texture",
+    "tags": [
+        "vector",
+        "svg",
+        "image",
+        "load",
+        "rasterize",
+        "logo",
+        "icon"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ecd162d1-615e-4d97-8376-9edbbc51aee1",

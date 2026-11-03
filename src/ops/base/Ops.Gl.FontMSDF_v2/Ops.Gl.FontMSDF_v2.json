@@ -67,6 +67,15 @@
         }
     ],
     "summary": "Load MSDF Font data and texture to use ",
+    "tags": [
+        "msdf",
+        "sdf",
+        "font",
+        "text",
+        "signed distance field",
+        "typography",
+        "glyphs"
+    ],
     "docs": {
         "ports": []
     },

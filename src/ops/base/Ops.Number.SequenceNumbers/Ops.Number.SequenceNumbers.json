@@ -198,6 +198,13 @@
         ]
     },
     "summary": "control order and flow of numbers",
+    "tags": [
+        "order",
+        "flow",
+        "sequence",
+        "chain",
+        "priority"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

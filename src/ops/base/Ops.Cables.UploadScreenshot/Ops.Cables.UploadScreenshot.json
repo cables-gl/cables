@@ -31,6 +31,14 @@
         ]
     },
     "summary": "Upload an image as screenshot in cables",
+    "tags": [
+        "upload",
+        "thumbnail",
+        "preview image",
+        "screenshot",
+        "cover image",
+        "publish"
+    ],
     "docs": {
         "ports": []
     },

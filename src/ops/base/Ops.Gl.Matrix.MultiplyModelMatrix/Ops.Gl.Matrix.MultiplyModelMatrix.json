@@ -26,6 +26,14 @@
         ]
     },
     "summary": "multiply model matrix",
+    "tags": [
+        "transform",
+        "combine",
+        "matrix",
+        "apply",
+        "mat4",
+        "model"
+    ],
     "docs": {
         "ports": []
     },

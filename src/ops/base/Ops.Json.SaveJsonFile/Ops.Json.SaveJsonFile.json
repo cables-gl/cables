@@ -3,6 +3,15 @@
     "id": "04596a28-9563-4f42-8756-2d2a831baa60",
     "created": 1520424090381,
     "summary": "save/download an object as json file",
+    "tags": [
+        "download",
+        "export",
+        "write",
+        "save",
+        "file",
+        "json",
+        "store"
+    ],
     "docs": {
         "ports": []
     },

@@ -19,6 +19,15 @@
         ]
     },
     "summary": "visualize which faces are facing the camera",
+    "tags": [
+        "debug",
+        "backface",
+        "face orientation",
+        "winding",
+        "culling",
+        "normals",
+        "visualize"
+    ],
     "docs": {
         "ports": []
     },

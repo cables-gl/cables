@@ -30,6 +30,16 @@
         ]
     },
     "summary": "Search for any value anywhere in an object",
+    "tags": [
+        "find",
+        "search",
+        "nested",
+        "lookup",
+        "query",
+        "path",
+        "recursive",
+        "json"
+    ],
     "docs": {
         "ports": []
     },

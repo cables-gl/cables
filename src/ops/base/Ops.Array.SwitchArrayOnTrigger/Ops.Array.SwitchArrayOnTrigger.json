@@ -78,6 +78,15 @@
         ]
     },
     "summary": "Switch between multiple arrays on trigger",
+    "tags": [
+        "select",
+        "choose",
+        "multiplexer",
+        "mux",
+        "pick",
+        "index",
+        "on trigger"
+    ],
     "docs": {
         "ports": []
     },

@@ -1,5 +1,11 @@
 {
     "summary": "square root of a number",
+    "tags": [
+        "square root",
+        "root",
+        "radical",
+        "power"
+    ],
     "layout": {
         "portsIn": [
             {

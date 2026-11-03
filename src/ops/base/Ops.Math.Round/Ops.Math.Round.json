@@ -1,5 +1,10 @@
 {
     "summary": "Outputs number rounded to the nearest integer",
+    "tags": [
+        "nearest",
+        "integer",
+        "rounding"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -17,6 +17,12 @@
         ]
     },
     "summary": "Converts array contents to absolute values - converts all negative numbers to positive numbers",
+    "tags": [
+        "absolute",
+        "positive",
+        "magnitude",
+        "remove sign"
+    ],
     "issues": "",
     "docs": {
         "ports": [

@@ -177,6 +177,13 @@
         ]
     },
     "summary": "control order and flow of objects",
+    "tags": [
+        "order",
+        "flow",
+        "sequence",
+        "chain",
+        "priority"
+    ],
     "issues": "",
     "docs": {
         "ports": []

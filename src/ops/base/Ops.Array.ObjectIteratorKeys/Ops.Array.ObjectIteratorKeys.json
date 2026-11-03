@@ -35,6 +35,15 @@
         ]
     },
     "summary": "Trigger once for each object in an array",
+    "tags": [
+        "loop",
+        "foreach",
+        "for each",
+        "json",
+        "keys",
+        "repeat",
+        "iterate"
+    ],
     "docs": {
         "ports": [
             {

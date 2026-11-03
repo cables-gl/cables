@@ -60,6 +60,16 @@
     },
     "created": 1607959999477,
     "summary": "Audio reverb using an impulse response (sample)",
+    "tags": [
+        "reverb",
+        "impulse response",
+        "room",
+        "hall",
+        "echo",
+        "space",
+        "ambience",
+        "ir"
+    ],
     "docs": {
         "ports": [
             {

@@ -26,6 +26,14 @@
         ]
     },
     "summary": "encode a string to html",
+    "tags": [
+        "escape",
+        "entities",
+        "&amp;",
+        "sanitize",
+        "convert",
+        "html entities"
+    ],
     "docs": {
         "ports": []
     },

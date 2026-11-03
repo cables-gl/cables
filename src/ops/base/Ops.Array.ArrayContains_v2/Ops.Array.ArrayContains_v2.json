@@ -25,6 +25,15 @@
         ]
     },
     "summary": "Check if an array contains a number (find,search,indexOf)",
+    "tags": [
+        "find",
+        "search",
+        "indexof",
+        "includes",
+        "has",
+        "exists",
+        "test"
+    ],
     "authorName": "simod",
     "id": "b982d7e3-c9cf-41dd-aead-66daad785fa8",
     "created": 1619617451517,

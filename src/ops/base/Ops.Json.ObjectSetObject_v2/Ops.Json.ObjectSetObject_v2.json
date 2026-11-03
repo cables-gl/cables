@@ -64,6 +64,16 @@
         ]
     },
     "summary": "set object as value in an object",
+    "tags": [
+        "write",
+        "key",
+        "property",
+        "set",
+        "assign",
+        "json",
+        "store",
+        "nested"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

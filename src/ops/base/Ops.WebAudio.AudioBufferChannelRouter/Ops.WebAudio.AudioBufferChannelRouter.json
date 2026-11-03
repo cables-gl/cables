@@ -54,6 +54,15 @@
     "authorName": "stephan",
     "created": 1702653521834,
     "summary": "Route audio from one input channel to any output channel",
+    "tags": [
+        "stereo",
+        "mono",
+        "channels",
+        "left right",
+        "mapping",
+        "mixdown",
+        "route"
+    ],
     "docs": {
         "ports": [
             {

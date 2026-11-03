@@ -1,5 +1,14 @@
 {
     "summary": "Triggers next only after value has changed to `false`",
+    "tags": [
+        "falling edge",
+        "went false",
+        "off",
+        "release",
+        "change",
+        "detect",
+        "edge"
+    ],
     "authorName": "pandur",
     "id": "6387bcb0-6091-4199-8ab7-f96ad4aa3c7d",
     "created": 1518604069266,

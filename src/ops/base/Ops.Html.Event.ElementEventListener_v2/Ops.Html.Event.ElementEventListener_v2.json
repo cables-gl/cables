@@ -49,6 +49,16 @@
         ]
     },
     "summary": "Listen for browser or custom events on an HTML element",
+    "tags": [
+        "click",
+        "addeventlistener",
+        "mouse",
+        "dom events",
+        "keyboard",
+        "listen",
+        "callback",
+        "handler"
+    ],
     "docs": {
         "ports": [
             {

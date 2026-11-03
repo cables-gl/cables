@@ -64,6 +64,15 @@
     "authorName": "pandur",
     "created": 1686154804127,
     "summary": "Define filters to get colliding and intersecting bodies",
+    "tags": [
+        "collision filter",
+        "layers",
+        "groups",
+        "mask",
+        "physics",
+        "hit filter",
+        "select bodies"
+    ],
     "docs": {
         "ports": []
     },

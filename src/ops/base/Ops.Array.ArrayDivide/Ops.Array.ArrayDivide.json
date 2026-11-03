@@ -1,5 +1,12 @@
 {
     "summary": "Divide all values in an array by one number",
+    "tags": [
+        "division",
+        "/",
+        "scale",
+        "quotient",
+        "all values"
+    ],
     "docs": {
         "ports": [
             {

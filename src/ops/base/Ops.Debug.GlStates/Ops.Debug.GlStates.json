@@ -77,6 +77,16 @@
         ]
     },
     "summary": "see current gl states and error message",
+    "tags": [
+        "webgl state",
+        "gpu",
+        "blend",
+        "depth",
+        "culling",
+        "inspect",
+        "debug",
+        "errors"
+    ],
     "changelog": [
         {
             "message": "Ops.Debug.GlDebug renamed to Ops.Debug.GlStates",

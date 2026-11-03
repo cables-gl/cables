@@ -37,6 +37,14 @@
         ]
     },
     "summary": "Custom easing curve via schlick bias and gain",
+    "tags": [
+        "bias",
+        "gain",
+        "easing",
+        "curve",
+        "schlick",
+        "contrast"
+    ],
     "exampleProjectId": "yeJETy",
     "docs": {
         "ports": []

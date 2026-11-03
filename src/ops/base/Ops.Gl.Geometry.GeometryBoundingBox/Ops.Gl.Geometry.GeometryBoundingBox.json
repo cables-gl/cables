@@ -95,6 +95,16 @@
         ]
     },
     "summary": "Calculate a bounding box from a geometry",
+    "tags": [
+        "bounds",
+        "aabb",
+        "dimensions",
+        "extent",
+        "size",
+        "min max",
+        "volume",
+        "measure"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

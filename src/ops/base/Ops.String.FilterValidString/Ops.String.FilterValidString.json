@@ -20,6 +20,15 @@
     "authorName": "pandur",
     "created": 1584353798919,
     "summary": "filter valid strings (not null,undefined or empty)",
+    "tags": [
+        "hold",
+        "last valid",
+        "not empty",
+        "cache",
+        "keep",
+        "null check",
+        "undefined"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

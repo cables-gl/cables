@@ -25,6 +25,15 @@
         ]
     },
     "summary": "Output the current patch coordinates",
+    "tags": [
+        "coordinates",
+        "position",
+        "patchfield",
+        "editor",
+        "xy",
+        "mouse position",
+        "debug"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

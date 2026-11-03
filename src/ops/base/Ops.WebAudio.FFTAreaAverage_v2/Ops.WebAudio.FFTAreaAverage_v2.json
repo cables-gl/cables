@@ -64,6 +64,17 @@
     "id": "8dd14fde-57d1-408c-a3ef-441a65bfe53a",
     "created": 1607443373884,
     "summary": "get average value in an area of a fft audio analysis buffer",
+    "tags": [
+        "frequency band",
+        "bass",
+        "mids",
+        "highs",
+        "level",
+        "spectrum",
+        "range",
+        "bin average",
+        "audio reactive"
+    ],
     "docs": {
         "ports": [
             {

@@ -45,6 +45,16 @@
         ]
     },
     "summary": "capture all following meshes into one geometry",
+    "tags": [
+        "bake",
+        "merge",
+        "combine",
+        "capture",
+        "static",
+        "optimize",
+        "collapse",
+        "flatten"
+    ],
     "exampleProjectId": "BwxY2f",
     "docs": {
         "ports": []

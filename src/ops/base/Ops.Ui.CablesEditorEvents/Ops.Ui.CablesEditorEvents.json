@@ -67,6 +67,15 @@
         ]
     },
     "summary": "Cables UI Event Triggers",
+    "tags": [
+        "editor",
+        "events",
+        "ui",
+        "listener",
+        "hooks",
+        "callbacks",
+        "patch ui"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

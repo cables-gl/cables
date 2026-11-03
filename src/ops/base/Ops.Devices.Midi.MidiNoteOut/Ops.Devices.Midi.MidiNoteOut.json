@@ -60,6 +60,15 @@
         }
     ],
     "summary": "send midi note data to a midi output",
+    "tags": [
+        "send",
+        "play note",
+        "midi out",
+        "synth",
+        "transmit",
+        "keyboard",
+        "pitch"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

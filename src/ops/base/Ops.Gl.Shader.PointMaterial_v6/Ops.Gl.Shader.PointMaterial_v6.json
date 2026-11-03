@@ -239,6 +239,15 @@
         }
     ],
     "summary": "Draw all vertices as points / circles",
+    "tags": [
+        "points",
+        "point cloud",
+        "particles",
+        "dots",
+        "sprites",
+        "circles",
+        "point size"
+    ],
     "docs": {
         "ports": []
     },

@@ -46,6 +46,15 @@
         }
     ],
     "summary": "Load a KTX file as a texture",
+    "tags": [
+        "compressed texture",
+        "basis",
+        "ktx2",
+        "library",
+        "gpu texture",
+        "loader",
+        "transcoder"
+    ],
     "docs": {
         "ports": []
     },

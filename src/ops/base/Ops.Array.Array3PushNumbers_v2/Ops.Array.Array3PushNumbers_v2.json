@@ -44,6 +44,15 @@
         ]
     },
     "summary": "Push three numbers to the end of an array (was ArrayPushValue3x)",
+    "tags": [
+        "append",
+        "add",
+        "push",
+        "xyz",
+        "point",
+        "vec3",
+        "extend"
+    ],
     "changelog": [
         {
             "message": "cloned op from Ops.Array.Array3PushNumbers",

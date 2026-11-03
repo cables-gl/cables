@@ -39,6 +39,16 @@
         ]
     },
     "summary": "Mercator map and center an array of latitudes and longitudes to a local coordinate system",
+    "tags": [
+        "map",
+        "projection",
+        "latitude",
+        "longitude",
+        "gps",
+        "geo",
+        "tiles",
+        "center"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

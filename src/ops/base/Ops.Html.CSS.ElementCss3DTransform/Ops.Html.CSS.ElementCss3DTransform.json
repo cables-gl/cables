@@ -85,6 +85,14 @@
         ]
     },
     "summary": "3d Transform a HTML element by using CSS3D properties",
+    "tags": [
+        "3d",
+        "perspective",
+        "rotate3d",
+        "css3d",
+        "transform",
+        "dom 3d"
+    ],
     "docs": {
         "ports": []
     },

@@ -32,6 +32,14 @@
         ]
     },
     "summary": "Create rotation matrix from normal",
+    "tags": [
+        "orientation",
+        "normal",
+        "lookat",
+        "matrix",
+        "direction",
+        "align"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

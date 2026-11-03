@@ -1,5 +1,15 @@
 {
     "summary": "Get the state of mouse buttons",
+    "tags": [
+        "click",
+        "left",
+        "right",
+        "middle",
+        "press",
+        "pointer",
+        "mouse down",
+        "button state"
+    ],
     "layout": {
         "portsIn": [
             {

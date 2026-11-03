@@ -70,6 +70,15 @@
     "authorName": "pandur",
     "created": 1644069519267,
     "summary": "Capture the current input and copy it to the output, even after a reload",
+    "tags": [
+        "hold",
+        "lock",
+        "keep",
+        "store",
+        "capture",
+        "snapshot",
+        "pause"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

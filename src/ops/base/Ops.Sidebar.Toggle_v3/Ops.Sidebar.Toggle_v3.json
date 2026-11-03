@@ -49,6 +49,16 @@
         ]
     },
     "summary": "Adds a toggle switch to the sidebar",
+    "tags": [
+        "checkbox",
+        "switch",
+        "boolean",
+        "on off",
+        "ui",
+        "gui",
+        "control",
+        "interface"
+    ],
     "docs": {
         "ports": []
     },

@@ -99,5 +99,14 @@
     "license": "MIT",
     "exampleProjectId": "F2emyQ",
     "docs": {},
-    "summary": "Draws an image, video or canvas element onto a canvas2d, optionally cropped and scaled to a destination rectangle"
+    "summary": "Draws an image, video or canvas element onto a canvas2d, optionally cropped and scaled to a destination rectangle",
+    "tags": [
+        "image",
+        "picture",
+        "sprite",
+        "blit",
+        "video",
+        "drawimage",
+        "texture"
+    ]
 }

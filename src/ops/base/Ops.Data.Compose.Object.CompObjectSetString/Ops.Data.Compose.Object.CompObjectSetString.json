@@ -62,6 +62,16 @@
     "authorName": "pandur",
     "created": 1680618631596,
     "summary": "set string as object property",
+    "tags": [
+        "property",
+        "key",
+        "write",
+        "set",
+        "assign",
+        "json",
+        "compose",
+        "text"
+    ],
     "docs": {
         "ports": []
     },

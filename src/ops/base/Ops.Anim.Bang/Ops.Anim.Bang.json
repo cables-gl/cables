@@ -37,6 +37,16 @@
         ]
     },
     "summary": "Trigger a simple bang animation going from 1 to 0",
+    "tags": [
+        "pulse",
+        "impulse",
+        "decay",
+        "flash",
+        "one shot",
+        "1 to 0",
+        "hit",
+        "envelope"
+    ],
     "docs": {
         "ports": [
             {

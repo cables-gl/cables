@@ -65,6 +65,14 @@
         ]
     },
     "summary": "Modify a css property of an element with a string",
+    "tags": [
+        "style",
+        "css",
+        "set property",
+        "element style",
+        "styling",
+        "custom"
+    ],
     "issues": "",
     "youtubeids": [
         "qnPFY8qYBUQ"

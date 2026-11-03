@@ -85,6 +85,17 @@
         }
     ],
     "summary": "Scatter an object on the surface of a mesh with different distribution methods",
+    "tags": [
+        "distribute",
+        "scatter",
+        "random",
+        "surface",
+        "place",
+        "instances",
+        "foliage",
+        "grass",
+        "points on mesh"
+    ],
     "issues": "",
     "youtubeids": [
         "tQr9hdNqBmQ"

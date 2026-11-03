@@ -86,6 +86,14 @@
         ]
     },
     "summary": "Set random numbers into an imagecompose",
+    "tags": [
+        "random",
+        "noise",
+        "seed",
+        "data",
+        "numbers",
+        "white noise"
+    ],
     "authorName": "pandur",
     "id": "42c8b058-bc9d-44c4-8139-1596907ac531",
     "created": 1695287848893,

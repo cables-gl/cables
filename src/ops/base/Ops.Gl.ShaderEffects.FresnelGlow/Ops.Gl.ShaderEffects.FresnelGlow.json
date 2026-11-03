@@ -64,6 +64,15 @@
         "cgl"
     ],
     "summary": "add fresnel glow to any material",
+    "tags": [
+        "rim light",
+        "rim",
+        "edge glow",
+        "outline",
+        "glow",
+        "fresnel",
+        "silhouette"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

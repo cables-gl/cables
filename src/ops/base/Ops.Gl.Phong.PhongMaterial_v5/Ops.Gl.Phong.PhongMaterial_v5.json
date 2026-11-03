@@ -322,6 +322,17 @@
         }
     ],
     "summary": "A shaded material for lighting objects",
+    "tags": [
+        "shaded",
+        "lighting",
+        "lit",
+        "specular",
+        "shiny",
+        "glossy",
+        "blinn",
+        "standard material",
+        "diffuse"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

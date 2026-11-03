@@ -1,5 +1,14 @@
 {
     "summary": "Access to the microphone",
+    "tags": [
+        "microphone",
+        "mic",
+        "line in",
+        "record",
+        "live audio",
+        "sound input",
+        "getusermedia"
+    ],
     "layout": {
         "portsIn": [
             {

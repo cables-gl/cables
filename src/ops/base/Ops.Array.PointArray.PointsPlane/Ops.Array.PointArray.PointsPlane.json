@@ -56,6 +56,14 @@
         ]
     },
     "summary": "Generate coordinates for a rectangular field of points (was Field)",
+    "tags": [
+        "grid",
+        "field",
+        "plane",
+        "rectangle grid",
+        "lattice",
+        "matrix"
+    ],
     "docs": {
         "ports": [
             {

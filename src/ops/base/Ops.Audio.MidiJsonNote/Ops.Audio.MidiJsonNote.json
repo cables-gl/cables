@@ -57,6 +57,15 @@
         ]
     },
     "summary": "filter midiJson for notes",
+    "tags": [
+        "notes",
+        "music",
+        "midi file",
+        "filter",
+        "pitch",
+        "sequence",
+        "select note"
+    ],
     "docs": {
         "ports": []
     },

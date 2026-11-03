@@ -37,6 +37,16 @@
         "ports": []
     },
     "summary": "preview an image URL or a data/base64 URL",
+    "tags": [
+        "preview",
+        "debug",
+        "visualize",
+        "image",
+        "url",
+        "data url",
+        "base64",
+        "picture"
+    ],
     "exampleProjectId": "gsP8hO",
     "isReleased": true
 }

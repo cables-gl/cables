@@ -1,5 +1,13 @@
 {
     "summary": "outputs the remainder after division of one number by another",
+    "tags": [
+        "mod",
+        "remainder",
+        "wrap",
+        "%",
+        "loop",
+        "cycle"
+    ],
     "layout": {
         "portsIn": [
             {

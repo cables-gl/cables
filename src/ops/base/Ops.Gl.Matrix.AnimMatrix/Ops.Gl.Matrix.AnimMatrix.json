@@ -52,6 +52,14 @@
         ]
     },
     "summary": "animate values in a matrix to a new matrix",
+    "tags": [
+        "animate",
+        "transition",
+        "tween",
+        "matrix",
+        "mat4",
+        "morph"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

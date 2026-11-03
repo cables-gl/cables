@@ -50,6 +50,15 @@
         "ports": []
     },
     "summary": "Visualize an audionode object as a waveform",
+    "tags": [
+        "oscilloscope",
+        "debug",
+        "visualize",
+        "scope",
+        "wave",
+        "audio meter",
+        "signal"
+    ],
     "coreLibs": [
         "webaudio"
     ],

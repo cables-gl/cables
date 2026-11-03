@@ -75,6 +75,14 @@
     },
     "license": "MIT",
     "summary": "Set the width and height of an HTML element",
+    "tags": [
+        "width",
+        "height",
+        "dimensions",
+        "css",
+        "resize",
+        "box"
+    ],
     "isReleased": true,
     "exampleProjectId": "Os01yn"
 }

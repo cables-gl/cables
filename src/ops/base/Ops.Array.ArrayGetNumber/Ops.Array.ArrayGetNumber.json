@@ -1,5 +1,14 @@
 {
     "summary": "Return a value from an array",
+    "tags": [
+        "element",
+        "index",
+        "read",
+        "value at",
+        "lookup",
+        "item",
+        "access"
+    ],
     "layout": {
         "portsIn": [
             {

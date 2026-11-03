@@ -24,6 +24,14 @@
         ]
     },
     "summary": "generate coordinates of a butterfly curve",
+    "tags": [
+        "butterfly",
+        "curve",
+        "parametric",
+        "spline",
+        "shape",
+        "points"
+    ],
     "docs": {
         "ports": []
     },

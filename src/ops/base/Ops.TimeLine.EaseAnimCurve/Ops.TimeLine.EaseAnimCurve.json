@@ -45,5 +45,15 @@
         "ports": []
     },
     "summary": "Ease a value between 0 and 1 over a timeline curve",
+    "tags": [
+        "easing",
+        "curve",
+        "0-1",
+        "shape",
+        "remap",
+        "progress",
+        "smooth",
+        "timeline curve"
+    ],
     "isReleased": true
 }

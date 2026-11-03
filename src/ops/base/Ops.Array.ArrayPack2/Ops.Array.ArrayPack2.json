@@ -41,6 +41,14 @@
         ]
     },
     "summary": "Pack two individual arrays into a new array",
+    "tags": [
+        "combine",
+        "interleave",
+        "xy",
+        "zip",
+        "merge",
+        "stride"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -104,6 +104,14 @@
         }
     ],
     "summary": "cellular noise",
+    "tags": [
+        "cells",
+        "voronoi",
+        "worley",
+        "organic",
+        "pattern",
+        "procedural"
+    ],
     "docs": {
         "ports": []
     },

@@ -53,6 +53,15 @@
         ]
     },
     "summary": "modify scale of meshes in an area",
+    "tags": [
+        "grow",
+        "shrink",
+        "magnify",
+        "local scale",
+        "bulge",
+        "volume",
+        "vertex"
+    ],
     "docs": {
         "ports": []
     },

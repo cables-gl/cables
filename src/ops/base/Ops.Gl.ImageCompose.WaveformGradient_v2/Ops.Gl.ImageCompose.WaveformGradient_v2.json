@@ -100,6 +100,15 @@
         ]
     },
     "summary": "Generate different texture waveforms. Sine, sawtooth and triangle.",
+    "tags": [
+        "sine",
+        "sawtooth",
+        "triangle",
+        "wave",
+        "gradient",
+        "stripes",
+        "oscillator"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

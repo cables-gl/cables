@@ -51,6 +51,17 @@
         ]
     },
     "summary": "Load a font file like .otf, .ttf, .woff via css",
+    "tags": [
+        "typeface",
+        "load font",
+        "otf",
+        "ttf",
+        "woff",
+        "font-face",
+        "webfont",
+        "typography",
+        "custom font"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

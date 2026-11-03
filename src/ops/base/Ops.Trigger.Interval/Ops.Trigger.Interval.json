@@ -1,5 +1,16 @@
 {
     "summary": "Timed Trigger every x ms",
+    "tags": [
+        "timer",
+        "repeat",
+        "loop",
+        "metronome",
+        "clock",
+        "setInterval",
+        "periodic",
+        "every x ms",
+        "tick"
+    ],
     "layout": {
         "portsIn": [
             {

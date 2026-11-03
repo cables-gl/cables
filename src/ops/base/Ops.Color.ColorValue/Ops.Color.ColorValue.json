@@ -58,6 +58,15 @@
         ]
     },
     "summary": "Use a color value on multiple places",
+    "tags": [
+        "rgb",
+        "rgba",
+        "picker",
+        "constant",
+        "store",
+        "variable",
+        "colour"
+    ],
     "docs": {
         "ports": [
             {

@@ -26,6 +26,14 @@
         ]
     },
     "summary": "Get the CSS class names of an HTML element",
+    "tags": [
+        "classes",
+        "read",
+        "css class",
+        "names",
+        "dom",
+        "get"
+    ],
     "docs": {
         "ports": [
             {

@@ -52,6 +52,18 @@
     "authorName": "pandur",
     "created": 1680618224201,
     "summary": "push/append a string to an array",
+    "tags": [
+        "push",
+        "append",
+        "add",
+        "array",
+        "compose",
+        "build",
+        "collect",
+        "list",
+        "string",
+        "text"
+    ],
     "docs": {
         "ports": []
     },

@@ -77,6 +77,14 @@
         ]
     },
     "summary": "load .exr floating point texture files",
+    "tags": [
+        "openexr",
+        "hdr",
+        "float",
+        "high dynamic range",
+        "image",
+        "load"
+    ],
     "docs": {},
     "exampleProjectId": "zHxXMW",
     "license": "MIT",

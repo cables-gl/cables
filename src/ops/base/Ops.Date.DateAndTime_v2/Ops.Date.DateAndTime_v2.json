@@ -1,5 +1,18 @@
 {
     "summary": "Outputs current date and time and timestamp",
+    "tags": [
+        "clock",
+        "now",
+        "current time",
+        "timestamp",
+        "today",
+        "year",
+        "month",
+        "day",
+        "hour",
+        "minute",
+        "second"
+    ],
     "layout": {
         "portsIn": [
             {

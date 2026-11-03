@@ -22,6 +22,14 @@
     },
     "isReleased": true,
     "summary": "Adjusts the volume of all audio ops",
+    "tags": [
+        "master volume",
+        "mute",
+        "loudness",
+        "gain",
+        "all audio",
+        "level"
+    ],
     "docs": {
         "ports": []
     },

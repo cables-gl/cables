@@ -17,6 +17,16 @@
         ]
     },
     "summary": "collect screen pixel coordinates into an array",
+    "tags": [
+        "record",
+        "store",
+        "points",
+        "trail",
+        "path",
+        "gather",
+        "pixels",
+        "screen space"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": []

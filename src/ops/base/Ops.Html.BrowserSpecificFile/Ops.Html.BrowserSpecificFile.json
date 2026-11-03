@@ -54,6 +54,15 @@
     "id": "3bf999bc-3433-4893-9c85-9633e096c01d",
     "created": 1521035142050,
     "summary": "Outputs a specific file for each browser",
+    "tags": [
+        "safari",
+        "chrome",
+        "firefox",
+        "detect browser",
+        "fallback",
+        "compatibility",
+        "codec"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": [

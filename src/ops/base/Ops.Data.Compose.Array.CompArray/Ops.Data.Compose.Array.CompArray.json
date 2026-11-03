@@ -49,6 +49,16 @@
     "authorName": "pandur",
     "created": 1680617369758,
     "summary": "Compose an Array",
+    "tags": [
+        "build",
+        "collect",
+        "list",
+        "start",
+        "create",
+        "compose",
+        "new array",
+        "construct"
+    ],
     "docs": {
         "ports": []
     },

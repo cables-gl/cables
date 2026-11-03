@@ -85,6 +85,14 @@
         "cgl"
     ],
     "summary": "Visualize a RGB texture as XYZ coordinates as points",
+    "tags": [
+        "points",
+        "particles",
+        "dots",
+        "scatter",
+        "cloud",
+        "pixels"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [

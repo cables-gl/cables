@@ -29,6 +29,14 @@
         ]
     },
     "summary": "check if webgl canvas element is in the current browser viewport",
+    "tags": [
+        "visible",
+        "in view",
+        "scroll",
+        "onscreen",
+        "intersection observer",
+        "offscreen"
+    ],
     "docs": {
         "ports": []
     },

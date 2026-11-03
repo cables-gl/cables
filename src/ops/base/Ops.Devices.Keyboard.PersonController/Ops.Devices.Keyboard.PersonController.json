@@ -57,6 +57,16 @@
         ]
     },
     "summary": "simple controller example op for game characters",
+    "tags": [
+        "character controller",
+        "walk",
+        "fps",
+        "movement",
+        "player",
+        "game",
+        "wasd",
+        "keyboard"
+    ],
     "docs": {
         "ports": []
     },

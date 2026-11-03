@@ -98,6 +98,14 @@
         ]
     },
     "summary": "Pixelated noise",
+    "tags": [
+        "random",
+        "pixels",
+        "static",
+        "grain",
+        "dirt",
+        "noise"
+    ],
     "docs": {
         "ports": [
             {

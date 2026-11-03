@@ -30,6 +30,14 @@
         ]
     },
     "summary": "Split an xyz array into 3 individual arrays",
+    "tags": [
+        "split",
+        "xyz",
+        "separate",
+        "deinterleave",
+        "channels",
+        "demux"
+    ],
     "docs": {
         "ports": [
             {

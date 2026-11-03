@@ -36,6 +36,15 @@
         ]
     },
     "summary": "stereo pan an audio signal from left to right",
+    "tags": [
+        "stereo",
+        "left right",
+        "pan",
+        "balance",
+        "spatial",
+        "position",
+        "placement"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

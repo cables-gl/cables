@@ -34,6 +34,14 @@
         ]
     },
     "summary": "get view matrix from a gltf camera",
+    "tags": [
+        "camera",
+        "view",
+        "perspective",
+        "imported camera",
+        "scene camera",
+        "blender camera"
+    ],
     "issues": "",
     "youtubeids": [
         "iqIXSb-kAws"

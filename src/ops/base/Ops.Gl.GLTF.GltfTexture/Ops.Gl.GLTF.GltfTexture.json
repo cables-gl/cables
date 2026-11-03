@@ -91,6 +91,14 @@
         ]
     },
     "summary": "Load textures from inside a .glb file",
+    "tags": [
+        "embedded texture",
+        "extract",
+        "image",
+        "glb",
+        "material map",
+        "load"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

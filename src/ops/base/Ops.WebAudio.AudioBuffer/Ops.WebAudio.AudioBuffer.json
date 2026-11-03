@@ -43,6 +43,16 @@
         ]
     },
     "summary": "Holds an audio file / sample",
+    "tags": [
+        "load",
+        "sample",
+        "sound file",
+        "mp3",
+        "wav",
+        "ogg",
+        "audio file",
+        "decode"
+    ],
     "docs": {
         "ports": [
             {

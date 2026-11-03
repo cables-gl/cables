@@ -50,6 +50,16 @@
         ]
     },
     "summary": "Get string from object by key",
+    "tags": [
+        "read",
+        "key",
+        "property",
+        "access",
+        "lookup",
+        "json",
+        "get",
+        "text"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

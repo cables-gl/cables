@@ -122,6 +122,16 @@
     ],
     "license": "MIT",
     "summary": "Draws text on a canvas",
+    "tags": [
+        "text",
+        "font",
+        "type",
+        "typography",
+        "fillText",
+        "string",
+        "label",
+        "letters"
+    ],
     "isReleased": true,
     "exampleProjectId": "6lTIAy",
     "docs": {

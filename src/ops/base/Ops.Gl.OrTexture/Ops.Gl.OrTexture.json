@@ -68,6 +68,15 @@
         ]
     },
     "summary": "outputs the first valid texture of the input ports",
+    "tags": [
+        "first valid",
+        "fallback",
+        "default",
+        "select",
+        "coalesce",
+        "pick",
+        "or"
+    ],
     "docs": {
         "ports": []
     },

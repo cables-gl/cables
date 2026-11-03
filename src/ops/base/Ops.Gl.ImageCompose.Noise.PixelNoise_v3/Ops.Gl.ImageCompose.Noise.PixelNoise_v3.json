@@ -99,6 +99,14 @@
         ]
     },
     "summary": "Adds adjustable pixel noise to an image.",
+    "tags": [
+        "random",
+        "pixels",
+        "static",
+        "grain",
+        "dirt",
+        "noise"
+    ],
     "docs": {
         "ports": [
             {

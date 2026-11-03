@@ -79,6 +79,15 @@
         ]
     },
     "summary": "Translate, rotate, or scale 3D points in an array",
+    "tags": [
+        "move",
+        "translate",
+        "rotate",
+        "scale",
+        "matrix",
+        "points",
+        "positions"
+    ],
     "docs": {},
     "changelog": [
         {

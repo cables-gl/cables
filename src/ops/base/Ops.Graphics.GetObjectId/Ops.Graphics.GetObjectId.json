@@ -52,6 +52,14 @@
         ]
     },
     "summary": "get the id/index of the current object/mesh",
+    "tags": [
+        "object index",
+        "identifier",
+        "read",
+        "current object",
+        "mesh id",
+        "picking"
+    ],
     "docs": {
         "ports": []
     },

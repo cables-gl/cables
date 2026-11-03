@@ -1,5 +1,14 @@
 {
     "summary": "create a cables logo which links to cables gl",
+    "tags": [
+        "logo",
+        "made with cables",
+        "credit",
+        "badge",
+        "branding",
+        "link",
+        "watermark"
+    ],
     "layout": {
         "portsIn": [
             {

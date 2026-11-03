@@ -50,6 +50,13 @@
         ]
     },
     "summary": "distance between two 3d points",
+    "tags": [
+        "length",
+        "between points",
+        "xyz",
+        "euclidean",
+        "range"
+    ],
     "docs": {
         "ports": []
     },

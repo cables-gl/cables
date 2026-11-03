@@ -25,6 +25,14 @@
         }
     ],
     "summary": "parse boolean from string/number",
+    "tags": [
+        "convert",
+        "string to bool",
+        "cast",
+        "text",
+        "parse",
+        "true false"
+    ],
     "docs": {
         "ports": []
     },

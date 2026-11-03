@@ -39,6 +39,14 @@
         "portsOut": []
     },
     "summary": "Load a CSS file from an asset",
+    "tags": [
+        "stylesheet",
+        "load",
+        "import",
+        "link",
+        "external css",
+        "asset"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

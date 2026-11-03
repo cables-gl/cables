@@ -25,5 +25,15 @@
         "ports": []
     },
     "summary": "preview an image/canvas/webcam drawable dom element",
+    "tags": [
+        "preview",
+        "debug",
+        "visualize",
+        "image",
+        "canvas",
+        "webcam",
+        "video",
+        "dom element"
+    ],
     "isReleased": false
 }

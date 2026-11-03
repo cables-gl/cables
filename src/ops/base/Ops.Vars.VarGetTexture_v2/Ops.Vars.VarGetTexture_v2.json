@@ -23,6 +23,15 @@
         ]
     },
     "summary": "get a texture from a variable",
+    "tags": [
+        "read",
+        "variable",
+        "get",
+        "wireless",
+        "global",
+        "receive",
+        "image"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

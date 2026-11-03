@@ -32,6 +32,15 @@
     "id": "1555fefe-4eb4-4aed-84c0-ad54e0dae1c1",
     "created": 1540921849064,
     "summary": "display texture using polar/radial coordinate system",
+    "tags": [
+        "radial",
+        "polar",
+        "circular",
+        "coordinates",
+        "unwrap",
+        "wrap",
+        "tunnel"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": []

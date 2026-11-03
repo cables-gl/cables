@@ -106,6 +106,15 @@
         ]
     },
     "summary": "record, playback and download audio",
+    "tags": [
+        "record",
+        "capture",
+        "save",
+        "download",
+        "wav",
+        "microphone",
+        "sampler"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

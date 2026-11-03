@@ -45,6 +45,14 @@
         ]
     },
     "summary": "result is first connected valid object",
+    "tags": [
+        "fallback",
+        "first valid",
+        "coalesce",
+        "default",
+        "select",
+        "or"
+    ],
     "docs": {
         "ports": []
     },

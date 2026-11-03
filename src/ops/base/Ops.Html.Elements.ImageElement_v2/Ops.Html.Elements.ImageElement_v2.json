@@ -116,6 +116,14 @@
         ]
     },
     "summary": "create an image(img) html element",
+    "tags": [
+        "img",
+        "picture",
+        "photo",
+        "html image",
+        "dom",
+        "logo"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

@@ -127,6 +127,16 @@
         ]
     },
     "summary": "Get a string from a sidebar input field",
+    "tags": [
+        "text field",
+        "input",
+        "string",
+        "type",
+        "textbox",
+        "ui",
+        "gui",
+        "interface"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

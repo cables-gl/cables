@@ -47,6 +47,12 @@
         ]
     },
     "summary": "normalize a vector",
+    "tags": [
+        "unit vector",
+        "length 1",
+        "direction",
+        "vector"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

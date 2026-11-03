@@ -65,6 +65,15 @@
         ]
     },
     "summary": "3d space noise for mesh materials",
+    "tags": [
+        "3d noise",
+        "grain",
+        "dirt",
+        "surface noise",
+        "texture",
+        "procedural",
+        "noise"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "3eeb7a13-339c-4409-9de7-3dfcab303663",

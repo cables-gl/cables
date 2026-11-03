@@ -43,6 +43,15 @@
         ]
     },
     "summary": "Switch between multiple object inputs",
+    "tags": [
+        "select",
+        "choose",
+        "multiplexer",
+        "mux",
+        "pick",
+        "index",
+        "many inputs"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

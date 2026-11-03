@@ -1,5 +1,13 @@
 {
     "summary": "Convert a number to a string",
+    "tags": [
+        "convert",
+        "text",
+        "format",
+        "stringify",
+        "to text",
+        "cast"
+    ],
     "updated": 1504977094540,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",

@@ -35,6 +35,15 @@
         ]
     },
     "summary": "A Simple way to write text on the screen.",
+    "tags": [
+        "text",
+        "vector font",
+        "lines",
+        "stroke",
+        "letters",
+        "typography",
+        "plotter"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": []

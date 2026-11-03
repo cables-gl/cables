@@ -23,6 +23,14 @@
         ]
     },
     "summary": "Parses a string and returns a floating point number / string to number",
+    "tags": [
+        "convert",
+        "parse",
+        "parsefloat",
+        "cast",
+        "number",
+        "text to number"
+    ],
     "docs": {
         "ports": []
     },

@@ -28,6 +28,16 @@
         ]
     },
     "summary": "vertex shader modulo operation on vertex position ",
+    "tags": [
+        "mod",
+        "wrap",
+        "repeat",
+        "tile",
+        "fold",
+        "vertex",
+        "glitch",
+        "remainder"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

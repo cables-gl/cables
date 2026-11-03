@@ -24,6 +24,16 @@
         ]
     },
     "summary": "create a cables.gl CORS proxy URL",
+    "tags": [
+        "cross origin",
+        "cors",
+        "proxy",
+        "fetch",
+        "load external",
+        "api",
+        "workaround",
+        "remote content"
+    ],
     "docs": {
         "ports": []
     },

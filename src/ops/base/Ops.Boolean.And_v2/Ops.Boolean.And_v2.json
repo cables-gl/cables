@@ -49,6 +49,15 @@
         ]
     },
     "summary": "Outputs `true` if all input values are `true` (boolean)",
+    "tags": [
+        "&&",
+        "both",
+        "all",
+        "logic",
+        "logical and",
+        "conjunction",
+        "gate"
+    ],
     "isReleased": true,
     "exampleProjectId": "_B91Ms",
     "docs": {

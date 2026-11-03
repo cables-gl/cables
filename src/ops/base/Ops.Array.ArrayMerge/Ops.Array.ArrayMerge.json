@@ -3,6 +3,14 @@
     "id": "3df0db41-26f9-4deb-a6ce-9e71eb8f9784",
     "created": 1520592423600,
     "summary": "Merge two arrays - Array 2 is placed behind array 1",
+    "tags": [
+        "concat",
+        "join",
+        "combine",
+        "append",
+        "concatenate",
+        "attach"
+    ],
     "docs": {
         "ports": [
             {

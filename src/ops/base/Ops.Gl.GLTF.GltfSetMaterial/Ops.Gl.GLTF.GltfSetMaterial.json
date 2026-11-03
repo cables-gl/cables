@@ -34,6 +34,14 @@
         ]
     },
     "summary": "Assigns a material to a node inside of the gltfScene op",
+    "tags": [
+        "assign material",
+        "override",
+        "replace shader",
+        "change look",
+        "material",
+        "apply"
+    ],
     "issues": "",
     "youtubeids": [
         "QNLw21hSweg"

@@ -38,6 +38,15 @@
         ]
     },
     "summary": "Subdivide and smooth a 3D point path with cubic Bézier interpolation",
+    "tags": [
+        "smooth",
+        "bezier",
+        "curve",
+        "round",
+        "refine",
+        "spline",
+        "path"
+    ],
     "docs": {
         "ports": [
             {

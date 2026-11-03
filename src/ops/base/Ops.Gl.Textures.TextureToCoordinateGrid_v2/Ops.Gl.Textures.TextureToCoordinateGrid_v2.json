@@ -76,6 +76,15 @@
         ]
     },
     "summary": "convert a texture to a 3d coordinate grid storing coordinates in texture RGB channels",
+    "tags": [
+        "positions",
+        "points",
+        "pixels to xyz",
+        "displacement",
+        "3d grid",
+        "data",
+        "convert"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [

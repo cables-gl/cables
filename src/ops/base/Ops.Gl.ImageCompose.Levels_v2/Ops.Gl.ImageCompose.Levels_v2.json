@@ -43,6 +43,14 @@
     "id": "cf49063c-a010-4e2b-add6-f8dea50392b5",
     "created": 1650881312915,
     "summary": "adjust levels to correct the tonal range of an image ",
+    "tags": [
+        "tonal range",
+        "histogram",
+        "black point",
+        "white point",
+        "curves",
+        "contrast"
+    ],
     "docs": {
         "ports": []
     },

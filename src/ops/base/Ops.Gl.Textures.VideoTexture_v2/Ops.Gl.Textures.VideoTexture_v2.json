@@ -138,6 +138,16 @@
         }
     ],
     "summary": "Play a video file and use it as a texture",
+    "tags": [
+        "movie",
+        "video",
+        "mp4",
+        "webm",
+        "play",
+        "footage",
+        "clip",
+        "stream"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

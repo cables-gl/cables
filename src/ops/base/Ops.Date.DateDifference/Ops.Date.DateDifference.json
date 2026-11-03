@@ -61,6 +61,15 @@
         ]
     },
     "summary": "Calculates the difference between two timestamps",
+    "tags": [
+        "duration",
+        "elapsed",
+        "time between",
+        "countdown",
+        "days between",
+        "delta",
+        "age"
+    ],
     "author": "5a0fe67d9641cedb39929853",
     "authorName": "pandur",
     "id": "34cd865c-cc4d-4c58-afb2-626773eb412e",

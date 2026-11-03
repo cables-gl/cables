@@ -22,6 +22,16 @@
         ]
     },
     "summary": "parse CSV files as array",
+    "tags": [
+        "spreadsheet",
+        "table",
+        "comma separated",
+        "parse",
+        "import",
+        "excel",
+        "data",
+        "rows"
+    ],
     "docs": {
         "ports": [
             {

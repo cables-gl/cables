@@ -21,6 +21,13 @@
         ]
     },
     "summary": "encode a string to base64",
+    "tags": [
+        "encode",
+        "base64",
+        "btoa",
+        "convert",
+        "binary"
+    ],
     "changelog": [
         {
             "message": "cloned op from Ops.String.Base64Encode",

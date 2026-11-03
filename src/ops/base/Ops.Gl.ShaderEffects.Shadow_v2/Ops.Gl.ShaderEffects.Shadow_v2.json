@@ -110,6 +110,14 @@
         "cgl"
     ],
     "summary": "add shadow capabilities to any material",
+    "tags": [
+        "shadows",
+        "light",
+        "shadow map",
+        "cast shadow",
+        "receive shadow",
+        "lighting"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

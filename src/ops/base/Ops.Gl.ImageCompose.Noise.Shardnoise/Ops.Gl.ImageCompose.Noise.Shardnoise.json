@@ -108,6 +108,14 @@
     "license": "MIT",
     "exampleProjectId": "GSZtvs",
     "summary": "Render \"shard noise\" into a texture",
+    "tags": [
+        "shards",
+        "crystal",
+        "fractured",
+        "broken glass",
+        "procedural",
+        "pattern"
+    ],
     "coreLibs": [
         "cgl"
     ],

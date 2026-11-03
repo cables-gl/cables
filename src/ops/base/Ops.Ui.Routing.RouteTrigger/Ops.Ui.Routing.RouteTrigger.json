@@ -25,6 +25,16 @@
         ]
     },
     "summary": "Routing Helper for trigger cables",
+    "tags": [
+        "cable",
+        "reroute",
+        "knot",
+        "tidy",
+        "organize",
+        "patch layout",
+        "waypoint",
+        "helper"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

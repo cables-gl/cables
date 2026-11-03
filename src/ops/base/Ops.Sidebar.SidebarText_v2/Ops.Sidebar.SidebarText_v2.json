@@ -38,6 +38,15 @@
         ]
     },
     "summary": "Display text in the sidebar",
+    "tags": [
+        "label",
+        "paragraph",
+        "info text",
+        "description",
+        "heading",
+        "gui",
+        "caption"
+    ],
     "docs": {
         "ports": [
             {

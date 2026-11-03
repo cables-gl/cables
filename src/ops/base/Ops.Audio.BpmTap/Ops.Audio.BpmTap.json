@@ -60,6 +60,16 @@
         ]
     },
     "summary": "Let’s you tap in a beat, useful to synchronise visuals to music (VJ, sync, sound)",
+    "tags": [
+        "tempo",
+        "tap tempo",
+        "rhythm",
+        "beat",
+        "metronome",
+        "sync",
+        "bpm",
+        "timing"
+    ],
     "docs": {
         "ports": [
             {

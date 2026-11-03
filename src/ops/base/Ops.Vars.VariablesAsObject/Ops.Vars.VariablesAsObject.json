@@ -29,6 +29,15 @@
         ]
     },
     "summary": "Outputs an object containing all variables",
+    "tags": [
+        "all variables",
+        "json",
+        "dump",
+        "export",
+        "debug",
+        "inspect",
+        "collect"
+    ],
     "docs": {
         "ports": []
     },

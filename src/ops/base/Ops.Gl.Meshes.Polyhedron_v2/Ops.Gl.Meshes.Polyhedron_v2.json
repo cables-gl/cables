@@ -28,6 +28,17 @@
         ]
     },
     "summary": "Generate 3D polyhedron geometry",
+    "tags": [
+        "platonic solid",
+        "d20",
+        "dice",
+        "solid",
+        "tetrahedron",
+        "octahedron",
+        "dodecahedron",
+        "crystal",
+        "gem"
+    ],
     "docs": {},
     "changelog": [
         {

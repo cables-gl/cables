@@ -74,6 +74,16 @@
     "authorName": "tob_har",
     "created": 1699217231147,
     "summary": "set a boolean as object property",
+    "tags": [
+        "property",
+        "key",
+        "write",
+        "set",
+        "assign",
+        "json",
+        "compose",
+        "boolean"
+    ],
     "docs": {
         "ports": []
     },

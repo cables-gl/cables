@@ -56,6 +56,13 @@
         ]
     },
     "summary": "objects further away are colored to enhance the perception of distance.",
+    "tags": [
+        "mist",
+        "haze",
+        "atmosphere",
+        "depth fade",
+        "distance"
+    ],
     "docs": {
         "ports": []
     },

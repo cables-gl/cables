@@ -35,6 +35,15 @@
         ]
     },
     "summary": "Read pixel colors from a texture as an array",
+    "tags": [
+        "pixels",
+        "read",
+        "data",
+        "readpixels",
+        "rgba",
+        "image to array",
+        "convert"
+    ],
     "docs": {
         "ports": [
             {

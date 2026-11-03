@@ -1,5 +1,14 @@
 {
     "summary": "outputs a absolute value controlled by the mousewheel (scroll, zoom)",
+    "tags": [
+        "scroll",
+        "zoom",
+        "wheel",
+        "delta",
+        "scrolling",
+        "spin",
+        "trackpad"
+    ],
     "layout": {
         "portsIn": [
             {

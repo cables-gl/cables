@@ -44,6 +44,15 @@
         ]
     },
     "summary": "Filter key-value pairs in objects in an array of objects",
+    "tags": [
+        "json",
+        "filter",
+        "where",
+        "search",
+        "query",
+        "select",
+        "objects"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

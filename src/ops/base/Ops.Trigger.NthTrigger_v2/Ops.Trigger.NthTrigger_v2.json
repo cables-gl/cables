@@ -22,6 +22,16 @@
         ]
     },
     "summary": "Lets a trigger through every nth time (trigger limiter)",
+    "tags": [
+        "every nth",
+        "divide",
+        "skip",
+        "throttle",
+        "counter",
+        "limiter",
+        "decimate",
+        "step"
+    ],
     "docs": {
         "ports": [
             {

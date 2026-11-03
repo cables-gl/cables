@@ -23,6 +23,14 @@
         ]
     },
     "summary": "Draw a mesh, showing only its vertex colors",
+    "tags": [
+        "vertex colors",
+        "colors",
+        "gouraud",
+        "painted",
+        "debug",
+        "attribute"
+    ],
     "docs": {
         "ports": []
     },

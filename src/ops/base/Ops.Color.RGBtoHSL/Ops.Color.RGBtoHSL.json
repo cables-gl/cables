@@ -48,6 +48,14 @@
         ]
     },
     "summary": "Convert RGB color to HSL values",
+    "tags": [
+        "hue",
+        "saturation",
+        "lightness",
+        "convert",
+        "color space",
+        "hsv"
+    ],
     "docs": {},
     "exampleProjectId": "Du0rvs",
     "isReleased": true,

@@ -46,6 +46,16 @@
         ]
     },
     "summary": "Sets output to `1` when triggered, turns back to `0` automatically after x seconds",
+    "tags": [
+        "one shot",
+        "pulse",
+        "timed",
+        "auto off",
+        "timeout",
+        "flash",
+        "retrigger",
+        "delay off"
+    ],
     "docs": {
         "ports": [
             {

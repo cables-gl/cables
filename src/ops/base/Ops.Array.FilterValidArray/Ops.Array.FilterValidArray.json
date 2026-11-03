@@ -34,6 +34,14 @@
         ]
     },
     "summary": "Keep the last non-empty array and report whether the current array is valid",
+    "tags": [
+        "hold",
+        "last valid",
+        "not empty",
+        "cache",
+        "keep",
+        "filter"
+    ],
     "docs": {
         "ports": []
     },

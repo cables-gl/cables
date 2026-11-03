@@ -64,6 +64,13 @@
         ]
     },
     "summary": "Create an array filled with other arrays",
+    "tags": [
+        "nested",
+        "2d array",
+        "matrix",
+        "group",
+        "collection"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

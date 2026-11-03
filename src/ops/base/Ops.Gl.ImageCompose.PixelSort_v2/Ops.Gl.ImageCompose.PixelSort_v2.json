@@ -124,5 +124,13 @@
     ],
     "license": "MIT",
     "isReleased": true,
-    "summary": "Sort pixels in rows or columns by luminance,brightness / glitch"
+    "summary": "Sort pixels in rows or columns by luminance,brightness / glitch",
+    "tags": [
+        "glitch",
+        "sort",
+        "luminance",
+        "brightness",
+        "smear",
+        "databend"
+    ]
 }

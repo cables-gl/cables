@@ -24,6 +24,14 @@
         ]
     },
     "summary": "draw only the edges of an image",
+    "tags": [
+        "outline",
+        "sobel",
+        "edges",
+        "contour",
+        "line art",
+        "toon"
+    ],
     "docs": {
         "ports": []
     },

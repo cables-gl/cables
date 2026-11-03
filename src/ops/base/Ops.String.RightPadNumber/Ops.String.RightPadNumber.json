@@ -25,6 +25,15 @@
         ]
     },
     "summary": "converts a number to a string with num decimal places, adds 0's",
+    "tags": [
+        "decimals",
+        "fixed",
+        "digits",
+        "format number",
+        "toFixed",
+        "precision",
+        "trailing zeros"
+    ],
     "docs": {
         "ports": []
     },

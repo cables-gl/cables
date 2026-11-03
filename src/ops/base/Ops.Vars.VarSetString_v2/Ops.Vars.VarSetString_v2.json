@@ -33,6 +33,16 @@
         ]
     },
     "summary": "Set string variable",
+    "tags": [
+        "write",
+        "variable",
+        "store",
+        "wireless",
+        "global",
+        "send",
+        "text",
+        "save"
+    ],
     "issues": "",
     "docs": {
         "ports": [

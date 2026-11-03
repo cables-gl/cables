@@ -27,6 +27,15 @@
         ]
     },
     "summary": "Convert object to string",
+    "tags": [
+        "json to string",
+        "serialize",
+        "text",
+        "debug",
+        "dump",
+        "convert",
+        "stringify"
+    ],
     "docs": {
         "ports": []
     },

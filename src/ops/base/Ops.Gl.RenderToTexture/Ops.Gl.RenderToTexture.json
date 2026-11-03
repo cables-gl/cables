@@ -1,5 +1,14 @@
 {
     "summary": "Render the scene into a texture",
+    "tags": [
+        "framebuffer",
+        "fbo",
+        "offscreen",
+        "render target",
+        "buffer",
+        "post processing",
+        "capture scene"
+    ],
     "layout": {
         "portsIn": [
             {

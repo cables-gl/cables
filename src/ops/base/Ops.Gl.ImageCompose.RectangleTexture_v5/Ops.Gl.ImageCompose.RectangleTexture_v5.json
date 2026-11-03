@@ -180,6 +180,14 @@
         }
     ],
     "summary": "draws a 2d rectangle into a texture.",
+    "tags": [
+        "rect",
+        "square",
+        "box",
+        "quad",
+        "shape",
+        "2d"
+    ],
     "docs": {
         "ports": [
             {

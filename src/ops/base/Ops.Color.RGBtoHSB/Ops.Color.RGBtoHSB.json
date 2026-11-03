@@ -51,6 +51,15 @@
         ]
     },
     "summary": "convert RGB color to HSB Hue, Saturation, Brightness",
+    "tags": [
+        "hsv",
+        "hue",
+        "saturation",
+        "brightness",
+        "convert",
+        "color space",
+        "hsl"
+    ],
     "docs": {
         "ports": []
     },

@@ -23,6 +23,16 @@
         ]
     },
     "summary": "Triggers when boolean value has changed",
+    "tags": [
+        "change",
+        "detect",
+        "edge",
+        "event",
+        "flip",
+        "toggle",
+        "onchange",
+        "listener"
+    ],
     "docs": {
         "ports": [
             {

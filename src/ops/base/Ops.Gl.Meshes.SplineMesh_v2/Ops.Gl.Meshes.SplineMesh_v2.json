@@ -39,6 +39,15 @@
         ]
     },
     "summary": "Draw splines or polylines as a mesh",
+    "tags": [
+        "curve",
+        "path",
+        "tube",
+        "ribbon",
+        "thick line",
+        "polyline",
+        "stroke"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

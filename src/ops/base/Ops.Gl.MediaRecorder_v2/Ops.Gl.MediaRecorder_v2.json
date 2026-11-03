@@ -140,6 +140,15 @@
         ]
     },
     "summary": "Record the renderer-output to video",
+    "tags": [
+        "record",
+        "video",
+        "capture",
+        "webm",
+        "screen recording",
+        "export",
+        "render to video"
+    ],
     "docs": {
         "ports": []
     },

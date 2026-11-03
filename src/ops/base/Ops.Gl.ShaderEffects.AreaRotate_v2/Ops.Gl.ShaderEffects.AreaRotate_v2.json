@@ -48,6 +48,15 @@
         ]
     },
     "summary": "rotate vertices in an area around a center point",
+    "tags": [
+        "twist",
+        "spin",
+        "swirl",
+        "local rotation",
+        "volume",
+        "deform",
+        "vertex"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": []

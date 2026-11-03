@@ -27,6 +27,15 @@
         ]
     },
     "summary": "get all values of a CSV column as array of strings",
+    "tags": [
+        "spreadsheet",
+        "table",
+        "column",
+        "field",
+        "excel",
+        "data",
+        "extract"
+    ],
     "docs": {
         "ports": []
     },

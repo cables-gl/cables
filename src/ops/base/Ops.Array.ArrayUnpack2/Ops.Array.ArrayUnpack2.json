@@ -33,6 +33,14 @@
         ]
     },
     "summary": "Unpack an xy array into separate arrays",
+    "tags": [
+        "split",
+        "xy",
+        "separate",
+        "deinterleave",
+        "channels",
+        "demux"
+    ],
     "docs": {
         "ports": [
             {

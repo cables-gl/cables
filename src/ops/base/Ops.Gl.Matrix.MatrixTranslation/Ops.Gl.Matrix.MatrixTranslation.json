@@ -36,6 +36,14 @@
         ]
     },
     "summary": "get translation of a matrix",
+    "tags": [
+        "position",
+        "extract",
+        "read",
+        "location",
+        "mat4",
+        "get position"
+    ],
     "docs": {
         "ports": []
     },

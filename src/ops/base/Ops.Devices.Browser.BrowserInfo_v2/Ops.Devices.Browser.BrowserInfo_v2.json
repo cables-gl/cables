@@ -99,6 +99,17 @@
         ]
     },
     "summary": "Reports the browser being used",
+    "tags": [
+        "user agent",
+        "chrome",
+        "safari",
+        "firefox",
+        "detect",
+        "platform",
+        "mobile",
+        "os",
+        "navigator"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

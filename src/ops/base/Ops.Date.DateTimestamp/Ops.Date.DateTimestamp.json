@@ -36,6 +36,14 @@
         ]
     },
     "summary": "Calculates the timestamp of a date by year / month / day / hour / minute",
+    "tags": [
+        "unix time",
+        "epoch",
+        "convert",
+        "year month day",
+        "make date",
+        "milliseconds"
+    ],
     "docs": {
         "ports": [
             {

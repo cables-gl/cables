@@ -36,6 +36,14 @@
         ]
     },
     "summary": "Trigger once for each texture in an array",
+    "tags": [
+        "loop",
+        "foreach",
+        "for each",
+        "images",
+        "repeat",
+        "iterate"
+    ],
     "docs": {
         "ports": [
             {

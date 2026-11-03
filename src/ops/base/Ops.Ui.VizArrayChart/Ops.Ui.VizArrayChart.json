@@ -33,6 +33,16 @@
         "portsOut": []
     },
     "summary": "Displays information of the distribution of numerical values in an array",
+    "tags": [
+        "histogram",
+        "distribution",
+        "statistics",
+        "debug",
+        "visualize",
+        "chart",
+        "plot",
+        "bars"
+    ],
     "docs": {
         "ports": [
             {

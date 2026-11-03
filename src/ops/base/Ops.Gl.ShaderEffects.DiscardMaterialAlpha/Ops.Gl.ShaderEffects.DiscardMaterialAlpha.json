@@ -49,6 +49,14 @@
         ]
     },
     "summary": "discard transparent pixels in material textures",
+    "tags": [
+        "cutout",
+        "alpha clip",
+        "alpha test",
+        "transparent pixels",
+        "mask",
+        "discard"
+    ],
     "exampleProjectId": "3r_lf6",
     "docs": {
         "ports": []

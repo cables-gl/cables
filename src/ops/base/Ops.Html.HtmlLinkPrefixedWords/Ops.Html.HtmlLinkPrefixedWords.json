@@ -43,6 +43,15 @@
     },
     "isReleased": true,
     "summary": "Create links from words with a prefix to a url as suffix",
+    "tags": [
+        "hashtag",
+        "mention",
+        "url",
+        "hyperlink",
+        "auto link",
+        "text",
+        "social"
+    ],
     "docs": {
         "ports": []
     },

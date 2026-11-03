@@ -1,6 +1,17 @@
 {
     "libs": [],
     "summary": "Trigger other ops once every frame to create smooth animations (renderer)",
+    "tags": [
+        "start",
+        "render loop",
+        "every frame",
+        "update",
+        "root",
+        "tick",
+        "draw",
+        "animation frame",
+        "begin"
+    ],
     "layout": {
         "portsIn": [
             {

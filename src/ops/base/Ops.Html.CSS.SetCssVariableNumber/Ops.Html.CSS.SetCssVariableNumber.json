@@ -21,6 +21,14 @@
         "portsOut": []
     },
     "summary": "Set a CSS variable to a number value",
+    "tags": [
+        "custom property",
+        "var",
+        "css",
+        "value",
+        "set",
+        "number"
+    ],
     "docs": {
         "ports": []
     },

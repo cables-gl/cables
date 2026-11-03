@@ -113,6 +113,15 @@
         ]
     },
     "summary": "triggers evenly distributed by value",
+    "tags": [
+        "split",
+        "distribute",
+        "route",
+        "spread",
+        "select",
+        "fan out",
+        "ratio"
+    ],
     "docs": {
         "ports": [
             {

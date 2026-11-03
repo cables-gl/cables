@@ -1,5 +1,14 @@
 {
     "summary": "use position and play pause state of cables timeline",
+    "tags": [
+        "play pause",
+        "position",
+        "seek",
+        "sync",
+        "transport",
+        "control",
+        "external"
+    ],
     "authorName": "pandur",
     "id": "53cb7b1a-56c7-405f-b427-12db78fbfd2f",
     "created": 1519814509715,

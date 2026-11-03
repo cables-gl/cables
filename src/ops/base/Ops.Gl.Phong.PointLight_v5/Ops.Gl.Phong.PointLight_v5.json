@@ -178,6 +178,16 @@
         }
     ],
     "summary": "Point light for phong shading",
+    "tags": [
+        "lamp",
+        "bulb",
+        "omni",
+        "light source",
+        "glow",
+        "candle",
+        "lighting",
+        "omnidirectional"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

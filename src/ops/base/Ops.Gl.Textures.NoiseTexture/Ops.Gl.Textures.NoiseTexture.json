@@ -123,6 +123,15 @@
         ]
     },
     "summary": "Generate a random noise texture",
+    "tags": [
+        "random",
+        "static",
+        "white noise",
+        "grain",
+        "pixels",
+        "data",
+        "seed"
+    ],
     "issues": "",
     "docs": {
         "ports": []

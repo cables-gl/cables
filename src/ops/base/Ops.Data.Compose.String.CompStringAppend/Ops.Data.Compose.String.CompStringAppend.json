@@ -48,6 +48,15 @@
     "authorName": "pandur",
     "created": 1689760598014,
     "summary": "Append a string to a string",
+    "tags": [
+        "add",
+        "concat",
+        "join",
+        "text",
+        "compose",
+        "extend",
+        "write"
+    ],
     "docs": {
         "ports": []
     },

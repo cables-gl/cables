@@ -79,6 +79,14 @@
         ]
     },
     "summary": "Set up a camera, rotated by a quaternion",
+    "tags": [
+        "rotation",
+        "orientation",
+        "camera",
+        "quat",
+        "view",
+        "rotate camera"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

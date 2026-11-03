@@ -18,6 +18,13 @@
         ]
     },
     "summary": "number of characters in a string",
+    "tags": [
+        "count",
+        "characters",
+        "size",
+        "number of letters",
+        "len"
+    ],
     "docs": {
         "ports": []
     },

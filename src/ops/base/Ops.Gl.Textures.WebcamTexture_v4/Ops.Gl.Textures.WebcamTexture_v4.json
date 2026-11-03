@@ -158,6 +158,16 @@
         ]
     },
     "summary": "Use your webcam camera as a texture",
+    "tags": [
+        "camera",
+        "webcam",
+        "video input",
+        "live",
+        "capture",
+        "video",
+        "face",
+        "stream"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

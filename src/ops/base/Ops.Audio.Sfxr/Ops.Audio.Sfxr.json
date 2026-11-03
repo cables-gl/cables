@@ -245,6 +245,16 @@
     ],
     "isReleased": true,
     "summary": "Oldschool sound effect generator",
+    "tags": [
+        "sound effects",
+        "8bit",
+        "chiptune",
+        "retro",
+        "game audio",
+        "bleep",
+        "jfxr",
+        "synth"
+    ],
     "docs": {
         "ports": []
     }

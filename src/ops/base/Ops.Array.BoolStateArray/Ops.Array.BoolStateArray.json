@@ -33,6 +33,15 @@
         ]
     },
     "summary": "Array filled with `0`, only one can be `1`",
+    "tags": [
+        "radio",
+        "one hot",
+        "selection",
+        "exclusive",
+        "toggle",
+        "state",
+        "switch"
+    ],
     "docs": {
         "ports": [
             {

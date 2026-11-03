@@ -48,6 +48,15 @@
         "cgl"
     ],
     "summary": "Translates, rotates and scales the canvas2d ops below it",
+    "tags": [
+        "translate",
+        "rotate",
+        "scale",
+        "move",
+        "matrix",
+        "position",
+        "transformation"
+    ],
     "isReleased": true,
     "license": "MIT",
     "exampleProjectId": "c9ITAy",

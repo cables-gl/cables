@@ -76,6 +76,16 @@
         ]
     },
     "summary": "Outputs information about the connected texture",
+    "tags": [
+        "size",
+        "width",
+        "height",
+        "format",
+        "filter",
+        "debug",
+        "resolution",
+        "properties"
+    ],
     "docs": {
         "ports": []
     },

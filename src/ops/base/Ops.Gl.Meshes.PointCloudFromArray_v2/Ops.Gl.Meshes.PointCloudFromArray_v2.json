@@ -58,6 +58,14 @@
     "id": "53bc6de5-8d22-4687-9f03-ccfd3e50d106",
     "created": 1726142850228,
     "summary": "visualize an array of coordinates as points",
+    "tags": [
+        "points",
+        "particles",
+        "dots",
+        "vertices",
+        "scatter",
+        "cloud"
+    ],
     "docs": {
         "ports": [
             {

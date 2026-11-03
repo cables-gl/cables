@@ -75,6 +75,18 @@
     "authorName": "pandur",
     "created": 1698418579461,
     "summary": "push/append an object to an array",
+    "tags": [
+        "push",
+        "append",
+        "add",
+        "array",
+        "compose",
+        "build",
+        "collect",
+        "list",
+        "object",
+        "json"
+    ],
     "docs": {
         "ports": []
     },

@@ -79,6 +79,14 @@
         ]
     },
     "summary": "Draw a 2D rectangle with controllable parameters",
+    "tags": [
+        "rect",
+        "square",
+        "box",
+        "quad",
+        "shape",
+        "2d"
+    ],
     "docs": {
         "ports": [
             {

@@ -48,6 +48,16 @@
         ]
     },
     "summary": "Set innerHTML or innerTEXT of an HTML element",
+    "tags": [
+        "text",
+        "content",
+        "html",
+        "set text",
+        "innertext",
+        "write",
+        "label",
+        "markup"
+    ],
     "docs": {
         "ports": []
     },

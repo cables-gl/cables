@@ -98,6 +98,15 @@
     "id": "c260d839-065c-4101-8943-c4680b771343",
     "created": 1510231462298,
     "summary": "draw 2d circle into texture",
+    "tags": [
+        "disc",
+        "disk",
+        "dot",
+        "round",
+        "ellipse",
+        "shape",
+        "2d"
+    ],
     "docs": {
         "ports": []
     },

@@ -184,6 +184,16 @@
         }
     ],
     "summary": "spot light  that emits a cone of light",
+    "tags": [
+        "flashlight",
+        "cone",
+        "beam",
+        "stage light",
+        "torch",
+        "lighting",
+        "projector",
+        "spotlight"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

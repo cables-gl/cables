@@ -70,6 +70,15 @@
     },
     "license": "MIT",
     "summary": "Flip/exchange two axis in a whole geometry, e.g. XYZ to XZY",
+    "tags": [
+        "swap axes",
+        "exchange",
+        "y up",
+        "z up",
+        "rotate coordinate system",
+        "xyz",
+        "convert"
+    ],
     "exampleProjectId": "Cxxq9a",
     "isReleased": true
 }

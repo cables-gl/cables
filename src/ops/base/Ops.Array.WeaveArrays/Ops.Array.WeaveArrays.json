@@ -26,6 +26,14 @@
         ]
     },
     "summary": "weave/interleave two input arrays into one combined array",
+    "tags": [
+        "interleave",
+        "zip",
+        "mix",
+        "alternate",
+        "combine",
+        "shuffle together"
+    ],
     "docs": {
         "ports": [
             {

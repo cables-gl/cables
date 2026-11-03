@@ -32,6 +32,16 @@
     "created": 1776780957090,
     "libs": [],
     "summary": "Generate a SVG path string of a string using an opentype font",
+    "tags": [
+        "vector",
+        "font outline",
+        "text to mesh",
+        "svg",
+        "opentype",
+        "letters",
+        "path",
+        "glyph"
+    ],
     "exampleProjectId": "Cp5VS3",
     "docs": {},
     "coreLibs": [

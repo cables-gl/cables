@@ -31,5 +31,13 @@
         "ports": []
     },
     "summary": "convert a timestamp to an ISO date string",
+    "tags": [
+        "format",
+        "iso 8601",
+        "convert",
+        "unix time",
+        "epoch",
+        "date string"
+    ],
     "isReleased": true
 }

@@ -56,6 +56,15 @@
         ]
     },
     "summary": "Crossfade between 2 values",
+    "tags": [
+        "mix",
+        "blend",
+        "lerp",
+        "fade between",
+        "transition",
+        "dissolve",
+        "interpolate"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -22,6 +22,14 @@
         ]
     },
     "summary": "Outputs the current document body element",
+    "tags": [
+        "body",
+        "dom",
+        "page",
+        "root",
+        "html",
+        "document"
+    ],
     "docs": {
         "ports": []
     },

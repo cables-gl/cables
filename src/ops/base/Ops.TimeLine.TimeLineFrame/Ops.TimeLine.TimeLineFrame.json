@@ -1,5 +1,13 @@
 {
     "summary": "Returns the current frame number of the timeline",
+    "tags": [
+        "frame number",
+        "fps",
+        "current frame",
+        "read",
+        "time",
+        "counter"
+    ],
     "layout": {
         "portsIn": [],
         "portsOut": [

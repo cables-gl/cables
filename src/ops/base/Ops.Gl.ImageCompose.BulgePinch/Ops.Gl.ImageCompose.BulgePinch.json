@@ -34,6 +34,15 @@
         ]
     },
     "summary": "bulge and pinch an image (deform,stretch,distort)",
+    "tags": [
+        "bulge",
+        "pinch",
+        "deform",
+        "distort",
+        "magnify",
+        "fisheye",
+        "warp"
+    ],
     "docs": {
         "ports": []
     },

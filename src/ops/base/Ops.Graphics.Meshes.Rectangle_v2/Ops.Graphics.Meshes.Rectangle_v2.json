@@ -82,6 +82,19 @@
         ]
     },
     "summary": "draw a rectangle (plane, square)",
+    "tags": [
+        "quad",
+        "plane",
+        "square",
+        "rect",
+        "sprite",
+        "billboard",
+        "card",
+        "panel",
+        "tile",
+        "2d",
+        "box 2d"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -131,6 +131,17 @@
         ]
     },
     "summary": "Show information about any object for patch debugging",
+    "tags": [
+        "json",
+        "inspect",
+        "debug",
+        "visualize",
+        "print",
+        "dump",
+        "properties",
+        "tree",
+        "console log"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

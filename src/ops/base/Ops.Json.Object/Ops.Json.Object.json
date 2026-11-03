@@ -31,6 +31,16 @@
         ]
     },
     "summary": "An empty Object",
+    "tags": [
+        "json",
+        "dictionary",
+        "hashmap",
+        "store",
+        "value",
+        "create",
+        "data",
+        "input"
+    ],
     "docs": {
         "ports": []
     },

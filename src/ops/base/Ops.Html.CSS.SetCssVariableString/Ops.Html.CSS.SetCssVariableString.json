@@ -21,6 +21,14 @@
         "portsOut": []
     },
     "summary": "Set a CSS variable to a string value",
+    "tags": [
+        "custom property",
+        "var",
+        "css",
+        "text",
+        "set",
+        "value"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": []

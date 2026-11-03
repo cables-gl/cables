@@ -82,6 +82,14 @@
         ]
     },
     "summary": "Convert boolean to RGB color",
+    "tags": [
+        "convert",
+        "rgb",
+        "black white",
+        "color",
+        "cast",
+        "on off"
+    ],
     "docs": {
         "ports": []
     },

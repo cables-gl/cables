@@ -50,6 +50,14 @@
         ]
     },
     "summary": "Create an array of num triplets set to default values xyz",
+    "tags": [
+        "xyz",
+        "points",
+        "vec3",
+        "vertices",
+        "positions",
+        "create"
+    ],
     "docs": {
         "ports": []
     },

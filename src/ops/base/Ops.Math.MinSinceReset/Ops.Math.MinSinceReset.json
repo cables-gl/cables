@@ -23,6 +23,13 @@
         ]
     },
     "summary": "Outputs the minimum value since reset has been triggered",
+    "tags": [
+        "lowest",
+        "hold",
+        "record",
+        "minimum",
+        "trough"
+    ],
     "docs": {
         "ports": []
     },

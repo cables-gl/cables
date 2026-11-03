@@ -84,6 +84,15 @@
         ]
     },
     "summary": "simple html ui for timeline/mediaplayers (was: TimeLineUI)",
+    "tags": [
+        "transport",
+        "timeline ui",
+        "media controls",
+        "play pause",
+        "seek bar",
+        "scrubber",
+        "video controls"
+    ],
     "docs": {
         "ports": []
     },

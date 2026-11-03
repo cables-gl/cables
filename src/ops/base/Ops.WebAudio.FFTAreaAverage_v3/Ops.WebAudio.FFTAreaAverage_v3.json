@@ -71,6 +71,17 @@
     "id": "e936b0bb-4ece-469d-aa93-6b3c4136c20b",
     "created": 1730989031417,
     "summary": "Gets the average audio level in a selected area of an FFT array.",
+    "tags": [
+        "frequency band",
+        "bass",
+        "mids",
+        "highs",
+        "level",
+        "spectrum",
+        "range",
+        "bin average",
+        "audio reactive"
+    ],
     "docs": {
         "ports": [
             {

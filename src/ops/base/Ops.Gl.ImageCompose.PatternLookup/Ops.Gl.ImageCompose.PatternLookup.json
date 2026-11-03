@@ -50,6 +50,15 @@
         }
     ],
     "summary": "map a pattern to value levels of your texture",
+    "tags": [
+        "pattern",
+        "levels",
+        "halftone",
+        "hatching",
+        "threshold",
+        "map",
+        "tone"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

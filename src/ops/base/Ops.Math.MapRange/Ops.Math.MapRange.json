@@ -1,5 +1,14 @@
 {
     "summary": "Maps a value from one range into another.",
+    "tags": [
+        "remap",
+        "scale",
+        "range",
+        "convert",
+        "normalize",
+        "linear map",
+        "rescale"
+    ],
     "layout": {
         "portsIn": [
             {

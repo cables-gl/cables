@@ -37,6 +37,16 @@
         ]
     },
     "summary": "Allows triggers to be sent to a TriggerReceive op with the same variable name",
+    "tags": [
+        "wireless",
+        "remote",
+        "event",
+        "message",
+        "named",
+        "broadcast",
+        "emit",
+        "bus"
+    ],
     "issues": "",
     "docs": {
         "ports": [

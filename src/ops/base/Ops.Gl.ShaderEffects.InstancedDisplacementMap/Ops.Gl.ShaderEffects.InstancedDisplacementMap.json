@@ -124,6 +124,14 @@
         ]
     },
     "summary": "displace positions of instanced meshes using a texture",
+    "tags": [
+        "displace",
+        "instances",
+        "heightmap",
+        "texture driven",
+        "move",
+        "position"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -27,6 +27,14 @@
     },
     "cloneOf": "e86ec524-b3fc-4e0f-9489-c48091c23178",
     "summary": "convert an array3 of euler rotations to an array4 of quaternions",
+    "tags": [
+        "rotation",
+        "euler",
+        "quaternion",
+        "convert",
+        "orientation",
+        "slerp"
+    ],
     "docs": {
         "ports": []
     },

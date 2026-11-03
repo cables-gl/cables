@@ -16,6 +16,11 @@
         ]
     },
     "summary": "Returns the smallest integer greater than or equal to a given number",
+    "tags": [
+        "round up",
+        "ceiling",
+        "integer"
+    ],
     "docs": {
         "ports": [
             {

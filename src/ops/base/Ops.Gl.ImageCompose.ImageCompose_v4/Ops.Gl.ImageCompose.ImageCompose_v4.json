@@ -134,6 +134,17 @@
         ]
     },
     "summary": "Combines images and effects in layers.",
+    "tags": [
+        "composition",
+        "compose",
+        "layers",
+        "framebuffer",
+        "render target",
+        "fbo",
+        "post processing",
+        "2d",
+        "start"
+    ],
     "credits": [
         {
             "title": "Photoshop math GLSL shaders",

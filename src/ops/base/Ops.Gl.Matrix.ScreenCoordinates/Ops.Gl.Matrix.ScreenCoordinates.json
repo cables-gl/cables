@@ -38,6 +38,14 @@
         ]
     },
     "summary": "screen/pixel coordinates of the current transform",
+    "tags": [
+        "2d position",
+        "pixel",
+        "project",
+        "screen space",
+        "world to screen",
+        "pixels"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

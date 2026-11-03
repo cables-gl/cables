@@ -95,6 +95,18 @@
     "authorName": "pandur",
     "created": 1680617920957,
     "summary": "push/append a number to an array",
+    "tags": [
+        "push",
+        "append",
+        "add",
+        "array",
+        "compose",
+        "build",
+        "collect",
+        "list",
+        "number",
+        "value"
+    ],
     "docs": {
         "ports": []
     },

@@ -15,6 +15,15 @@
         ]
     },
     "summary": "vibrating a mobile device",
+    "tags": [
+        "haptic",
+        "rumble",
+        "feedback",
+        "phone",
+        "buzz",
+        "vibration",
+        "tactile"
+    ],
     "authorName": "pandur",
     "id": "e947fc63-e44e-4bdd-98e0-89e79373f073",
     "created": 1542699557913,

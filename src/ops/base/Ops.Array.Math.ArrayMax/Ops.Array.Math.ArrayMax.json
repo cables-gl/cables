@@ -22,6 +22,12 @@
         ]
     },
     "summary": "Apply a max operation to all values in an array",
+    "tags": [
+        "larger",
+        "maximum",
+        "highest",
+        "clamp"
+    ],
     "docs": {
         "ports": [
             {

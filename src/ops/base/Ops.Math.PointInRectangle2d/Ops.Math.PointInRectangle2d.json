@@ -55,6 +55,14 @@
         ]
     },
     "summary": "test if a point is in or outside of a rectangle",
+    "tags": [
+        "hit test",
+        "inside",
+        "collision",
+        "bounds",
+        "contains",
+        "intersect"
+    ],
     "exampleProjectId": "dG4B98",
     "isReleased": true,
     "license": "MIT"

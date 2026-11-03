@@ -60,6 +60,16 @@
         ]
     },
     "summary": "Holds an audio file / sample in a buffer ",
+    "tags": [
+        "load",
+        "sample",
+        "sound file",
+        "mp3",
+        "wav",
+        "ogg",
+        "audio file",
+        "decode"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

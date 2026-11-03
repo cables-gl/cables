@@ -52,6 +52,13 @@
     "authorName": "pandur",
     "created": 1579615623326,
     "summary": "Simulate fisheye effect",
+    "tags": [
+        "fisheye",
+        "lens distortion",
+        "wide angle",
+        "warp",
+        "pincushion"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

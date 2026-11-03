@@ -1,5 +1,14 @@
 {
     "summary": "A freely deformable plane, rectangle, polygon",
+    "tags": [
+        "deform",
+        "polygon",
+        "warp",
+        "quad",
+        "rectangle",
+        "plane",
+        "bend"
+    ],
     "layout": {
         "portsIn": [
             {

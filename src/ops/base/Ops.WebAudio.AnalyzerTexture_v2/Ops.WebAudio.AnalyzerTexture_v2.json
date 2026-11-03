@@ -44,6 +44,15 @@
         ]
     },
     "summary": "Creates a spectrogram texture from an audio FFT array",
+    "tags": [
+        "spectrogram",
+        "fft",
+        "visualizer",
+        "waterfall",
+        "spectrum",
+        "audio visualization",
+        "frequency"
+    ],
     "created": 1607427491104,
     "changelog": [
         {

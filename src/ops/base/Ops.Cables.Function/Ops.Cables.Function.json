@@ -19,6 +19,16 @@
         ]
     },
     "summary": "trigger from external function when embedded into a website",
+    "tags": [
+        "javascript",
+        "external",
+        "embed",
+        "interop",
+        "call from js",
+        "api",
+        "integration",
+        "expose"
+    ],
     "docs": {
         "ports": [
             {

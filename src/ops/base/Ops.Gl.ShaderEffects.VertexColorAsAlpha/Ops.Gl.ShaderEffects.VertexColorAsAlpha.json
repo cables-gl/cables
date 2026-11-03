@@ -47,6 +47,14 @@
         ]
     },
     "summary": "Use mesh vertexcolor as Alpha/Opacity",
+    "tags": [
+        "vertex colors",
+        "opacity",
+        "transparency",
+        "alpha",
+        "fade",
+        "mask"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

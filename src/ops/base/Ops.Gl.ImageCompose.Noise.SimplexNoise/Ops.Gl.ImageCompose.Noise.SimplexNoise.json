@@ -104,6 +104,13 @@
         }
     ],
     "summary": "simplex noise generator",
+    "tags": [
+        "smooth noise",
+        "procedural",
+        "clouds",
+        "gradient noise",
+        "organic"
+    ],
     "docs": {
         "ports": []
     },

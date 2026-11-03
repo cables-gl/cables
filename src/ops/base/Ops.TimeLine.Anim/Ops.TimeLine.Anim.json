@@ -58,6 +58,16 @@
         ]
     },
     "summary": "timeline keyframable animation object",
+    "tags": [
+        "keyframes",
+        "animation",
+        "curve",
+        "timeline",
+        "animate",
+        "envelope",
+        "tween",
+        "anim object"
+    ],
     "docs": {
         "ports": []
     },

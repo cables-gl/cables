@@ -11,6 +11,14 @@
     "authorName": "pandur",
     "created": 1618323456249,
     "summary": "Merge / concatenate arrays by trigger",
+    "tags": [
+        "concat",
+        "join",
+        "combine",
+        "append",
+        "concatenate",
+        "on trigger"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

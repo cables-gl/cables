@@ -65,6 +65,16 @@
         ]
     },
     "summary": "information about the webgl context",
+    "tags": [
+        "webgl",
+        "gpu",
+        "context",
+        "capabilities",
+        "extensions",
+        "renderer",
+        "limits",
+        "version"
+    ],
     "docs": {
         "ports": []
     },

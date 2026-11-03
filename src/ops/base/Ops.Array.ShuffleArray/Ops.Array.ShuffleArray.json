@@ -1,5 +1,13 @@
 {
     "summary": "Randomize the order of elements inside an array",
+    "tags": [
+        "random order",
+        "randomize",
+        "mix up",
+        "permute",
+        "scramble",
+        "shuffle"
+    ],
     "layout": {
         "portsIn": [
             {

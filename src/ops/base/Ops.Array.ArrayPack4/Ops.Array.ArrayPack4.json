@@ -42,6 +42,15 @@
         ]
     },
     "summary": "Combine four arrays into one when triggered",
+    "tags": [
+        "combine",
+        "interleave",
+        "xyzw",
+        "rgba",
+        "zip",
+        "merge",
+        "stride"
+    ],
     "docs": {},
     "changelog": [
         {

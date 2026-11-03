@@ -104,6 +104,14 @@
         ]
     },
     "summary": "Draws a simple gradient between three colors",
+    "tags": [
+        "ramp",
+        "fade",
+        "blend",
+        "color transition",
+        "linear gradient",
+        "background"
+    ],
     "docs": {
         "ports": []
     },

@@ -39,6 +39,15 @@
         ]
     },
     "summary": "For subdividing splines, smoothing lines using cubic bezier interpolation",
+    "tags": [
+        "smooth",
+        "bezier",
+        "curve",
+        "round",
+        "refine",
+        "spline",
+        "interpolate"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

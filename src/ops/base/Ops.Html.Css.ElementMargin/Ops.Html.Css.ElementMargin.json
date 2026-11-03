@@ -53,6 +53,13 @@
         ]
     },
     "summary": "Set CSS margins of a html element",
+    "tags": [
+        "spacing",
+        "outer space",
+        "css",
+        "box model",
+        "gap"
+    ],
     "docs": {
         "ports": []
     },

@@ -42,6 +42,16 @@
         ]
     },
     "summary": "connect to MIDI device output port",
+    "tags": [
+        "midi in",
+        "controller",
+        "keyboard",
+        "connect",
+        "device",
+        "input",
+        "port",
+        "usb"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -17,6 +17,14 @@
         ]
     },
     "summary": "Return information about the count of \"duplicates\" in an array, as an object",
+    "tags": [
+        "duplicates",
+        "count",
+        "histogram",
+        "occurrences",
+        "frequency",
+        "statistics"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -53,6 +53,14 @@
     "authorName": "pandur",
     "created": 1680618157701,
     "summary": "pop/remove the last number from an array",
+    "tags": [
+        "remove last",
+        "pop",
+        "delete",
+        "take out",
+        "array",
+        "compose"
+    ],
     "docs": {
         "ports": []
     },

@@ -52,6 +52,14 @@
         }
     ],
     "summary": "ambient light for phong material shading",
+    "tags": [
+        "global light",
+        "base light",
+        "fill light",
+        "ambient",
+        "brightness",
+        "shading"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

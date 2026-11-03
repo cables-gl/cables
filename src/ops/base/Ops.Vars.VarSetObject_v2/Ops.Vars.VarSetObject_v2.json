@@ -23,6 +23,16 @@
         "vargetset"
     ],
     "summary": "Set a variable object",
+    "tags": [
+        "write",
+        "variable",
+        "store",
+        "wireless",
+        "global",
+        "send",
+        "json",
+        "save"
+    ],
     "issues": "",
     "youtubeids": [
         "sUR6b0zvuSY"

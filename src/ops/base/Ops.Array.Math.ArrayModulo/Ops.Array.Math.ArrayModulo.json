@@ -1,5 +1,12 @@
 {
     "summary": "Apply a modulo operation to all values in an array",
+    "tags": [
+        "mod",
+        "remainder",
+        "wrap",
+        "%",
+        "loop"
+    ],
     "docs": {
         "ports": []
     },

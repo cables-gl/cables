@@ -38,6 +38,15 @@
     "id": "9b151d99-7888-4948-81c7-cd23b334e8d4",
     "created": 1510252566722,
     "summary": "scroll image",
+    "tags": [
+        "scroll",
+        "pan",
+        "offset",
+        "move",
+        "translate",
+        "shift",
+        "slide"
+    ],
     "docs": {
         "ports": []
     },

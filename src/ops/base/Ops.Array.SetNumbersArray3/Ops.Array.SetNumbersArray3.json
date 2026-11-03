@@ -41,6 +41,15 @@
         ]
     },
     "summary": "Set three values at position index in an array",
+    "tags": [
+        "write",
+        "replace",
+        "set",
+        "xyz",
+        "index",
+        "modify",
+        "assign"
+    ],
     "docs": {
         "ports": [
             {

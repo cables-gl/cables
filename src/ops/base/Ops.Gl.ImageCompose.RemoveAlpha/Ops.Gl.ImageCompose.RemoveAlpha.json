@@ -17,6 +17,13 @@
         ]
     },
     "summary": "Remove alpha information from image",
+    "tags": [
+        "opaque",
+        "flatten",
+        "transparency",
+        "solid",
+        "background"
+    ],
     "docs": {
         "ports": []
     },

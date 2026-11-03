@@ -31,6 +31,15 @@
         ]
     },
     "summary": "browser js memory consumption",
+    "tags": [
+        "ram",
+        "heap",
+        "memory usage",
+        "leak",
+        "performance",
+        "profiling",
+        "megabytes"
+    ],
     "issues": "",
     "caniusequery": "performance.memory",
     "youtubeids": [],

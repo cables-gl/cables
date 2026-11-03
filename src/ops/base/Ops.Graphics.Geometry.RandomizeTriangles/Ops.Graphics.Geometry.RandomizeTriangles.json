@@ -23,6 +23,14 @@
         ]
     },
     "summary": "randomize order of triangles in a geometry",
+    "tags": [
+        "shuffle",
+        "random order",
+        "scramble",
+        "triangle order",
+        "glitch",
+        "sort"
+    ],
     "exampleProjectId": "gLrrJV",
     "changelog": [
         {

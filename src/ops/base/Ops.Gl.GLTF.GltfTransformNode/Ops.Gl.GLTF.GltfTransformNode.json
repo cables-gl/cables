@@ -68,6 +68,15 @@
         ]
     },
     "summary": "set transformation of a gltf node",
+    "tags": [
+        "move node",
+        "rotate",
+        "scale",
+        "override transform",
+        "animate part",
+        "manipulate",
+        "set"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

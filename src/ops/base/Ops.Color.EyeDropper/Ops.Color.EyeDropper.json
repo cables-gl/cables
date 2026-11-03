@@ -51,5 +51,14 @@
     },
     "exampleProjectId": "kYsAkv",
     "summary": "Native color picker",
+    "tags": [
+        "color picker",
+        "pick color",
+        "screen",
+        "sample",
+        "eyedropper",
+        "pipette",
+        "native"
+    ],
     "isReleased": true
 }

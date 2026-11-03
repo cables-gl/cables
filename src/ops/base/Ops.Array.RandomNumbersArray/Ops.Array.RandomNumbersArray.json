@@ -1,5 +1,14 @@
 {
     "summary": "Generate an Array of Random Numbers (was: randomArray)",
+    "tags": [
+        "random",
+        "rand",
+        "noise",
+        "seed",
+        "dice",
+        "generate",
+        "white noise"
+    ],
     "layout": {
         "portsIn": [
             {

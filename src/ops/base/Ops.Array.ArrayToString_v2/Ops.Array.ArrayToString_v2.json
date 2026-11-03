@@ -28,6 +28,15 @@
         ]
     },
     "summary": "Convert an array to a string, divided by a separator",
+    "tags": [
+        "join",
+        "concat",
+        "text",
+        "implode",
+        "combine",
+        "csv",
+        "serialize"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

@@ -67,6 +67,16 @@
         ]
     },
     "summary": "Renders following meshes as wireframes",
+    "tags": [
+        "wireframe",
+        "wire",
+        "lines",
+        "edges",
+        "outline",
+        "mesh",
+        "grid",
+        "debug"
+    ],
     "docs": {
         "ports": [
             {

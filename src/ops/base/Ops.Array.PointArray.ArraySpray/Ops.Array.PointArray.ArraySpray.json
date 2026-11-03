@@ -114,6 +114,14 @@
         ]
     },
     "summary": "Particle spray simulation",
+    "tags": [
+        "particles",
+        "emitter",
+        "spray",
+        "burst",
+        "simulation",
+        "fountain"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

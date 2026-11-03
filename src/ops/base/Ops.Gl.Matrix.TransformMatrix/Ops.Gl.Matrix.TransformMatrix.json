@@ -96,6 +96,15 @@
         "ports": []
     },
     "summary": "transform a matrix (mat4)",
+    "tags": [
+        "mat4",
+        "rotate",
+        "translate",
+        "scale",
+        "matrix",
+        "apply",
+        "custom matrix"
+    ],
     "coreLibs": [
         "cgl"
     ],

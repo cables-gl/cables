@@ -69,6 +69,14 @@
         ]
     },
     "summary": "test intersect bodies collision against a point/coordinate",
+    "tags": [
+        "hit test",
+        "point query",
+        "picking",
+        "inside",
+        "contains",
+        "collision"
+    ],
     "license": "MIT",
     "exampleProjectId": "c2DAO8",
     "docs": {

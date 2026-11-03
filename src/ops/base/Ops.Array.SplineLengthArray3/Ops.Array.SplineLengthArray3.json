@@ -22,6 +22,14 @@
         ]
     },
     "summary": "Return a number with the total distance between the points/items in an array3",
+    "tags": [
+        "path length",
+        "distance",
+        "curve length",
+        "total",
+        "measure",
+        "arc length"
+    ],
     "docs": {
         "ports": [
             {

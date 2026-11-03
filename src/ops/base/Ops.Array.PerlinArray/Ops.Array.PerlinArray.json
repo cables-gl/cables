@@ -48,6 +48,14 @@
         ]
     },
     "summary": "Create an array filled with Perlin noise values",
+    "tags": [
+        "noise",
+        "random",
+        "organic",
+        "smooth",
+        "procedural",
+        "wiggle"
+    ],
     "docs": {
         "ports": [
             {

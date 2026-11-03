@@ -41,6 +41,16 @@
         ]
     },
     "summary": "Creates a CORS proxy URL to load content from another site.",
+    "tags": [
+        "cross origin",
+        "cors",
+        "proxy",
+        "fetch",
+        "load external",
+        "api",
+        "workaround",
+        "remote content"
+    ],
     "docs": {
         "ports": []
     },

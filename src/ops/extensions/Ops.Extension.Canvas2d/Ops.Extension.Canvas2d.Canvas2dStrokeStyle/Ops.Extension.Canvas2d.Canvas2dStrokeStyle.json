@@ -108,6 +108,16 @@
     },
     "license": "MIT",
     "summary": "Sets stroke color, line width, caps, joins and dashes for the canvas2d ops below it",
+    "tags": [
+        "outline",
+        "stroke",
+        "line width",
+        "line cap",
+        "line join",
+        "dash",
+        "color",
+        "pen"
+    ],
     "isReleased": true,
     "exampleProjectId": "uWCEAy",
     "docs": {

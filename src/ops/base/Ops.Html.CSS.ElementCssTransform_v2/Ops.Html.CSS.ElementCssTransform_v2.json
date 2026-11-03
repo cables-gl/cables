@@ -142,6 +142,15 @@
         ]
     },
     "summary": "translate,scale and rotate a HTML element using css transform",
+    "tags": [
+        "translate",
+        "scale",
+        "rotate",
+        "move",
+        "css",
+        "transform",
+        "skew"
+    ],
     "docs": {
         "ports": []
     },

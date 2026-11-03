@@ -54,6 +54,14 @@
         ]
     },
     "summary": "fill image using a color (overlay)",
+    "tags": [
+        "fill",
+        "solid",
+        "tint",
+        "overlay",
+        "flat color",
+        "background"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "c0acfc80-16f9-4f17-978d-bad650f3ed1c",

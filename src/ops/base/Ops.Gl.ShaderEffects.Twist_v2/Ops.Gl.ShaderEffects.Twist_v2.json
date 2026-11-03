@@ -32,6 +32,14 @@
         ]
     },
     "summary": "twist a mesh around an axis",
+    "tags": [
+        "spiral",
+        "wring",
+        "screw",
+        "rotate along axis",
+        "deform",
+        "swirl"
+    ],
     "changelog": [
         {
             "message": "Ops.Gl.ShaderEffects.Twist_v2 renamed to Ops.Gl.ShaderEffects.Twist_v3",

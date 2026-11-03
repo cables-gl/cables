@@ -94,6 +94,16 @@
         ]
     },
     "summary": "Listen to events of an element",
+    "tags": [
+        "mouse",
+        "touch",
+        "hover",
+        "click",
+        "pointer",
+        "interaction",
+        "enter leave",
+        "events"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

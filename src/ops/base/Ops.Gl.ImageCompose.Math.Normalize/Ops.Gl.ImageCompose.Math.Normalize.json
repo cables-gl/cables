@@ -1,5 +1,12 @@
 {
     "summary": "normalize texture rgb values",
+    "tags": [
+        "normalise",
+        "scale",
+        "0-1",
+        "range",
+        "vector"
+    ],
     "layout": {
         "portsIn": [
             {

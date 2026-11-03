@@ -12,6 +12,14 @@
         ]
     },
     "summary": "Helper op for sub-patches",
+    "tags": [
+        "subpatch",
+        "inputs",
+        "helper",
+        "ports",
+        "interface",
+        "parameters"
+    ],
     "docs": {
         "ports": []
     },

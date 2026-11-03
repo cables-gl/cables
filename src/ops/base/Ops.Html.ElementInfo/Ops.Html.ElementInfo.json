@@ -40,6 +40,15 @@
         ]
     },
     "summary": "Get information about an element",
+    "tags": [
+        "properties",
+        "debug",
+        "inspect",
+        "dom",
+        "details",
+        "tag",
+        "size"
+    ],
     "docs": {
         "ports": []
     },

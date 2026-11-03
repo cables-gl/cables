@@ -82,6 +82,14 @@
     ],
     "isReleased": true,
     "summary": "Load a compressed KTX texture file",
+    "tags": [
+        "compressed",
+        "basis",
+        "ktx2",
+        "gpu texture",
+        "load",
+        "image"
+    ],
     "docs": {
         "ports": []
     },

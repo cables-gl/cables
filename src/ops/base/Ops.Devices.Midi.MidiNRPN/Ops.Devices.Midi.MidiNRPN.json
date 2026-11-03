@@ -58,6 +58,14 @@
         ]
     },
     "summary": "read NRPN value from controller",
+    "tags": [
+        "controller",
+        "high resolution",
+        "14 bit",
+        "parameter number",
+        "midi controller",
+        "knob"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -17,6 +17,15 @@
     "authorName": "pandur",
     "created": 1776698481646,
     "summary": "Switch between filenames",
+    "tags": [
+        "select",
+        "choose",
+        "files",
+        "filenames",
+        "switch",
+        "index",
+        "asset"
+    ],
     "docs": {
         "ports": []
     },

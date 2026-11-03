@@ -1,5 +1,12 @@
 {
     "summary": "Subtract one number from all values in an array",
+    "tags": [
+        "minus",
+        "-",
+        "difference",
+        "offset",
+        "all values"
+    ],
     "docs": {
         "ports": [
             {

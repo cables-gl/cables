@@ -80,6 +80,14 @@
         ]
     },
     "summary": "Generate a centered or offset grid of 3D points",
+    "tags": [
+        "grid",
+        "field",
+        "plane",
+        "rectangle grid",
+        "lattice",
+        "matrix"
+    ],
     "docs": {},
     "exampleProjectId": "icchV5",
     "isReleased": true,

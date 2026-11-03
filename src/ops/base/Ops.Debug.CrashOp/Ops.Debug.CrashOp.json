@@ -62,6 +62,15 @@
         ]
     },
     "summary": "Crash the editor in many ways ",
+    "tags": [
+        "test",
+        "error",
+        "exception",
+        "throw",
+        "stress test",
+        "editor test",
+        "break"
+    ],
     "docs": {
         "ports": []
     },

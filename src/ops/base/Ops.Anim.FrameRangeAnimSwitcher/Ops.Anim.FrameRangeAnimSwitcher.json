@@ -89,6 +89,16 @@
         ]
     },
     "summary": "Switch between multiple anim ranges of a keyframed 3d scene",
+    "tags": [
+        "frames",
+        "range",
+        "timeline",
+        "clips",
+        "gltf",
+        "animation states",
+        "switch",
+        "sections"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

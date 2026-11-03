@@ -104,6 +104,15 @@
         ]
     },
     "summary": "texture containing a colour gradient that can be altered with an editor",
+    "tags": [
+        "ramp",
+        "fade",
+        "color transition",
+        "gradient editor",
+        "colors",
+        "strip",
+        "lookup"
+    ],
     "docs": {
         "ports": [
             {

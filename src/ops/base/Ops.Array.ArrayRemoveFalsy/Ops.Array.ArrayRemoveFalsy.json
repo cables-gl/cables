@@ -31,6 +31,15 @@
         ]
     },
     "summary": "Remove falsy items from an array",
+    "tags": [
+        "clean",
+        "filter",
+        "empty",
+        "null",
+        "remove",
+        "compact",
+        "zero"
+    ],
     "docs": {
         "ports": []
     },

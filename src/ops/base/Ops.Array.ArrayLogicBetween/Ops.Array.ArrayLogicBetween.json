@@ -39,6 +39,14 @@
         ]
     },
     "summary": "If value of array is between min and max then the value is 1 else 0",
+    "tags": [
+        "range",
+        "between",
+        "mask",
+        "threshold",
+        "inside",
+        "compare"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

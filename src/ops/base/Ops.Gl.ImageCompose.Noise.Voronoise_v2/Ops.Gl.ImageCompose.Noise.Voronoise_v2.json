@@ -1,5 +1,13 @@
 {
     "summary": "Voronoi Noise function",
+    "tags": [
+        "voronoi",
+        "cells",
+        "cellular",
+        "mosaic",
+        "procedural",
+        "pattern"
+    ],
     "layout": {
         "portsIn": [
             {

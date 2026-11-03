@@ -34,6 +34,14 @@
         ]
     },
     "summary": "Sort numbers and output their original indices in the new order",
+    "tags": [
+        "order",
+        "argsort",
+        "rank",
+        "sorting",
+        "indices",
+        "permutation"
+    ],
     "docs": {
         "ports": [
             {

@@ -85,6 +85,18 @@
         ]
     },
     "summary": "Extracts FFT, RMS & Waveform data from an incoming audio signal",
+    "tags": [
+        "fft",
+        "rms",
+        "level",
+        "volume",
+        "spectrum",
+        "waveform",
+        "beat",
+        "frequency",
+        "meter",
+        "visualizer"
+    ],
     "docs": {
         "ports": [
             {

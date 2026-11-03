@@ -71,6 +71,16 @@
         ]
     },
     "summary": "Move html element to current transformation in screen space",
+    "tags": [
+        "follow",
+        "attach",
+        "label",
+        "html overlay",
+        "screen space",
+        "3d to 2d",
+        "tracking",
+        "anchor"
+    ],
     "docs": {
         "ports": []
     },

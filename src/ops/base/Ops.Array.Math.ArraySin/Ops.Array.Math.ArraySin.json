@@ -37,6 +37,14 @@
         ]
     },
     "summary": "Perform a sin or cos operation on the contents of an array",
+    "tags": [
+        "sine",
+        "cosine",
+        "cos",
+        "trigonometry",
+        "wave",
+        "oscillate"
+    ],
     "docs": {
         "ports": []
     },

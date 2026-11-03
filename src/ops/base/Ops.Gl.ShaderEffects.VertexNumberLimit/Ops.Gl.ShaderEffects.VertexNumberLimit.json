@@ -23,6 +23,15 @@
         ]
     },
     "summary": "only draw the first X vertices of a mesh",
+    "tags": [
+        "reveal",
+        "draw progress",
+        "first x",
+        "partial",
+        "count",
+        "animate in",
+        "growing"
+    ],
     "docs": {
         "ports": []
     },

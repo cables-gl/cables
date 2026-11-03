@@ -19,6 +19,14 @@
         ]
     },
     "summary": "parse a string to a integer number",
+    "tags": [
+        "convert",
+        "string to number",
+        "integer",
+        "cast",
+        "number",
+        "parse"
+    ],
     "isReleased": true,
     "license": "MIT"
 }

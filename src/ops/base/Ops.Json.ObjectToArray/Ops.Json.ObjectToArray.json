@@ -17,6 +17,13 @@
         ]
     },
     "summary": "cast an object port to an array port",
+    "tags": [
+        "cast",
+        "convert",
+        "object port to array",
+        "type cast",
+        "reinterpret"
+    ],
     "docs": {
         "ports": []
     },

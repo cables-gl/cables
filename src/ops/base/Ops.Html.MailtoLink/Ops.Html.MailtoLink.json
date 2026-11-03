@@ -27,6 +27,15 @@
         "portsOut": []
     },
     "summary": "creates a mailto: link to open the default email app",
+    "tags": [
+        "email",
+        "e-mail",
+        "contact",
+        "mail",
+        "send",
+        "href",
+        "open mail client"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

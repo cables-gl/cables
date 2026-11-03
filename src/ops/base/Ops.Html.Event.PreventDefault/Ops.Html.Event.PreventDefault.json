@@ -25,6 +25,13 @@
         ]
     },
     "summary": "Prevents the default on a JavaScript event",
+    "tags": [
+        "cancel event",
+        "stop default",
+        "block",
+        "suppress",
+        "dom event"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": [

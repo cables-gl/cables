@@ -46,5 +46,13 @@
                 "subType": "number"
             }
         ]
-    }
+    },
+    "tags": [
+        "gamma",
+        "color space",
+        "srgb",
+        "linear",
+        "convert",
+        "tone"
+    ]
 }

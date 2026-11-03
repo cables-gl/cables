@@ -113,6 +113,15 @@
     "id": "03a2ff88-f3af-4042-8e64-62e70e17e1bc",
     "created": 1567700253441,
     "summary": "Draw 2d circle into texture",
+    "tags": [
+        "disc",
+        "disk",
+        "dot",
+        "round",
+        "ellipse",
+        "shape",
+        "2d"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

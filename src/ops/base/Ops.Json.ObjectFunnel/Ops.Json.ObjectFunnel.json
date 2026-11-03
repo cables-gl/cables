@@ -33,6 +33,14 @@
         ]
     },
     "summary": "outputs the last changed object",
+    "tags": [
+        "last changed",
+        "merge",
+        "latest",
+        "combine inputs",
+        "most recent",
+        "update"
+    ],
     "docs": {
         "ports": []
     },

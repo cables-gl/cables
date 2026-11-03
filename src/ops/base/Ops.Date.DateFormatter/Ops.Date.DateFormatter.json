@@ -38,6 +38,16 @@
         ]
     },
     "summary": "String representation of a date",
+    "tags": [
+        "format",
+        "string",
+        "locale",
+        "pretty",
+        "display date",
+        "strftime",
+        "text",
+        "toLocaleString"
+    ],
     "docs": {},
     "exampleProjectId": "mzfGGl",
     "isReleased": true,

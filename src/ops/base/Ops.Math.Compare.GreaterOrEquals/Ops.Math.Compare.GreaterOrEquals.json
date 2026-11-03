@@ -31,6 +31,15 @@
         ]
     },
     "summary": "result is true if number 1 is greater or equals number 2",
+    "tags": [
+        ">=",
+        "bigger",
+        "larger",
+        "at least",
+        "test",
+        "condition",
+        "bool"
+    ],
     "docs": {
         "ports": [
             {

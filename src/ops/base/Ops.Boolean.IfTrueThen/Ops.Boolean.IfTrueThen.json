@@ -1,5 +1,15 @@
 {
     "summary": "Switch, trigger one or the other trigger port based on the input value",
+    "tags": [
+        "condition",
+        "branch",
+        "if",
+        "else",
+        "when true",
+        "trigger",
+        "switch",
+        "ternary"
+    ],
     "layout": {
         "portsIn": [
             {

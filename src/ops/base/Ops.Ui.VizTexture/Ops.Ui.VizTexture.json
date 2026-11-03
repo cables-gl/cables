@@ -148,6 +148,16 @@
         ]
     },
     "summary": "Displays texture at input port",
+    "tags": [
+        "image",
+        "preview",
+        "debug",
+        "visualize",
+        "show texture",
+        "inspect",
+        "thumbnail",
+        "look at"
+    ],
     "youtubeids": [
         "-1vMiU6BcDg"
     ],

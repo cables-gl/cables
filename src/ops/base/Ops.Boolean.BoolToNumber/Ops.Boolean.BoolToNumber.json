@@ -1,5 +1,14 @@
 {
     "summary": "Outputs `0` for `false` and `1` for `true` (converter, boolean)",
+    "tags": [
+        "convert",
+        "0 1",
+        "switch",
+        "select",
+        "cast",
+        "ternary",
+        "if else"
+    ],
     "layout": {
         "portsIn": [
             {

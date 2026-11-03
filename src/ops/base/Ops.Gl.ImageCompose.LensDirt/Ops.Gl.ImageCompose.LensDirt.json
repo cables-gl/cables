@@ -82,6 +82,13 @@
         ]
     },
     "summary": "Creates a lens dirt like texture",
+    "tags": [
+        "dirty lens",
+        "bloom",
+        "smudge",
+        "dust",
+        "camera"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

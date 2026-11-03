@@ -19,6 +19,16 @@
         ]
     },
     "summary": "Counts how often the port is triggered per second / profiling",
+    "tags": [
+        "profile",
+        "rate",
+        "frequency",
+        "hz",
+        "counter",
+        "benchmark",
+        "activity",
+        "speed"
+    ],
     "docs": {
         "ports": [
             {

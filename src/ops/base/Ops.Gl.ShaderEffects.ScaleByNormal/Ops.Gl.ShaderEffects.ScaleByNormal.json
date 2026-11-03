@@ -23,6 +23,15 @@
         ]
     },
     "summary": "scale vertices of an object in the direction of face normals",
+    "tags": [
+        "inflate",
+        "expand",
+        "fatten",
+        "push out",
+        "grow",
+        "normals",
+        "puff"
+    ],
     "docs": {
         "ports": []
     },

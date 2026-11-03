@@ -64,6 +64,14 @@
         ]
     },
     "summary": "Renders a scene to a cubemap texture",
+    "tags": [
+        "reflection probe",
+        "environment",
+        "dynamic reflections",
+        "360",
+        "capture scene",
+        "render target"
+    ],
     "issues": "",
     "docs": {
         "ports": [

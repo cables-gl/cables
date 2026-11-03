@@ -23,6 +23,14 @@
         ]
     },
     "summary": "Renders a icosahedron (polyhedron with 20 faces)",
+    "tags": [
+        "polyhedron",
+        "d20",
+        "dice",
+        "geodesic",
+        "low poly sphere",
+        "platonic solid"
+    ],
     "docs": {
         "ports": [
             {

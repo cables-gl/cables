@@ -58,6 +58,16 @@
         ]
     },
     "summary": "Upload a file into the cables patch assets using a base64 string",
+    "tags": [
+        "upload",
+        "file",
+        "save",
+        "store",
+        "asset",
+        "server",
+        "user upload",
+        "cloud"
+    ],
     "license": "MIT",
     "docs": {
         "ports": [

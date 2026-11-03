@@ -1,5 +1,16 @@
 {
     "summary": "Open a URL in the current browser tab",
+    "tags": [
+        "url",
+        "link",
+        "open",
+        "anchor",
+        "navigate",
+        "href",
+        "website",
+        "a tag",
+        "redirect"
+    ],
     "layout": {
         "portsIn": [
             {

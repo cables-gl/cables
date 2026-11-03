@@ -69,6 +69,15 @@
         ]
     },
     "summary": "show a typical web loading/progress indicator animation",
+    "tags": [
+        "spinner",
+        "progress",
+        "preloader",
+        "throbber",
+        "wait",
+        "loader",
+        "loading bar"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

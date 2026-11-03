@@ -69,6 +69,14 @@
         ]
     },
     "summary": "noise circles",
+    "tags": [
+        "dots",
+        "circles",
+        "spots",
+        "bubbles",
+        "pattern",
+        "procedural"
+    ],
     "docs": {
         "ports": []
     },

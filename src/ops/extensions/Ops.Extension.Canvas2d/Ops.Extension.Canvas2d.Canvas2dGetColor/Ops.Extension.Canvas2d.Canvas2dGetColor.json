@@ -55,6 +55,14 @@
         ]
     },
     "summary": "Reads the RGBA color of one pixel of a canvas2d",
+    "tags": [
+        "pixel",
+        "read pixel",
+        "color picker",
+        "eyedropper",
+        "sample",
+        "getimagedata"
+    ],
     "isReleased": true,
     "license": "MIT",
     "exampleProjectId": "eNQRAy",

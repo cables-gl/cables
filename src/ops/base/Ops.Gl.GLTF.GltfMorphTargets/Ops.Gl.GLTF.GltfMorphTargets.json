@@ -67,6 +67,14 @@
     "authorName": "pandur",
     "created": 1693646482040,
     "summary": "render weighted morph targets/shape keys from a gltf file",
+    "tags": [
+        "blend shapes",
+        "shape keys",
+        "facial animation",
+        "morph",
+        "weights",
+        "expressions"
+    ],
     "docs": {
         "ports": []
     },

@@ -34,6 +34,13 @@
         }
     ],
     "summary": "Round array values to the nearest, down, or up at a chosen decimal place",
+    "tags": [
+        "nearest",
+        "integer",
+        "floor",
+        "ceil",
+        "snap"
+    ],
     "docs": {
         "ports": [
             {

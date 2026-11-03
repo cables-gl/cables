@@ -1,5 +1,13 @@
 {
     "summary": "draw a 2d rect into an image",
+    "tags": [
+        "rect",
+        "square",
+        "box",
+        "quad",
+        "shape",
+        "2d"
+    ],
     "layout": {
         "portsIn": [
             {

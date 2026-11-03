@@ -167,6 +167,17 @@
         "ports": []
     },
     "summary": "Get mouse/touchscreen/pointer coordinates and events",
+    "tags": [
+        "cursor",
+        "pointer",
+        "position",
+        "touch",
+        "xy",
+        "coordinates",
+        "hover",
+        "input",
+        "mouse move"
+    ],
     "license": "MIT",
     "coreLibs": [
         "cgl"

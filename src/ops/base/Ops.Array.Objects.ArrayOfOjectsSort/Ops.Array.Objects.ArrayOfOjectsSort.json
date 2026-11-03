@@ -44,6 +44,14 @@
         ]
     },
     "summary": "Sort an array of objects by the values of a key",
+    "tags": [
+        "json",
+        "order",
+        "sort by",
+        "key",
+        "objects",
+        "rank"
+    ],
     "docs": {
         "ports": []
     },

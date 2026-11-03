@@ -39,6 +39,14 @@
         ]
     },
     "summary": "Allows for Gamma correction of a texture",
+    "tags": [
+        "gamma",
+        "srgb",
+        "linear",
+        "tone",
+        "brightness",
+        "curve"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": [

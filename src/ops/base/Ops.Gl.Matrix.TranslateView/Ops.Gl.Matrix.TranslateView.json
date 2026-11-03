@@ -32,6 +32,13 @@
         ]
     },
     "summary": "translate the view/camera matrix",
+    "tags": [
+        "move camera",
+        "camera position",
+        "view offset",
+        "pan",
+        "dolly"
+    ],
     "docs": {
         "ports": []
     },

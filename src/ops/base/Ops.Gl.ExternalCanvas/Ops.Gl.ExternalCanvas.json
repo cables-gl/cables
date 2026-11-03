@@ -96,6 +96,15 @@
     "authorName": "pandur",
     "created": 1689248551446,
     "summary": "Open a new window that shows a copy of the patch canvas",
+    "tags": [
+        "popup",
+        "second window",
+        "projector",
+        "mirror",
+        "fullscreen",
+        "separate window",
+        "output"
+    ],
     "docs": {
         "ports": []
     },

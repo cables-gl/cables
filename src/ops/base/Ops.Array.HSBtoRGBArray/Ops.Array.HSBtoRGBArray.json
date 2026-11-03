@@ -59,6 +59,16 @@
         ]
     },
     "summary": "Generate an RGBA array from up to 4 arrays (HSBA)",
+    "tags": [
+        "color",
+        "hsv",
+        "hsb",
+        "hsl",
+        "convert",
+        "rgba",
+        "hue",
+        "colorspace"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

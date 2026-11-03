@@ -45,6 +45,14 @@
         ]
     },
     "summary": "Outputs the waveform of an audio file as a spline array",
+    "tags": [
+        "waveform",
+        "visualize",
+        "wave",
+        "points",
+        "audio shape",
+        "line"
+    ],
     "docs": {
         "ports": [
             {

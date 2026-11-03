@@ -56,6 +56,14 @@
         ]
     },
     "summary": "Create an array of num quadruples set to default values xyz  ",
+    "tags": [
+        "xyzw",
+        "rgba",
+        "vec4",
+        "quadruples",
+        "create",
+        "color"
+    ],
     "docs": {
         "ports": []
     },

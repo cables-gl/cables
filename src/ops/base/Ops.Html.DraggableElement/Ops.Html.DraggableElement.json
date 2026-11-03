@@ -37,6 +37,16 @@
         ]
     },
     "summary": "Make a HTML element draggable to move it around with the mouse",
+    "tags": [
+        "drag",
+        "drag and drop",
+        "move",
+        "mouse",
+        "touch",
+        "pointer",
+        "reposition",
+        "grab"
+    ],
     "docs": {
         "ports": []
     },

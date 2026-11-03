@@ -42,6 +42,15 @@
         "vargetset"
     ],
     "summary": "set number variable by trigger",
+    "tags": [
+        "write",
+        "variable",
+        "store",
+        "on trigger",
+        "set",
+        "value",
+        "save"
+    ],
     "issues": "",
     "youtubeids": [
         "30v_GQc6ajA"

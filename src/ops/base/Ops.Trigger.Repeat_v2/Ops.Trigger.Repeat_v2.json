@@ -43,6 +43,15 @@
         ]
     },
     "summary": "Triggers all ops below x times (for loop / while)",
+    "tags": [
+        "loop",
+        "for loop",
+        "iterate",
+        "multiple times",
+        "count",
+        "while",
+        "cycle"
+    ],
     "issues": "",
     "youtubeids": [
         "jiOLZaMUH78",

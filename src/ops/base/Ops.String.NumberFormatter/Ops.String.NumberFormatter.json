@@ -110,6 +110,16 @@
         ]
     },
     "summary": "Format a number to a string in the given locale and format",
+    "tags": [
+        "locale",
+        "format",
+        "currency",
+        "thousands separator",
+        "decimals",
+        "percent",
+        "intl",
+        "units"
+    ],
     "issues": "",
     "caniusequery": "Date%20toLocaleString",
     "youtubeids": [],

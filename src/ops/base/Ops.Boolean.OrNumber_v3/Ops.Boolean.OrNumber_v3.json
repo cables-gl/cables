@@ -42,6 +42,15 @@
         ]
     },
     "summary": "Switch between multiple numbers with an index",
+    "tags": [
+        "select",
+        "choose",
+        "index",
+        "switch",
+        "pick",
+        "fallback",
+        "or"
+    ],
     "docs": {
         "ports": [
             {

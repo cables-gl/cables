@@ -25,6 +25,14 @@
     "id": "8a0f1c05-3ed7-4d50-b8ec-e8298050988d",
     "created": 1517606255138,
     "summary": "Stop a JavaScript event (bubbling / capturing)",
+    "tags": [
+        "bubbling",
+        "capturing",
+        "cancel event",
+        "stop",
+        "dom event",
+        "block"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": [

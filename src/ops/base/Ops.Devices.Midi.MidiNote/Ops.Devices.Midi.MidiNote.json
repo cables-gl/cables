@@ -73,6 +73,17 @@
         ]
     },
     "summary": "Read a single midi note",
+    "tags": [
+        "key",
+        "piano",
+        "keyboard",
+        "pitch",
+        "velocity",
+        "note on",
+        "note off",
+        "pad",
+        "music"
+    ],
     "issues": "",
     "youtubeids": [
         "eDlaFD_d5lc"

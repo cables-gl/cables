@@ -61,6 +61,14 @@
         ]
     },
     "summary": "Draws a cross with controllable thickness and length. ",
+    "tags": [
+        "plus",
+        "x",
+        "crosshair",
+        "marker",
+        "add",
+        "symbol"
+    ],
     "docs": {
         "ports": []
     },

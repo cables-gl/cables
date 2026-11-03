@@ -29,6 +29,14 @@
         ]
     },
     "summary": "Calculate average X, Y, and Z across a 3D point array",
+    "tags": [
+        "mean",
+        "center",
+        "centroid",
+        "average",
+        "xyz",
+        "points"
+    ],
     "docs": {
         "ports": [
             {

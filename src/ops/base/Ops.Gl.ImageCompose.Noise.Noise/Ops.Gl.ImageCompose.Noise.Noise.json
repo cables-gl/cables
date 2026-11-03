@@ -46,6 +46,14 @@
         ]
     },
     "summary": "White noise pixel effect",
+    "tags": [
+        "white noise",
+        "static",
+        "tv noise",
+        "random",
+        "snow",
+        "pixels"
+    ],
     "authorName": "pandur",
     "id": "81253441-cc73-42fa-b903-6d23806873d9",
     "created": 1515151849116,

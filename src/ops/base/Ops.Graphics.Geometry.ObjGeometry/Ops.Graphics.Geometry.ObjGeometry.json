@@ -30,6 +30,15 @@
         ]
     },
     "summary": "parse an obj string to a geometry object",
+    "tags": [
+        "obj file",
+        "wavefront",
+        "import",
+        "load",
+        "parse",
+        "model",
+        "3d file"
+    ],
     "docs": {
         "ports": []
     },

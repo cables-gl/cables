@@ -48,6 +48,12 @@
         ]
     },
     "summary": "Draw a 3D pyramid mesh",
+    "tags": [
+        "tetrahedron",
+        "cone",
+        "triangle",
+        "spike"
+    ],
     "docs": {
         "ports": []
     },

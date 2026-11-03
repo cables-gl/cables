@@ -50,6 +50,15 @@
         ]
     },
     "summary": "Set four numbers at index in an array",
+    "tags": [
+        "xyzw",
+        "rgba",
+        "write",
+        "replace",
+        "set",
+        "vec4",
+        "index"
+    ],
     "docs": {
         "ports": [
             {

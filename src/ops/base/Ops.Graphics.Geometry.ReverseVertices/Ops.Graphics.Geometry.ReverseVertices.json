@@ -22,6 +22,14 @@
         ]
     },
     "summary": "Reverses the order of vertices in a geometry, back facing triangles become front facing ones",
+    "tags": [
+        "flip winding",
+        "backface",
+        "reverse",
+        "invert faces",
+        "inside out",
+        "culling"
+    ],
     "docs": {
         "ports": []
     },

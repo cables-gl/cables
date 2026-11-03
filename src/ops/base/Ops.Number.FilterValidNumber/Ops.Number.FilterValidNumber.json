@@ -53,6 +53,15 @@
         ]
     },
     "summary": "Filter valid numbers",
+    "tags": [
+        "nan",
+        "not a number",
+        "undefined",
+        "null check",
+        "valid",
+        "clean",
+        "hold last"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

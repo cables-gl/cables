@@ -104,6 +104,14 @@
         ]
     },
     "summary": "Creates a hexagonal noise texture ",
+    "tags": [
+        "hexagons",
+        "honeycomb",
+        "hex",
+        "tiles",
+        "procedural",
+        "pattern"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

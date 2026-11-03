@@ -19,6 +19,15 @@
         ]
     },
     "summary": "result is false if input is true and vice versa (negate/toggle/switch/!=)",
+    "tags": [
+        "!",
+        "invert",
+        "negate",
+        "toggle",
+        "opposite",
+        "flip",
+        "reverse"
+    ],
     "docs": {
         "ports": []
     },

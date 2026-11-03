@@ -17,6 +17,13 @@
         ]
     },
     "summary": "draw meshes using the cables error material shader",
+    "tags": [
+        "debug",
+        "error",
+        "pink",
+        "missing",
+        "placeholder"
+    ],
     "docs": {
         "ports": []
     },

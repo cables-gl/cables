@@ -74,6 +74,16 @@
         ]
     },
     "summary": "Draws a rectangle with rounded corners",
+    "tags": [
+        "rounded corners",
+        "round rect",
+        "rounded rectangle",
+        "button",
+        "card",
+        "pill",
+        "panel",
+        "ui"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -168,6 +168,15 @@
     "authorName": "amajesticseaflapflap",
     "created": 1642599890799,
     "summary": "PBR image based lighting setup",
+    "tags": [
+        "ibl",
+        "image based lighting",
+        "environment map",
+        "hdri",
+        "reflections",
+        "light probe",
+        "ambient"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [

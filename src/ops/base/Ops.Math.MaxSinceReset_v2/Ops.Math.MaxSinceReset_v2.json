@@ -3,6 +3,13 @@
     "id": "19d8d790-e9db-4c9d-b4a3-87190bd81353",
     "created": 1792915811014,
     "summary": "Outputs the maximum value since reset has been triggered",
+    "tags": [
+        "peak",
+        "highest",
+        "hold",
+        "record",
+        "maximum"
+    ],
     "docs": {
         "ports": []
     },

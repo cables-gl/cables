@@ -84,6 +84,15 @@
         ]
     },
     "summary": "detailed information about Midi events being sent",
+    "tags": [
+        "debug",
+        "midi events",
+        "messages",
+        "log",
+        "inspect",
+        "incoming",
+        "sniffer"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

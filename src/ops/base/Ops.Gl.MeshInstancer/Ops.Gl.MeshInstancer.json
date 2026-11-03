@@ -55,6 +55,17 @@
         ]
     },
     "summary": "draw the same mesh multiple times very fast",
+    "tags": [
+        "instancing",
+        "instances",
+        "copies",
+        "clone",
+        "many",
+        "repeat",
+        "gpu",
+        "duplicate",
+        "array"
+    ],
     "docs": {
         "ports": [
             {

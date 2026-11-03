@@ -25,6 +25,15 @@
         ]
     },
     "summary": "Minify GLSL shader source code",
+    "tags": [
+        "compress",
+        "optimize",
+        "shrink",
+        "glsl",
+        "code",
+        "size",
+        "shader source"
+    ],
     "license": "MIT",
     "docs": {},
     "exampleProjectId": "t5H1Qc",

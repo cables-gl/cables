@@ -36,6 +36,14 @@
         ]
     },
     "summary": "output the line number at the character index",
+    "tags": [
+        "line number",
+        "row",
+        "character index",
+        "position",
+        "text",
+        "locate"
+    ],
     "docs": {
         "ports": []
     },

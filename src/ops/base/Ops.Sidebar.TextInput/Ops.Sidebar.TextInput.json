@@ -32,6 +32,16 @@
         ]
     },
     "summary": "Enter text in the sidebar",
+    "tags": [
+        "text field",
+        "input",
+        "string",
+        "type",
+        "textbox",
+        "ui",
+        "gui",
+        "interface"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": [

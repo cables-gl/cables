@@ -25,6 +25,13 @@
         ]
     },
     "summary": "random numbers fitting a Gaussian, or normal, distribution",
+    "tags": [
+        "random",
+        "normal distribution",
+        "bell curve",
+        "gauss",
+        "noise"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "1a8c3535-6fce-4cba-8601-ddb7a5dd7656",

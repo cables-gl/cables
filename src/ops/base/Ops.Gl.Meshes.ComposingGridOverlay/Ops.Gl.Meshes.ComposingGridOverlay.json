@@ -42,6 +42,15 @@
         "portsOut": []
     },
     "summary": "Rule of thirds image composition helper",
+    "tags": [
+        "grid",
+        "guides",
+        "overlay",
+        "helper",
+        "composition",
+        "rule of thirds",
+        "layout"
+    ],
     "exampleProjectId": "G8mQQ2",
     "docs": {
         "ports": []

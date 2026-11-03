@@ -43,6 +43,14 @@
         ]
     },
     "summary": "test one body against all bodies in the world",
+    "tags": [
+        "collision",
+        "hit test",
+        "overlap",
+        "query",
+        "bodies",
+        "check"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

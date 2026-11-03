@@ -38,6 +38,15 @@
         ]
     },
     "summary": "delay a value by seconds",
+    "tags": [
+        "wait",
+        "timeout",
+        "later",
+        "lag",
+        "postpone",
+        "timer",
+        "hold"
+    ],
     "docs": {
         "ports": []
     },

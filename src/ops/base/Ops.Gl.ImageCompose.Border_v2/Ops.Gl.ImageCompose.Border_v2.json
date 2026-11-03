@@ -1,5 +1,12 @@
 {
     "summary": "Draws a Border (rectangular frame) around the current ImageCompose",
+    "tags": [
+        "frame",
+        "outline",
+        "edge",
+        "stroke",
+        "rectangle"
+    ],
     "layout": {
         "portsIn": [
             {

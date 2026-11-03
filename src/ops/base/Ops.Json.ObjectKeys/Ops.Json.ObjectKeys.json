@@ -22,6 +22,14 @@
         ]
     },
     "summary": "returns an array of strings, which contain the keys of the object",
+    "tags": [
+        "properties",
+        "names",
+        "list keys",
+        "json",
+        "enumerate",
+        "fields"
+    ],
     "docs": {
         "ports": []
     },

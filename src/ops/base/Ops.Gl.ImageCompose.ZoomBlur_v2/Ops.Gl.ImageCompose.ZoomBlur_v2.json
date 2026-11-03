@@ -55,6 +55,14 @@
     "id": "b720a2f5-5501-48ef-90de-94a280ba6fbd",
     "created": 1650522070431,
     "summary": "Directional blur effect",
+    "tags": [
+        "radial blur",
+        "motion blur",
+        "speed",
+        "zoom",
+        "directional blur",
+        "rush"
+    ],
     "docs": {
         "ports": []
     },

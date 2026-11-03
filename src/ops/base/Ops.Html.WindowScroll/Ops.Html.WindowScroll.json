@@ -32,6 +32,16 @@
         ]
     },
     "summary": "Get the current scroll position of the window",
+    "tags": [
+        "scroll",
+        "offset",
+        "pagey",
+        "scrollx",
+        "scrolly",
+        "read",
+        "scrolling",
+        "position"
+    ],
     "docs": {
         "ports": []
     },

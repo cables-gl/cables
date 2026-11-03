@@ -63,6 +63,14 @@
         ]
     },
     "summary": "multiply XYZ values with a gl matrix vec3 x mat4",
+    "tags": [
+        "transform",
+        "matrix",
+        "vec3",
+        "mat4",
+        "position",
+        "multiply"
+    ],
     "docs": {
         "ports": []
     },

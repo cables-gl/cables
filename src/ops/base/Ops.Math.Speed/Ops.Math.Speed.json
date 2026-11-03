@@ -23,6 +23,13 @@
         ]
     },
     "summary": "measure speed of how much a value changes",
+    "tags": [
+        "velocity",
+        "rate of change",
+        "derivative",
+        "movement",
+        "delta"
+    ],
     "docs": {
         "ports": []
     },

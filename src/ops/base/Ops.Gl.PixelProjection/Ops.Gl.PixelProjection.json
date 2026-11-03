@@ -76,6 +76,14 @@
         ]
     },
     "summary": "Remaps world co-ordinates to a pixel co-ordinate system",
+    "tags": [
+        "world to screen",
+        "pixels",
+        "project",
+        "2d position",
+        "screen space",
+        "coordinates"
+    ],
     "issues": "",
     "youtubeids": [
         "xkIrVtSU4FU"

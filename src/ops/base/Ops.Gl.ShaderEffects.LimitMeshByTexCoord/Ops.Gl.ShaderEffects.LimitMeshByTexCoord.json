@@ -58,6 +58,16 @@
         ]
     },
     "summary": "discard pixel if texture coordinate is below threshold",
+    "tags": [
+        "cut",
+        "clip",
+        "reveal",
+        "wipe",
+        "uv",
+        "threshold",
+        "mask",
+        "hide"
+    ],
     "docs": {
         "ports": [
             {

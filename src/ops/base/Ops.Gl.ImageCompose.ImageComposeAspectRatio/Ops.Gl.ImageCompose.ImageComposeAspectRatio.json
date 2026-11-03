@@ -45,6 +45,15 @@
         ]
     },
     "summary": "Adjust aspect ratio of an image compose branch",
+    "tags": [
+        "aspect",
+        "ratio",
+        "crop",
+        "letterbox",
+        "pillarbox",
+        "fit",
+        "resize"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

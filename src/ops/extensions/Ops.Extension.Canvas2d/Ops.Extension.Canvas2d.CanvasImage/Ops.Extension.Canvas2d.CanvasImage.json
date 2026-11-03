@@ -51,6 +51,14 @@
         ]
     },
     "summary": "image(img) element op",
+    "tags": [
+        "image",
+        "picture",
+        "html image",
+        "img",
+        "element",
+        "texture"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

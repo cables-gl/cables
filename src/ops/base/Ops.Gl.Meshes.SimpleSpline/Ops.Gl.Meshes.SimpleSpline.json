@@ -1,5 +1,13 @@
 {
     "summary": "Draws a simple spline only one pixel wide",
+    "tags": [
+        "curve",
+        "path",
+        "line",
+        "bezier",
+        "polyline",
+        "stroke"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -50,6 +50,15 @@
     "authorName": "pandur",
     "created": 1686129047736,
     "summary": "Information about Textures in an array",
+    "tags": [
+        "size",
+        "width",
+        "height",
+        "list",
+        "statistics",
+        "debug",
+        "textures"
+    ],
     "docs": {
         "ports": []
     },

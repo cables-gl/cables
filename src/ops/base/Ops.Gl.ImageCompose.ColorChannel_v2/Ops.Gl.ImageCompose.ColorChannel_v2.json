@@ -1,5 +1,15 @@
 {
     "summary": "enable disable RGB color channels",
+    "tags": [
+        "rgb",
+        "channels",
+        "red",
+        "green",
+        "blue",
+        "split",
+        "isolate",
+        "swizzle"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -111,6 +111,15 @@
         ]
     },
     "summary": "Manage/re-order components of an array (stride)",
+    "tags": [
+        "reorder",
+        "channels",
+        "stride",
+        "rearrange",
+        "components",
+        "swap",
+        "xyz"
+    ],
     "docs": {
         "ports": []
     },

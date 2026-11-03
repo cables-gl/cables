@@ -33,6 +33,13 @@
         ]
     },
     "summary": "Push/Append a string to the end of an array",
+    "tags": [
+        "append",
+        "add",
+        "text",
+        "end",
+        "extend"
+    ],
     "docs": {
         "ports": []
     },

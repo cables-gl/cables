@@ -125,6 +125,14 @@
         "cgl"
     ],
     "summary": "texture projection on meshes",
+    "tags": [
+        "projector",
+        "decal",
+        "project image",
+        "mapping",
+        "gobo",
+        "projection mapping"
+    ],
     "issues": "",
     "youtubeids": [
         "0Xgj7wKl7Ko",

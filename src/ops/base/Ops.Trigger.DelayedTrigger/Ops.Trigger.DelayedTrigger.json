@@ -1,5 +1,15 @@
 {
     "summary": "delay triggering next port by x seconds",
+    "tags": [
+        "wait",
+        "timeout",
+        "later",
+        "lag",
+        "postpone",
+        "timer",
+        "setTimeout",
+        "schedule"
+    ],
     "layout": {
         "portsIn": [
             {

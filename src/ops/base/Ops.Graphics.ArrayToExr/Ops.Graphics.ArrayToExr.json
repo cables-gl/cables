@@ -62,5 +62,15 @@
         "ports": []
     },
     "summary": "convert and download an array of numbers as an .exr image file",
+    "tags": [
+        "export",
+        "openexr",
+        "hdr",
+        "float image",
+        "download",
+        "save",
+        "data",
+        "convert"
+    ],
     "isReleased": true
 }

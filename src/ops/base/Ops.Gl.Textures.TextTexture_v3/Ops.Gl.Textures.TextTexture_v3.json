@@ -173,6 +173,16 @@
         ]
     },
     "summary": "Generates a texture which reads Text",
+    "tags": [
+        "text",
+        "font",
+        "type",
+        "typography",
+        "label",
+        "letters",
+        "string",
+        "write"
+    ],
     "issues": "",
     "youtubeids": [
         "z1Qf9dE67-w"

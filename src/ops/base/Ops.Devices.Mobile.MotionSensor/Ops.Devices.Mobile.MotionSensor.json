@@ -60,6 +60,15 @@
         ]
     },
     "summary": "get values from the device motion sensor  mobile",
+    "tags": [
+        "accelerometer",
+        "gyroscope",
+        "tilt",
+        "shake",
+        "phone",
+        "acceleration",
+        "devicemotion"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "3b15ad33-0117-4a33-975e-bca154a7f298",

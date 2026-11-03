@@ -30,6 +30,15 @@
         ]
     },
     "summary": "Set key/values to the current ObjectCompose from an existing object",
+    "tags": [
+        "merge",
+        "copy keys",
+        "assign",
+        "import",
+        "json",
+        "compose",
+        "extend"
+    ],
     "docs": {
         "ports": []
     },

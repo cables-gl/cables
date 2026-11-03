@@ -61,6 +61,15 @@
         ]
     },
     "summary": "Translate any geometry underneath it using vectors and speed.",
+    "tags": [
+        "move",
+        "direction",
+        "velocity",
+        "speed",
+        "drift",
+        "vector",
+        "motion"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -1,5 +1,13 @@
 {
     "summary": "remove darkest or brightest parts of the image",
+    "tags": [
+        "luminance",
+        "key",
+        "brightness mask",
+        "matte",
+        "cutout",
+        "threshold"
+    ],
     "layout": {
         "portsIn": [
             {

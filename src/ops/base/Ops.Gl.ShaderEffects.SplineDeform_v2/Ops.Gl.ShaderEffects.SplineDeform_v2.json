@@ -31,6 +31,14 @@
         ]
     },
     "summary": "Deform a mesh along a spline",
+    "tags": [
+        "curve",
+        "bend along",
+        "follow path",
+        "tube",
+        "warp",
+        "path deform"
+    ],
     "docs": {
         "ports": []
     },

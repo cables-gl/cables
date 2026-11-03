@@ -21,6 +21,14 @@
         ]
     },
     "summary": "A very simple empty transparent texture with an opacity of 0",
+    "tags": [
+        "blank",
+        "transparent",
+        "placeholder",
+        "nothing",
+        "default",
+        "null texture"
+    ],
     "docs": {
         "ports": []
     },

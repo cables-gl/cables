@@ -1,5 +1,15 @@
 {
     "summary": "Stores a value, use the same value in different places (was: value.value)",
+    "tags": [
+        "value",
+        "float",
+        "variable",
+        "constant",
+        "parameter",
+        "store",
+        "slider",
+        "input"
+    ],
     "layout": {
         "portsIn": [
             {

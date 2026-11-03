@@ -41,6 +41,14 @@
         ]
     },
     "summary": "read back all uniforms values of the current bound shader",
+    "tags": [
+        "glsl",
+        "uniform values",
+        "debug",
+        "inspect",
+        "parameters",
+        "read back"
+    ],
     "docs": {
         "ports": []
     },

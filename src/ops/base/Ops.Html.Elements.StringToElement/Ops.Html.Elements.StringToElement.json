@@ -36,6 +36,15 @@
         ]
     },
     "summary": "convert html/xml string input to an element",
+    "tags": [
+        "parse",
+        "html string",
+        "markup",
+        "create from string",
+        "innerhtml",
+        "dom",
+        "svg"
+    ],
     "docs": {
         "ports": [
             {

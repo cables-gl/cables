@@ -105,6 +105,16 @@
         ]
     },
     "summary": "render a shader into a texture",
+    "tags": [
+        "glsl",
+        "render",
+        "fragment shader",
+        "generate",
+        "procedural",
+        "gpu",
+        "bake",
+        "shadertoy"
+    ],
     "docs": {
         "ports": [
             {

@@ -4,6 +4,16 @@
     "id": "7ef594f3-4907-47b0-a2d3-9854eda1679d",
     "created": 1514976790397,
     "summary": "Extends a trigger (useful in big patches for better overview)",
+    "tags": [
+        "reroute",
+        "cable",
+        "tidy",
+        "organize",
+        "wireless",
+        "extend",
+        "relay",
+        "patch cleanup"
+    ],
     "layout": {
         "portsIn": [
             {

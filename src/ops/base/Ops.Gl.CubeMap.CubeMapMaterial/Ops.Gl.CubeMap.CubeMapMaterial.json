@@ -28,6 +28,16 @@
         ]
     },
     "summary": "Use a cubemap texture as a material",
+    "tags": [
+        "skybox",
+        "environment",
+        "reflection",
+        "equirectangular",
+        "hdr",
+        "panorama",
+        "360",
+        "sky"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "17f73be5-401b-46f1-ace7-fd203bf1aa94",

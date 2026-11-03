@@ -52,6 +52,15 @@
         ]
     },
     "summary": "Load any file (image, audio, text, binary) as a data url",
+    "tags": [
+        "load",
+        "file",
+        "base64",
+        "fetch",
+        "embed",
+        "inline",
+        "data uri"
+    ],
     "isReleased": false,
     "docs": {
         "ports": []

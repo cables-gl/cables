@@ -68,6 +68,15 @@
         ]
     },
     "summary": "Create points by sampling texture",
+    "tags": [
+        "sample",
+        "scatter",
+        "stipple",
+        "points",
+        "random",
+        "dots",
+        "importance sampling"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

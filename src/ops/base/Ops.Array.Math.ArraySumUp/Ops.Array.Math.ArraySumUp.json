@@ -19,6 +19,13 @@
         ]
     },
     "summary": "Sum of every number in an array",
+    "tags": [
+        "total",
+        "add up",
+        "sum",
+        "aggregate",
+        "reduce"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": [

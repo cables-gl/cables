@@ -34,6 +34,15 @@
         ]
     },
     "summary": "interpolate between two matrices",
+    "tags": [
+        "lerp",
+        "blend",
+        "mix",
+        "transition",
+        "tween",
+        "morph",
+        "mat4"
+    ],
     "docs": {
         "ports": []
     },

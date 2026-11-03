@@ -54,6 +54,15 @@
         ]
     },
     "summary": "send MIDI CC data to a midi output",
+    "tags": [
+        "knob",
+        "fader",
+        "send",
+        "controller change",
+        "midi out",
+        "cc",
+        "transmit"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

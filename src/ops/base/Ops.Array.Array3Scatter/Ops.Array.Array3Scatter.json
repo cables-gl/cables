@@ -31,6 +31,14 @@
     },
     "isReleased": true,
     "summary": "create copy of points at positions provided by another array",
+    "tags": [
+        "copies",
+        "instances",
+        "distribute",
+        "duplicate",
+        "positions",
+        "points"
+    ],
     "docs": {
         "ports": []
     },

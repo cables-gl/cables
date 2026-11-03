@@ -50,6 +50,14 @@
         ]
     },
     "summary": "Outputs the last number of the input port which was triggered",
+    "tags": [
+        "hold",
+        "latch",
+        "select",
+        "which port",
+        "last triggered",
+        "index"
+    ],
     "docs": {
         "ports": [
             {

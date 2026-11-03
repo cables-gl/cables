@@ -26,6 +26,13 @@
         ]
     },
     "summary": "start timeline",
+    "tags": [
+        "start",
+        "begin",
+        "run",
+        "resume",
+        "play"
+    ],
     "exampleProjectId": "3F6DOe",
     "docs": {
         "ports": []

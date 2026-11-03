@@ -25,6 +25,15 @@
         ]
     },
     "summary": "dump all gl commands of one frame to console",
+    "tags": [
+        "webgl calls",
+        "gpu",
+        "drawcalls",
+        "commands",
+        "trace",
+        "profile",
+        "frame dump"
+    ],
     "docs": {
         "ports": []
     },

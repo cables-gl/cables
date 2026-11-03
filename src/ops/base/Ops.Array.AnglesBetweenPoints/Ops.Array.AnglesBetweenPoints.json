@@ -39,6 +39,14 @@
         ]
     },
     "summary": "Outputs the angle between points in 3D space (degree)",
+    "tags": [
+        "angle",
+        "direction",
+        "points",
+        "degrees",
+        "path",
+        "3d"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

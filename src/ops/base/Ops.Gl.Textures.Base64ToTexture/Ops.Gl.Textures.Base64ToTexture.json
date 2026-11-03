@@ -60,6 +60,15 @@
         ]
     },
     "summary": "Converts a base-64 image string into a texture",
+    "tags": [
+        "decode",
+        "data url",
+        "embed",
+        "inline image",
+        "convert",
+        "base64",
+        "image string"
+    ],
     "docs": {
         "ports": [
             {

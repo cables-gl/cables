@@ -30,6 +30,14 @@
         ]
     },
     "summary": "current set length of the timeline",
+    "tags": [
+        "duration",
+        "total time",
+        "end",
+        "seconds",
+        "range",
+        "read"
+    ],
     "docs": {
         "ports": []
     },

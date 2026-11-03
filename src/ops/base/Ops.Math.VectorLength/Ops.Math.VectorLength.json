@@ -26,6 +26,13 @@
         ]
     },
     "summary": "length of a vector",
+    "tags": [
+        "magnitude",
+        "length",
+        "norm",
+        "distance",
+        "size"
+    ],
     "docs": {
         "ports": []
     },

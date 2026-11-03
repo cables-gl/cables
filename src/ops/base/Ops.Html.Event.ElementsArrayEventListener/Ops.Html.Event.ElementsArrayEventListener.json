@@ -71,6 +71,15 @@
         ]
     },
     "summary": "listen to events on multiple html elements",
+    "tags": [
+        "click",
+        "addeventlistener",
+        "multiple",
+        "dom events",
+        "listen",
+        "handlers",
+        "many elements"
+    ],
     "docs": {
         "ports": [
             {

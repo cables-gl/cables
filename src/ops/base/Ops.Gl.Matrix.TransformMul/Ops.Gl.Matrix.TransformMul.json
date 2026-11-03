@@ -23,6 +23,14 @@
         ]
     },
     "summary": "multiply current modelmatrix",
+    "tags": [
+        "mat4",
+        "multiply",
+        "matrix",
+        "combine",
+        "apply",
+        "custom matrix"
+    ],
     "coreLibs": [
         "cgl"
     ],

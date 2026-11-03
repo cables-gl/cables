@@ -29,6 +29,13 @@
         ]
     },
     "summary": "Convert an array4 to array3 by dropping every 4th number",
+    "tags": [
+        "convert",
+        "xyzw to xyz",
+        "drop w",
+        "reduce",
+        "stride"
+    ],
     "docs": {
         "ports": []
     },

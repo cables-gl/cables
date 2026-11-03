@@ -27,6 +27,14 @@
         ]
     },
     "summary": "download a texture as png file",
+    "tags": [
+        "save image",
+        "export",
+        "png",
+        "jpeg",
+        "file",
+        "save texture"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": [

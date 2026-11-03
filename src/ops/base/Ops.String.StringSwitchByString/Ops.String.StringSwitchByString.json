@@ -109,6 +109,15 @@
         ]
     },
     "summary": "Switch between multiple strings by a string index",
+    "tags": [
+        "select",
+        "choose",
+        "lookup",
+        "map",
+        "dictionary",
+        "match",
+        "index"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

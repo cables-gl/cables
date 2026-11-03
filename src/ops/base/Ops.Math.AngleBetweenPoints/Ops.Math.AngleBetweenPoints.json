@@ -1,5 +1,13 @@
 {
     "summary": "outputs the angle between two points (degree)",
+    "tags": [
+        "angle",
+        "direction",
+        "atan",
+        "degrees",
+        "heading",
+        "bearing"
+    ],
     "layout": {
         "portsIn": [
             {

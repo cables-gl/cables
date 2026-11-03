@@ -87,6 +87,14 @@
         ]
     },
     "summary": "skew / stretch an image by rendering scaled sides",
+    "tags": [
+        "skew",
+        "stretch",
+        "shear",
+        "distort",
+        "perspective",
+        "corner pin"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -111,6 +111,13 @@
         ]
     },
     "summary": "Offsets the xy components of an RGB texture",
+    "tags": [
+        "rgb split",
+        "color shift",
+        "glitch",
+        "chromatic aberration",
+        "channel offset"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

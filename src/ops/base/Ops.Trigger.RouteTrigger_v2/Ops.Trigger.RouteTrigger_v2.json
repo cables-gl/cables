@@ -42,6 +42,15 @@
         ]
     },
     "summary": "Triggers one of the output ports - value index switch case",
+    "tags": [
+        "switch",
+        "select output",
+        "case",
+        "demux",
+        "branch",
+        "split",
+        "index"
+    ],
     "docs": {
         "ports": []
     },

@@ -31,6 +31,14 @@
         ]
     },
     "summary": "return fraction of value by index",
+    "tags": [
+        "normalize index",
+        "0-1",
+        "progress",
+        "position",
+        "ratio",
+        "percentage"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

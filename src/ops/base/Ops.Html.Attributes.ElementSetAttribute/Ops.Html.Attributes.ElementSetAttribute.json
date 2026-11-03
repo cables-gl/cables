@@ -54,6 +54,15 @@
         ]
     },
     "summary": "Write or Set the value of an HTML element Attribute",
+    "tags": [
+        "write",
+        "property",
+        "dom",
+        "setattribute",
+        "value",
+        "set",
+        "modify"
+    ],
     "docs": {
         "ports": []
     },

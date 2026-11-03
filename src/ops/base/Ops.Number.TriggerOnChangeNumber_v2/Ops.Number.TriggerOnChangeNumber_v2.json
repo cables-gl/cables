@@ -23,6 +23,15 @@
         ]
     },
     "summary": "triggers every time the input value changed",
+    "tags": [
+        "change",
+        "detect",
+        "event",
+        "onchange",
+        "listener",
+        "update",
+        "value changed"
+    ],
     "docs": {
         "ports": [
             {

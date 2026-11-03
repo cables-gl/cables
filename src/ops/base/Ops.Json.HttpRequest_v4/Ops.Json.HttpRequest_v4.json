@@ -208,6 +208,19 @@
         ]
     },
     "summary": "Request a json file and output an object (ajax, url, json,fetch)",
+    "tags": [
+        "ajax",
+        "fetch",
+        "xhr",
+        "api",
+        "rest",
+        "load json",
+        "url",
+        "get",
+        "network",
+        "download",
+        "web request"
+    ],
     "docs": {
         "ports": [
             {

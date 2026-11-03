@@ -18,6 +18,12 @@
         ]
     },
     "summary": "Create a copy of an array",
+    "tags": [
+        "duplicate",
+        "clone",
+        "snapshot",
+        "store"
+    ],
     "changelog": [
         {
             "message": "cloned op from Ops.Array.ArrayReverse",

@@ -49,6 +49,17 @@
     },
     "exampleProjectId": "bsbM2y",
     "summary": "Spring simulation based on input target value.",
+    "tags": [
+        "physics",
+        "bounce",
+        "elastic",
+        "overshoot",
+        "damping",
+        "oscillation",
+        "simulation",
+        "wobble",
+        "inertia"
+    ],
     "isReleased": true,
     "license": "MIT"
 }

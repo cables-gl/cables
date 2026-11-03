@@ -38,6 +38,15 @@
         ]
     },
     "summary": "configure the timeline for the current patch",
+    "tags": [
+        "settings",
+        "fps",
+        "length",
+        "duration",
+        "loop",
+        "setup",
+        "patch timeline"
+    ],
     "docs": {
         "ports": []
     },

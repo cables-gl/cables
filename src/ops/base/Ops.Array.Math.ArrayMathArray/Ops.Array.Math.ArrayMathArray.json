@@ -1,5 +1,14 @@
 {
     "summary": "Perform a math operations on two arrays",
+    "tags": [
+        "add",
+        "subtract",
+        "multiply",
+        "divide",
+        "two arrays",
+        "arithmetic",
+        "element wise"
+    ],
     "docs": {
         "ports": [
             {

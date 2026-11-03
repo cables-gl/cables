@@ -114,6 +114,13 @@
         ]
     },
     "summary": "Adds a fog effect to a scene.",
+    "tags": [
+        "mist",
+        "haze",
+        "atmosphere",
+        "depth fade",
+        "distance"
+    ],
     "docs": {
         "ports": [
             {

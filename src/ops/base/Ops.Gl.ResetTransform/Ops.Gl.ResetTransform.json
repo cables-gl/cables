@@ -49,6 +49,13 @@
         ]
     },
     "summary": "reset current transforms to initial value (identity)",
+    "tags": [
+        "reset matrix",
+        "identity",
+        "clear transform",
+        "origin",
+        "default"
+    ],
     "docs": {
         "ports": []
     },

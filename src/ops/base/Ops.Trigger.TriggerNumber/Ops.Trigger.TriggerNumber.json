@@ -40,6 +40,15 @@
         ]
     },
     "summary": "Outputs a number when triggered",
+    "tags": [
+        "send",
+        "output",
+        "emit",
+        "number",
+        "value",
+        "on trigger",
+        "constant"
+    ],
     "docs": {
         "ports": [
             {

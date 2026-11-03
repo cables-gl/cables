@@ -27,6 +27,15 @@
     },
     "isReleased": true,
     "summary": "Get a list of ops that have a specific tag",
+    "tags": [
+        "find ops",
+        "search",
+        "tag",
+        "list ops",
+        "query",
+        "filter",
+        "discover"
+    ],
     "docs": {
         "ports": []
     },

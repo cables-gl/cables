@@ -32,6 +32,14 @@
         ]
     },
     "summary": "render the difference of two textures",
+    "tags": [
+        "difference",
+        "subtract",
+        "compare",
+        "delta",
+        "diff",
+        "motion"
+    ],
     "docs": {
         "ports": []
     },

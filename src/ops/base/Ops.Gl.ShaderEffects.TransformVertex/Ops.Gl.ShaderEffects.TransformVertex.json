@@ -89,6 +89,15 @@
         }
     ],
     "summary": "transform vertices of a mesh via vertex shader",
+    "tags": [
+        "move",
+        "rotate",
+        "scale",
+        "vertex shader",
+        "offset",
+        "deform",
+        "displace"
+    ],
     "issues": "",
     "youtubeids": [
         "SaKWF6RnsyI"

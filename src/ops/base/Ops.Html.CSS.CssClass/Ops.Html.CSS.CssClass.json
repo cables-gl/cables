@@ -24,6 +24,14 @@
         ]
     },
     "summary": "Create a CSS class for styling other elements",
+    "tags": [
+        "stylesheet",
+        "class",
+        "style rule",
+        "selector",
+        "custom css",
+        "styling"
+    ],
     "docs": {
         "ports": []
     },

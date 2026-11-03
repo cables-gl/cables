@@ -67,6 +67,15 @@
     "authorName": "pandur",
     "created": 1647367985009,
     "summary": "basic extrusion of flat geometry",
+    "tags": [
+        "extrusion",
+        "thicken",
+        "depth",
+        "2d to 3d",
+        "solidify",
+        "pull",
+        "shape to solid"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

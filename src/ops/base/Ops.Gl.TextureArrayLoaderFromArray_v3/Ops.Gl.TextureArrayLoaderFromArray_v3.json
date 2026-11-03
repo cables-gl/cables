@@ -68,6 +68,15 @@
         ]
     },
     "summary": "Loads multiple textures from an array of URLs.",
+    "tags": [
+        "load",
+        "images",
+        "filenames",
+        "batch",
+        "preload",
+        "image list",
+        "urls"
+    ],
     "docs": {
         "ports": []
     },

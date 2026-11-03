@@ -62,6 +62,14 @@
         ]
     },
     "summary": "Set CSS backdrop filter like blur, contrast, brightness, saturation",
+    "tags": [
+        "blur",
+        "frosted glass",
+        "glassmorphism",
+        "blur behind",
+        "css",
+        "filter"
+    ],
     "docs": {
         "ports": []
     },

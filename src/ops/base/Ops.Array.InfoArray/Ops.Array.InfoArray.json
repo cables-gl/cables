@@ -1,5 +1,15 @@
 {
     "summary": "Min, Max and Average value from an array",
+    "tags": [
+        "statistics",
+        "min",
+        "max",
+        "average",
+        "mean",
+        "range",
+        "analyze",
+        "stats"
+    ],
     "layout": {
         "portsIn": [
             {

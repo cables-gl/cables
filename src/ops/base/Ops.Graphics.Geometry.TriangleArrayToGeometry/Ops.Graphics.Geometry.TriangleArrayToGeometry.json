@@ -22,6 +22,15 @@
         ]
     },
     "summary": "Draws multiple triangles using coordinates from an array",
+    "tags": [
+        "triangles",
+        "points",
+        "from array",
+        "custom mesh",
+        "polygons",
+        "vertices",
+        "build"
+    ],
     "docs": {
         "ports": [
             {

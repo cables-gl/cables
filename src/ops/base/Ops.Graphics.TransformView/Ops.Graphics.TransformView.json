@@ -60,6 +60,14 @@
         ]
     },
     "summary": "the most simple camera op / transform the viewmatrix",
+    "tags": [
+        "camera",
+        "view matrix",
+        "move camera",
+        "simple camera",
+        "position view",
+        "eye"
+    ],
     "docs": {
         "ports": []
     },

@@ -104,6 +104,14 @@
         }
     ],
     "summary": "fractional brownian motion noise ",
+    "tags": [
+        "fbm",
+        "fractal",
+        "clouds",
+        "terrain",
+        "procedural",
+        "turbulence"
+    ],
     "docs": {
         "ports": []
     },

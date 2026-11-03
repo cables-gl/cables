@@ -21,6 +21,14 @@
         ]
     },
     "summary": "gets current value of CSS Variable",
+    "tags": [
+        "read",
+        "custom property",
+        "var",
+        "css",
+        "get",
+        "computed style"
+    ],
     "docs": {
         "ports": []
     },

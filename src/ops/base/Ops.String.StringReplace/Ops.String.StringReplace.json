@@ -42,6 +42,14 @@
         ]
     },
     "summary": "replace occurrences of a string with another string",
+    "tags": [
+        "find and replace",
+        "substitute",
+        "swap",
+        "regex",
+        "change text",
+        "search"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

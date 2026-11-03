@@ -387,6 +387,18 @@
         }
     ],
     "summary": "PBR/Physical Based Rendering Material for realistic materials",
+    "tags": [
+        "pbr",
+        "physically based",
+        "realistic",
+        "metallic",
+        "roughness",
+        "shiny",
+        "metal",
+        "glossy",
+        "standard material",
+        "gltf"
+    ],
     "youtubeids": [
         "uwoj7R52yU8"
     ],

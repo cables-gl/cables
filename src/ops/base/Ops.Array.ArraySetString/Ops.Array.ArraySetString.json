@@ -34,6 +34,15 @@
         ]
     },
     "summary": "Set a string at index in an array",
+    "tags": [
+        "write",
+        "replace",
+        "set",
+        "index",
+        "modify",
+        "assign",
+        "text"
+    ],
     "docs": {
         "ports": [
             {

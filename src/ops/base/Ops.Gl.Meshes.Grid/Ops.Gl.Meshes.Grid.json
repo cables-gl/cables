@@ -1,5 +1,12 @@
 {
     "summary": "Draw a grid of lines on an axis plane",
+    "tags": [
+        "lines",
+        "helper",
+        "graph paper",
+        "wireframe",
+        "mesh grid"
+    ],
     "layout": {
         "portsIn": [
             {

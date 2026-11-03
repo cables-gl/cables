@@ -68,6 +68,16 @@
         ]
     },
     "summary": "Create an image file from a canvas",
+    "tags": [
+        "export",
+        "png",
+        "jpeg",
+        "data url",
+        "screenshot",
+        "save image",
+        "encode",
+        "convert"
+    ],
     "docs": {
         "ports": []
     },

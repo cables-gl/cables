@@ -1,5 +1,16 @@
 {
     "summary": "Gyroscope motionsensor camera",
+    "tags": [
+        "gyroscope",
+        "gyro",
+        "accelerometer",
+        "motion sensor",
+        "mobile",
+        "vr",
+        "phone",
+        "tilt",
+        "orientation"
+    ],
     "layout": {
         "portsIn": [
             {

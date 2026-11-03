@@ -52,6 +52,14 @@
         ]
     },
     "summary": "Animate values in an array to another array",
+    "tags": [
+        "animate",
+        "tween",
+        "transition",
+        "interpolate",
+        "ease",
+        "array morph"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

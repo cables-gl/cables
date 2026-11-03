@@ -90,6 +90,13 @@
     ],
     "license": "MIT",
     "summary": "Render \"gabor noise\" into a texture",
+    "tags": [
+        "procedural",
+        "anisotropic",
+        "stripes",
+        "pattern",
+        "texture"
+    ],
     "exampleProjectId": "PWDdQm",
     "coreLibs": [
         "cgl"

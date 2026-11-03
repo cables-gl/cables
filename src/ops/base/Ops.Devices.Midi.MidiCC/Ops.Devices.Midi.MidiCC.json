@@ -82,6 +82,15 @@
         ]
     },
     "summary": "read CC value from Midi controller",
+    "tags": [
+        "knob",
+        "fader",
+        "slider",
+        "controller change",
+        "midi controller",
+        "cc value",
+        "potentiometer"
+    ],
     "issues": "",
     "youtubeids": [
         "eDlaFD_d5lc"

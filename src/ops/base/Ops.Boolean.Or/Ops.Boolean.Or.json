@@ -1,5 +1,14 @@
 {
     "summary": "Returns `true` if one or more of the input booleans are `true`",
+    "tags": [
+        "||",
+        "either",
+        "any",
+        "logic",
+        "logical or",
+        "disjunction",
+        "gate"
+    ],
     "layout": {
         "portsIn": [
             {

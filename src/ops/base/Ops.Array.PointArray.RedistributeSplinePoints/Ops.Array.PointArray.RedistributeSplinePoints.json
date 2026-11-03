@@ -36,6 +36,15 @@
         ]
     },
     "summary": "Recalculate a spline / change number of points of a spline",
+    "tags": [
+        "resample",
+        "even spacing",
+        "uniform",
+        "spline",
+        "curve",
+        "equidistant",
+        "path"
+    ],
     "docs": {
         "ports": []
     },

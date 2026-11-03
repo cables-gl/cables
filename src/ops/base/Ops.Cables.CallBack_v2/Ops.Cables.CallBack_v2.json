@@ -46,6 +46,16 @@
         }
     ],
     "summary": "Executes an external function (external javascript)",
+    "tags": [
+        "javascript",
+        "external function",
+        "embed",
+        "interop",
+        "call js",
+        "callback",
+        "api",
+        "integration"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

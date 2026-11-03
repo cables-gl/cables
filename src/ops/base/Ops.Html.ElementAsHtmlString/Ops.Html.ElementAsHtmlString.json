@@ -42,6 +42,15 @@
         ]
     },
     "summary": "Serialize HTML/SVG elements to a string",
+    "tags": [
+        "serialize",
+        "outerhtml",
+        "svg",
+        "markup",
+        "export",
+        "convert",
+        "source"
+    ],
     "docs": {
         "ports": []
     },

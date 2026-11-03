@@ -29,6 +29,15 @@
         ]
     },
     "summary": "calculate normals of a geometry",
+    "tags": [
+        "shading",
+        "smooth",
+        "flat",
+        "recompute",
+        "normal vectors",
+        "faces",
+        "lighting"
+    ],
     "changelog": [
         {
             "message": "code cleanup - ports",

@@ -1,5 +1,16 @@
 {
     "summary": "a shaded material for lighting objects",
+    "tags": [
+        "shaded",
+        "lighting",
+        "lit",
+        "specular",
+        "shiny",
+        "glossy",
+        "blinn",
+        "standard material",
+        "diffuse"
+    ],
     "layout": {
         "portsIn": [
             {

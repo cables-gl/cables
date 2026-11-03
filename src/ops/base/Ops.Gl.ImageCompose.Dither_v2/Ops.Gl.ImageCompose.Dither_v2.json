@@ -53,6 +53,14 @@
     "id": "686ae373-2d2d-44cc-b45f-2ccb782dea26",
     "created": 1650967311533,
     "summary": "convert color to black and white patterns",
+    "tags": [
+        "halftone",
+        "bayer",
+        "retro",
+        "1-bit",
+        "black and white",
+        "pattern"
+    ],
     "docs": {
         "ports": []
     },

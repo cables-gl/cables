@@ -90,6 +90,17 @@
         ]
     },
     "summary": "do not draw pixels inside a defined 3d area",
+    "tags": [
+        "cut",
+        "clip",
+        "hide",
+        "cull",
+        "volume",
+        "cutout",
+        "section",
+        "discard",
+        "area"
+    ],
     "docs": {
         "ports": [
             {

@@ -43,6 +43,15 @@
         ]
     },
     "summary": "switch between multiple string inputs",
+    "tags": [
+        "select",
+        "choose",
+        "multiplexer",
+        "mux",
+        "pick",
+        "index",
+        "many inputs"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

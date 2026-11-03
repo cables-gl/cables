@@ -64,6 +64,15 @@
         }
     ],
     "summary": "a simple shaded material ",
+    "tags": [
+        "diffuse",
+        "matte",
+        "shaded",
+        "lighting",
+        "lit",
+        "simple lighting",
+        "flat shading"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

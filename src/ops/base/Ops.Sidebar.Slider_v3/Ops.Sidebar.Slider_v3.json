@@ -73,6 +73,17 @@
         ]
     },
     "summary": "Sidebar slider element (range)",
+    "tags": [
+        "range",
+        "knob",
+        "fader",
+        "number",
+        "ui",
+        "gui",
+        "control",
+        "interface",
+        "drag"
+    ],
     "docs": {
         "ports": []
     },

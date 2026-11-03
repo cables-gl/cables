@@ -118,6 +118,16 @@
         ]
     },
     "summary": "3 filters in one - an eq to quickly process an audio signal",
+    "tags": [
+        "eq",
+        "bass",
+        "mid",
+        "treble",
+        "tone",
+        "equalizer",
+        "low high",
+        "filter"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -35,6 +35,16 @@
     },
     "cloneOf": "1405b11f-78be-4ba2-a969-e4e57e693d45",
     "summary": "HttpRequest/Fetch Streaming",
+    "tags": [
+        "streaming",
+        "sse",
+        "fetch",
+        "server sent events",
+        "chunks",
+        "request",
+        "llm",
+        "api"
+    ],
     "docs": {
         "ports": []
     },

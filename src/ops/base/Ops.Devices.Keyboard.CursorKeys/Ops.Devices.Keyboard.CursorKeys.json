@@ -1,5 +1,14 @@
 {
     "summary": "get the state of your keyboards arrow keys",
+    "tags": [
+        "arrow keys",
+        "wasd",
+        "direction",
+        "navigation",
+        "input",
+        "arrows",
+        "movement"
+    ],
     "layout": {
         "portsIn": [
             {

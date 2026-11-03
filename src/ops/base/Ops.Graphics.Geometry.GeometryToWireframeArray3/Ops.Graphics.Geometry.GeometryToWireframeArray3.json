@@ -35,6 +35,14 @@
         ]
     },
     "summary": "generate an array of lines from a mesh to render a wireframe",
+    "tags": [
+        "lines",
+        "edges",
+        "wireframe",
+        "outline",
+        "mesh to lines",
+        "points"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

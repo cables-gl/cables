@@ -126,6 +126,17 @@
         ]
     },
     "summary": "State management of all parameters connected to it - Create presets of multiple ops",
+    "tags": [
+        "state",
+        "save",
+        "recall",
+        "snapshot",
+        "scene",
+        "presets",
+        "parameters",
+        "store",
+        "interpolate"
+    ],
     "issues": "",
     "youtubeids": [
         "2eKIpiTv6ww"

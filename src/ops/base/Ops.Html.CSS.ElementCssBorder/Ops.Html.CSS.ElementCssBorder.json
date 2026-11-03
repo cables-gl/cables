@@ -83,6 +83,14 @@
         ]
     },
     "summary": "Set CSS border properties of a HTML element",
+    "tags": [
+        "outline",
+        "frame",
+        "stroke",
+        "border radius",
+        "rounded",
+        "css"
+    ],
     "docs": {
         "ports": []
     },

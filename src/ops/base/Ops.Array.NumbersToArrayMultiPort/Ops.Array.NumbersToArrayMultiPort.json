@@ -39,6 +39,14 @@
         ]
     },
     "summary": "Create an array from multiple number inputs",
+    "tags": [
+        "combine",
+        "collect",
+        "create",
+        "list",
+        "many inputs",
+        "numbers"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

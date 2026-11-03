@@ -119,6 +119,15 @@
         ]
     },
     "summary": "Switch between different textures ",
+    "tags": [
+        "select",
+        "choose",
+        "multiplexer",
+        "mux",
+        "pick",
+        "index",
+        "route"
+    ],
     "issues": "",
     "youtubeids": [
         "TdHgjqOLpnM"

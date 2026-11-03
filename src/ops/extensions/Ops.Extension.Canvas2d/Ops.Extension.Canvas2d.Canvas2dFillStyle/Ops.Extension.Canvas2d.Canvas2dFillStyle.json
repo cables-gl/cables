@@ -50,6 +50,14 @@
     },
     "license": "MIT",
     "summary": "Sets the fill color for the canvas2d ops below it",
+    "tags": [
+        "color",
+        "fill",
+        "paint",
+        "brush",
+        "fillstyle",
+        "gradient"
+    ],
     "isReleased": true,
     "exampleProjectId": "nc4BAy",
     "docs": {

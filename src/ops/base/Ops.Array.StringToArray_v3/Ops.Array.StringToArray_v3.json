@@ -3,6 +3,15 @@
     "authorName": "pandur",
     "created": 1766470311217,
     "summary": "Parse a string into an array (create, split string, stringToArray)",
+    "tags": [
+        "split",
+        "explode",
+        "parse",
+        "tokenize",
+        "csv",
+        "separator",
+        "delimiter"
+    ],
     "docs": {
         "ports": [
             {

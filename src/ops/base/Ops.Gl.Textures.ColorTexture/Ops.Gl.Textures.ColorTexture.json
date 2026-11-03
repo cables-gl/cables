@@ -1,5 +1,13 @@
 {
     "summary": "Simple texture filled with one color",
+    "tags": [
+        "solid color",
+        "fill",
+        "flat",
+        "single color",
+        "swatch",
+        "plain"
+    ],
     "layout": {
         "portsIn": [
             {

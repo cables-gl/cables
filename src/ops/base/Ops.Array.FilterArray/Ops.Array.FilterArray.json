@@ -45,6 +45,15 @@
         ]
     },
     "summary": "Compare elements from an array and remove not matching ones",
+    "tags": [
+        "remove",
+        "keep",
+        "select",
+        "compare",
+        "where",
+        "search",
+        "condition"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

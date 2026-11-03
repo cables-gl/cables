@@ -56,6 +56,16 @@
         ]
     },
     "summary": "Store and retrieve a string in browser storage",
+    "tags": [
+        "browser storage",
+        "persist",
+        "save",
+        "remember",
+        "settings",
+        "localstorage",
+        "text",
+        "store"
+    ],
     "docs": {
         "ports": [
             {

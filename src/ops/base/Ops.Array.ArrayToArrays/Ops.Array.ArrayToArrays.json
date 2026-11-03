@@ -57,6 +57,15 @@
         ]
     },
     "summary": "Split an array up into an array of arrays",
+    "tags": [
+        "split",
+        "chunk",
+        "group",
+        "nested",
+        "2d",
+        "stride",
+        "partition"
+    ],
     "docs": {
         "ports": []
     },

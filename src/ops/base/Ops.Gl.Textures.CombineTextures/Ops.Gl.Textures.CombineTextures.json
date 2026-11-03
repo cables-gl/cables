@@ -189,6 +189,15 @@
         ]
     },
     "summary": "combine multiple textures into one by copying colorchannels",
+    "tags": [
+        "merge",
+        "channels",
+        "pack",
+        "rgba",
+        "mix",
+        "compose",
+        "combine channels"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

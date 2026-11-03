@@ -1,5 +1,14 @@
 {
     "summary": "Get the time since last trigger",
+    "tags": [
+        "elapsed",
+        "seconds",
+        "timer",
+        "duration",
+        "stopwatch",
+        "since",
+        "age"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "df54103f-5ef6-4a4f-adcf-dddc005132f8",

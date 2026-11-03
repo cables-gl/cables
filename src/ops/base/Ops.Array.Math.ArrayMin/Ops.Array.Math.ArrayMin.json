@@ -22,6 +22,12 @@
         ]
     },
     "summary": "Apply a min operation to all values in an array",
+    "tags": [
+        "smaller",
+        "minimum",
+        "lowest",
+        "clamp"
+    ],
     "docs": {
         "ports": [
             {

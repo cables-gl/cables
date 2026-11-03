@@ -114,5 +114,14 @@
         "ports": []
     },
     "summary": "animated switching between things",
+    "tags": [
+        "transition",
+        "fade",
+        "crossfade",
+        "switch",
+        "animated",
+        "blend between",
+        "scenes"
+    ],
     "isReleased": true
 }

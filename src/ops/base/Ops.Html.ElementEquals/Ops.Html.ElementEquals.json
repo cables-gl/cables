@@ -33,6 +33,15 @@
         ]
     },
     "summary": "Check if two HTML element objects are equal",
+    "tags": [
+        "compare",
+        "same",
+        "identical",
+        "==",
+        "test",
+        "dom",
+        "bool"
+    ],
     "exampleProjectId": "LZSRjH",
     "docs": {
         "ports": [

@@ -24,6 +24,16 @@
         ]
     },
     "summary": "average of last two values",
+    "tags": [
+        "smooth",
+        "lowpass",
+        "ease",
+        "damping",
+        "inertia",
+        "lag",
+        "filter",
+        "mean"
+    ],
     "docs": {
         "ports": []
     },

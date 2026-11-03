@@ -83,6 +83,15 @@
         ]
     },
     "summary": "play a youtube video in a HTML element",
+    "tags": [
+        "video",
+        "embed",
+        "youtube",
+        "player",
+        "stream",
+        "iframe",
+        "movie"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

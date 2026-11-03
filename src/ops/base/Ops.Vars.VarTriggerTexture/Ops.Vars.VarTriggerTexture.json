@@ -33,6 +33,15 @@
         "vargetset"
     ],
     "summary": "Set an object variable by trigger",
+    "tags": [
+        "write",
+        "variable",
+        "store",
+        "on trigger",
+        "set",
+        "image",
+        "save"
+    ],
     "issues": "",
     "docs": {
         "ports": [

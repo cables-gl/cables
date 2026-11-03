@@ -39,6 +39,15 @@
         }
     ],
     "summary": "Remove elements from an array from the beginning and/or the end",
+    "tags": [
+        "trim",
+        "remove",
+        "slice",
+        "shorten",
+        "crop",
+        "start",
+        "end"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

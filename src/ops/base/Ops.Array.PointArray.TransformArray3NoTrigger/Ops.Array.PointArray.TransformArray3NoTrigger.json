@@ -71,6 +71,15 @@
         ]
     },
     "summary": "Transform (translate, rotate, scale) positions in an array3x",
+    "tags": [
+        "move",
+        "translate",
+        "rotate",
+        "scale",
+        "matrix",
+        "points",
+        "positions"
+    ],
     "docs": {
         "ports": []
     },

@@ -1,5 +1,14 @@
 {
     "summary": "Contains a collection of nice color palettes output to texture or array via index",
+    "tags": [
+        "swatches",
+        "color scheme",
+        "presets",
+        "palette",
+        "theme",
+        "collection",
+        "harmony"
+    ],
     "layout": {
         "portsIn": [
             {

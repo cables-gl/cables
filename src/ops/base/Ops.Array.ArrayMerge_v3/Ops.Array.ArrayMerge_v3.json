@@ -62,6 +62,14 @@
         ]
     },
     "summary": "Merge multiple arrays - in consecutive order",
+    "tags": [
+        "concat",
+        "join",
+        "combine",
+        "append",
+        "concatenate",
+        "attach"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -39,6 +39,18 @@
     "authorName": "pandur",
     "created": 1649238794135,
     "summary": "Visualize the state of a boolean input in the patch, useful for debugging",
+    "tags": [
+        "lamp",
+        "led",
+        "indicator",
+        "debug",
+        "visualize",
+        "true false",
+        "light",
+        "state",
+        "flag",
+        "on off"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

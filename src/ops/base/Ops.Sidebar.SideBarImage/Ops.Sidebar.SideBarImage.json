@@ -59,6 +59,15 @@
         ]
     },
     "summary": "Display an image in the sidebar",
+    "tags": [
+        "picture",
+        "show image",
+        "preview",
+        "thumbnail",
+        "ui",
+        "gui",
+        "logo"
+    ],
     "exampleProjectId": "nLvdby",
     "docs": {
         "ports": []

@@ -1,5 +1,13 @@
 {
     "summary": "modulo pixel color values",
+    "tags": [
+        "mod",
+        "modulo",
+        "remainder",
+        "wrap",
+        "repeat",
+        "math"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -68,6 +68,14 @@
         ]
     },
     "summary": "Outputs the waveform of an audio file as a geometry",
+    "tags": [
+        "waveform",
+        "visualize",
+        "3d wave",
+        "geometry",
+        "audio shape",
+        "terrain"
+    ],
     "docs": {
         "ports": [
             {

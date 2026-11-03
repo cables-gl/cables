@@ -32,6 +32,16 @@
         ]
     },
     "summary": "Subset of a string between one index and another",
+    "tags": [
+        "slice",
+        "substr",
+        "part",
+        "cut",
+        "extract",
+        "range",
+        "characters",
+        "crop"
+    ],
     "docs": {
         "ports": []
     },

@@ -27,6 +27,16 @@
         ]
     },
     "summary": "Generate a random string of given characters",
+    "tags": [
+        "random",
+        "characters",
+        "generate",
+        "id",
+        "token",
+        "password",
+        "text",
+        "noise"
+    ],
     "issues": "",
     "docs": {
         "ports": []

@@ -24,6 +24,16 @@
         ]
     },
     "summary": "Get a number from an object",
+    "tags": [
+        "read",
+        "key",
+        "property",
+        "access",
+        "lookup",
+        "json",
+        "get",
+        "value"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": []

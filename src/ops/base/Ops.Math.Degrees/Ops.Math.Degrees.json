@@ -19,6 +19,12 @@
         ]
     },
     "summary": "Converts a radian measurement to its corresponding value in degrees.",
+    "tags": [
+        "radians to degrees",
+        "convert",
+        "angle",
+        "deg"
+    ],
     "docs": {
         "ports": [
             {

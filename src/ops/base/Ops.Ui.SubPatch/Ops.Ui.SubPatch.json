@@ -27,6 +27,18 @@
         ]
     },
     "summary": "subpatch op",
+    "tags": [
+        "group",
+        "container",
+        "module",
+        "nest",
+        "encapsulate",
+        "subgraph",
+        "macro",
+        "function",
+        "reuse",
+        "organize"
+    ],
     "docs": {
         "ports": []
     },

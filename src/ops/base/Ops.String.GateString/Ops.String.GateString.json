@@ -55,6 +55,15 @@
         ]
     },
     "summary": "Output string if pass through is true",
+    "tags": [
+        "pass",
+        "block",
+        "switch",
+        "allow",
+        "if",
+        "conditional",
+        "mute"
+    ],
     "issues": "",
     "docs": {
         "ports": [

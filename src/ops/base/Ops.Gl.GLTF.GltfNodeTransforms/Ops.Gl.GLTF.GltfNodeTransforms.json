@@ -54,6 +54,15 @@
         ]
     },
     "summary": "output all transformations of nodes starting with [search]",
+    "tags": [
+        "positions",
+        "rotations",
+        "multiple nodes",
+        "filter",
+        "matching",
+        "matrices",
+        "array"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

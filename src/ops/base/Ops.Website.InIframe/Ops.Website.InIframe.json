@@ -25,5 +25,15 @@
         "ports": []
     },
     "summary": "Outputs true if the patch is inside of an iframe",
+    "tags": [
+        "embedded",
+        "embed",
+        "frame",
+        "detect",
+        "iframe",
+        "sandbox",
+        "standalone",
+        "parent window"
+    ],
     "isReleased": true
 }

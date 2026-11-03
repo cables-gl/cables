@@ -47,6 +47,14 @@
         ]
     },
     "summary": "draw a gradient mapped to depth buffer values",
+    "tags": [
+        "depth of field",
+        "dof",
+        "focus",
+        "focal",
+        "blur mask",
+        "depth"
+    ],
     "docs": {
         "ports": []
     },

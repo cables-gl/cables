@@ -54,6 +54,14 @@
         ]
     },
     "summary": "Render a scene into a 6-sided cubemap texture",
+    "tags": [
+        "reflection probe",
+        "environment",
+        "dynamic reflections",
+        "360",
+        "capture scene",
+        "render target"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

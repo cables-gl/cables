@@ -4,6 +4,15 @@
     "id": "8d52e710-d5d1-46e8-ac73-3270b17e40f4",
     "created": 1513356276638,
     "summary": "Get a variable array",
+    "tags": [
+        "read",
+        "variable",
+        "get",
+        "wireless",
+        "global",
+        "receive",
+        "array"
+    ],
     "layout": {
         "portsOut": [
             {

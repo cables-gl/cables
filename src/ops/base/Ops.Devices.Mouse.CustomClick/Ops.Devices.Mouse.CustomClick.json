@@ -53,6 +53,16 @@
     },
     "isReleased": true,
     "summary": "Configurable mouse click listener",
+    "tags": [
+        "click",
+        "button",
+        "listener",
+        "pointer",
+        "tap",
+        "double click",
+        "right click",
+        "mouse events"
+    ],
     "docs": {
         "ports": []
     }

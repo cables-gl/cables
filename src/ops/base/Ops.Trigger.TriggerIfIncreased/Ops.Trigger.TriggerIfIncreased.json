@@ -25,6 +25,15 @@
         ]
     },
     "summary": "Outputs a trigger if the value of a number increases",
+    "tags": [
+        "rising",
+        "grow",
+        "higher",
+        "bigger",
+        "change",
+        "detect",
+        "increase"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

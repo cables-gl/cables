@@ -22,6 +22,14 @@
         ]
     },
     "summary": "Shift array contents based upon rotate amount",
+    "tags": [
+        "shift",
+        "offset",
+        "cycle",
+        "wrap",
+        "scroll",
+        "rotate items"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

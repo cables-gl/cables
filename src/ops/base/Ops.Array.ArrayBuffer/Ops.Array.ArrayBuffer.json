@@ -40,6 +40,15 @@
         ]
     },
     "summary": "Store values in an array / fifo array buffer",
+    "tags": [
+        "fifo",
+        "history",
+        "queue",
+        "store values",
+        "log",
+        "collect",
+        "buffer"
+    ],
     "docs": {
         "ports": [
             {

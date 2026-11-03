@@ -33,6 +33,13 @@
         ]
     },
     "summary": "Get the scalar scaling of a matrix",
+    "tags": [
+        "scale",
+        "size",
+        "read",
+        "extract",
+        "mat4"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

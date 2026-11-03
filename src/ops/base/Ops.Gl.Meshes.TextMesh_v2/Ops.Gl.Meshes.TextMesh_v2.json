@@ -134,6 +134,16 @@
         ]
     },
     "summary": "Draws text in 3d space using one of the font ops",
+    "tags": [
+        "text",
+        "font",
+        "letters",
+        "typography",
+        "3d text",
+        "type",
+        "string",
+        "label"
+    ],
     "docs": {
         "ports": [
             {

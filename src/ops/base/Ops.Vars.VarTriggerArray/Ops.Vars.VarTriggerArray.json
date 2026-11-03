@@ -29,6 +29,15 @@
         ]
     },
     "summary": "Set an array variable by a trigger",
+    "tags": [
+        "write",
+        "variable",
+        "store",
+        "on trigger",
+        "set",
+        "array",
+        "save"
+    ],
     "issues": "",
     "youtubeids": [
         "30v_GQc6ajA"

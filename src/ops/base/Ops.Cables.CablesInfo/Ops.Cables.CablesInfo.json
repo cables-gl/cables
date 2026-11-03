@@ -20,6 +20,15 @@
         ]
     },
     "summary": "Output the cables URL of the current editor environment",
+    "tags": [
+        "environment",
+        "url",
+        "editor",
+        "version",
+        "server",
+        "info",
+        "host"
+    ],
     "docs": {
         "ports": []
     },

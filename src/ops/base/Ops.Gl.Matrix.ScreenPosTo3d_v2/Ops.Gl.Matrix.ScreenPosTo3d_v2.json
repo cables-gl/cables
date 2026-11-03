@@ -49,6 +49,14 @@
         ]
     },
     "summary": "convert screen coordinates to 3d coordinates",
+    "tags": [
+        "unproject",
+        "raycast",
+        "mouse to world",
+        "screen to world",
+        "pick",
+        "2d to 3d"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

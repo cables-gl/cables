@@ -21,6 +21,13 @@
         ]
     },
     "summary": "get current viewmatrix",
+    "tags": [
+        "view",
+        "camera",
+        "read",
+        "mat4",
+        "eye"
+    ],
     "docs": {
         "ports": []
     },

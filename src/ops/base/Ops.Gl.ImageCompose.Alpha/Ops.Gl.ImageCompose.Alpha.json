@@ -56,6 +56,13 @@
         }
     ],
     "summary": "Modify current alpha/opacity ",
+    "tags": [
+        "opacity",
+        "transparency",
+        "transparent",
+        "fade",
+        "alpha channel"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

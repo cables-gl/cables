@@ -43,6 +43,13 @@
         ]
     },
     "summary": "Add up random numbers by triggering",
+    "tags": [
+        "random",
+        "accumulate",
+        "add",
+        "random walk",
+        "count"
+    ],
     "docs": {
         "ports": []
     },

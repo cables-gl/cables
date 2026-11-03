@@ -46,6 +46,16 @@
     "id": "f4f3a54b-4e3b-46b1-ad8d-731fb88ac920",
     "created": 1505491782569,
     "summary": "render lots of particles following a path/spline/array3x",
+    "tags": [
+        "path",
+        "spline",
+        "follow",
+        "curve",
+        "particles",
+        "flow",
+        "trail",
+        "instances"
+    ],
     "docs": {
         "ports": []
     },

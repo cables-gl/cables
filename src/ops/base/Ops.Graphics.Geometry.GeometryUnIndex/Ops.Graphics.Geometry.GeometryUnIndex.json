@@ -20,6 +20,14 @@
         ]
     },
     "summary": "convert geometry to only flat triangles without reusing vertices positions",
+    "tags": [
+        "flat triangles",
+        "non indexed",
+        "flat shading",
+        "duplicate vertices",
+        "expand",
+        "triangle soup"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -40,6 +40,16 @@
         ]
     },
     "summary": "Performs logical comparison operations on a single array of numbers",
+    "tags": [
+        "compare",
+        "greater",
+        "less",
+        "equal",
+        "boolean",
+        "test",
+        "condition",
+        "mask"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

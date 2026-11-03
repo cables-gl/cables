@@ -24,6 +24,14 @@
         ]
     },
     "summary": "Make the 1st and last point of an array the same, good for closing splines and shapes",
+    "tags": [
+        "close",
+        "closed path",
+        "loop",
+        "cycle",
+        "connect ends",
+        "polygon"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

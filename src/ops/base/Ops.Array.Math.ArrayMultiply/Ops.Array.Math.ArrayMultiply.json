@@ -1,5 +1,12 @@
 {
     "summary": "Multiply every number in an array",
+    "tags": [
+        "times",
+        "*",
+        "scale",
+        "product",
+        "all values"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -16,6 +16,12 @@
         ]
     },
     "summary": "Calculates the logarithm of Number",
+    "tags": [
+        "logarithm",
+        "ln",
+        "log10",
+        "exponent"
+    ],
     "docs": {
         "ports": [
             {

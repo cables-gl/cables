@@ -1,5 +1,14 @@
 {
     "summary": "Sends an audio signal to your speakers",
+    "tags": [
+        "speakers",
+        "destination",
+        "master",
+        "sound out",
+        "headphones",
+        "play",
+        "audio context"
+    ],
     "layout": {
         "portsIn": [
             {

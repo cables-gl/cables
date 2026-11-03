@@ -39,6 +39,14 @@
         ]
     },
     "summary": "Debug what happens when a trigger happens",
+    "tags": [
+        "breakpoint",
+        "trace",
+        "step through",
+        "inspect trigger",
+        "debug",
+        "call stack"
+    ],
     "docs": {
         "ports": []
     },

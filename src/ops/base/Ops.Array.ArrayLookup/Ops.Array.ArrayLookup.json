@@ -34,6 +34,14 @@
         ]
     },
     "summary": "Create an array that is filled with values looked up by index from another array",
+    "tags": [
+        "index",
+        "map",
+        "lookup table",
+        "remap",
+        "palette",
+        "get by index"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

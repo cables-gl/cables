@@ -49,6 +49,14 @@
         ]
     },
     "summary": "Creates a twirl/swirl/spiral effect in a texture",
+    "tags": [
+        "swirl",
+        "spiral",
+        "twist",
+        "vortex",
+        "whirl",
+        "distort"
+    ],
     "docs": {
         "ports": [
             {

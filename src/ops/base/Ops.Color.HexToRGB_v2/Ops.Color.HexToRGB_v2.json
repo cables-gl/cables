@@ -3,6 +3,15 @@
     "authorName": "pandur",
     "created": 1543861514673,
     "summary": "Converts a hex color like `#ff0000` to number values",
+    "tags": [
+        "hex",
+        "#ff0000",
+        "html color",
+        "css",
+        "convert",
+        "web color",
+        "parse"
+    ],
     "docs": {
         "ports": [
             {

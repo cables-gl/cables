@@ -1,5 +1,14 @@
 {
     "summary": "Allows switching between objects",
+    "tags": [
+        "select",
+        "choose",
+        "multiplexer",
+        "mux",
+        "pick",
+        "index",
+        "route"
+    ],
     "docs": {
         "ports": [
             {

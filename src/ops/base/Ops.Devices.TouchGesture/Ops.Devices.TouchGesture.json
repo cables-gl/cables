@@ -60,6 +60,16 @@
         ]
     },
     "summary": "detect touch gestures like swipe and pan",
+    "tags": [
+        "swipe",
+        "pan",
+        "touch",
+        "tap",
+        "gesture",
+        "multitouch",
+        "phone",
+        "flick"
+    ],
     "docs": {},
     "coreLibs": [
         "cgl"

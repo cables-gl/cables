@@ -144,6 +144,18 @@
         "ports": []
     },
     "summary": "rendering on webxr virtual reality immersive devices",
+    "tags": [
+        "virtual reality",
+        "headset",
+        "oculus",
+        "quest",
+        "webxr",
+        "immersive",
+        "hmd",
+        "ar",
+        "xr",
+        "goggles"
+    ],
     "license": "MIT",
     "coreLibs": [
         "cgl"

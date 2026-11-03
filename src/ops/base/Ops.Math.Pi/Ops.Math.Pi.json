@@ -3,6 +3,13 @@
     "id": "311e8179-9a7c-43de-9eb2-84577d702974",
     "created": 1519296680513,
     "summary": "returns PI (3.141592653589793) * multiply amount",
+    "tags": [
+        "3.14159",
+        "circle",
+        "constant",
+        "tau",
+        "radians"
+    ],
     "docs": {
         "ports": [
             {

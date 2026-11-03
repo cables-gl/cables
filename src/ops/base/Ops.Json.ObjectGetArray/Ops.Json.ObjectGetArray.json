@@ -26,6 +26,15 @@
         ]
     },
     "summary": "Returns an array from a JSON-object",
+    "tags": [
+        "read",
+        "key",
+        "property",
+        "access",
+        "lookup",
+        "json",
+        "get"
+    ],
     "docs": {
         "ports": [
             {

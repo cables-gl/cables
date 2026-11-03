@@ -28,6 +28,14 @@
         ]
     },
     "summary": "sort geometry triangles by position ",
+    "tags": [
+        "order triangles",
+        "depth sort",
+        "transparency",
+        "painter",
+        "sorting",
+        "axis"
+    ],
     "docs": {
         "ports": []
     },

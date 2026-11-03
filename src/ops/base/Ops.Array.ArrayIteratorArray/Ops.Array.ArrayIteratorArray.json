@@ -30,6 +30,14 @@
         ]
     },
     "summary": "Iterate over an array of arrays",
+    "tags": [
+        "loop",
+        "foreach",
+        "for each",
+        "nested",
+        "repeat",
+        "iterate"
+    ],
     "docs": {
         "ports": []
     },

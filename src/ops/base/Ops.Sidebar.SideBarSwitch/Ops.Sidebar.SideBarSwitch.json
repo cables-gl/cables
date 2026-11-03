@@ -84,6 +84,15 @@
         ]
     },
     "summary": "add tabs or switchbar to a sidebar",
+    "tags": [
+        "tabs",
+        "tab bar",
+        "segmented control",
+        "switch",
+        "pages",
+        "navigation",
+        "gui"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

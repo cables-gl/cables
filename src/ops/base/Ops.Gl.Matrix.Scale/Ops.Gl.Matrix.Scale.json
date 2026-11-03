@@ -1,5 +1,15 @@
 {
     "summary": "Scale all child objects (scaleXYZ)",
+    "tags": [
+        "size",
+        "resize",
+        "grow",
+        "shrink",
+        "zoom",
+        "scaling",
+        "enlarge",
+        "transform"
+    ],
     "layout": {
         "portsIn": [
             {

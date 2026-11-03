@@ -42,6 +42,14 @@
         ]
     },
     "summary": "Draw round corners around image (border)",
+    "tags": [
+        "rounded corners",
+        "rounded",
+        "border",
+        "mask",
+        "rounded rectangle",
+        "vignette"
+    ],
     "exampleProjectId": "iYLmJ5",
     "issues": "",
     "caniusequery": "",

@@ -34,6 +34,16 @@
         ]
     },
     "summary": "project mercator coordinates",
+    "tags": [
+        "map",
+        "projection",
+        "latitude",
+        "longitude",
+        "gps",
+        "geo",
+        "tiles",
+        "web mercator"
+    ],
     "exampleProjectId": "oi9AI4",
     "isReleased": true,
     "license": "MIT"

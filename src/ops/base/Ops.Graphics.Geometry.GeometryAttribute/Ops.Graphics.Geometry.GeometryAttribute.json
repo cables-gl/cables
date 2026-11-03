@@ -40,5 +40,15 @@
             }
         ]
     },
-    "summary": "Get a named attribute array from a geometry (vertices, normals, UVs)"
+    "summary": "Get a named attribute array from a geometry (vertices, normals, UVs)",
+    "tags": [
+        "read",
+        "vertices",
+        "normals",
+        "uv",
+        "data",
+        "extract",
+        "array",
+        "buffer"
+    ]
 }

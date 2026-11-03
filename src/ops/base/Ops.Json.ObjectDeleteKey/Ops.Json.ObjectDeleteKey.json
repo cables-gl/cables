@@ -29,6 +29,15 @@
         ]
     },
     "summary": "Remove a Property from an Object by Key",
+    "tags": [
+        "remove",
+        "property",
+        "delete",
+        "omit",
+        "key",
+        "drop",
+        "json"
+    ],
     "docs": {
         "ports": []
     },

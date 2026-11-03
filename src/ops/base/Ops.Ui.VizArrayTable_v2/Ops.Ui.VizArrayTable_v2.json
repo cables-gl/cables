@@ -83,6 +83,16 @@
         ]
     },
     "summary": "Show the contents of the input array in a table in the patch, useful for debugging",
+    "tags": [
+        "spreadsheet",
+        "list",
+        "debug",
+        "visualize",
+        "inspect",
+        "rows",
+        "values",
+        "data view"
+    ],
     "docs": {
         "ports": []
     },

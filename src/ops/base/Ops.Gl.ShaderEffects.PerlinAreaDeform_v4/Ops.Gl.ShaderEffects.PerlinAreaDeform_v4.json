@@ -108,6 +108,15 @@
         "cgl"
     ],
     "summary": "Displace vertices using perlin noise animation",
+    "tags": [
+        "noise",
+        "displace",
+        "organic",
+        "wobble",
+        "wave",
+        "vertex",
+        "volume"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

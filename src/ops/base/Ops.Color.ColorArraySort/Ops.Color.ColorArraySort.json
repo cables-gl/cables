@@ -75,5 +75,14 @@
         "ports": []
     },
     "summary": "Sort an array of colors by saturation/lightness etc.",
+    "tags": [
+        "order",
+        "rank",
+        "sorting",
+        "palette",
+        "saturation",
+        "lightness",
+        "hue"
+    ],
     "isReleased": true
 }

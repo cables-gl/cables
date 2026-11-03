@@ -66,6 +66,17 @@
         ]
     },
     "summary": "Different kinds of audio filters",
+    "tags": [
+        "lowpass",
+        "highpass",
+        "bandpass",
+        "eq",
+        "equalizer",
+        "filter",
+        "notch",
+        "resonance",
+        "cutoff"
+    ],
     "docs": {
         "ports": [
             {

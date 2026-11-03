@@ -1,5 +1,15 @@
 {
     "summary": "Transforms objects randomly in space",
+    "tags": [
+        "scatter",
+        "random",
+        "distribute",
+        "jitter",
+        "swarm",
+        "crowd",
+        "instances",
+        "cloud"
+    ],
     "authorName": "pandur",
     "id": "ca3bc984-e596-48fb-b53d-502eb13979b0",
     "created": 1516269330315,

@@ -34,6 +34,13 @@
         ]
     },
     "summary": "Return the distance between 2 points from an array",
+    "tags": [
+        "length",
+        "between points",
+        "xyz",
+        "euclidean",
+        "range"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

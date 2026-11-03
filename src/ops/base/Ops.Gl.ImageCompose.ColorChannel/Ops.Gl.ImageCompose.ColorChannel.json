@@ -1,5 +1,15 @@
 {
     "summary": "Texture effect to enable/disable RGBA channels, convert to mono color",
+    "tags": [
+        "rgb",
+        "channels",
+        "red",
+        "green",
+        "blue",
+        "split",
+        "isolate",
+        "swizzle"
+    ],
     "layout": {
         "portsIn": [
             {

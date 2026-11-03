@@ -21,6 +21,14 @@
         ]
     },
     "summary": "Get current modelmatrix",
+    "tags": [
+        "transform",
+        "world matrix",
+        "object matrix",
+        "read",
+        "mat4",
+        "current transform"
+    ],
     "docs": {
         "ports": []
     },

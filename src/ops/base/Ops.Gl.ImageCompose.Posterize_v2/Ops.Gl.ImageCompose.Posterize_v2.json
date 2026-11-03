@@ -31,6 +31,14 @@
         ]
     },
     "summary": "reduce number of colors",
+    "tags": [
+        "reduce colors",
+        "quantize",
+        "levels",
+        "banding",
+        "poster",
+        "comic"
+    ],
     "docs": {
         "ports": []
     },

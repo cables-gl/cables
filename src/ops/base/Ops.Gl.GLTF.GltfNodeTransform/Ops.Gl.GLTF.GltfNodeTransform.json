@@ -37,6 +37,15 @@
         ]
     },
     "summary": "get current transformation of a gltf node",
+    "tags": [
+        "position",
+        "rotation",
+        "scale",
+        "read transform",
+        "matrix",
+        "node",
+        "get"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

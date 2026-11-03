@@ -1,5 +1,14 @@
 {
     "summary": "compare and pass through of color channel values",
+    "tags": [
+        "compare",
+        "greater",
+        "less",
+        "equal",
+        "threshold",
+        "conditional",
+        "step"
+    ],
     "layout": {
         "portsIn": [
             {

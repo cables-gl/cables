@@ -48,6 +48,13 @@
         ]
     },
     "summary": "draw the content of a depth texture",
+    "tags": [
+        "z-buffer",
+        "zbuffer",
+        "depth map",
+        "depth",
+        "distance"
+    ],
     "authorName": "pandur",
     "id": "5958fbb8-fb78-4de2-85dc-5eb289f652cb",
     "created": 1654596517300,

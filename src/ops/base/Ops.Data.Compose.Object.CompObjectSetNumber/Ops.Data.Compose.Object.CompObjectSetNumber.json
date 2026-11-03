@@ -33,6 +33,16 @@
     "authorName": "pandur",
     "created": 1680618732493,
     "summary": "set number as object property",
+    "tags": [
+        "property",
+        "key",
+        "write",
+        "set",
+        "assign",
+        "json",
+        "compose",
+        "value"
+    ],
     "docs": {
         "ports": []
     },

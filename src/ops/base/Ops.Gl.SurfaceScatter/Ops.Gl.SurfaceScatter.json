@@ -56,6 +56,17 @@
         ]
     },
     "summary": "scatter object on the surface of a mesh",
+    "tags": [
+        "distribute",
+        "scatter",
+        "random",
+        "surface",
+        "place",
+        "instances",
+        "foliage",
+        "grass",
+        "points on mesh"
+    ],
     "docs": {
         "ports": []
     },

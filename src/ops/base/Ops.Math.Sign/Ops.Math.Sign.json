@@ -3,6 +3,13 @@
     "authorName": "action",
     "created": 1543617110426,
     "summary": "get sign of value",
+    "tags": [
+        "positive",
+        "negative",
+        "-1",
+        "1",
+        "signum"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": []

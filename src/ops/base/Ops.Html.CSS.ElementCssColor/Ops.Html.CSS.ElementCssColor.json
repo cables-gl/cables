@@ -90,6 +90,14 @@
         ]
     },
     "summary": "Set text and background colors of an HTML element",
+    "tags": [
+        "text color",
+        "background",
+        "font color",
+        "bg color",
+        "css",
+        "colour"
+    ],
     "docs": {
         "ports": []
     },

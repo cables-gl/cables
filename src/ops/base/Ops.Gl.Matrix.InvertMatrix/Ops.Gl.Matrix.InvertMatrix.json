@@ -29,6 +29,12 @@
         ]
     },
     "summary": "outputs an inverted matrix",
+    "tags": [
+        "inverse",
+        "reverse",
+        "mat4",
+        "opposite"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

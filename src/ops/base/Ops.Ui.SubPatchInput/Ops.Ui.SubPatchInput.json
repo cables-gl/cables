@@ -34,5 +34,13 @@
     },
     "isReleased": true,
     "license": "MIT",
-    "summary": "Input of a subpatch, passes a value in from the parent patch"
+    "summary": "Input of a subpatch, passes a value in from the parent patch",
+    "tags": [
+        "subpatch",
+        "input",
+        "parameter",
+        "port",
+        "argument",
+        "interface"
+    ]
 }

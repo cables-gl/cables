@@ -39,6 +39,14 @@
         ]
     },
     "summary": "Set array values between Min and Max to 1, or keep their values when enabled",
+    "tags": [
+        "range",
+        "between",
+        "mask",
+        "threshold",
+        "inside",
+        "compare"
+    ],
     "docs": {
         "ports": [
             {

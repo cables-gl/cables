@@ -36,6 +36,15 @@
         ]
     },
     "summary": "sidebar push button/trigger element",
+    "tags": [
+        "ui",
+        "push button",
+        "trigger",
+        "control panel",
+        "click",
+        "gui",
+        "interface"
+    ],
     "docs": {
         "ports": []
     },

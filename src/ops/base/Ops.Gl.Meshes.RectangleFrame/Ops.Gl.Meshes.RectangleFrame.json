@@ -1,5 +1,14 @@
 {
     "summary": "Draw a rectangular frame",
+    "tags": [
+        "border",
+        "outline",
+        "frame",
+        "square",
+        "rect",
+        "stroke",
+        "box 2d"
+    ],
     "layout": {
         "portsIn": [
             {

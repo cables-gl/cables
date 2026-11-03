@@ -29,6 +29,13 @@
         ]
     },
     "summary": "Return the length of a vector from an array 3 ",
+    "tags": [
+        "magnitude",
+        "length",
+        "distance",
+        "norm",
+        "xyz"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

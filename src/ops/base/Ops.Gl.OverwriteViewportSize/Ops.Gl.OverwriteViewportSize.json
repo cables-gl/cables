@@ -27,6 +27,14 @@
         ]
     },
     "summary": "Force a manually set viewport size for connected ops",
+    "tags": [
+        "viewport",
+        "resolution",
+        "render size",
+        "override",
+        "fixed size",
+        "resize"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

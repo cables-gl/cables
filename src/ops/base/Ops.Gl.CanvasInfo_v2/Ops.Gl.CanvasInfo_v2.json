@@ -1,5 +1,16 @@
 {
     "summary": "the size of the canvas in pixels, aspect ratio and pixel density",
+    "tags": [
+        "size",
+        "width",
+        "height",
+        "resolution",
+        "aspect ratio",
+        "pixel density",
+        "dpr",
+        "retina",
+        "screen size"
+    ],
     "layout": {
         "portsIn": [
             {

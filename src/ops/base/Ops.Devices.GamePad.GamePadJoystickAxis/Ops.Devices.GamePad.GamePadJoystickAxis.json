@@ -38,6 +38,15 @@
         ]
     },
     "summary": "get axis and angle of a joystick/thumbstick",
+    "tags": [
+        "thumbstick",
+        "analog stick",
+        "controller",
+        "direction",
+        "angle",
+        "axis",
+        "joystick"
+    ],
     "docs": {
         "ports": []
     },

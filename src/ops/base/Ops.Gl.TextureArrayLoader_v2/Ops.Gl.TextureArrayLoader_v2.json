@@ -69,6 +69,15 @@
         ]
     },
     "summary": "load multiple images into an array",
+    "tags": [
+        "load",
+        "images",
+        "multiple",
+        "batch",
+        "preload",
+        "image list",
+        "gallery"
+    ],
     "authorName": "pandur",
     "id": "4bbb57ce-3c7b-49c1-84fd-2b6a27ff3afa",
     "created": 1631107270910,

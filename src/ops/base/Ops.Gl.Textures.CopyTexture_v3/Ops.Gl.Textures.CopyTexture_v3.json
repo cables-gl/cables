@@ -103,6 +103,13 @@
         ]
     },
     "summary": "Copies a texture, with optional resizing",
+    "tags": [
+        "duplicate",
+        "clone",
+        "resize",
+        "snapshot",
+        "copy"
+    ],
     "docs": {
         "ports": []
     },

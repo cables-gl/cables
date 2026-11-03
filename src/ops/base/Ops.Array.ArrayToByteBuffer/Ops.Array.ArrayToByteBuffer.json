@@ -24,6 +24,14 @@
         ]
     },
     "summary": "Convert an array to a byte buffer (Uint8ClampedArray)",
+    "tags": [
+        "uint8",
+        "binary",
+        "bytes",
+        "convert",
+        "typed array",
+        "clamped"
+    ],
     "issues": "",
     "docs": {
         "ports": []

@@ -24,6 +24,12 @@
         ]
     },
     "summary": "Result will be the smaller number of the inputs",
+    "tags": [
+        "smaller",
+        "minimum",
+        "lowest",
+        "smaller of two"
+    ],
     "docs": {
         "ports": []
     },

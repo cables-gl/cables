@@ -29,6 +29,15 @@
         ]
     },
     "summary": "Measure the time difference between two triggers",
+    "tags": [
+        "duration",
+        "elapsed",
+        "interval",
+        "stopwatch",
+        "measure",
+        "time between",
+        "dt"
+    ],
     "authorName": "pandur",
     "id": "fba0e516-b50e-4372-9a0c-dc605669ffed",
     "created": 1520347835082,

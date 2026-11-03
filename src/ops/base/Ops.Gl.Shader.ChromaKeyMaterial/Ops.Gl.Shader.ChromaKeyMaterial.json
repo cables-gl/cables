@@ -71,6 +71,15 @@
         ]
     },
     "summary": "display texture and replace a color with transparency",
+    "tags": [
+        "green screen",
+        "greenscreen",
+        "keying",
+        "key color",
+        "transparent",
+        "video",
+        "cutout"
+    ],
     "docs": {
         "ports": []
     },

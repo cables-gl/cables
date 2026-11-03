@@ -154,6 +154,17 @@
         ]
     },
     "summary": "Draws an image into a composition",
+    "tags": [
+        "image",
+        "picture",
+        "sprite",
+        "blit",
+        "place",
+        "layer",
+        "composite",
+        "texture",
+        "logo"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -60,6 +60,14 @@
         ]
     },
     "summary": "generate a cubemap from 6 textures",
+    "tags": [
+        "skybox",
+        "environment",
+        "six faces",
+        "reflection",
+        "cube texture",
+        "assemble"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

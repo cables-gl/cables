@@ -19,6 +19,15 @@
         ]
     },
     "summary": "disconnect faces/polygons of a mesh ",
+    "tags": [
+        "split",
+        "separate faces",
+        "detach",
+        "flat shading",
+        "disconnect",
+        "explode",
+        "faceted"
+    ],
     "changelog": [
         {
             "message": "code cleanup - ports",

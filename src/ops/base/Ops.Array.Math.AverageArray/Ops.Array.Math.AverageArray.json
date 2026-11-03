@@ -1,5 +1,13 @@
 {
     "summary": "Smooth/average values in an array",
+    "tags": [
+        "smooth",
+        "mean",
+        "filter",
+        "lowpass",
+        "blur",
+        "moving average"
+    ],
     "docs": {
         "ports": [
             {

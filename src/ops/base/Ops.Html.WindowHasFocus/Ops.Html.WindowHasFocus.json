@@ -1,5 +1,14 @@
 {
     "summary": "detect if the browser window/tab has focus",
+    "tags": [
+        "tab active",
+        "visible",
+        "blur",
+        "focus",
+        "browser focus",
+        "pause when hidden",
+        "visibility"
+    ],
     "layout": {
         "portsOut": [
             {

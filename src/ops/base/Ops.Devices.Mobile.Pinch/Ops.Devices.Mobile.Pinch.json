@@ -47,6 +47,15 @@
         ]
     },
     "summary": "detect two finger pinch gestures on touchscreens",
+    "tags": [
+        "zoom",
+        "two fingers",
+        "touch",
+        "gesture",
+        "scale",
+        "multitouch",
+        "pinch zoom"
+    ],
     "docs": {},
     "coreLibs": [
         "cgl"

@@ -112,6 +112,17 @@
         ]
     },
     "summary": "Get mouse coordinates and events",
+    "tags": [
+        "cursor",
+        "pointer",
+        "position",
+        "touch",
+        "xy",
+        "coordinates",
+        "hover",
+        "input",
+        "mouse move"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

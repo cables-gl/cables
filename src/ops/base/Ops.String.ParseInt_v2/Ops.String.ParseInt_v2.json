@@ -18,6 +18,14 @@
         ]
     },
     "summary": "Parse a string to an integer number / string to number",
+    "tags": [
+        "convert",
+        "string to number",
+        "integer",
+        "cast",
+        "number",
+        "parse"
+    ],
     "docs": {
         "ports": []
     },

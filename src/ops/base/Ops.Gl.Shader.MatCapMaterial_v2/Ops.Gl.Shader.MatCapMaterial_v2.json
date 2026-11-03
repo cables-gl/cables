@@ -143,6 +143,16 @@
         }
     ],
     "summary": "Easy to use image based lighting Material",
+    "tags": [
+        "matcap",
+        "material capture",
+        "sphere map",
+        "lit sphere",
+        "sculpt",
+        "clay",
+        "fake lighting",
+        "studio"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

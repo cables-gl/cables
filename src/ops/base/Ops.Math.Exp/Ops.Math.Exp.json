@@ -19,6 +19,13 @@
         ]
     },
     "summary": "Calculates the power of Euler’s number",
+    "tags": [
+        "exponent",
+        "euler",
+        "e",
+        "power",
+        "exponential"
+    ],
     "docs": {
         "ports": [
             {

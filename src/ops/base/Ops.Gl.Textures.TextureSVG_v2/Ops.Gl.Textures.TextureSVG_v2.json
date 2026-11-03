@@ -50,6 +50,15 @@
         ]
     },
     "summary": "Load a SVG image and convert to a texture of pixels",
+    "tags": [
+        "vector",
+        "svg",
+        "image",
+        "load",
+        "rasterize",
+        "logo",
+        "icon"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

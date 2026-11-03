@@ -47,5 +47,15 @@
         "ports": []
     },
     "summary": "Show specific GLTF texture channels as color texture",
+    "tags": [
+        "debug",
+        "channels",
+        "roughness",
+        "metallic",
+        "occlusion",
+        "preview",
+        "orm",
+        "inspect"
+    ],
     "exampleProjectId": "6Jtryn"
 }

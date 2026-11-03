@@ -4,6 +4,16 @@
     "id": "27a8b574-ae7c-4191-a0e8-d7318f8278d8",
     "created": 1513356393616,
     "summary": "Set a variable object",
+    "tags": [
+        "write",
+        "variable",
+        "store",
+        "wireless",
+        "global",
+        "send",
+        "json",
+        "save"
+    ],
     "layout": {
         "portsIn": [
             {

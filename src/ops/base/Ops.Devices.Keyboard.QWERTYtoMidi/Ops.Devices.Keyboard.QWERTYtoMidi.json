@@ -1,5 +1,15 @@
 {
     "summary": "Emulates a MIDI keyboard using your regular keyboard",
+    "tags": [
+        "piano",
+        "keyboard",
+        "notes",
+        "music",
+        "play",
+        "instrument",
+        "midi emulation",
+        "typing"
+    ],
     "docs": {
         "ports": []
     },

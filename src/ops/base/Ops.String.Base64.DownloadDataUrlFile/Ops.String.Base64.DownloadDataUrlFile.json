@@ -39,6 +39,14 @@
         ]
     },
     "summary": "trigger a download of a base64 binary file",
+    "tags": [
+        "save",
+        "download",
+        "export",
+        "data url",
+        "file",
+        "binary"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

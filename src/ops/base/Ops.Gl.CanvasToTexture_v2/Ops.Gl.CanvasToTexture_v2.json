@@ -50,6 +50,14 @@
         ]
     },
     "summary": "Use a 2D canvas or video frame as a texture",
+    "tags": [
+        "2d canvas",
+        "video frame",
+        "html canvas",
+        "texture",
+        "upload",
+        "drawing"
+    ],
     "docs": {
         "ports": []
     },

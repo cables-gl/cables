@@ -25,6 +25,14 @@
         ]
     },
     "summary": "Create a md5 hash of a string",
+    "tags": [
+        "hash",
+        "checksum",
+        "digest",
+        "fingerprint",
+        "crypto",
+        "encode"
+    ],
     "docs": {
         "ports": []
     },

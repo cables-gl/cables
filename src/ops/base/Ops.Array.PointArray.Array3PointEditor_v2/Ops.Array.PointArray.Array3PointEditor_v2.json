@@ -44,6 +44,16 @@
         ]
     },
     "summary": "Create an array from multiple number inputs",
+    "tags": [
+        "draw",
+        "edit",
+        "manual",
+        "place",
+        "interactive",
+        "points",
+        "path",
+        "shape"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

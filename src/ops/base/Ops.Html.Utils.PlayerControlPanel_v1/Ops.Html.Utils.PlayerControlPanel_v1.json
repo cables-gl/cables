@@ -5,6 +5,15 @@
     "created": 1513971956730,
     "layout": {},
     "summary": "little ui for controlling the timeline",
+    "tags": [
+        "transport",
+        "timeline ui",
+        "media controls",
+        "play pause",
+        "seek bar",
+        "scrubber",
+        "video controls"
+    ],
     "docs": {
         "ports": []
     },

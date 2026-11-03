@@ -1,5 +1,12 @@
 {
     "summary": "Rotates a texture",
+    "tags": [
+        "rotate",
+        "turn",
+        "angle",
+        "spin",
+        "rotation"
+    ],
     "docs": {
         "ports": [
             {

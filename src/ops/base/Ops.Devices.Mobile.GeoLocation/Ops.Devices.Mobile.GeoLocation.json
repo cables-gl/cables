@@ -1,5 +1,15 @@
 {
     "summary": "tries to get the geo coordinates from the mobile device/browser",
+    "tags": [
+        "gps",
+        "latitude",
+        "longitude",
+        "position",
+        "location",
+        "coordinates",
+        "where am i",
+        "map"
+    ],
     "layout": {
         "portsIn": [],
         "portsOut": [

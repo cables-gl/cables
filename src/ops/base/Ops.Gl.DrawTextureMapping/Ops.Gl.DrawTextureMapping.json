@@ -28,6 +28,14 @@
         ]
     },
     "summary": "draw texture mapping coordinates",
+    "tags": [
+        "uv",
+        "uv map",
+        "texture coordinates",
+        "debug",
+        "unwrap",
+        "visualize"
+    ],
     "exampleProjectId": "Nu7dJ5",
     "license": "MIT",
     "coreLibs": [

@@ -45,6 +45,15 @@
         ]
     },
     "summary": "Set three numbers at index in an array",
+    "tags": [
+        "write",
+        "replace",
+        "set",
+        "xyz",
+        "vec3",
+        "index",
+        "modify"
+    ],
     "docs": {
         "ports": [
             {

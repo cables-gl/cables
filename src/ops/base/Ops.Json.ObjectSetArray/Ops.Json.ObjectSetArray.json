@@ -37,6 +37,15 @@
         ]
     },
     "summary": "Set array by key in an object",
+    "tags": [
+        "write",
+        "key",
+        "property",
+        "set",
+        "assign",
+        "json",
+        "store"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

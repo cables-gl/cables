@@ -110,6 +110,14 @@
         ]
     },
     "summary": "draw perlin noise into an image",
+    "tags": [
+        "clouds",
+        "smooth noise",
+        "procedural",
+        "organic",
+        "terrain",
+        "gradient noise"
+    ],
     "credits": [
         {
             "title": "GPU-Noise-Lib",

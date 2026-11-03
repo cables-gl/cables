@@ -69,6 +69,14 @@
         ]
     },
     "summary": "Route an array to an output port",
+    "tags": [
+        "switch",
+        "select output",
+        "demux",
+        "split",
+        "send to",
+        "branch"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

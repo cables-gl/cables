@@ -36,6 +36,14 @@
         ]
     },
     "summary": "Outputs the current subpatch op name",
+    "tags": [
+        "subpatch",
+        "name",
+        "current",
+        "identifier",
+        "context",
+        "read"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

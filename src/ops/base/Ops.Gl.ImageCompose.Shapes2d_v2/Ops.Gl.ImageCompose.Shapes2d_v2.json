@@ -118,6 +118,16 @@
         ]
     },
     "summary": "Generates different 2d shapes to use as a texture",
+    "tags": [
+        "shape",
+        "circle",
+        "rectangle",
+        "triangle",
+        "polygon",
+        "star",
+        "sdf",
+        "2d"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

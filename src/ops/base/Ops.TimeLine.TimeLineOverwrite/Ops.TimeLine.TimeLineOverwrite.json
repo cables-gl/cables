@@ -22,6 +22,14 @@
         ]
     },
     "summary": "overwrite timeline time value",
+    "tags": [
+        "override",
+        "force time",
+        "set time",
+        "manual",
+        "custom time",
+        "control"
+    ],
     "docs": {
         "ports": []
     },

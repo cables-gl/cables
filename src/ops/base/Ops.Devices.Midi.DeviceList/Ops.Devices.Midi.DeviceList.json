@@ -1,5 +1,14 @@
 {
     "summary": "list of midi devices",
+    "tags": [
+        "midi",
+        "controllers",
+        "devices",
+        "connected",
+        "ports",
+        "list",
+        "inputs outputs"
+    ],
     "layout": {
         "portsIn": [],
         "portsOut": [

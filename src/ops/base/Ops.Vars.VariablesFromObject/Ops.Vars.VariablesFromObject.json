@@ -24,6 +24,15 @@
         ]
     },
     "summary": "Set existing variables to values in an object",
+    "tags": [
+        "bulk set",
+        "import",
+        "json",
+        "load",
+        "restore",
+        "write many",
+        "apply"
+    ],
     "exampleProjectId": "UDuPFb",
     "docs": {
         "ports": [

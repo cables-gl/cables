@@ -1,5 +1,14 @@
 {
     "summary": "morph from one geometry to another",
+    "tags": [
+        "morph",
+        "blend shapes",
+        "transition",
+        "tween",
+        "interpolate",
+        "shape key",
+        "metamorphosis"
+    ],
     "layout": {
         "portsIn": [
             {

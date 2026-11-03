@@ -45,6 +45,15 @@
         ]
     },
     "summary": "Add custom HTML Elements into the sidebar",
+    "tags": [
+        "custom html",
+        "html",
+        "embed",
+        "dom",
+        "custom ui",
+        "widget",
+        "gui"
+    ],
     "docs": {
         "ports": []
     },

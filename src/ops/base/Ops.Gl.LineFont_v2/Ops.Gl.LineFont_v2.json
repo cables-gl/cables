@@ -41,6 +41,15 @@
         ]
     },
     "summary": "Render text as line segments with adjustable spacing and alignment",
+    "tags": [
+        "text",
+        "vector font",
+        "lines",
+        "stroke",
+        "letters",
+        "typography",
+        "plotter"
+    ],
     "docs": {},
     "changelog": [
         {

@@ -111,6 +111,16 @@
     },
     "license": "MIT",
     "summary": "Align a HTML element to another, keep positioning",
+    "tags": [
+        "position",
+        "anchor",
+        "attach",
+        "place",
+        "layout",
+        "snap to",
+        "follow",
+        "dom"
+    ],
     "exampleProjectId": "jKcTdv",
     "coreLibs": [
         "cgl"

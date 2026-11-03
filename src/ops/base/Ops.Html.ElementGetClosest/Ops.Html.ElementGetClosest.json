@@ -32,6 +32,15 @@
         ]
     },
     "summary": "get the closest parent element matching the query selector",
+    "tags": [
+        "parent",
+        "ancestor",
+        "query selector",
+        "find",
+        "dom",
+        "traverse",
+        "closest"
+    ],
     "exampleProjectId": "ojHGjH",
     "docs": {
         "ports": [

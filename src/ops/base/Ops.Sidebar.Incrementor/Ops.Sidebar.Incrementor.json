@@ -46,6 +46,15 @@
         ]
     },
     "summary": "steps through numerical or array values one by one",
+    "tags": [
+        "stepper",
+        "next",
+        "previous",
+        "arrows",
+        "counter",
+        "gui",
+        "step through"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

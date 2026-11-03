@@ -58,6 +58,16 @@
         ]
     },
     "summary": "Store and retrieve a number in browser storage",
+    "tags": [
+        "browser storage",
+        "persist",
+        "save",
+        "remember",
+        "settings",
+        "localstorage",
+        "number",
+        "store"
+    ],
     "docs": {
         "ports": [
             {

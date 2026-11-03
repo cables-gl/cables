@@ -50,6 +50,15 @@
     },
     "libs": [],
     "summary": "sets window.location.hash to the specified value(s)",
+    "tags": [
+        "url hash",
+        "anchor",
+        "deep link",
+        "navigation",
+        "#",
+        "window.location",
+        "write"
+    ],
     "issues": "",
     "youtubeids": [
         "hUdHnFtBTNU"

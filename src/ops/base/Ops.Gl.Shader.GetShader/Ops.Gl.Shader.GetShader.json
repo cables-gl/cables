@@ -15,6 +15,14 @@
     "authorName": "pandur",
     "created": 1608532639068,
     "summary": "get current set shader",
+    "tags": [
+        "read",
+        "current shader",
+        "material",
+        "retrieve",
+        "glsl",
+        "inspect"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

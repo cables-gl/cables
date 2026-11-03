@@ -57,6 +57,15 @@
     "authorName": "pandur",
     "created": 1686661094980,
     "summary": "get a copy of the current state of an array",
+    "tags": [
+        "copy",
+        "clone",
+        "freeze",
+        "capture",
+        "array",
+        "compose",
+        "duplicate"
+    ],
     "docs": {
         "ports": []
     },

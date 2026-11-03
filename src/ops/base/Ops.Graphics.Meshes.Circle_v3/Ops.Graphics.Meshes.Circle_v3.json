@@ -1,5 +1,17 @@
 {
     "summary": "Draws a circle",
+    "tags": [
+        "disc",
+        "disk",
+        "round",
+        "ellipse",
+        "oval",
+        "dot",
+        "ring",
+        "arc",
+        "pie",
+        "sphere 2d"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -192,6 +192,16 @@
         ]
     },
     "summary": "Draw the same mesh multiple times on the GPU",
+    "tags": [
+        "instancing",
+        "instances",
+        "copies",
+        "clone",
+        "particles",
+        "gpu",
+        "repeat",
+        "many"
+    ],
     "issues": "",
     "youtubeids": [
         "PrkdnENo8wQ"

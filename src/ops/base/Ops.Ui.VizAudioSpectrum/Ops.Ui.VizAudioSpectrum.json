@@ -55,6 +55,16 @@
         "ports": []
     },
     "summary": "Visualize an audionode object spectrum",
+    "tags": [
+        "fft",
+        "frequency",
+        "debug",
+        "visualize",
+        "analyzer",
+        "equalizer",
+        "spectrum",
+        "bars"
+    ],
     "coreLibs": [
         "webaudio"
     ],

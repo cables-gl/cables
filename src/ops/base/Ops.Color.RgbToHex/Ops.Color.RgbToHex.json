@@ -40,6 +40,15 @@
         ]
     },
     "summary": "convert RGB float values to HEX color String",
+    "tags": [
+        "hex",
+        "#ff0000",
+        "html color",
+        "css",
+        "convert",
+        "web color",
+        "string"
+    ],
     "docs": {
         "ports": []
     },

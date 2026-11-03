@@ -42,6 +42,15 @@
         ]
     },
     "summary": "export array of positions from a hierarchy of a branch structure in a gltf, e.g. a skeleton bones",
+    "tags": [
+        "nodes",
+        "tree",
+        "positions",
+        "structure",
+        "bones",
+        "children",
+        "scene graph"
+    ],
     "issues": "",
     "youtubeids": [
         "I_eD5nml_5A"

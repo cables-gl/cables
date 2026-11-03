@@ -48,6 +48,15 @@
         }
     ],
     "summary": "Disable the rendering of front or back facing triangles with culling",
+    "tags": [
+        "backface",
+        "front face",
+        "hide faces",
+        "cull",
+        "two sided",
+        "single sided",
+        "double sided"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

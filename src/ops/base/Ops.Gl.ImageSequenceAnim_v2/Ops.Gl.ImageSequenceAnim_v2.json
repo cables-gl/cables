@@ -78,6 +78,15 @@
         ]
     },
     "summary": "play an image sprite animation",
+    "tags": [
+        "sprite sheet",
+        "flipbook",
+        "frames",
+        "atlas",
+        "animation",
+        "spritesheet",
+        "tile animation"
+    ],
     "docs": {
         "ports": [
             {

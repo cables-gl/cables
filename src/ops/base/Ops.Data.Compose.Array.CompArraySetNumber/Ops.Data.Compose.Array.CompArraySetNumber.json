@@ -35,6 +35,16 @@
     "authorName": "pandur",
     "created": 1740590228955,
     "summary": "set a number to an array at index",
+    "tags": [
+        "write",
+        "replace",
+        "set",
+        "index",
+        "modify",
+        "assign",
+        "array",
+        "compose"
+    ],
     "docs": {
         "ports": []
     },

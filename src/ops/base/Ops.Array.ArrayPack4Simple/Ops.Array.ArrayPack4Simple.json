@@ -61,6 +61,15 @@
         ]
     },
     "summary": "Pack 3 individual arrays into an array3 - without needing a trigger",
+    "tags": [
+        "combine",
+        "interleave",
+        "xyzw",
+        "rgba",
+        "zip",
+        "merge",
+        "stride"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

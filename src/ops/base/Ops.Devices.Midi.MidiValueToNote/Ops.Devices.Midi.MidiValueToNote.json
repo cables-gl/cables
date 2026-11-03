@@ -20,6 +20,16 @@
         ]
     },
     "summary": "Converts a MIDI value to a note string",
+    "tags": [
+        "note name",
+        "convert",
+        "c4",
+        "pitch",
+        "string",
+        "music",
+        "label",
+        "midi number"
+    ],
     "docs": {
         "ports": [
             {

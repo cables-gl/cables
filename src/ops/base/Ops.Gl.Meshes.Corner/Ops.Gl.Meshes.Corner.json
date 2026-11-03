@@ -56,6 +56,13 @@
         ]
     },
     "summary": "Draw an L-shaped corner element",
+    "tags": [
+        "l-shape",
+        "angle",
+        "bracket",
+        "edge",
+        "elbow"
+    ],
     "docs": {
         "ports": []
     },

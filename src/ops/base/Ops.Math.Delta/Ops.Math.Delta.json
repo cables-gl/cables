@@ -25,6 +25,14 @@
         ]
     },
     "summary": "difference to the last value (previous, store)",
+    "tags": [
+        "difference",
+        "change",
+        "previous value",
+        "derivative",
+        "velocity",
+        "store"
+    ],
     "authorName": "tim",
     "id": "0f203337-e13c-47ec-a09f-b309212540b0",
     "created": 1517650300323,

@@ -34,6 +34,15 @@
         ]
     },
     "summary": "list connected gamepads - press a button to connect",
+    "tags": [
+        "controller",
+        "list",
+        "connected",
+        "joypad",
+        "detect",
+        "devices",
+        "input"
+    ],
     "docs": {
         "ports": [
             {

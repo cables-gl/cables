@@ -39,6 +39,13 @@
         ]
     },
     "summary": "Calculates the sine of an angle.",
+    "tags": [
+        "sin",
+        "trigonometry",
+        "wave",
+        "oscillate",
+        "angle"
+    ],
     "docs": {
         "ports": []
     },

@@ -28,6 +28,13 @@
         ]
     },
     "summary": "Inserts zeroes every third item",
+    "tags": [
+        "convert",
+        "xy to xyz",
+        "add z",
+        "expand",
+        "stride"
+    ],
     "docs": {
         "ports": []
     },

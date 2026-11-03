@@ -120,6 +120,15 @@
         ]
     },
     "summary": "Generates notes based on key presses",
+    "tags": [
+        "keyboard",
+        "notes",
+        "synth",
+        "play music",
+        "instrument",
+        "qwerty",
+        "musical typing"
+    ],
     "docs": {
         "ports": [
             {

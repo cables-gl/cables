@@ -40,6 +40,15 @@
         ]
     },
     "summary": "organize sidebar elements into groups",
+    "tags": [
+        "folder",
+        "section",
+        "collapse",
+        "organize",
+        "panel",
+        "container",
+        "gui"
+    ],
     "docs": {
         "ports": []
     },

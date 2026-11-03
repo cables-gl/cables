@@ -26,6 +26,14 @@
         ]
     },
     "summary": "multiply view matrix",
+    "tags": [
+        "view",
+        "combine",
+        "matrix",
+        "apply",
+        "mat4",
+        "camera"
+    ],
     "docs": {
         "ports": []
     },

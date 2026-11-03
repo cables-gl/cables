@@ -73,6 +73,16 @@
         ]
     },
     "summary": "sends out midi clock signals as triggers",
+    "tags": [
+        "tempo",
+        "sync",
+        "bpm",
+        "beat clock",
+        "timing",
+        "midi sync",
+        "transport",
+        "tick"
+    ],
     "issues": "",
     "youtubeids": [
         "ieozmhPy8jc"

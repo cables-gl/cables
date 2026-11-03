@@ -15,6 +15,15 @@
         ]
     },
     "summary": "trigger if a value decreases / gets smaller",
+    "tags": [
+        "falling",
+        "drop",
+        "lower",
+        "smaller",
+        "change",
+        "detect",
+        "decrease"
+    ],
     "docs": {
         "ports": [
             {

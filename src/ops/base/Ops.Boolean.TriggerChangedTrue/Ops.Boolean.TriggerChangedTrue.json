@@ -1,5 +1,14 @@
 {
     "summary": "Triggers next only after value has changed to `true`",
+    "tags": [
+        "rising edge",
+        "went true",
+        "on",
+        "press",
+        "change",
+        "detect",
+        "edge"
+    ],
     "authorName": "pandur",
     "id": "385197e1-8b34-4d1c-897f-d1386d99e3b3",
     "created": 1518604076114,

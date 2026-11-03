@@ -37,6 +37,16 @@
         ]
     },
     "summary": "sequence trigger",
+    "tags": [
+        "order",
+        "flow",
+        "sequence",
+        "chain",
+        "priority",
+        "execution order",
+        "fan out",
+        "many outputs"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

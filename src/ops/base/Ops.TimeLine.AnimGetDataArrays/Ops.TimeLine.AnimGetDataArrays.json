@@ -30,6 +30,15 @@
         ]
     },
     "summary": "Get data of an animation as arrays",
+    "tags": [
+        "keyframes",
+        "read",
+        "times",
+        "values",
+        "export",
+        "curve data",
+        "arrays"
+    ],
     "docs": {
         "ports": []
     },

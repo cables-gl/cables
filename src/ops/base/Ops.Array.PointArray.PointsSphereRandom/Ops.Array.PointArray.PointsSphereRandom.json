@@ -48,6 +48,15 @@
         ]
     },
     "summary": "Generate a point field mapped to the surface of a sphere",
+    "tags": [
+        "ball",
+        "globe",
+        "surface",
+        "random",
+        "scatter",
+        "cloud",
+        "sphere"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

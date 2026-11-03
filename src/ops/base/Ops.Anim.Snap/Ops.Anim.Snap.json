@@ -82,6 +82,15 @@
         ]
     },
     "summary": "Snap at certain points (e.g. while scrolling)",
+    "tags": [
+        "magnet",
+        "detent",
+        "sticky",
+        "scroll snap",
+        "steps",
+        "quantize",
+        "stop points"
+    ],
     "docs": {
         "ports": [
             {

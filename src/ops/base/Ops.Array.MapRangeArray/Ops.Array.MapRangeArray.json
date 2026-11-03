@@ -46,6 +46,14 @@
         ]
     },
     "summary": "Remap array values from an input range to an output range with optional easing",
+    "tags": [
+        "remap",
+        "scale",
+        "normalize",
+        "rescale",
+        "convert range",
+        "linear map"
+    ],
     "youtubeids": [
         "SKYXdzHYwdI"
     ],

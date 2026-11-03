@@ -49,6 +49,15 @@
         ]
     },
     "summary": "Interpolate between two arrays, only a few numbers at the same time",
+    "tags": [
+        "lerp",
+        "mix",
+        "blend",
+        "morph",
+        "partial",
+        "subset",
+        "range"
+    ],
     "docs": {
         "ports": []
     },

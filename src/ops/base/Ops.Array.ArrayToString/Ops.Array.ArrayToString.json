@@ -1,5 +1,14 @@
 {
     "summary": "Convert an array to a string, divided by a separator",
+    "tags": [
+        "join",
+        "concat",
+        "text",
+        "implode",
+        "combine",
+        "csv",
+        "serialize"
+    ],
     "authorName": "pandur",
     "id": "7b27f5e9-5599-48d0-bb33-bc74d53784ac",
     "created": 1518868112591,

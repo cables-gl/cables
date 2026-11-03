@@ -69,6 +69,17 @@
     },
     "isReleased": true,
     "summary": "Line based serial port communication ",
+    "tags": [
+        "arduino",
+        "usb",
+        "hardware",
+        "microcontroller",
+        "uart",
+        "com port",
+        "web serial",
+        "device",
+        "sensor"
+    ],
     "docs": {
         "ports": []
     },

@@ -69,6 +69,13 @@
         ]
     },
     "summary": "Use a cables gradient as HTML element background",
+    "tags": [
+        "background",
+        "gradient",
+        "css gradient",
+        "color transition",
+        "style"
+    ],
     "docs": {
         "ports": []
     },

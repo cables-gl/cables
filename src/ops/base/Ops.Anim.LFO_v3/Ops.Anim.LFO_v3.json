@@ -62,6 +62,18 @@
         "ports": []
     },
     "summary": "Low-frequency oscillation for animations",
+    "tags": [
+        "oscillator",
+        "sine",
+        "wave",
+        "square",
+        "sawtooth",
+        "triangle",
+        "random",
+        "modulation",
+        "periodic",
+        "tremolo"
+    ],
     "exampleProjectId": "9EOrS8",
     "isReleased": true
 }

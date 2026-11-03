@@ -32,6 +32,14 @@
         ]
     },
     "summary": "displace pixel by red/blue color value of pixel",
+    "tags": [
+        "displace",
+        "displacement map",
+        "warp",
+        "distort",
+        "refraction",
+        "offset"
+    ],
     "docs": {
         "ports": []
     },

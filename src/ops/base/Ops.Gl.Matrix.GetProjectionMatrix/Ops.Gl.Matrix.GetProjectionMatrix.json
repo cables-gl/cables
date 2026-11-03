@@ -21,6 +21,13 @@
     "id": "3f048006-89e9-4e3f-a7d3-42aaa77ed630",
     "created": 1517222067170,
     "summary": "Get current projectionmatrix",
+    "tags": [
+        "projection",
+        "camera",
+        "perspective",
+        "read",
+        "mat4"
+    ],
     "docs": {},
     "exampleProjectId": "573_4S",
     "changelog": [

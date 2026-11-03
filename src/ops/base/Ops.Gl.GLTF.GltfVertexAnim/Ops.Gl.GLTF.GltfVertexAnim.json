@@ -53,6 +53,15 @@
         ]
     },
     "summary": "play gltf vertex anim directly with its own timing",
+    "tags": [
+        "vertex animation",
+        "baked",
+        "alembic",
+        "cache",
+        "morph",
+        "playback",
+        "mesh animation"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

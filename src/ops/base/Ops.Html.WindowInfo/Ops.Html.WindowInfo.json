@@ -22,6 +22,15 @@
     "authorName": "pandur",
     "created": 1566822681581,
     "summary": "size of browser window in pixels",
+    "tags": [
+        "browser size",
+        "innerwidth",
+        "innerheight",
+        "viewport",
+        "resolution",
+        "screen",
+        "responsive"
+    ],
     "docs": {
         "ports": []
     },

@@ -51,6 +51,13 @@
         }
     ],
     "summary": "Blurs a texture  - simple and fast",
+    "tags": [
+        "gaussian",
+        "soften",
+        "smooth",
+        "quick blur",
+        "glow"
+    ],
     "docs": {
         "ports": [
             {

@@ -37,6 +37,15 @@
         ]
     },
     "summary": "Outputs an array of filenames, that are uploaded to the current patch",
+    "tags": [
+        "assets",
+        "files",
+        "uploaded",
+        "list",
+        "filenames",
+        "directory",
+        "resources"
+    ],
     "docs": {
         "ports": []
     },

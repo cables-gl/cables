@@ -10,6 +10,16 @@
     "authorName": "pandur",
     "created": 1584025829483,
     "summary": "set a string value by key in an object",
+    "tags": [
+        "write",
+        "key",
+        "property",
+        "set",
+        "assign",
+        "json",
+        "store",
+        "text"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -52,6 +52,15 @@
         ]
     },
     "summary": "Element Accessibility properties for screen reader",
+    "tags": [
+        "a11y",
+        "aria",
+        "screen reader",
+        "accessibility",
+        "alt text",
+        "role",
+        "label"
+    ],
     "docs": {
         "ports": []
     },

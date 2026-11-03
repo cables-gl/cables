@@ -21,6 +21,15 @@
         ]
     },
     "summary": "result is true if number1 is greater than number2",
+    "tags": [
+        ">",
+        "bigger",
+        "larger",
+        "more",
+        "test",
+        "condition",
+        "bool"
+    ],
     "docs": {
         "ports": [
             {

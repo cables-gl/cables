@@ -24,6 +24,16 @@
         ]
     },
     "summary": "Smooths a changing number: blends each new value into the previous result",
+    "tags": [
+        "smooth",
+        "lowpass",
+        "ease",
+        "damping",
+        "inertia",
+        "lag",
+        "filter",
+        "mean"
+    ],
     "docs": {
         "ports": []
     },

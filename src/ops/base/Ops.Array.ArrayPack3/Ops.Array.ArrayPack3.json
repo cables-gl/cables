@@ -43,6 +43,14 @@
         ]
     },
     "summary": "Pack 3 individual arrays into a xyz array",
+    "tags": [
+        "combine",
+        "interleave",
+        "xyz",
+        "zip",
+        "merge",
+        "stride"
+    ],
     "docs": {
         "ports": [
             {

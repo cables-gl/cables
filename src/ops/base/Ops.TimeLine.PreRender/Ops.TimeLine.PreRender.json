@@ -10,6 +10,15 @@
     "authorName": "kb_",
     "created": 1605646492467,
     "summary": "Render the patch at certain times ",
+    "tags": [
+        "preload",
+        "warmup",
+        "compile shaders",
+        "prerender",
+        "loading",
+        "cache",
+        "buffer"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

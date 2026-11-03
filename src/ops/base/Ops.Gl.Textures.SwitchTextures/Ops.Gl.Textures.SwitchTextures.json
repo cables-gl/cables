@@ -91,6 +91,15 @@
         ]
     },
     "summary": "switch betwen different textures",
+    "tags": [
+        "select",
+        "choose",
+        "multiplexer",
+        "mux",
+        "pick",
+        "index",
+        "route"
+    ],
     "docs": {
         "ports": [
             {

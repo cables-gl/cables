@@ -23,6 +23,15 @@
         ]
     },
     "summary": "Generate a qr code as a texture",
+    "tags": [
+        "qr",
+        "barcode",
+        "link",
+        "scan",
+        "code",
+        "url",
+        "generate"
+    ],
     "exampleProjectId": "QjlEo-",
     "changelog": [
         {

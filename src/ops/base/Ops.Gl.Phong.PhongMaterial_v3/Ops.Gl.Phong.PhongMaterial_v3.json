@@ -139,5 +139,16 @@
     ],
     "isReleased": true,
     "license": "MIT",
-    "summary": "Material for Phong-shaded objects with colour, textures and light toggles"
+    "summary": "Material for Phong-shaded objects with colour, textures and light toggles",
+    "tags": [
+        "shaded",
+        "lighting",
+        "lit",
+        "specular",
+        "shiny",
+        "glossy",
+        "blinn",
+        "standard material",
+        "diffuse"
+    ]
 }

@@ -28,6 +28,17 @@
     "id": "0cf90109-cccd-4633-9c77-8aaf53eae15c",
     "created": 1518009204879,
     "summary": "load a font file like .otf, .ttf, .woff",
+    "tags": [
+        "typeface",
+        "load font",
+        "otf",
+        "ttf",
+        "woff",
+        "font-face",
+        "webfont",
+        "typography",
+        "custom font"
+    ],
     "docs": {
         "ports": []
     },

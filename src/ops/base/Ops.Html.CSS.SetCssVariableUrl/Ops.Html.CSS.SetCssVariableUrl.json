@@ -15,6 +15,14 @@
         ]
     },
     "summary": "Set a CSS variable to a URL value",
+    "tags": [
+        "custom property",
+        "var",
+        "css",
+        "link",
+        "set",
+        "asset"
+    ],
     "docs": {
         "ports": []
     },

@@ -126,6 +126,16 @@
         ]
     },
     "summary": "load a local file and output as data url",
+    "tags": [
+        "file picker",
+        "upload",
+        "open file",
+        "load",
+        "choose file",
+        "input",
+        "base64",
+        "gui"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -1,5 +1,14 @@
 {
     "summary": "Animates a text/string, like it is being typed out by a person",
+    "tags": [
+        "typewriter",
+        "typing",
+        "text reveal",
+        "characters",
+        "write on",
+        "type out",
+        "letters"
+    ],
     "updated": 1538418659151,
     "authorName": "pandur",
     "id": "61b0db65-814c-403f-b4d1-2b58e6311454",

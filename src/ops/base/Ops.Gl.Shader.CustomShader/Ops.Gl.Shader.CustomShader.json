@@ -33,6 +33,16 @@
         ]
     },
     "summary": "write your own shader",
+    "tags": [
+        "glsl",
+        "shader",
+        "code",
+        "vertex",
+        "fragment",
+        "programming",
+        "material",
+        "webgl"
+    ],
     "docs": {
         "ports": []
     },

@@ -30,6 +30,15 @@
     "authorName": "pandur",
     "created": 1698252867673,
     "summary": "Set cables editor colors",
+    "tags": [
+        "colors",
+        "editor",
+        "palette",
+        "ui theme",
+        "customize",
+        "appearance",
+        "style"
+    ],
     "docs": {
         "ports": []
     },

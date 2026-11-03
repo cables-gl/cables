@@ -25,6 +25,13 @@
         ]
     },
     "summary": "Output the line number of each non-newline character in a string",
+    "tags": [
+        "lines",
+        "rows",
+        "line index",
+        "text",
+        "per character"
+    ],
     "docs": {},
     "isReleased": true,
     "license": "MIT",

@@ -44,6 +44,14 @@
         }
     ],
     "summary": "twist a mesh around an axis",
+    "tags": [
+        "spiral",
+        "wring",
+        "screw",
+        "rotate along axis",
+        "deform",
+        "swirl"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

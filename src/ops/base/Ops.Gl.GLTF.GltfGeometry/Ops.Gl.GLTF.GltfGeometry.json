@@ -66,6 +66,15 @@
         ]
     },
     "summary": "expose geometry from gltf meshes, also possible to expose submaterial geometries",
+    "tags": [
+        "mesh",
+        "vertices",
+        "extract",
+        "geometry",
+        "data",
+        "faces",
+        "model data"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

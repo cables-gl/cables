@@ -1,5 +1,13 @@
 {
     "summary": "Clears the depth buffer (zbuffer, z buffer)",
+    "tags": [
+        "zbuffer",
+        "z buffer",
+        "depth buffer",
+        "reset depth",
+        "overlay",
+        "draw on top"
+    ],
     "layout": {
         "portsIn": [
             {

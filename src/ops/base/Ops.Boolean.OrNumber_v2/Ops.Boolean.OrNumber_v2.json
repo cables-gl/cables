@@ -61,6 +61,15 @@
         ]
     },
     "summary": "Output another number if input number is zero",
+    "tags": [
+        "select",
+        "choose",
+        "index",
+        "switch",
+        "pick",
+        "fallback",
+        "or"
+    ],
     "docs": {
         "ports": []
     },

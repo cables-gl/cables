@@ -33,6 +33,16 @@
         ]
     },
     "summary": "Can generate 3 kinds of arrays: Number - 1,2,3,4 - Normalized - (ContinuousNumberArray)",
+    "tags": [
+        "create",
+        "generate",
+        "list",
+        "numbers",
+        "constant",
+        "fill",
+        "new array",
+        "vector"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

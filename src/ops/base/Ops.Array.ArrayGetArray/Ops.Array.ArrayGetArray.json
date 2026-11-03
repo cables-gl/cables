@@ -1,5 +1,12 @@
 {
     "summary": "Get an array from an array of arrays",
+    "tags": [
+        "nested",
+        "sub array",
+        "2d array",
+        "matrix row",
+        "element"
+    ],
     "docs": {
         "ports": [
             {

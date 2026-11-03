@@ -38,6 +38,15 @@
         ]
     },
     "summary": "Calculate the luminance of a RGB color",
+    "tags": [
+        "brightness",
+        "lightness",
+        "grey",
+        "gray",
+        "perceived",
+        "luma",
+        "value"
+    ],
     "docs": {},
     "exampleProjectId": "Du0rvs",
     "isReleased": true,

@@ -44,6 +44,15 @@
         ]
     },
     "summary": "Get the current viewport size and position",
+    "tags": [
+        "size",
+        "resolution",
+        "width",
+        "height",
+        "render area",
+        "viewport",
+        "rectangle"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

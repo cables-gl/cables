@@ -49,6 +49,16 @@
         "portsOut": []
     },
     "summary": "Connect to MIDI device input port",
+    "tags": [
+        "midi out",
+        "synth",
+        "send",
+        "connect",
+        "device",
+        "output",
+        "port",
+        "usb"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

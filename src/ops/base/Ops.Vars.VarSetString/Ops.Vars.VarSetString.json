@@ -18,6 +18,16 @@
         ]
     },
     "summary": "set variable with a string input",
+    "tags": [
+        "write",
+        "variable",
+        "store",
+        "wireless",
+        "global",
+        "send",
+        "text",
+        "save"
+    ],
     "docs": {
         "ports": []
     },

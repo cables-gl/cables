@@ -39,6 +39,13 @@
         ]
     },
     "summary": "Calculates the cosine of an angle.",
+    "tags": [
+        "cos",
+        "trigonometry",
+        "wave",
+        "oscillate",
+        "angle"
+    ],
     "docs": {
         "ports": [
             {

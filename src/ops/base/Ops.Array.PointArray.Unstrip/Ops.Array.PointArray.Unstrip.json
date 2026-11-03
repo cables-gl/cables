@@ -26,6 +26,14 @@
         ]
     },
     "summary": "Unstrip a line point array",
+    "tags": [
+        "line strip",
+        "segments",
+        "lines",
+        "convert",
+        "split",
+        "pairs"
+    ],
     "docs": {
         "ports": []
     },

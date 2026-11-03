@@ -69,6 +69,14 @@
         ]
     },
     "summary": "Scales a texture",
+    "tags": [
+        "scale",
+        "zoom",
+        "resize",
+        "size",
+        "magnify",
+        "shrink"
+    ],
     "docs": {
         "ports": [
             {

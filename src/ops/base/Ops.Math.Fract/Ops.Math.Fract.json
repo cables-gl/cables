@@ -1,5 +1,12 @@
 {
     "summary": "returns the fractional part of a number",
+    "tags": [
+        "fractional",
+        "decimal part",
+        "remainder",
+        "frac",
+        "sawtooth"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -29,6 +29,14 @@
         ]
     },
     "summary": "result is true if value is between number1 and number2",
+    "tags": [
+        "range",
+        "inside",
+        "within",
+        "in range",
+        "test",
+        "bool"
+    ],
     "docs": {
         "ports": [
             {

@@ -89,6 +89,16 @@
         ]
     },
     "summary": "Remove points from an array3 with different shapes",
+    "tags": [
+        "cull",
+        "delete",
+        "clip",
+        "filter",
+        "region",
+        "inside",
+        "outside",
+        "points"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

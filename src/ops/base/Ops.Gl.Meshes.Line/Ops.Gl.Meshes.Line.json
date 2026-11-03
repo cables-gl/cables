@@ -1,5 +1,12 @@
 {
     "summary": "Draw a line between two points",
+    "tags": [
+        "segment",
+        "stroke",
+        "connect",
+        "beam",
+        "rod"
+    ],
     "layout": {
         "portsIn": [
             {

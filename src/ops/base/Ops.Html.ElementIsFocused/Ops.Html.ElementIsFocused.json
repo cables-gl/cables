@@ -32,6 +32,14 @@
         ]
     },
     "summary": "Is the connected element currently focused",
+    "tags": [
+        "focus",
+        "active",
+        "input",
+        "keyboard",
+        "test",
+        "bool"
+    ],
     "docs": {
         "ports": []
     },

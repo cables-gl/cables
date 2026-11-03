@@ -1,5 +1,14 @@
 {
     "summary": "Split an xyzw array into 4 individual arrays",
+    "tags": [
+        "split",
+        "xyzw",
+        "rgba",
+        "separate",
+        "deinterleave",
+        "channels",
+        "demux"
+    ],
     "docs": {
         "ports": [
             {

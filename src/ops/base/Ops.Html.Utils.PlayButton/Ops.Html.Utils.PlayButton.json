@@ -60,6 +60,15 @@
         ]
     },
     "summary": "shows a playbutton for forcing a simple user interaction",
+    "tags": [
+        "start",
+        "user interaction",
+        "gesture",
+        "click to start",
+        "autoplay",
+        "unlock audio",
+        "tap to play"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": [

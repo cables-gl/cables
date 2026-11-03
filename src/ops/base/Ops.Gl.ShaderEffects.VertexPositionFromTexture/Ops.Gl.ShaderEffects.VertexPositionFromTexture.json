@@ -28,6 +28,14 @@
         }
     ],
     "summary": "set vertex positions from texture color values",
+    "tags": [
+        "positions",
+        "data texture",
+        "gpgpu",
+        "particles",
+        "vertex fetch",
+        "texture driven"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

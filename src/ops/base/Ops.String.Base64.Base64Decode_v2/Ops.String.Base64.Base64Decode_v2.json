@@ -3,6 +3,14 @@
     "id": "4986a1d8-390f-48ee-aff4-c4257ddb480a",
     "created": 1613114969150,
     "summary": "Decode a base64 string",
+    "tags": [
+        "decode",
+        "base64",
+        "atob",
+        "decrypt",
+        "binary",
+        "convert"
+    ],
     "layout": {
         "portsIn": [
             {

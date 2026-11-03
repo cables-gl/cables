@@ -136,6 +136,14 @@
         ]
     },
     "summary": "Creates an HTML image element from a file",
+    "tags": [
+        "img",
+        "picture",
+        "photo",
+        "html image",
+        "dom",
+        "logo"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

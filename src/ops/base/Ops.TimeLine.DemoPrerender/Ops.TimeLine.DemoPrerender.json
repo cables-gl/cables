@@ -70,6 +70,14 @@
         ]
     },
     "summary": "Prerenderer based on timeline progress",
+    "tags": [
+        "preload",
+        "warmup",
+        "compile shaders",
+        "prerender",
+        "loading",
+        "buffer"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

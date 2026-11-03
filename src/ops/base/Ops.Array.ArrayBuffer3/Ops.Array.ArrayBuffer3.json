@@ -51,6 +51,15 @@
         ]
     },
     "summary": "Circular buffer for xyz values",
+    "tags": [
+        "circular",
+        "ring buffer",
+        "trail",
+        "history",
+        "xyz",
+        "points",
+        "fifo"
+    ],
     "docs": {
         "ports": [
             {

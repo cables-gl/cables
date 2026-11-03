@@ -26,6 +26,14 @@
         ]
     },
     "summary": "Outputs a linebreak, or adds a linebreak to a string",
+    "tags": [
+        "newline",
+        "\\n",
+        "return",
+        "enter",
+        "carriage return",
+        "break"
+    ],
     "docs": {
         "ports": []
     },

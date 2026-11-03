@@ -137,6 +137,15 @@
         "ports": []
     },
     "summary": "HTML input/textarea element to allow the user to enter text ",
+    "tags": [
+        "textarea",
+        "text field",
+        "form",
+        "textbox",
+        "user input",
+        "type",
+        "keyboard"
+    ],
     "license": "MIT",
     "coreLibs": [
         "cgl"

@@ -12,6 +12,16 @@
         ]
     },
     "summary": "Displays a comment in the patch area",
+    "tags": [
+        "note",
+        "text",
+        "annotation",
+        "documentation",
+        "label",
+        "remark",
+        "description",
+        "patch notes"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9de0c04f-666b-47cd-9722-a8cf36ab4720",

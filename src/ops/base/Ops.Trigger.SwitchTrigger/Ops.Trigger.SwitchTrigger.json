@@ -89,6 +89,15 @@
         ]
     },
     "summary": "route input triggers by index to one output",
+    "tags": [
+        "select",
+        "choose",
+        "multiplexer",
+        "mux",
+        "pick",
+        "index",
+        "route"
+    ],
     "issues": "",
     "youtubeids": [
         "TdHgjqOLpnM"

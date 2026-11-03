@@ -50,6 +50,15 @@
         ]
     },
     "summary": "Find all matching elements by query in the DOM",
+    "tags": [
+        "queryselector",
+        "find",
+        "select",
+        "dom",
+        "get elements",
+        "css selector",
+        "lookup"
+    ],
     "docs": {
         "ports": [
             {

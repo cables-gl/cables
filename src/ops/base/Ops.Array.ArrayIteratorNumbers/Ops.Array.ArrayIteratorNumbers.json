@@ -28,6 +28,15 @@
         ]
     },
     "summary": "Loop over every element of an array",
+    "tags": [
+        "loop",
+        "foreach",
+        "for each",
+        "repeat",
+        "iterate",
+        "every element",
+        "trigger"
+    ],
     "docs": {
         "ports": [
             {

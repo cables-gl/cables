@@ -40,6 +40,16 @@
     ],
     "license": "MIT",
     "summary": "Patchfield cable routing helper for number cables",
+    "tags": [
+        "cable",
+        "reroute",
+        "knot",
+        "tidy",
+        "organize",
+        "patch layout",
+        "waypoint",
+        "helper"
+    ],
     "exampleProjectId": "CLMeDg",
     "isReleased": true
 }

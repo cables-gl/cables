@@ -75,6 +75,13 @@
         ]
     },
     "summary": "Generate an array of points of a rectangle with rounded corners",
+    "tags": [
+        "rounded rect",
+        "rounded corners",
+        "pill",
+        "card",
+        "outline"
+    ],
     "docs": {
         "ports": [
             {

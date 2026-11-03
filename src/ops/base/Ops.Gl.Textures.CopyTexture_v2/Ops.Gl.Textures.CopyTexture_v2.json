@@ -75,6 +75,13 @@
         ]
     },
     "summary": "copy a texture and optionally resize it",
+    "tags": [
+        "duplicate",
+        "clone",
+        "resize",
+        "snapshot",
+        "copy"
+    ],
     "docs": {
         "ports": []
     },

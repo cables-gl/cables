@@ -1,5 +1,11 @@
 {
     "summary": "Subtracts Number2 from Number1 (minus, -)",
+    "tags": [
+        "minus",
+        "-",
+        "difference",
+        "take away"
+    ],
     "layout": {
         "portsIn": [
             {

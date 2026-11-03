@@ -52,6 +52,15 @@
         ]
     },
     "summary": "Orthogonal projection / objects in distance don't appear smaller (isometric)",
+    "tags": [
+        "orthographic",
+        "isometric",
+        "flat projection",
+        "2d",
+        "camera",
+        "no perspective",
+        "parallel"
+    ],
     "docs": {
         "ports": [
             {

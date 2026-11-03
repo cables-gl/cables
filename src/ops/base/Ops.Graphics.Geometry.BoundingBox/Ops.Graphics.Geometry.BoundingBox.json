@@ -36,6 +36,16 @@
         ]
     },
     "summary": "Bounding box of a given width, height and depth",
+    "tags": [
+        "bounds",
+        "aabb",
+        "box",
+        "dimensions",
+        "extent",
+        "size",
+        "wireframe cube",
+        "volume"
+    ],
     "docs": {
         "ports": []
     },

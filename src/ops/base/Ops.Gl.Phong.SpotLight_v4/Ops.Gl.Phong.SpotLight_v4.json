@@ -136,6 +136,16 @@
         }
     ],
     "summary": "Creates a spotlight for Phong-shaded objects",
+    "tags": [
+        "flashlight",
+        "cone",
+        "beam",
+        "stage light",
+        "torch",
+        "lighting",
+        "projector",
+        "spotlight"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

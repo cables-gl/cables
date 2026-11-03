@@ -52,7 +52,15 @@
     "authorName": "pandur",
     "id": "0d210f0b-adb9-46a5-a331-dc5cf212757d",
     "created": 1704730340553,
-    "summary": "",
+    "summary": "Sort image pixels by structure, optionally masked",
+    "tags": [
+        "glitch",
+        "sort",
+        "luminance",
+        "brightness",
+        "smear",
+        "databend"
+    ],
     "docs": {
         "ports": []
     },
@@ -67,6 +75,5 @@
     "coreLibs": [
         "cgl"
     ],
-    "license": "MIT",
-    "summary": "Sort image pixels by structure, optionally masked"
+    "license": "MIT"
 }

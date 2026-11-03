@@ -73,6 +73,16 @@
         ]
     },
     "summary": "render an animation and save as file webm video or png image sequence",
+    "tags": [
+        "record",
+        "export",
+        "video",
+        "webm",
+        "png sequence",
+        "frames",
+        "render",
+        "capture"
+    ],
     "docs": {
         "ports": [
             {

@@ -29,6 +29,14 @@
         ]
     },
     "summary": "Convert multiple spline point arrays into line segment pairs",
+    "tags": [
+        "lines",
+        "segments",
+        "convert",
+        "line strip",
+        "geometry",
+        "lines mesh"
+    ],
     "docs": {
         "ports": [
             {

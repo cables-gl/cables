@@ -32,6 +32,15 @@
         ]
     },
     "summary": "Resample a spline to a chosen number of evenly spaced points",
+    "tags": [
+        "resample",
+        "even spacing",
+        "uniform",
+        "spline",
+        "curve",
+        "equidistant",
+        "path"
+    ],
     "docs": {},
     "changelog": [
         {

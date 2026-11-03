@@ -33,6 +33,14 @@
         ]
     },
     "summary": "Merge two arrays - Array 2 is placed behind array 1",
+    "tags": [
+        "concat",
+        "join",
+        "combine",
+        "append",
+        "concatenate",
+        "attach"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

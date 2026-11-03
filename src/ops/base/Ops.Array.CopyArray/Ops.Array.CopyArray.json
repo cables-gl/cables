@@ -36,6 +36,14 @@
         ]
     },
     "summary": "Copy an array with a trigger, reset to use a default array",
+    "tags": [
+        "duplicate",
+        "clone",
+        "snapshot",
+        "freeze",
+        "store",
+        "trigger"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

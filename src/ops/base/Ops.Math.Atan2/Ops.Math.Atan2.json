@@ -34,6 +34,14 @@
         ]
     },
     "summary": "Angle of the point X/Y around the origin in radians (-PI to PI)",
+    "tags": [
+        "arctangent",
+        "angle",
+        "radians",
+        "direction",
+        "heading",
+        "trigonometry"
+    ],
     "docs": {
         "ports": [
             {

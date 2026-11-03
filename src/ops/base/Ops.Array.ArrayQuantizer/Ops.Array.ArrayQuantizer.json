@@ -45,6 +45,15 @@
         ]
     },
     "summary": "Quantize input to nearest number in array",
+    "tags": [
+        "snap",
+        "nearest",
+        "round",
+        "scale",
+        "notes",
+        "steps",
+        "grid"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

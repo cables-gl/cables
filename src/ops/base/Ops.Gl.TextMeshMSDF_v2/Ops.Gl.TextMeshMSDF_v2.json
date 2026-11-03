@@ -205,6 +205,16 @@
         ]
     },
     "summary": "draw text  using the FontMSDF operator",
+    "tags": [
+        "text",
+        "font",
+        "msdf",
+        "sdf",
+        "typography",
+        "letters",
+        "3d text",
+        "string"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

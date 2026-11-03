@@ -78,6 +78,17 @@
         ]
     },
     "summary": "render an equirectangular map or a cubemap as scene background",
+    "tags": [
+        "sky",
+        "background",
+        "environment",
+        "panorama",
+        "360",
+        "hdri",
+        "horizon",
+        "backdrop",
+        "sky dome"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

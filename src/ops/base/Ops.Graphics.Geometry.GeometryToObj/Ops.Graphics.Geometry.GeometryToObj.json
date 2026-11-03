@@ -42,6 +42,15 @@
         ]
     },
     "summary": "Generate an .obj file as string from a geometry",
+    "tags": [
+        "export",
+        "wavefront",
+        "obj file",
+        "save",
+        "convert",
+        "3d file",
+        "string"
+    ],
     "exampleProjectId": "BwxY2f",
     "docs": {
         "ports": []

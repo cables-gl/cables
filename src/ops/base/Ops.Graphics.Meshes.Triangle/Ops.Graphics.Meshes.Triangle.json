@@ -1,5 +1,13 @@
 {
     "summary": "Draw a triangle",
+    "tags": [
+        "tri",
+        "polygon",
+        "wedge",
+        "arrow",
+        "delta",
+        "shape"
+    ],
     "layout": {
         "portsIn": [
             {

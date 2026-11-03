@@ -69,6 +69,15 @@
         ]
     },
     "summary": "Only read a range of notes (e.g. C1 to C2)",
+    "tags": [
+        "range",
+        "key range",
+        "split",
+        "zone",
+        "select notes",
+        "keyboard",
+        "limit"
+    ],
     "issues": "",
     "youtubeids": [
         "eDlaFD_d5lc",

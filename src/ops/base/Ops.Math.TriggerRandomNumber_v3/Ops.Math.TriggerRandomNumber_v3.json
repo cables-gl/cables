@@ -64,6 +64,14 @@
         ]
     },
     "summary": "Generate random number between min and max",
+    "tags": [
+        "random",
+        "rand",
+        "dice",
+        "on trigger",
+        "chance",
+        "range"
+    ],
     "docs": {
         "ports": []
     },

@@ -74,6 +74,14 @@
         ]
     },
     "summary": "Creates a black and white glitched texture to use for displacement",
+    "tags": [
+        "glitch",
+        "digital",
+        "datamosh",
+        "displacement",
+        "distortion",
+        "corrupt"
+    ],
     "docs": {
         "ports": []
     },

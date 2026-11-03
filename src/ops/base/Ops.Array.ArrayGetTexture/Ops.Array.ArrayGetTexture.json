@@ -30,6 +30,14 @@
         ]
     },
     "summary": "Get texture from array at index",
+    "tags": [
+        "element",
+        "index",
+        "item",
+        "image",
+        "access",
+        "lookup"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

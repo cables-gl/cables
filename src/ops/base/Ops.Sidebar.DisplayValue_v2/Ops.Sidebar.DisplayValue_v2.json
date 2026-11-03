@@ -25,6 +25,16 @@
         ]
     },
     "summary": "display a value or string",
+    "tags": [
+        "readout",
+        "monitor",
+        "show value",
+        "label",
+        "debug",
+        "gui",
+        "text",
+        "print"
+    ],
     "docs": {
         "ports": []
     },

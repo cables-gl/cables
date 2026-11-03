@@ -1,5 +1,16 @@
 {
     "summary": "Show WebGl Performance Statistics",
+    "tags": [
+        "fps",
+        "frame rate",
+        "stats",
+        "gpu",
+        "debug",
+        "profiler",
+        "drawcalls",
+        "benchmark",
+        "speed"
+    ],
     "layout": {
         "portsIn": [
             {

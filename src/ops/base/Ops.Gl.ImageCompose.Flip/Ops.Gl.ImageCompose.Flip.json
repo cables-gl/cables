@@ -1,5 +1,13 @@
 {
     "summary": "flip the image on x or y axis",
+    "tags": [
+        "mirror",
+        "invert axis",
+        "reverse",
+        "flip x",
+        "flip y",
+        "rotate 180"
+    ],
     "layout": {
         "portsIn": [
             {

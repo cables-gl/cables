@@ -23,6 +23,15 @@
         ]
     },
     "summary": "Automatic rewind of timeline at a certain time",
+    "tags": [
+        "repeat",
+        "rewind",
+        "restart",
+        "cycle",
+        "loop timeline",
+        "wrap",
+        "endless"
+    ],
     "docs": {
         "ports": [
             {

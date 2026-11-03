@@ -143,6 +143,15 @@
     "id": "48a69680-8a68-4bcb-95bc-a1d1846e363a",
     "created": 1772641508442,
     "summary": "Transform an area of a mesh in the vertex shader",
+    "tags": [
+        "move",
+        "rotate",
+        "scale",
+        "local transform",
+        "volume",
+        "influence",
+        "vertex"
+    ],
     "docs": {
         "ports": []
     },

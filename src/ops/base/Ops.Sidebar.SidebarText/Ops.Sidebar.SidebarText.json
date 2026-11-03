@@ -27,6 +27,15 @@
         ]
     },
     "summary": "Display text in the sidebar",
+    "tags": [
+        "label",
+        "paragraph",
+        "info text",
+        "description",
+        "heading",
+        "gui",
+        "caption"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": [

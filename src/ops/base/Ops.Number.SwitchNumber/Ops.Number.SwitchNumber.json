@@ -99,6 +99,15 @@
         ]
     },
     "summary": "switch between number values by index",
+    "tags": [
+        "select",
+        "choose",
+        "multiplexer",
+        "mux",
+        "pick",
+        "index",
+        "route"
+    ],
     "docs": {
         "ports": [
             {

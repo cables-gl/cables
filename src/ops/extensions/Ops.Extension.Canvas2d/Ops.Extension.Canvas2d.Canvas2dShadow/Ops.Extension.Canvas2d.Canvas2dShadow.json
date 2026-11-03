@@ -61,6 +61,14 @@
     },
     "license": "MIT",
     "summary": "Adds a drop shadow to everything drawn by the canvas2d ops below it",
+    "tags": [
+        "drop shadow",
+        "glow",
+        "blur",
+        "shadowblur",
+        "offset",
+        "depth"
+    ],
     "isReleased": true,
     "exampleProjectId": "hz4MAy",
     "docs": {

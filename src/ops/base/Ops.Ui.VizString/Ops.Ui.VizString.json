@@ -113,6 +113,16 @@
         ]
     },
     "summary": "Displays long input string on the patchfield",
+    "tags": [
+        "text",
+        "display",
+        "debug",
+        "visualize",
+        "print",
+        "show",
+        "multi line",
+        "long text"
+    ],
     "docs": {
         "ports": []
     },

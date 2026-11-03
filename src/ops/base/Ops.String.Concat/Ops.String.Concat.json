@@ -26,6 +26,16 @@
         ]
     },
     "summary": "Joins two strings together",
+    "tags": [
+        "join",
+        "combine",
+        "append",
+        "add",
+        "merge",
+        "+",
+        "glue",
+        "string add"
+    ],
     "updated": 1520078051187,
     "authorName": "pandur",
     "id": "63fe337f-0509-4e6b-be40-c39973c8cca0",

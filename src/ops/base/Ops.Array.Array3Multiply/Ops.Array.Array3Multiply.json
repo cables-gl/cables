@@ -32,6 +32,14 @@
         ]
     },
     "summary": "Multiply every XYZ member of array3x",
+    "tags": [
+        "scale",
+        "times",
+        "xyz",
+        "vec3",
+        "multiply",
+        "points"
+    ],
     "docs": {
         "ports": [
             {

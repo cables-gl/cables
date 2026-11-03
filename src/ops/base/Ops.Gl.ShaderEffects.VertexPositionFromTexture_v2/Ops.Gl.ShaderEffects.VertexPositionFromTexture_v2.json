@@ -48,6 +48,14 @@
         "cgl"
     ],
     "summary": "set vertex positions of a mesh from a texture",
+    "tags": [
+        "positions",
+        "data texture",
+        "gpgpu",
+        "particles",
+        "vertex fetch",
+        "texture driven"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -74,6 +74,17 @@
         ]
     },
     "summary": "Enter data in a spreadsheet table",
+    "tags": [
+        "table",
+        "excel",
+        "cells",
+        "grid",
+        "data entry",
+        "rows columns",
+        "csv",
+        "editor",
+        "values"
+    ],
     "docs": {
         "ports": []
     },

@@ -18,6 +18,14 @@
         ]
     },
     "summary": "Close the current browser window",
+    "tags": [
+        "quit",
+        "exit",
+        "close tab",
+        "window.close",
+        "end",
+        "shutdown"
+    ],
     "docs": {
         "ports": []
     },

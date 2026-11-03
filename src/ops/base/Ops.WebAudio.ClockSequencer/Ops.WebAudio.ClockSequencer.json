@@ -144,6 +144,17 @@
     "authorName": "simod",
     "created": 1612888673498,
     "summary": "send bpm based triggers like a clocked trigger sequencer / clock divider",
+    "tags": [
+        "bpm",
+        "tempo",
+        "metronome",
+        "beat",
+        "step sequencer",
+        "rhythm",
+        "clock",
+        "timing",
+        "drum machine"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

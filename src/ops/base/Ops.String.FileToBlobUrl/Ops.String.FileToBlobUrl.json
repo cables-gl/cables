@@ -62,5 +62,14 @@
             }
         ]
     },
-    "summary": "Load a file and output a blob URL, MIME type, and size in bytes."
+    "summary": "Load a file and output a blob URL, MIME type, and size in bytes.",
+    "tags": [
+        "load",
+        "file",
+        "blob",
+        "mime",
+        "fetch",
+        "object url",
+        "download"
+    ]
 }

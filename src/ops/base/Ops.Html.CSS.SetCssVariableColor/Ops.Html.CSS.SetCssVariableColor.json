@@ -27,6 +27,14 @@
         "portsOut": []
     },
     "summary": "set color value of a CSS variable",
+    "tags": [
+        "custom property",
+        "var",
+        "css",
+        "theme",
+        "colour",
+        "set"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": []

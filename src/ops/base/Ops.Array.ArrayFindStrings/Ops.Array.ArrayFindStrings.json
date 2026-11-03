@@ -17,6 +17,14 @@
     "authorName": "stephan",
     "created": 1736441837092,
     "summary": "Return all the indexes of a string in an array",
+    "tags": [
+        "search",
+        "find",
+        "indexof",
+        "locate",
+        "string",
+        "positions"
+    ],
     "docs": {
         "ports": [
             {

@@ -130,6 +130,15 @@
     "exampleProjectId": "V34dYh",
     "docs": {},
     "summary": "Generate 3D point arrays for circles, spirals, and helices",
+    "tags": [
+        "circle",
+        "ring",
+        "spiral",
+        "helix",
+        "coil",
+        "points",
+        "round"
+    ],
     "license": "MIT",
     "isReleased": true
 }

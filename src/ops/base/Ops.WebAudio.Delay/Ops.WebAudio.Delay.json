@@ -122,6 +122,14 @@
         ]
     },
     "summary": "add a delay effect to an audio stream",
+    "tags": [
+        "echo",
+        "repeat",
+        "feedback",
+        "time",
+        "reverb",
+        "tape"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

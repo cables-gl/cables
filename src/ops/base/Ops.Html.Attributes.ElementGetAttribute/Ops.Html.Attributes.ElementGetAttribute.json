@@ -47,6 +47,14 @@
         ]
     },
     "summary": "Read or Get the value of an HTML element Attribute",
+    "tags": [
+        "read",
+        "property",
+        "dom",
+        "getattribute",
+        "value",
+        "get"
+    ],
     "docs": {
         "ports": []
     },

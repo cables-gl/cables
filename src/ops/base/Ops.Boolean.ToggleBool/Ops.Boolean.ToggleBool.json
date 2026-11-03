@@ -1,5 +1,14 @@
 {
     "summary": "Toggle a boolean value by triggering",
+    "tags": [
+        "flip",
+        "switch",
+        "on off",
+        "flipflop",
+        "change",
+        "toggle button",
+        "latch"
+    ],
     "layout": {
         "portsIn": [
             {

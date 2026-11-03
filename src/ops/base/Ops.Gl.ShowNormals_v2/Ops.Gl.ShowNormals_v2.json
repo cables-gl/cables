@@ -85,6 +85,15 @@
         }
     ],
     "summary": "visualize normals, tangents or bitangents",
+    "tags": [
+        "debug",
+        "tangents",
+        "bitangents",
+        "visualize",
+        "shading",
+        "normal vectors",
+        "lines"
+    ],
     "docs": {
         "ports": [
             {

@@ -64,6 +64,15 @@
         "ports": []
     },
     "summary": "string conversion using handlebars template engine",
+    "tags": [
+        "template",
+        "mustache",
+        "html",
+        "format",
+        "placeholder",
+        "render",
+        "variables"
+    ],
     "license": "MIT",
     "dependencies": [
         {

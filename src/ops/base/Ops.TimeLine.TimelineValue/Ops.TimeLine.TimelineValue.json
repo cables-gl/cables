@@ -38,6 +38,15 @@
         ]
     },
     "summary": "Animate and get value at \"time\" of timeline",
+    "tags": [
+        "animate",
+        "keyframes",
+        "curve",
+        "animated number",
+        "parameter",
+        "envelope",
+        "value over time"
+    ],
     "docs": {
         "ports": [
             {

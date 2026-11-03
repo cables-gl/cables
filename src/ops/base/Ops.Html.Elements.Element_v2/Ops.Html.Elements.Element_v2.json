@@ -173,6 +173,17 @@
         ]
     },
     "summary": "A more convenient version of div element op, that can be used for creating html without writing much css code",
+    "tags": [
+        "div",
+        "span",
+        "dom",
+        "html",
+        "container",
+        "box",
+        "tag",
+        "create element",
+        "node"
+    ],
     "docs": {
         "ports": []
     },

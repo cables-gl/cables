@@ -28,6 +28,16 @@
         ]
     },
     "summary": "Get an object from an object",
+    "tags": [
+        "read",
+        "key",
+        "property",
+        "access",
+        "lookup",
+        "json",
+        "get",
+        "nested"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

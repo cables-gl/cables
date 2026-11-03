@@ -58,6 +58,15 @@
         ]
     },
     "summary": "Animates between random values defined by a min and max value",
+    "tags": [
+        "random",
+        "wander",
+        "noise",
+        "wiggle",
+        "jitter",
+        "drift",
+        "tween"
+    ],
     "docs": {
         "ports": [
             {

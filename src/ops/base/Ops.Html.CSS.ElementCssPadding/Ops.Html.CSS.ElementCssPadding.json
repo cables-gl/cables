@@ -54,6 +54,13 @@
         ]
     },
     "summary": "Set css padding of a html element",
+    "tags": [
+        "spacing",
+        "inner space",
+        "css",
+        "box model",
+        "inset"
+    ],
     "docs": {
         "ports": []
     },

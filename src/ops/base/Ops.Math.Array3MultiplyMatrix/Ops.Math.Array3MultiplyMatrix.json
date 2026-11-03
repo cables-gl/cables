@@ -29,6 +29,14 @@
         ]
     },
     "summary": "multiply every XYZ coordinate with a matrix",
+    "tags": [
+        "transform",
+        "matrix",
+        "vec3",
+        "xyz",
+        "mat4",
+        "points"
+    ],
     "docs": {
         "ports": []
     },

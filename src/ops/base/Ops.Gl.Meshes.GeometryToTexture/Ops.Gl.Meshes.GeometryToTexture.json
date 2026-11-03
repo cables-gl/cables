@@ -54,6 +54,14 @@
         ]
     },
     "summary": "Convert vertices of a geometry to a data texture",
+    "tags": [
+        "geometry",
+        "vertices",
+        "positions",
+        "bake",
+        "data texture",
+        "gpgpu"
+    ],
     "docs": {
         "ports": [
             {

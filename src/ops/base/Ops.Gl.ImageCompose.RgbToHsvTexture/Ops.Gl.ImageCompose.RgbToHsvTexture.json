@@ -30,6 +30,15 @@
     "id": "147ed29e-f04e-4f7c-b9d7-133d7c6cbef9",
     "created": 1647697092030,
     "summary": "Convert a RGB Texture to Hue/Saturation/Lightness values as RGB colors",
+    "tags": [
+        "hsv",
+        "hsl",
+        "hue",
+        "saturation",
+        "value",
+        "color space",
+        "convert"
+    ],
     "docs": {
         "ports": []
     },

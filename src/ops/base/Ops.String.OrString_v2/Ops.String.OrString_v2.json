@@ -38,6 +38,15 @@
         ]
     },
     "summary": "Switch between multiple strings with an index",
+    "tags": [
+        "select",
+        "choose",
+        "index",
+        "switch",
+        "pick",
+        "fallback",
+        "or"
+    ],
     "docs": {
         "ports": [
             {

@@ -71,6 +71,15 @@
         ]
     },
     "summary": "Test if a boundingbox could be visible in the current viewport",
+    "tags": [
+        "culling",
+        "frustum",
+        "visibility",
+        "occlusion",
+        "in view",
+        "test",
+        "optimize"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

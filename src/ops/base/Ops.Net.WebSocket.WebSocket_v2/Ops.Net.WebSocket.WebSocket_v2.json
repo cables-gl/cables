@@ -66,6 +66,18 @@
         ]
     },
     "summary": "Create a websocket connection and receive data from it",
+    "tags": [
+        "realtime",
+        "network",
+        "socket",
+        "server",
+        "connect",
+        "receive",
+        "live data",
+        "ws",
+        "messaging",
+        "osc"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -27,6 +27,17 @@
         ]
     },
     "summary": "finds a number at a position in an array defined by path",
+    "tags": [
+        "query",
+        "jsonpath",
+        "nested",
+        "lookup",
+        "get",
+        "number",
+        "path",
+        "access",
+        "dot notation"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

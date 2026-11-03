@@ -1,5 +1,12 @@
 {
     "summary": "Difference between two numbers",
+    "tags": [
+        "subtract",
+        "distance",
+        "delta",
+        "absolute difference",
+        "gap"
+    ],
     "layout": {
         "portsIn": [
             {

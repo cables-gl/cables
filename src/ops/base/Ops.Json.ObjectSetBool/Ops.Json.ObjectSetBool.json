@@ -34,6 +34,16 @@
         ]
     },
     "summary": "set number at key in an object",
+    "tags": [
+        "write",
+        "key",
+        "property",
+        "set",
+        "assign",
+        "json",
+        "store",
+        "boolean"
+    ],
     "docs": {
         "ports": []
     },

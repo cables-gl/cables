@@ -27,6 +27,14 @@
         ]
     },
     "summary": "maximize renderer to window size",
+    "tags": [
+        "fullscreen",
+        "canvas size",
+        "fit window",
+        "full window",
+        "resize",
+        "presentation"
+    ],
     "docs": {
         "ports": []
     },

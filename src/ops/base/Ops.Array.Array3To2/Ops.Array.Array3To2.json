@@ -17,6 +17,13 @@
         ]
     },
     "summary": "Remove every 3rd item of an array - changes array length",
+    "tags": [
+        "convert",
+        "xyz to xy",
+        "drop z",
+        "reduce",
+        "stride"
+    ],
     "docs": {
         "ports": [
             {

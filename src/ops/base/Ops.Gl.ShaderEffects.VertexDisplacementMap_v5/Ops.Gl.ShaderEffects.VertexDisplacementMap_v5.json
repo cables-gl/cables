@@ -170,6 +170,15 @@
         "cgl"
     ],
     "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
+    "tags": [
+        "heightmap",
+        "displacement",
+        "bump",
+        "relief",
+        "terrain",
+        "texture driven",
+        "elevation"
+    ],
     "issues": "",
     "youtubeids": [
         "a56wk9Xm9dY"

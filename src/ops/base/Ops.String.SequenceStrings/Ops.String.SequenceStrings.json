@@ -155,6 +155,14 @@
         ]
     },
     "summary": "control order and flow of strings",
+    "tags": [
+        "order",
+        "flow",
+        "sequence",
+        "chain",
+        "execute order",
+        "priority"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

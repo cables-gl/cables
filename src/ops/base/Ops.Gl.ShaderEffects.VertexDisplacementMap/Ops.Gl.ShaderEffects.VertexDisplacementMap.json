@@ -72,6 +72,15 @@
     "id": "94ffa0de-2926-4d02-842e-a1ad6f5846c2",
     "created": 1508265581954,
     "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
+    "tags": [
+        "heightmap",
+        "displacement",
+        "bump",
+        "relief",
+        "terrain",
+        "texture driven",
+        "elevation"
+    ],
     "docs": {
         "ports": []
     },

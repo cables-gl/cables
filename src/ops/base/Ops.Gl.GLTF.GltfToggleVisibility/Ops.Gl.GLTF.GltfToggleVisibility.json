@@ -39,6 +39,15 @@
         ]
     },
     "summary": "Toggle visibility of GLTF nodes ",
+    "tags": [
+        "show hide",
+        "visible",
+        "hide node",
+        "toggle",
+        "switch parts",
+        "variants",
+        "enable disable"
+    ],
     "docs": {
         "ports": []
     },

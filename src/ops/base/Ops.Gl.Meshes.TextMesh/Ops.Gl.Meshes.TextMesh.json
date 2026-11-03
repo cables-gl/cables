@@ -1,5 +1,15 @@
 {
     "summary": "Draw text as a 3D mesh",
+    "tags": [
+        "text",
+        "font",
+        "letters",
+        "typography",
+        "3d text",
+        "type",
+        "string",
+        "label"
+    ],
     "layout": {
         "portsIn": [
             {

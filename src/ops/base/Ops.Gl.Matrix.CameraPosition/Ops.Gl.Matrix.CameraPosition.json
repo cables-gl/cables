@@ -33,6 +33,13 @@
         ]
     },
     "summary": "get the current position of viewmatrix/camera eye",
+    "tags": [
+        "eye",
+        "camera position",
+        "view position",
+        "world position",
+        "viewer"
+    ],
     "changelog": [
         {
             "message": "Ops.Gl.Matrix.ViewMatrixTranslation renamed to Ops.Gl.Matrix.CameraPosition",

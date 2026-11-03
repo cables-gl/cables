@@ -38,6 +38,15 @@
         ]
     },
     "summary": "Fade an HTML element in or out",
+    "tags": [
+        "show hide",
+        "opacity",
+        "transition",
+        "visibility",
+        "fade",
+        "animate",
+        "appear"
+    ],
     "docs": {
         "ports": []
     },

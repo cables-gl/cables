@@ -41,6 +41,14 @@
         ]
     },
     "summary": "Use a CSS variable in a css property of an element",
+    "tags": [
+        "style",
+        "css",
+        "custom property",
+        "var()",
+        "variable",
+        "element style"
+    ],
     "docs": {
         "ports": [
             {

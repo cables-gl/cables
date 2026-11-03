@@ -1,5 +1,13 @@
 {
     "summary": "Draw a 3D cone mesh",
+    "tags": [
+        "spike",
+        "funnel",
+        "party hat",
+        "pointy",
+        "tip",
+        "pyramid round"
+    ],
     "layout": {
         "portsIn": [
             {

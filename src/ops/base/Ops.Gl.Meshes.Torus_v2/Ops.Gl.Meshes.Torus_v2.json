@@ -1,5 +1,13 @@
 {
     "summary": "Draw a torus (doughnut, donut, ring mesh)",
+    "tags": [
+        "donut",
+        "doughnut",
+        "ring",
+        "tire",
+        "bagel",
+        "loop"
+    ],
     "layout": {
         "portsIn": [
             {

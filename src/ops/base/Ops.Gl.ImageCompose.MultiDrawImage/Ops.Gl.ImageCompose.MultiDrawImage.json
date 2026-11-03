@@ -1,5 +1,15 @@
 {
     "summary": "draw multiple images at once",
+    "tags": [
+        "images",
+        "sprites",
+        "instances",
+        "many",
+        "particles",
+        "tiles",
+        "atlas",
+        "blit"
+    ],
     "layout": {
         "portsIn": [
             {

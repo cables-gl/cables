@@ -139,6 +139,16 @@
         ]
     },
     "summary": "get camera attributes from current camera/orbit controls",
+    "tags": [
+        "camera",
+        "fov",
+        "near",
+        "far",
+        "projection",
+        "orbit",
+        "read",
+        "parameters"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

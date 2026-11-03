@@ -9,6 +9,16 @@
         ]
     },
     "summary": "set a variable number",
+    "tags": [
+        "write",
+        "variable",
+        "store",
+        "wireless",
+        "global",
+        "send",
+        "value",
+        "save"
+    ],
     "docs": {
         "ports": [
             {

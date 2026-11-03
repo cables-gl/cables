@@ -27,6 +27,14 @@
         ]
     },
     "summary": "Get a string from an array by index and report whether it was found",
+    "tags": [
+        "element",
+        "index",
+        "item",
+        "text",
+        "access",
+        "lookup"
+    ],
     "docs": {
         "ports": [
             {

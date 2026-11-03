@@ -12,6 +12,14 @@
         "portsOut": []
     },
     "summary": "Helper op for sub-patches",
+    "tags": [
+        "subpatch",
+        "outputs",
+        "helper",
+        "ports",
+        "interface",
+        "return"
+    ],
     "docs": {
         "ports": []
     },

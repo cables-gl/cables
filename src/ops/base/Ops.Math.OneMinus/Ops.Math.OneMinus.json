@@ -20,6 +20,13 @@
         ]
     },
     "summary": "subtract a number from one",
+    "tags": [
+        "invert",
+        "1-x",
+        "complement",
+        "reverse",
+        "flip"
+    ],
     "exampleProjectId": "8-XQ5d",
     "isReleased": true,
     "license": "MIT"

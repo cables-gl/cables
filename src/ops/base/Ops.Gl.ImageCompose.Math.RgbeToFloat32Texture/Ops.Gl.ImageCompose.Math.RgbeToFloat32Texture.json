@@ -29,6 +29,14 @@
         ]
     },
     "summary": "Convert a RGBE texture to HDR/floating point texture",
+    "tags": [
+        "hdr",
+        "rgbe",
+        "radiance",
+        "float",
+        "decode",
+        "convert"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

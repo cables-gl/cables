@@ -1,5 +1,13 @@
 {
     "summary": "enable/disable RGBA color channels of your entire scene",
+    "tags": [
+        "channels",
+        "rgba",
+        "write mask",
+        "red green blue",
+        "disable channel",
+        "mute channel"
+    ],
     "layout": {
         "portsIn": [
             {

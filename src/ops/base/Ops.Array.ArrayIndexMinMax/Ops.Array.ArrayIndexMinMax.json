@@ -45,6 +45,15 @@
         ]
     },
     "summary": "Find lowest/highest numbers in an array",
+    "tags": [
+        "lowest",
+        "highest",
+        "min",
+        "max",
+        "argmin",
+        "argmax",
+        "extremes"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

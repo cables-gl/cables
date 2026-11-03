@@ -1,5 +1,12 @@
 {
     "summary": "Multiplies two numbers",
+    "tags": [
+        "times",
+        "*",
+        "product",
+        "scale",
+        "multiplication"
+    ],
     "layout": {
         "portsIn": [
             {

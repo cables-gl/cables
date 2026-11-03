@@ -80,5 +80,14 @@
         ]
     },
     "isReleased": true,
-    "summary": "Output timeline cursor, visible range, loop bounds, and selected-key information."
+    "summary": "Output timeline cursor, visible range, loop bounds, and selected-key information.",
+    "tags": [
+        "inspect",
+        "cursor",
+        "range",
+        "loop bounds",
+        "selection",
+        "debug",
+        "playhead"
+    ]
 }

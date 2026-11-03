@@ -40,6 +40,14 @@
         ]
     },
     "summary": "Get op name by id",
+    "tags": [
+        "id to name",
+        "lookup",
+        "op name",
+        "identifier",
+        "resolve",
+        "debug"
+    ],
     "docs": {
         "ports": []
     },

@@ -25,6 +25,15 @@
         ]
     },
     "summary": "set output object when triggered",
+    "tags": [
+        "send",
+        "output",
+        "emit",
+        "on trigger",
+        "object",
+        "latch",
+        "hold"
+    ],
     "docs": {
         "ports": []
     },

@@ -69,6 +69,15 @@
         ]
     },
     "summary": "Simulating an old camera effect of fading away the edges of the image",
+    "tags": [
+        "dark corners",
+        "edges",
+        "fade",
+        "camera",
+        "lens",
+        "spotlight",
+        "frame"
+    ],
     "docs": {
         "ports": []
     },

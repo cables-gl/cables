@@ -32,6 +32,15 @@
         ]
     },
     "summary": "trigger a string",
+    "tags": [
+        "send",
+        "output",
+        "emit",
+        "text",
+        "value",
+        "on trigger",
+        "constant"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

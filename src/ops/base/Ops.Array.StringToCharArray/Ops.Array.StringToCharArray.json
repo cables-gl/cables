@@ -29,6 +29,14 @@
         ]
     },
     "summary": "Turn a string into an array of single characters or ASCII numbers",
+    "tags": [
+        "characters",
+        "letters",
+        "ascii",
+        "char codes",
+        "split",
+        "unicode"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

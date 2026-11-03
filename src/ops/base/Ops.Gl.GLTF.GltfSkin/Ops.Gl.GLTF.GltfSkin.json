@@ -76,6 +76,16 @@
         "cgl"
     ],
     "summary": "render a skinned mesh (bone/rigging/rigged animation)",
+    "tags": [
+        "skinned mesh",
+        "bones",
+        "rigging",
+        "skeleton",
+        "character",
+        "armature",
+        "animation",
+        "skeletal"
+    ],
     "issues": "",
     "youtubeids": [
         "I_eD5nml_5A"

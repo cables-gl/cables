@@ -47,6 +47,16 @@
         ]
     },
     "summary": "Follow a 3D point array over time and output a look-ahead transform",
+    "tags": [
+        "path",
+        "spline",
+        "follow",
+        "curve",
+        "camera path",
+        "track",
+        "move along",
+        "motion path"
+    ],
     "docs": {},
     "authorName": "pandur",
     "id": "395bff14-d092-4e7e-a723-b6a69564add2",

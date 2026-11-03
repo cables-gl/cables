@@ -42,6 +42,18 @@
         ]
     },
     "summary": "Get a geometry’s vertices, faces, normals, UVs, colors, and tangents",
+    "tags": [
+        "read",
+        "vertices",
+        "faces",
+        "normals",
+        "uv",
+        "colors",
+        "data",
+        "extract",
+        "arrays",
+        "buffers"
+    ],
     "docs": {},
     "exampleProjectId": "4VpJz6",
     "license": "MIT",

@@ -47,6 +47,16 @@
         ]
     },
     "summary": "Stores a 3D coordinate (was Value3)",
+    "tags": [
+        "vec3",
+        "xyz",
+        "coordinate",
+        "position",
+        "store",
+        "on trigger",
+        "point",
+        "value3"
+    ],
     "docs": {
         "ports": [
             {

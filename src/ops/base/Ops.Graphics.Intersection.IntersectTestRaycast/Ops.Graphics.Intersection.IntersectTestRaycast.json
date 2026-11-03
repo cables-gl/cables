@@ -116,6 +116,15 @@
     "authorName": "pandur",
     "created": 1686493436213,
     "summary": "Cast a ray and check if it intersect/collide with bodies",
+    "tags": [
+        "ray",
+        "raycast",
+        "picking",
+        "line of sight",
+        "click 3d",
+        "hit",
+        "mouse pick"
+    ],
     "docs": {
         "ports": []
     },

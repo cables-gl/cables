@@ -103,6 +103,15 @@
         ]
     },
     "summary": "Convert an array1 to array2,3,4 by choosing content for new axis",
+    "tags": [
+        "convert",
+        "expand",
+        "stride",
+        "channels",
+        "array2",
+        "array3",
+        "array4"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

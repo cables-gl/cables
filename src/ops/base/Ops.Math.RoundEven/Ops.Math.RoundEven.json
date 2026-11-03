@@ -31,6 +31,12 @@
         ]
     },
     "summary": "round to the next even number",
+    "tags": [
+        "even number",
+        "rounding",
+        "integer",
+        "snap"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

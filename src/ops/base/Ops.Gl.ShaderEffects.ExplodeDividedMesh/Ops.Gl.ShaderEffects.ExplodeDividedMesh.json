@@ -78,6 +78,15 @@
         ]
     },
     "summary": "explode a (divided) mesh in the direction of faces normals",
+    "tags": [
+        "explosion",
+        "shatter",
+        "fragments",
+        "pieces",
+        "blast",
+        "disintegrate",
+        "faces"
+    ],
     "exampleProjectId": "sYIxm1",
     "coreLibs": [
         "cgl"

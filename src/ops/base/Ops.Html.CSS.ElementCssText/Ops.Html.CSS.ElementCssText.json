@@ -106,6 +106,16 @@
         ]
     },
     "summary": "Set font and text properties of a html element",
+    "tags": [
+        "font",
+        "typography",
+        "text style",
+        "font size",
+        "weight",
+        "css",
+        "letter spacing",
+        "align"
+    ],
     "docs": {
         "ports": []
     },

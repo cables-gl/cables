@@ -67,6 +67,15 @@
         ]
     },
     "summary": "Outputs true if one of the input values is true (boolean)",
+    "tags": [
+        "||",
+        "either",
+        "any",
+        "logic",
+        "logical or",
+        "disjunction",
+        "gate"
+    ],
     "docs": {
         "ports": []
     },

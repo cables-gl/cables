@@ -1,5 +1,12 @@
 {
     "summary": "reset the view matrix (cameras etc.)",
+    "tags": [
+        "reset camera",
+        "reset view",
+        "clear camera",
+        "origin",
+        "default view"
+    ],
     "layout": {
         "portsIn": [
             {

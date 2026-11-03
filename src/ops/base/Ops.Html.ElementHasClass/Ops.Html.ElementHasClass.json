@@ -36,6 +36,14 @@
         ]
     },
     "summary": "Does the element currently have a specific class set",
+    "tags": [
+        "classlist",
+        "contains",
+        "test",
+        "css class",
+        "check",
+        "bool"
+    ],
     "docs": {
         "ports": []
     },

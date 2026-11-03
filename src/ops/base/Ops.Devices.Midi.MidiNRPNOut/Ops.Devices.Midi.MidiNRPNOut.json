@@ -54,6 +54,14 @@
         ]
     },
     "summary": "send midi NRPN data to a midi output",
+    "tags": [
+        "send",
+        "high resolution",
+        "14 bit",
+        "parameter number",
+        "midi out",
+        "transmit"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

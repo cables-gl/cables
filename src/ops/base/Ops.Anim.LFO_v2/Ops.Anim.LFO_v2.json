@@ -57,6 +57,18 @@
         "ports": []
     },
     "summary": "Low-frequency oscillation for animations",
+    "tags": [
+        "oscillator",
+        "sine",
+        "wave",
+        "square",
+        "sawtooth",
+        "triangle",
+        "random",
+        "modulation",
+        "periodic",
+        "tremolo"
+    ],
     "youtubeids": [
         "cn_PcwI7vO0"
     ],

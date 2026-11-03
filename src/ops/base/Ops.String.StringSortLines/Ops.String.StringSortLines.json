@@ -30,6 +30,14 @@
         ]
     },
     "summary": "sort each line of a string alphabetically ",
+    "tags": [
+        "order",
+        "alphabetical",
+        "rows",
+        "sorting",
+        "lines",
+        "az"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

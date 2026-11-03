@@ -30,6 +30,15 @@
         ]
     },
     "summary": "Route trigger differently when in shadowpass or not",
+    "tags": [
+        "shadow",
+        "route",
+        "branch",
+        "depth pass",
+        "light pass",
+        "switch",
+        "trigger"
+    ],
     "docs": {
         "ports": []
     },

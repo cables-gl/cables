@@ -35,6 +35,14 @@
         ]
     },
     "summary": "Iterate over an array of objects",
+    "tags": [
+        "loop",
+        "foreach",
+        "for each",
+        "json",
+        "repeat",
+        "iterate"
+    ],
     "docs": {
         "ports": [
             {

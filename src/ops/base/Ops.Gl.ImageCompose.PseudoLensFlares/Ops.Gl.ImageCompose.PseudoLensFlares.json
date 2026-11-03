@@ -47,6 +47,15 @@
         ]
     },
     "summary": "simulate lens flare effect",
+    "tags": [
+        "lens flare",
+        "flare",
+        "light",
+        "glow",
+        "ghosts",
+        "bloom",
+        "camera"
+    ],
     "docs": {
         "ports": [
             {

@@ -77,6 +77,16 @@
         ]
     },
     "summary": "Write your own custom shader",
+    "tags": [
+        "glsl",
+        "shader",
+        "code",
+        "vertex",
+        "fragment",
+        "programming",
+        "material",
+        "webgl"
+    ],
     "docs": {
         "ports": [
             {

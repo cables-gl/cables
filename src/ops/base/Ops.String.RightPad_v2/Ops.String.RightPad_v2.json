@@ -26,6 +26,15 @@
         ]
     },
     "summary": "create a string with a fixed length filling the space with a character",
+    "tags": [
+        "padding",
+        "fixed length",
+        "fill",
+        "spaces",
+        "format",
+        "align",
+        "trailing"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

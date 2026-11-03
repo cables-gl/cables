@@ -41,6 +41,15 @@
         ]
     },
     "summary": "Pass through a texture or use a default texture when none is connected",
+    "tags": [
+        "fallback",
+        "default",
+        "placeholder",
+        "valid",
+        "null check",
+        "pass through",
+        "coalesce"
+    ],
     "docs": {},
     "license": "MIT",
     "coreLibs": [

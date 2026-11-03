@@ -129,6 +129,16 @@
         ]
     },
     "summary": "play a video file and use it as a texture",
+    "tags": [
+        "movie",
+        "video",
+        "mp4",
+        "webm",
+        "play",
+        "footage",
+        "clip",
+        "stream"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "569af220-e7c5-4dde-a5d9-b63cebdc8bfd",

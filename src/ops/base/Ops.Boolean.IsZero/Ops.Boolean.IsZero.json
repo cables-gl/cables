@@ -16,6 +16,15 @@
         ]
     },
     "summary": "Returns `true` if input value is `0`",
+    "tags": [
+        "equals zero",
+        "==0",
+        "test",
+        "check",
+        "bool",
+        "compare",
+        "empty"
+    ],
     "docs": {
         "ports": [
             {

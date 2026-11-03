@@ -65,6 +65,15 @@
         ]
     },
     "summary": "Switch between multiple strings with an index",
+    "tags": [
+        "select",
+        "choose",
+        "multiplexer",
+        "mux",
+        "pick",
+        "index",
+        "route"
+    ],
     "docs": {
         "ports": [
             {

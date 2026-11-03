@@ -120,6 +120,15 @@
         ]
     },
     "summary": "Generate seeded random numbers in one to four dimensions",
+    "tags": [
+        "random",
+        "rand",
+        "noise",
+        "seed",
+        "dice",
+        "generate",
+        "white noise"
+    ],
     "docs": {
         "ports": [
             {

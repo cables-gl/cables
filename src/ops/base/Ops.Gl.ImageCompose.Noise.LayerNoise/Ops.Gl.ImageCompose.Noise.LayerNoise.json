@@ -89,6 +89,13 @@
         ]
     },
     "summary": "multilayer perlin noise variation",
+    "tags": [
+        "perlin",
+        "clouds",
+        "fractal",
+        "octaves",
+        "procedural"
+    ],
     "docs": {
         "ports": []
     },

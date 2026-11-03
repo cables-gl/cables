@@ -23,6 +23,13 @@
     "id": "57eda803-bda4-4b22-b578-608cabb9859e",
     "created": 1508766254270,
     "summary": "simulate fisheye effect",
+    "tags": [
+        "fisheye",
+        "lens distortion",
+        "wide angle",
+        "warp",
+        "pincushion"
+    ],
     "docs": {
         "ports": []
     },

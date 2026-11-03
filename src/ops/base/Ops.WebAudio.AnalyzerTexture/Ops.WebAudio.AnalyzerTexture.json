@@ -23,6 +23,15 @@
         ]
     },
     "summary": "Generates a texture from audio information",
+    "tags": [
+        "spectrogram",
+        "fft",
+        "visualizer",
+        "waterfall",
+        "spectrum",
+        "audio visualization",
+        "frequency"
+    ],
     "docs": {
         "ports": [
             {

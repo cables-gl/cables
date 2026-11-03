@@ -24,6 +24,16 @@
         ]
     },
     "summary": "Shows console log output on the screen",
+    "tags": [
+        "log",
+        "print",
+        "on screen",
+        "messages",
+        "output",
+        "errors",
+        "debug",
+        "terminal"
+    ],
     "docs": {
         "ports": [
             {

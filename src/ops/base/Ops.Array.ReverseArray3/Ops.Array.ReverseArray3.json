@@ -18,6 +18,13 @@
         ]
     },
     "summary": "Reverse an array with value triplets [x, y, z, ...]",
+    "tags": [
+        "flip",
+        "invert order",
+        "backwards",
+        "xyz",
+        "mirror"
+    ],
     "docs": {
         "ports": [
             {

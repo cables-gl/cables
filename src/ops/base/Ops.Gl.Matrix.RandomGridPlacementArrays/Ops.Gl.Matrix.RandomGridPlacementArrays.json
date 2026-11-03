@@ -68,6 +68,15 @@
         ]
     },
     "summary": "Place random objects on a grid",
+    "tags": [
+        "scatter",
+        "grid",
+        "random",
+        "distribute",
+        "layout",
+        "instances",
+        "tiles"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

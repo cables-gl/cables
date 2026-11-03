@@ -34,6 +34,14 @@
         ]
     },
     "summary": "Remove every occurrence of given characters from a string",
+    "tags": [
+        "delete",
+        "strip",
+        "filter",
+        "clean",
+        "remove letters",
+        "sanitize"
+    ],
     "docs": {
         "ports": []
     },

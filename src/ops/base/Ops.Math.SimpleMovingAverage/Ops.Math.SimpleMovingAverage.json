@@ -1,5 +1,13 @@
 {
     "summary": "Calculate the Average of the last X values",
+    "tags": [
+        "smooth",
+        "average",
+        "filter",
+        "mean",
+        "window",
+        "lowpass"
+    ],
     "layout": {
         "portsIn": [
             {

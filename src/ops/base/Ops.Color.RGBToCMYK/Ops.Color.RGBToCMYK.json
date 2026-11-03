@@ -53,6 +53,13 @@
         ]
     },
     "summary": "Output the CMYK value of a RGB color",
+    "tags": [
+        "print",
+        "cmyk",
+        "convert",
+        "color space",
+        "ink"
+    ],
     "docs": {},
     "exampleProjectId": "Du0rvs",
     "isReleased": true,

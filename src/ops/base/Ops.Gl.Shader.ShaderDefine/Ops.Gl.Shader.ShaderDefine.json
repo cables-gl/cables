@@ -31,6 +31,15 @@
         ]
     },
     "summary": "Set shader defines",
+    "tags": [
+        "glsl",
+        "preprocessor",
+        "#define",
+        "shader",
+        "macro",
+        "flag",
+        "custom shader"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

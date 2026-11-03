@@ -95,6 +95,17 @@
         ]
     },
     "summary": "Set rgba array by key in an object",
+    "tags": [
+        "write",
+        "key",
+        "property",
+        "set",
+        "assign",
+        "json",
+        "store",
+        "rgba",
+        "color"
+    ],
     "issues": "",
     "docs": {
         "ports": []

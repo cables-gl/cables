@@ -21,6 +21,19 @@
     "authorName": "pandur",
     "created": 1709304953396,
     "summary": "push/append an array to an array",
+    "tags": [
+        "push",
+        "append",
+        "add",
+        "array",
+        "compose",
+        "build",
+        "collect",
+        "list",
+        "concat",
+        "merge",
+        "extend"
+    ],
     "docs": {
         "ports": []
     },

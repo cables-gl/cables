@@ -1,5 +1,14 @@
 {
     "summary": "faces hidden from the viewer will not be rendered when enabled",
+    "tags": [
+        "backface",
+        "front face",
+        "hide faces",
+        "cull",
+        "two sided",
+        "single sided",
+        "double sided"
+    ],
     "layout": {
         "portsIn": [
             {

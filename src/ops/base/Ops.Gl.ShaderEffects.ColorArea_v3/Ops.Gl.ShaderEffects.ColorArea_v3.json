@@ -125,6 +125,15 @@
         "cgl"
     ],
     "summary": "colorize all meshes around current position",
+    "tags": [
+        "tint",
+        "paint",
+        "colorize",
+        "spotlight",
+        "volume",
+        "highlight",
+        "influence"
+    ],
     "issues": "",
     "youtubeids": [
         "cUU0fNw3rEg"

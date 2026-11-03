@@ -47,6 +47,15 @@
     "id": "3f7db864-7409-418f-8c03-b2c966c050b3",
     "created": 1513865904150,
     "summary": "Iterate over an array in steps of three and outputs three values",
+    "tags": [
+        "loop",
+        "foreach",
+        "for each",
+        "xyz",
+        "vec3",
+        "points",
+        "repeat"
+    ],
     "docs": {
         "ports": [
             {

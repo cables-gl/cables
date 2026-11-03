@@ -24,6 +24,15 @@
         ]
     },
     "summary": "Get the asset URL for a filename",
+    "tags": [
+        "file path",
+        "url",
+        "asset",
+        "filename",
+        "resolve",
+        "location",
+        "uploaded file"
+    ],
     "docs": {},
     "exampleProjectId": "mwhthf",
     "isReleased": true,

@@ -1,5 +1,14 @@
 {
     "summary": "Limits how often a trigger goes through to x ms",
+    "tags": [
+        "throttle",
+        "rate limit",
+        "debounce",
+        "cooldown",
+        "max rate",
+        "min interval",
+        "ms"
+    ],
     "layout": {
         "portsIn": [
             {

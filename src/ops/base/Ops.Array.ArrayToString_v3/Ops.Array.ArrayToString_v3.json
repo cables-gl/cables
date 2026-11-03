@@ -17,6 +17,15 @@
     "authorName": "pandur",
     "created": 1565717348413,
     "summary": "Join array values to a string (concat)",
+    "tags": [
+        "join",
+        "concat",
+        "text",
+        "implode",
+        "combine",
+        "csv",
+        "serialize"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

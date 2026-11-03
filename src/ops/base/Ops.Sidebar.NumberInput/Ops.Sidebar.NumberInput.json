@@ -42,6 +42,15 @@
         ]
     },
     "summary": "Enter a number in the sidebar",
+    "tags": [
+        "number field",
+        "value",
+        "input",
+        "type number",
+        "ui",
+        "gui",
+        "interface"
+    ],
     "docs": {
         "ports": [
             {

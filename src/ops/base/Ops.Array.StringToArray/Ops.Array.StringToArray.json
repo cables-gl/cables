@@ -33,6 +33,15 @@
         ]
     },
     "summary": "Parse a string into an array (create)",
+    "tags": [
+        "split",
+        "explode",
+        "parse",
+        "tokenize",
+        "csv",
+        "separator",
+        "delimiter"
+    ],
     "authorName": "pandur",
     "id": "6d6bd309-fb4b-4eed-9a05-5a1cd93f2a05",
     "created": 1517954950220,

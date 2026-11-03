@@ -31,6 +31,16 @@
         ]
     },
     "summary": "Visualize Array as line graph",
+    "tags": [
+        "plot",
+        "line chart",
+        "debug",
+        "visualize",
+        "curve",
+        "graph",
+        "waveform",
+        "array values"
+    ],
     "docs": {
         "ports": []
     },

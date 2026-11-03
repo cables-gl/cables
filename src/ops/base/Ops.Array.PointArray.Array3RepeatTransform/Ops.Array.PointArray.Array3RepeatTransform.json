@@ -92,6 +92,15 @@
         "ports": []
     },
     "summary": "Repeat an array by transforming it x times",
+    "tags": [
+        "duplicate",
+        "copies",
+        "repeat",
+        "instances",
+        "transform",
+        "spiral",
+        "fractal"
+    ],
     "coreLibs": [
         "cgl"
     ],

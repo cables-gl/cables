@@ -24,6 +24,16 @@
         ]
     },
     "summary": "simple button to trigger manually",
+    "tags": [
+        "button",
+        "click",
+        "manual",
+        "press",
+        "push",
+        "fire",
+        "ui",
+        "bang"
+    ],
     "docs": {
         "ports": []
     },

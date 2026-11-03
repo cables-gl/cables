@@ -31,6 +31,14 @@
     "id": "a9aba612-dc72-4108-a6fb-f0292463a186",
     "created": 1510252712035,
     "summary": "Convert a black and white map to a normal map",
+    "tags": [
+        "normal map",
+        "bump map",
+        "height map",
+        "relief",
+        "bump",
+        "normals"
+    ],
     "docs": {
         "ports": []
     },

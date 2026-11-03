@@ -1,5 +1,13 @@
 {
     "summary": "Interpolate between values, lerp, linear interpolate",
+    "tags": [
+        "lerp",
+        "mix",
+        "blend",
+        "tween",
+        "transition",
+        "linear"
+    ],
     "layout": {
         "portsIn": [
             {

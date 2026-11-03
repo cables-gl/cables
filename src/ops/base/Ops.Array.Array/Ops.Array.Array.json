@@ -1,5 +1,15 @@
 {
     "summary": "Create an Array and fill with one value",
+    "tags": [
+        "create",
+        "generate",
+        "list",
+        "numbers",
+        "constant",
+        "fill",
+        "new array",
+        "vector"
+    ],
     "layout": {
         "portsIn": [
             {

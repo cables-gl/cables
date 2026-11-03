@@ -106,6 +106,15 @@
         }
     ],
     "summary": "Scales the size of meshes within the area of influence",
+    "tags": [
+        "grow",
+        "shrink",
+        "magnify",
+        "local scale",
+        "bulge",
+        "volume",
+        "vertex"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

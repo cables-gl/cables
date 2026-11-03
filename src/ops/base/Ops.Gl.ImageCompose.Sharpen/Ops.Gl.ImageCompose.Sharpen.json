@@ -1,5 +1,12 @@
 {
     "summary": "Adjust image sharpness",
+    "tags": [
+        "sharpness",
+        "detail",
+        "crisp",
+        "unsharp mask",
+        "focus"
+    ],
     "layout": {
         "portsIn": [
             {

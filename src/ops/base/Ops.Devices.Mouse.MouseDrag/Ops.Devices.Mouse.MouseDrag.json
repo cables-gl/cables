@@ -59,6 +59,17 @@
         ]
     },
     "summary": "get delta of mouse position while dragging",
+    "tags": [
+        "drag",
+        "delta",
+        "move",
+        "pan",
+        "rotate",
+        "swipe",
+        "mouse movement",
+        "pointer",
+        "relative"
+    ],
     "docs": {
         "ports": []
     },

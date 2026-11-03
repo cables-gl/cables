@@ -17,6 +17,15 @@
         ]
     },
     "summary": "Stores and outputs a string value",
+    "tags": [
+        "text",
+        "constant",
+        "value",
+        "input",
+        "label",
+        "word",
+        "characters"
+    ],
     "docs": {
         "ports": []
     },

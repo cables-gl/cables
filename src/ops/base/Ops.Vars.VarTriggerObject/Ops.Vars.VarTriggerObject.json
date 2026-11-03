@@ -32,6 +32,15 @@
         "vargetset"
     ],
     "summary": "Set an object variable by trigger",
+    "tags": [
+        "write",
+        "variable",
+        "store",
+        "on trigger",
+        "set",
+        "json",
+        "save"
+    ],
     "issues": "",
     "youtubeids": [
         "30v_GQc6ajA"

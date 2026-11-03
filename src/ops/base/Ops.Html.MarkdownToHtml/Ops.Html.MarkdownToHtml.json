@@ -35,6 +35,15 @@
     },
     "created": 1669976600784,
     "summary": "markdown markup language to html parser",
+    "tags": [
+        "md",
+        "convert",
+        "parser",
+        "formatting",
+        "text",
+        "render markdown",
+        "blog"
+    ],
     "docs": {},
     "exampleProjectId": "52Zlij",
     "authorName": "stephan",

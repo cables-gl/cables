@@ -14,6 +14,17 @@
         ]
     },
     "summary": "collect world space coordinates into an array",
+    "tags": [
+        "record",
+        "store",
+        "points",
+        "trail",
+        "path",
+        "history",
+        "gather",
+        "world space",
+        "positions"
+    ],
     "youtubeid": "",
     "docs": {
         "ports": []

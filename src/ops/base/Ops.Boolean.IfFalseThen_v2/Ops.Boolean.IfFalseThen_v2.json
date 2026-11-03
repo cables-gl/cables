@@ -27,6 +27,15 @@
         ]
     },
     "summary": "Triggers if input value is `false`",
+    "tags": [
+        "condition",
+        "branch",
+        "if",
+        "not",
+        "when false",
+        "trigger",
+        "else"
+    ],
     "docs": {
         "ports": [
             {

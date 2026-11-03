@@ -75,6 +75,16 @@
         "ports": []
     },
     "summary": "Visually edit positions in an array of point coordinates",
+    "tags": [
+        "draw",
+        "edit",
+        "manual",
+        "place",
+        "interactive",
+        "points",
+        "path",
+        "shape"
+    ],
     "license": "MIT",
     "coreLibs": [
         "cgl"

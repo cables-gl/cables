@@ -33,6 +33,17 @@
     "authorName": "pandur",
     "created": 1637676964149,
     "summary": "Displays input string on the patchfield",
+    "tags": [
+        "display",
+        "debug",
+        "visualize",
+        "readout",
+        "print",
+        "show value",
+        "monitor",
+        "text",
+        "string"
+    ],
     "issues": "",
     "youtubeids": [
         "-1vMiU6BcDg"

@@ -32,6 +32,16 @@
         ]
     },
     "summary": "change depth testing method (depthMask,depthWrite,depthFunc)",
+    "tags": [
+        "zbuffer",
+        "z buffer",
+        "depth write",
+        "depth mask",
+        "depthfunc",
+        "sorting",
+        "overlay",
+        "occlusion"
+    ],
     "docs": {
         "ports": []
     },

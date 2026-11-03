@@ -113,6 +113,17 @@
         ]
     },
     "summary": "Compose Images and effects as layers to generate new Images",
+    "tags": [
+        "composition",
+        "compose",
+        "layers",
+        "framebuffer",
+        "render target",
+        "fbo",
+        "post processing",
+        "2d",
+        "start"
+    ],
     "credits": [
         {
             "title": "Photoshop math GLSL shaders",

@@ -152,5 +152,15 @@
     ],
     "isReleased": true,
     "license": "MIT",
-    "summary": "Render text as a 3D mesh using MSDF fonts"
+    "summary": "Render text as a 3D mesh using MSDF fonts",
+    "tags": [
+        "text",
+        "font",
+        "msdf",
+        "sdf",
+        "typography",
+        "letters",
+        "3d text",
+        "string"
+    ]
 }

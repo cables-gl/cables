@@ -43,6 +43,16 @@
         ]
     },
     "summary": "evaluate a javascript expression",
+    "tags": [
+        "eval",
+        "javascript",
+        "code",
+        "script",
+        "formula",
+        "custom",
+        "function",
+        "expression"
+    ],
     "license": "MIT",
     "exampleProjectId": "gpp4O8",
     "docs": {

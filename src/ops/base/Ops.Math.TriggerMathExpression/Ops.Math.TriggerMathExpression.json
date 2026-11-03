@@ -93,6 +93,14 @@
         ]
     },
     "summary": "calculates a user defined mathematical expression",
+    "tags": [
+        "formula",
+        "equation",
+        "expression",
+        "calculate",
+        "parser",
+        "on trigger"
+    ],
     "exampleProjectId": "6K7A5f",
     "docs": {
         "ports": []

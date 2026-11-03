@@ -19,6 +19,14 @@
         ]
     },
     "summary": "positive numbers become negative and vice versa (negate)",
+    "tags": [
+        "negate",
+        "invert",
+        "minus",
+        "opposite",
+        "reverse sign",
+        "-1"
+    ],
     "docs": {
         "ports": []
     },

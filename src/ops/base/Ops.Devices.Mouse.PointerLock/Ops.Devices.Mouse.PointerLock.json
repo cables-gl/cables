@@ -44,6 +44,14 @@
         ]
     },
     "summary": "locks the pointer to the canvas and hides the cursor",
+    "tags": [
+        "capture mouse",
+        "fps",
+        "hide cursor",
+        "mouse look",
+        "first person",
+        "lock"
+    ],
     "caniusequery": "pointerLock",
     "docs": {
         "ports": []

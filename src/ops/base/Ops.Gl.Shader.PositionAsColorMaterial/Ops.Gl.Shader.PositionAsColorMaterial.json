@@ -18,6 +18,14 @@
         ]
     },
     "summary": "draw meshes using XYZ position coordinates as RGB color ",
+    "tags": [
+        "debug",
+        "xyz",
+        "world position",
+        "coordinates",
+        "visualize",
+        "position color"
+    ],
     "docs": {
         "ports": []
     },

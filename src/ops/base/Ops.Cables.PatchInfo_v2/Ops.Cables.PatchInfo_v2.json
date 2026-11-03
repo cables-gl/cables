@@ -3,6 +3,15 @@
     "id": "7187c2f2-67a9-479e-92c4-0e415443f504",
     "created": 1625058870561,
     "summary": "read patch config when embedding on another page",
+    "tags": [
+        "embed",
+        "config",
+        "patch settings",
+        "metadata",
+        "read",
+        "parameters",
+        "configuration"
+    ],
     "docs": {
         "ports": [
             {

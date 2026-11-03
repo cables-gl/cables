@@ -45,6 +45,15 @@
         ]
     },
     "summary": "Only allow an array through if pass through is true",
+    "tags": [
+        "pass",
+        "block",
+        "switch",
+        "allow",
+        "if",
+        "conditional",
+        "mute"
+    ],
     "issues": "",
     "youtubeids": [
         "gT1jXP5As9A"

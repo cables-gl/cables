@@ -64,6 +64,15 @@
         }
     ],
     "summary": "bend objects along an axis",
+    "tags": [
+        "curve",
+        "bow",
+        "arc",
+        "warp",
+        "deform",
+        "flex",
+        "vertex"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

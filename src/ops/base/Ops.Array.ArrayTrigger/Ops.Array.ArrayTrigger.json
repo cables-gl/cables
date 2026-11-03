@@ -25,6 +25,14 @@
         ]
     },
     "summary": "Trigger an array",
+    "tags": [
+        "trigger",
+        "output",
+        "update",
+        "pass",
+        "send",
+        "on trigger"
+    ],
     "docs": {
         "ports": [
             {

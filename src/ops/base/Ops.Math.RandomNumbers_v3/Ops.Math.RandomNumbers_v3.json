@@ -52,6 +52,14 @@
         ]
     },
     "summary": "Simple way to get random numbers without using arrays",
+    "tags": [
+        "random",
+        "rand",
+        "dice",
+        "seed",
+        "chance",
+        "noise"
+    ],
     "issues": "",
     "youtubeids": [
         "ASp7LEqZUIE"

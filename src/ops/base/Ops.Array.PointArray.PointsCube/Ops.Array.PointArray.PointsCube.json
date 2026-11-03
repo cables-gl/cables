@@ -48,6 +48,15 @@
         ]
     },
     "summary": "Generate a 3d point field with controllable amount of xyz points / cube,box",
+    "tags": [
+        "box",
+        "grid",
+        "volume",
+        "lattice",
+        "3d grid",
+        "field",
+        "dice"
+    ],
     "docs": {
         "ports": [
             {

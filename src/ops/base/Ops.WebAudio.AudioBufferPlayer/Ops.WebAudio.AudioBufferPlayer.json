@@ -66,6 +66,15 @@
         ]
     },
     "summary": "Plays back audio data stored in an AudioBuffer",
+    "tags": [
+        "sample player",
+        "play sound",
+        "sfx",
+        "one shot",
+        "trigger sound",
+        "playback",
+        "loop"
+    ],
     "created": 1506598843485,
     "docs": {
         "ports": [

@@ -55,6 +55,16 @@
         ]
     },
     "summary": "Converts a texture into a base-64 image string",
+    "tags": [
+        "encode",
+        "export",
+        "data url",
+        "image string",
+        "save",
+        "png",
+        "convert",
+        "base64"
+    ],
     "docs": {
         "ports": [
             {

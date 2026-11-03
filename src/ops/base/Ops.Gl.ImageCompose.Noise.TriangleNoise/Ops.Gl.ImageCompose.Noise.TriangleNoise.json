@@ -41,6 +41,13 @@
         ]
     },
     "summary": "noise made from triangles",
+    "tags": [
+        "triangles",
+        "low poly",
+        "tessellation",
+        "procedural",
+        "pattern"
+    ],
     "docs": {
         "ports": []
     },

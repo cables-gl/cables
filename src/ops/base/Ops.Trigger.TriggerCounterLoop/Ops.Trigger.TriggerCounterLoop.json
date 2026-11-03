@@ -36,6 +36,16 @@
         ]
     },
     "summary": "Increments with each trigger and loops depending on min and max loop values.",
+    "tags": [
+        "count",
+        "counter",
+        "loop",
+        "wrap",
+        "cycle",
+        "increment",
+        "modulo",
+        "step through"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

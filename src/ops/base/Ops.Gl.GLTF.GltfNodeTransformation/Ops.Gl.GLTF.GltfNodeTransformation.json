@@ -43,6 +43,15 @@
         ]
     },
     "summary": "Get the transform from the GLTFscene op",
+    "tags": [
+        "position",
+        "rotation",
+        "scale",
+        "read transform",
+        "matrix",
+        "node",
+        "get"
+    ],
     "docs": {
         "ports": []
     },

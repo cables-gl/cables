@@ -69,6 +69,14 @@
         ]
     },
     "summary": "Download a texture as an image file",
+    "tags": [
+        "save image",
+        "export",
+        "png",
+        "jpeg",
+        "file",
+        "save texture"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

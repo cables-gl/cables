@@ -34,6 +34,13 @@
         ]
     },
     "summary": "Sum up every number in an array with the sum of the previous",
+    "tags": [
+        "running total",
+        "cumulative",
+        "prefix sum",
+        "accumulate",
+        "integrate"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

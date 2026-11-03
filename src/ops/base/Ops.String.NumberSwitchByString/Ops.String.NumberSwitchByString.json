@@ -120,6 +120,15 @@
         ]
     },
     "summary": "associate numbers by strings",
+    "tags": [
+        "map",
+        "lookup",
+        "dictionary",
+        "associate",
+        "select",
+        "match",
+        "string to number"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

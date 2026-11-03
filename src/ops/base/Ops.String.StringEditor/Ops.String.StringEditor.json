@@ -42,6 +42,16 @@
         ]
     },
     "summary": "string text editor",
+    "tags": [
+        "text",
+        "multi line",
+        "textarea",
+        "write",
+        "edit",
+        "long text",
+        "notes",
+        "code"
+    ],
     "docs": {
         "ports": [
             {

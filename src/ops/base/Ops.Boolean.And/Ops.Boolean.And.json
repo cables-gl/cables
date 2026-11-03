@@ -21,6 +21,15 @@
         ]
     },
     "summary": "Outputs `true` if both input values are `true` (boolean)",
+    "tags": [
+        "&&",
+        "both",
+        "all",
+        "logic",
+        "logical and",
+        "conjunction",
+        "gate"
+    ],
     "docs": {
         "ports": [
             {

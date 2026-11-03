@@ -21,6 +21,14 @@
         ]
     },
     "summary": "Calculates a vector (x and y) based on an angle in degrees",
+    "tags": [
+        "angle to vector",
+        "direction",
+        "heading",
+        "xy",
+        "unit vector",
+        "polar"
+    ],
     "docs": {
         "ports": [
             {

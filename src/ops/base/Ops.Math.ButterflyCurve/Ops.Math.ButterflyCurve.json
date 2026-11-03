@@ -24,6 +24,14 @@
         ]
     },
     "summary": "Point on a butterfly curve for a given value",
+    "tags": [
+        "butterfly",
+        "curve",
+        "parametric",
+        "spline",
+        "shape",
+        "points"
+    ],
     "docs": {
         "ports": []
     },

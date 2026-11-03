@@ -47,6 +47,14 @@
         ]
     },
     "summary": "Round number values of texture color channels",
+    "tags": [
+        "floor",
+        "ceil",
+        "quantize",
+        "snap",
+        "integer",
+        "posterize"
+    ],
     "docs": {
         "ports": []
     },

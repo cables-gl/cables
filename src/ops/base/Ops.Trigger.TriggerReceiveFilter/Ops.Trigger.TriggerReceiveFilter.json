@@ -28,6 +28,17 @@
         ]
     },
     "summary": "receives all named triggers and relays them, optionally using a filter-prefix on the name",
+    "tags": [
+        "wireless",
+        "remote",
+        "event",
+        "message",
+        "named",
+        "broadcast",
+        "listen",
+        "wildcard",
+        "pattern"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

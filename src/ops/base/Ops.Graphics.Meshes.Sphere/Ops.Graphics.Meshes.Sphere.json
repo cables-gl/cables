@@ -1,5 +1,14 @@
 {
     "summary": "draw a sphere",
+    "tags": [
+        "ball",
+        "globe",
+        "orb",
+        "planet",
+        "bubble",
+        "round",
+        "circle 3d"
+    ],
     "layout": {
         "portsIn": [
             {

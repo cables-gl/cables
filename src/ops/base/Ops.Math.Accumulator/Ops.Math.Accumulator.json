@@ -37,6 +37,14 @@
         ]
     },
     "summary": "Add to and multiply a number, set to current value",
+    "tags": [
+        "add",
+        "multiply",
+        "running total",
+        "sum",
+        "counter",
+        "integrate"
+    ],
     "docs": {
         "ports": [
             {

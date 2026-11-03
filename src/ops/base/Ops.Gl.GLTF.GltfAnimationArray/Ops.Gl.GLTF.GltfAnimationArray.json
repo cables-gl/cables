@@ -60,6 +60,15 @@
         ]
     },
     "summary": "Convert an animation into an array of coordinates",
+    "tags": [
+        "animation",
+        "keyframes",
+        "path",
+        "coordinates",
+        "export",
+        "motion",
+        "points"
+    ],
     "issues": "Currently only supports positional data. \nRotation or scale data will be supported in the near future.",
     "youtubeids": [
         "QNLw21hSweg"

@@ -31,6 +31,14 @@
         ]
     },
     "summary": "Append an array to an existing array",
+    "tags": [
+        "concat",
+        "join",
+        "extend",
+        "push",
+        "merge",
+        "add to end"
+    ],
     "docs": {
         "ports": [
             {

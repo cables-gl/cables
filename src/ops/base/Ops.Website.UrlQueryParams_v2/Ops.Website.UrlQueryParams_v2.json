@@ -28,6 +28,15 @@
         ]
     },
     "summary": "Returns a URL query parameter",
+    "tags": [
+        "url parameters",
+        "get parameter",
+        "query string",
+        "?param",
+        "read",
+        "arguments",
+        "deep link"
+    ],
     "docs": {
         "ports": [
             {

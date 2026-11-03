@@ -39,6 +39,12 @@
         ]
     },
     "summary": "Calculates the ratio of the sine and cosine of an angle.",
+    "tags": [
+        "tan",
+        "trigonometry",
+        "slope",
+        "angle"
+    ],
     "docs": {
         "ports": [
             {

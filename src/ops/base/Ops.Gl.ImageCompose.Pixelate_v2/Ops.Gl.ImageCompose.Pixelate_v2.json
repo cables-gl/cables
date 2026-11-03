@@ -45,6 +45,15 @@
     "id": "c06ae168-ff4f-4ae6-b4d0-06c3b24203bc",
     "created": 1650525244554,
     "summary": "Pixelate an image",
+    "tags": [
+        "mosaic",
+        "8bit",
+        "retro",
+        "lowres",
+        "low resolution",
+        "blocks",
+        "pixel art"
+    ],
     "docs": {
         "ports": []
     },

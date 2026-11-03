@@ -24,6 +24,14 @@
         ]
     },
     "summary": "remove html tags from a string",
+    "tags": [
+        "remove tags",
+        "plain text",
+        "clean",
+        "sanitize",
+        "markup",
+        "innerText"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

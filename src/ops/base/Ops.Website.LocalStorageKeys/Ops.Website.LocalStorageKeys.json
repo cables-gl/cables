@@ -53,6 +53,15 @@
         ]
     },
     "summary": "Retrieve all keys (and values) stored in browser storage",
+    "tags": [
+        "browser storage",
+        "persist",
+        "list",
+        "saved data",
+        "keys",
+        "inspect",
+        "localstorage"
+    ],
     "docs": {
         "ports": [
             {

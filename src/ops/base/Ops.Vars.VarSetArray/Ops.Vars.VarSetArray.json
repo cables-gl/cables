@@ -12,6 +12,16 @@
         ]
     },
     "summary": "Set a variable array",
+    "tags": [
+        "write",
+        "variable",
+        "store",
+        "wireless",
+        "global",
+        "send",
+        "array",
+        "save"
+    ],
     "changelog": [
         {
             "message": "Ops.Vars.SetVariableArray renamed to Ops.Vars.VarSetArray",

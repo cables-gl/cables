@@ -31,6 +31,15 @@
         ]
     },
     "summary": "set a uniform value of the current shader",
+    "tags": [
+        "glsl",
+        "parameter",
+        "uniform",
+        "shader input",
+        "custom shader",
+        "number",
+        "set value"
+    ],
     "docs": {
         "ports": []
     },

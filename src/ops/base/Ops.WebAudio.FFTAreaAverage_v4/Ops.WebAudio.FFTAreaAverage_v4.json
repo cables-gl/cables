@@ -71,6 +71,17 @@
     "id": "cee66e27-c2fa-49d5-a80f-aa33f52164c4",
     "created": 1789654563058,
     "summary": "Gets the average value in an FFT area.",
+    "tags": [
+        "frequency band",
+        "bass",
+        "mids",
+        "highs",
+        "level",
+        "spectrum",
+        "range",
+        "bin average",
+        "audio reactive"
+    ],
     "docs": {
         "ports": [
             {

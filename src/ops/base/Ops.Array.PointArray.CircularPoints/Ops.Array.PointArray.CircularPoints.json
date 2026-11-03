@@ -84,5 +84,14 @@
     ],
     "isReleased": true,
     "license": "MIT",
-    "summary": "Create points in circles and rounds with radius and offset steps"
+    "summary": "Create points in circles and rounds with radius and offset steps",
+    "tags": [
+        "circle",
+        "ring",
+        "spiral",
+        "helix",
+        "coil",
+        "points",
+        "round"
+    ]
 }

@@ -26,6 +26,16 @@
         ]
     },
     "summary": "check if string contains another string (find,search,indexOf)",
+    "tags": [
+        "find",
+        "search",
+        "indexof",
+        "includes",
+        "has",
+        "test",
+        "substring",
+        "match"
+    ],
     "authorName": "pandur",
     "id": "9621424b-76f1-4000-9cd4-acc46da06a5d",
     "created": 1558039688432,

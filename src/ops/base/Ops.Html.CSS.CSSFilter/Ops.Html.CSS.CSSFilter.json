@@ -22,6 +22,16 @@
         "portsOut": []
     },
     "summary": "set css filter to html element (blur/opacity/contrast)",
+    "tags": [
+        "blur",
+        "contrast",
+        "brightness",
+        "grayscale",
+        "effects",
+        "filter",
+        "css effects",
+        "sepia"
+    ],
     "docs": {
         "ports": []
     },

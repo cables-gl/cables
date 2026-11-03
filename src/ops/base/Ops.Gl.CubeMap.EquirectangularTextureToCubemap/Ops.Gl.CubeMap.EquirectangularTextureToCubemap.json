@@ -75,6 +75,15 @@
         ]
     },
     "summary": "convert an equirectangular map to a cubemap",
+    "tags": [
+        "panorama",
+        "360",
+        "convert",
+        "hdri",
+        "skybox",
+        "environment",
+        "cube texture"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -1,5 +1,16 @@
 {
     "summary": "what browser is being used",
+    "tags": [
+        "user agent",
+        "chrome",
+        "safari",
+        "firefox",
+        "detect",
+        "platform",
+        "mobile",
+        "os",
+        "navigator"
+    ],
     "layout": {
         "portsOut": [
             {

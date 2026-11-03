@@ -28,6 +28,15 @@
     "authorName": "pandur",
     "created": 1689760770988,
     "summary": "Remove characters from the beginning or end of a string",
+    "tags": [
+        "trim",
+        "cut",
+        "truncate",
+        "remove characters",
+        "crop",
+        "compose",
+        "chop"
+    ],
     "docs": {
         "ports": []
     },

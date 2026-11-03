@@ -27,6 +27,14 @@
         ]
     },
     "summary": "Output css attributes of an element as a string",
+    "tags": [
+        "inline style",
+        "style attribute",
+        "css text",
+        "read",
+        "dump",
+        "debug"
+    ],
     "docs": {
         "ports": []
     },

@@ -1,5 +1,14 @@
 {
     "summary": "Draws a filled Spline with configurable thickness",
+    "tags": [
+        "curve",
+        "path",
+        "tube",
+        "ribbon",
+        "thick line",
+        "polyline",
+        "stroke"
+    ],
     "layout": {
         "portsIn": [
             {

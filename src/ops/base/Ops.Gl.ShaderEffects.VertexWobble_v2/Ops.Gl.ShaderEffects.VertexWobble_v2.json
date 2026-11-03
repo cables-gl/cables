@@ -109,6 +109,16 @@
         ]
     },
     "summary": "sine wave vertex displacement",
+    "tags": [
+        "wave",
+        "ripple",
+        "jelly",
+        "sine",
+        "wavy",
+        "displace",
+        "flag",
+        "cloth"
+    ],
     "docs": {
         "ports": []
     },

@@ -26,6 +26,14 @@
         ]
     },
     "summary": "convert a html encoded string to a normal UTF8 string",
+    "tags": [
+        "unescape",
+        "entities",
+        "&amp;",
+        "convert",
+        "utf8",
+        "html entities"
+    ],
     "docs": {
         "ports": []
     },

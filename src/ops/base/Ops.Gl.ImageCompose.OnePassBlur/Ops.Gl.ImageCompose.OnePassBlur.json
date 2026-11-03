@@ -64,6 +64,13 @@
         }
     ],
     "summary": "Blurs a texture  ",
+    "tags": [
+        "gaussian",
+        "soften",
+        "smooth",
+        "quick blur",
+        "glow"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

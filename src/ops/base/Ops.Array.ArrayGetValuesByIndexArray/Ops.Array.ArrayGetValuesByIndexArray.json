@@ -11,6 +11,15 @@
     "authorName": "kikohs",
     "created": 1678108947352,
     "summary": "Pick values from input array at given indices and stride",
+    "tags": [
+        "pick",
+        "gather",
+        "select",
+        "indices",
+        "lookup",
+        "stride",
+        "remap"
+    ],
     "docs": {
         "ports": [
             {

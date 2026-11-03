@@ -230,6 +230,16 @@
         ]
     },
     "summary": "route trigger output by string",
+    "tags": [
+        "switch",
+        "select output",
+        "case",
+        "demux",
+        "branch",
+        "split",
+        "name",
+        "match"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

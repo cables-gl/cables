@@ -28,6 +28,14 @@
         ]
     },
     "summary": "Convert a Float32 bit/HDR texture to RGBE format (only positive numbers)",
+    "tags": [
+        "hdr",
+        "rgbe",
+        "radiance",
+        "float",
+        "encode",
+        "convert"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

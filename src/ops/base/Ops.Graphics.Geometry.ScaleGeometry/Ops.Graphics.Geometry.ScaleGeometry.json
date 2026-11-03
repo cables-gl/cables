@@ -50,6 +50,15 @@
         ]
     },
     "summary": "Scaling of geometry vertices",
+    "tags": [
+        "resize",
+        "size",
+        "grow",
+        "shrink",
+        "bake scale",
+        "vertices",
+        "enlarge"
+    ],
     "docs": {
         "ports": []
     },

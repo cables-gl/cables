@@ -68,6 +68,15 @@
         ]
     },
     "summary": "sine animate gltf nodes by a filter",
+    "tags": [
+        "wiggle",
+        "oscillate",
+        "wave",
+        "sine",
+        "animate nodes",
+        "procedural animation",
+        "bob"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

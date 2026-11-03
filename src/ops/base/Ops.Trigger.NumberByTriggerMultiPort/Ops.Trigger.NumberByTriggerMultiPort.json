@@ -37,6 +37,15 @@
         ]
     },
     "summary": "output a number by triggering an index port ",
+    "tags": [
+        "hold",
+        "latch",
+        "select",
+        "which port",
+        "last triggered",
+        "index",
+        "many inputs"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

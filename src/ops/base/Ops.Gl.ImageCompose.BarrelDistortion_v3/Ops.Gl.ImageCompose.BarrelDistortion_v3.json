@@ -62,6 +62,13 @@
     "authorName": "pandur",
     "created": 1650964935237,
     "summary": "Applies a fisheye distortion to an image.",
+    "tags": [
+        "fisheye",
+        "lens distortion",
+        "wide angle",
+        "warp",
+        "pincushion"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

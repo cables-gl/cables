@@ -29,6 +29,18 @@
     "authorName": "pandur",
     "created": 1750249932005,
     "summary": "push/append a texture to an array",
+    "tags": [
+        "push",
+        "append",
+        "add",
+        "array",
+        "compose",
+        "build",
+        "collect",
+        "list",
+        "texture",
+        "image"
+    ],
     "docs": {
         "ports": []
     },

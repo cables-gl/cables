@@ -18,6 +18,15 @@
         ]
     },
     "summary": "Triggers when the input value became zero",
+    "tags": [
+        "zero",
+        "reached zero",
+        "equals zero",
+        "0",
+        "edge",
+        "detect",
+        "countdown finished"
+    ],
     "docs": {
         "ports": [
             {

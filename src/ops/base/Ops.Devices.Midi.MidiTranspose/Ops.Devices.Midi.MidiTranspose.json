@@ -46,6 +46,15 @@
         ]
     },
     "summary": "transpose incoming midi notes",
+    "tags": [
+        "shift",
+        "pitch",
+        "semitones",
+        "octave",
+        "key change",
+        "offset",
+        "notes"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -61,6 +61,15 @@
     "authorName": "pandur",
     "created": 1680627161558,
     "summary": "set array as object property",
+    "tags": [
+        "property",
+        "key",
+        "write",
+        "set",
+        "assign",
+        "json",
+        "compose"
+    ],
     "docs": {
         "ports": []
     },

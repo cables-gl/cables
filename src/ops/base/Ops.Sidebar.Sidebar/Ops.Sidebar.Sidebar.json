@@ -64,6 +64,18 @@
         ]
     },
     "summary": "Sidebar overlay to control values",
+    "tags": [
+        "control panel",
+        "ui",
+        "gui",
+        "interface",
+        "parameters",
+        "menu",
+        "dat.gui",
+        "overlay",
+        "controls",
+        "settings"
+    ],
     "docs": {
         "ports": [
             {

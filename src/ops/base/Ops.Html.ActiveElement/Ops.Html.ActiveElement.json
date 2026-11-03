@@ -26,6 +26,14 @@
         ]
     },
     "summary": "Outputs the currently active/focused element",
+    "tags": [
+        "focus",
+        "focused",
+        "current",
+        "selected",
+        "document.activeelement",
+        "input"
+    ],
     "docs": {
         "ports": []
     },

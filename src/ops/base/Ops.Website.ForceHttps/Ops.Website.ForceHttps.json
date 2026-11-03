@@ -16,6 +16,15 @@
     "authorName": "pandur",
     "created": 1585908153315,
     "summary": "will redirect to same URL using https protocol",
+    "tags": [
+        "redirect",
+        "ssl",
+        "secure",
+        "https",
+        "protocol",
+        "tls",
+        "security"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

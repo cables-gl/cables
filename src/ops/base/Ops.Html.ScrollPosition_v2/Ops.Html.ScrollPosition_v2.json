@@ -43,6 +43,14 @@
         ]
     },
     "summary": "the current x y  top left scrolling position of html page or element",
+    "tags": [
+        "scroll",
+        "offset",
+        "scrolltop",
+        "page position",
+        "read",
+        "pan"
+    ],
     "authorName": "pandur",
     "id": "16e3f40e-62dd-4a49-b2c4-e20eda508d5e",
     "created": 1674471286214,

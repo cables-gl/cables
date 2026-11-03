@@ -1,5 +1,18 @@
 {
     "summary": "Transform objects in 3d space (rotate, translate, scale)",
+    "tags": [
+        "move",
+        "rotate",
+        "scale",
+        "translate",
+        "position",
+        "rotation",
+        "size",
+        "srt",
+        "xyz",
+        "object matrix",
+        "place"
+    ],
     "layout": {
         "portsIn": [
             {

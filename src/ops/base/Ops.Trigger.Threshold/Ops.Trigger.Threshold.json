@@ -37,6 +37,16 @@
         ]
     },
     "summary": "Triggers once above or below a threshold and outputs the current threshold state",
+    "tags": [
+        "limit",
+        "crossing",
+        "above",
+        "below",
+        "level",
+        "trigger on value",
+        "schmitt",
+        "comparator"
+    ],
     "docs": {
         "ports": []
     },

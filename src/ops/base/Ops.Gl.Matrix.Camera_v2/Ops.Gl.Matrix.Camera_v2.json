@@ -121,6 +121,16 @@
         ]
     },
     "summary": "Transforms and projects the scene from the point of view of the camera.",
+    "tags": [
+        "perspective",
+        "view",
+        "projection",
+        "fov",
+        "viewport",
+        "orthographic",
+        "scene",
+        "eye"
+    ],
     "docs": {
         "ports": [
             {

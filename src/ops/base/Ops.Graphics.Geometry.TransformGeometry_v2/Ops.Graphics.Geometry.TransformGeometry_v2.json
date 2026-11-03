@@ -64,6 +64,15 @@
         ]
     },
     "summary": "transform vertices of geometry",
+    "tags": [
+        "move",
+        "rotate",
+        "scale",
+        "bake transform",
+        "vertices",
+        "translate",
+        "matrix"
+    ],
     "exampleProjectId": "aoBFz6",
     "changelog": [
         {

@@ -70,6 +70,15 @@
         ]
     },
     "summary": "load multiple images into an array",
+    "tags": [
+        "load",
+        "images",
+        "multiple",
+        "batch",
+        "preload",
+        "image list",
+        "gallery"
+    ],
     "authorName": "tim",
     "id": "4ee5bc6d-fd73-4498-8378-6846e57cdd7f",
     "created": 1519307241280,

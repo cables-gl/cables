@@ -24,6 +24,14 @@
         ]
     },
     "summary": "is a number capable of being divided.",
+    "tags": [
+        "divisible",
+        "factor",
+        "modulo",
+        "multiple",
+        "test",
+        "bool"
+    ],
     "exampleProjectId": "-IqoJ5",
     "isReleased": true,
     "license": "MIT"

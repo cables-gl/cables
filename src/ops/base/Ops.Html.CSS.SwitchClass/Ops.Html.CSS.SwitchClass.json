@@ -34,6 +34,15 @@
         ]
     },
     "summary": "add or remove css class to/from a HTML element",
+    "tags": [
+        "toggle class",
+        "classlist",
+        "add class",
+        "remove class",
+        "state",
+        "css",
+        "swap"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

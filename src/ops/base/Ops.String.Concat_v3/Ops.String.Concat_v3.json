@@ -61,6 +61,16 @@
         ]
     },
     "summary": "concatenate/join multiple string inputs",
+    "tags": [
+        "join",
+        "combine",
+        "append",
+        "add",
+        "merge",
+        "+",
+        "glue",
+        "string add"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

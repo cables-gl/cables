@@ -27,6 +27,14 @@
         ]
     },
     "summary": "Apply a smoothstep function to the contents of an array ",
+    "tags": [
+        "smoothstep",
+        "ease",
+        "curve",
+        "threshold",
+        "s-curve",
+        "transition"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

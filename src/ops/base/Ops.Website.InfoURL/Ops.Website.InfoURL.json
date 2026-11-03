@@ -43,6 +43,16 @@
         ]
     },
     "summary": "Information about the current URL",
+    "tags": [
+        "address",
+        "location",
+        "href",
+        "hostname",
+        "path",
+        "query",
+        "domain",
+        "window.location"
+    ],
     "issues": "",
     "docs": {
         "ports": []

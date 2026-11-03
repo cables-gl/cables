@@ -25,6 +25,15 @@
         ]
     },
     "summary": "Check if an array contains a string or number (find,search,indexOf)",
+    "tags": [
+        "find",
+        "search",
+        "indexof",
+        "includes",
+        "has",
+        "exists",
+        "test"
+    ],
     "authorName": "pandur",
     "id": "3ff90564-fe8d-422f-a4ee-f8bfb8f1b76f",
     "created": 1542698773328,

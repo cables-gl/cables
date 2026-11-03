@@ -41,6 +41,15 @@
         ]
     },
     "summary": "set a string value of an object using trigger",
+    "tags": [
+        "write",
+        "key",
+        "property",
+        "set",
+        "on trigger",
+        "json",
+        "text"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

@@ -21,6 +21,15 @@
         ]
     },
     "summary": "delay the value data flow by x seconds",
+    "tags": [
+        "wait",
+        "timeout",
+        "later",
+        "lag",
+        "postpone",
+        "timer",
+        "hold"
+    ],
     "authorName": "pandur",
     "id": "89ea7e9c-0dfb-4e1e-8e61-4e79112ee533",
     "created": 1519230727595,

@@ -27,6 +27,15 @@
         ]
     },
     "summary": "Edit a color gradient and output its gradient object and color array",
+    "tags": [
+        "ramp",
+        "fade",
+        "color transition",
+        "gradient editor",
+        "colors",
+        "blend",
+        "stops"
+    ],
     "docs": {
         "ports": [
             {

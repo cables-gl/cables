@@ -37,6 +37,15 @@
         ]
     },
     "summary": "Extract definable amount of random xyz points from an array",
+    "tags": [
+        "random",
+        "pick",
+        "sample",
+        "subset",
+        "choose",
+        "points",
+        "xyz"
+    ],
     "issues": "",
     "docs": {
         "ports": [

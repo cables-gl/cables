@@ -119,6 +119,13 @@
         ]
     },
     "summary": "add post processing fog (nebula) to a scene",
+    "tags": [
+        "mist",
+        "haze",
+        "atmosphere",
+        "depth fade",
+        "distance"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

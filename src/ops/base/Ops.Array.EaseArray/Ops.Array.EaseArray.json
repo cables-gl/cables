@@ -44,6 +44,14 @@
         ]
     },
     "summary": "Apply easing curve to numbers in an array",
+    "tags": [
+        "easing",
+        "curve",
+        "tween",
+        "smooth",
+        "interpolate",
+        "animation"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

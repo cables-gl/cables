@@ -1,5 +1,15 @@
 {
     "summary": "Draws a rectangle using the full WebGL canvas size / fullscreen",
+    "tags": [
+        "fullscreen quad",
+        "screen quad",
+        "full screen",
+        "background",
+        "post processing",
+        "effect",
+        "rectangle",
+        "plane"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -79,6 +79,14 @@
         ]
     },
     "summary": "Routes the value to one of the output ports (based on index, relay)",
+    "tags": [
+        "switch",
+        "select output",
+        "demux",
+        "split",
+        "send to",
+        "branch"
+    ],
     "docs": {
         "ports": [
             {

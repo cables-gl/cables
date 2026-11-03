@@ -43,6 +43,14 @@
         ]
     },
     "summary": "Sort an array of numbers and also get sorted indices ",
+    "tags": [
+        "order",
+        "argsort",
+        "rank",
+        "sorting",
+        "indices",
+        "permutation"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

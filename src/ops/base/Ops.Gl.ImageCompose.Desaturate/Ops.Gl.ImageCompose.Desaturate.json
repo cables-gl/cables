@@ -32,6 +32,15 @@
     "id": "340efbd5-be53-4bd5-92ad-8f38d8eeecf1",
     "created": 1508766377767,
     "summary": "Remove colors from image / greyscale",
+    "tags": [
+        "greyscale",
+        "grayscale",
+        "black and white",
+        "bw",
+        "monochrome",
+        "saturation",
+        "gray"
+    ],
     "docs": {
         "ports": []
     },

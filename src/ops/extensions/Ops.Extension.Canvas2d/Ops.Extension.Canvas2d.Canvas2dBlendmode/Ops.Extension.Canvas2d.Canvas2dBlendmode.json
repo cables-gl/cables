@@ -30,6 +30,15 @@
         ]
     },
     "summary": "Sets the blend mode (composite operation) for the canvas2d ops below it",
+    "tags": [
+        "composite",
+        "blend",
+        "globalcompositeoperation",
+        "multiply",
+        "screen",
+        "overlay",
+        "mask"
+    ],
     "isReleased": true,
     "license": "MIT",
     "exampleProjectId": "nc4BAy",

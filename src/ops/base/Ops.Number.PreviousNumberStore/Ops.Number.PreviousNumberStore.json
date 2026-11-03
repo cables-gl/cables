@@ -24,6 +24,14 @@
         ]
     },
     "summary": "remember/store last set number ",
+    "tags": [
+        "last value",
+        "history",
+        "remember",
+        "old value",
+        "store",
+        "previous"
+    ],
     "docs": {
         "ports": []
     },

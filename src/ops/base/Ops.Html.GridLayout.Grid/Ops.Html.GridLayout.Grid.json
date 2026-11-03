@@ -124,6 +124,16 @@
         "ports": []
     },
     "summary": "Arrange HTML elements in grids, create grids by combining rows and columns",
+    "tags": [
+        "css grid",
+        "layout",
+        "columns",
+        "rows",
+        "arrange",
+        "responsive",
+        "gallery",
+        "tiles"
+    ],
     "coreLibs": [
         "cgl"
     ],

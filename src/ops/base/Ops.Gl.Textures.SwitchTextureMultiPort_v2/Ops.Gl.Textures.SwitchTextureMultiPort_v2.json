@@ -44,6 +44,15 @@
         ]
     },
     "summary": "Switch between multiple textures",
+    "tags": [
+        "select",
+        "choose",
+        "multiplexer",
+        "mux",
+        "pick",
+        "index",
+        "many inputs"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

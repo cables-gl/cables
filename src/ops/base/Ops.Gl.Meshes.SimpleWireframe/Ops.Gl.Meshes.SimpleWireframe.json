@@ -32,6 +32,14 @@
         ]
     },
     "summary": "Simple Wireframe Line Renderer",
+    "tags": [
+        "wireframe",
+        "lines",
+        "edges",
+        "outline",
+        "mesh",
+        "debug"
+    ],
     "issues": "",
     "docs": {
         "ports": []

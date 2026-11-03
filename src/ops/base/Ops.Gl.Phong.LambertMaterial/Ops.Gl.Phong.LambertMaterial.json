@@ -47,6 +47,15 @@
         ]
     },
     "summary": "simple shaded material",
+    "tags": [
+        "diffuse",
+        "matte",
+        "shaded",
+        "lighting",
+        "lit",
+        "simple lighting",
+        "flat shading"
+    ],
     "docs": {
         "ports": []
     },

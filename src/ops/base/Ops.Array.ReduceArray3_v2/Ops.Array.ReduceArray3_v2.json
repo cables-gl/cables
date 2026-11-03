@@ -1,5 +1,13 @@
 {
     "summary": "Copy only every x point from an array",
+    "tags": [
+        "decimate",
+        "thin",
+        "downsample",
+        "simplify",
+        "remove points",
+        "every nth"
+    ],
     "layout": {
         "portsIn": [
             {

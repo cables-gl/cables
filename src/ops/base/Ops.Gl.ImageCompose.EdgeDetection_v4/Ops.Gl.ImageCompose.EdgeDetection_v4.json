@@ -77,6 +77,14 @@
         ]
     },
     "summary": "Draw only the edges of an image",
+    "tags": [
+        "outline",
+        "sobel",
+        "edges",
+        "contour",
+        "line art",
+        "toon"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

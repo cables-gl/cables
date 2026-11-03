@@ -53,6 +53,14 @@
         ]
     },
     "summary": "Merge multiple arrays - in consecutive order",
+    "tags": [
+        "concat",
+        "join",
+        "combine",
+        "append",
+        "concatenate",
+        "many inputs"
+    ],
     "docs": {
         "ports": []
     },

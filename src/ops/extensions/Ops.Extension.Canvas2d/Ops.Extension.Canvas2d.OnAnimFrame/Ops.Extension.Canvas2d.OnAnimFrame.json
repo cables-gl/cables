@@ -42,6 +42,15 @@
         ]
     },
     "summary": "Triggers every frame of the patch's render loop, like requestAnimationFrame",
+    "tags": [
+        "requestanimationframe",
+        "raf",
+        "every frame",
+        "loop",
+        "update",
+        "tick",
+        "render loop"
+    ],
     "isReleased": true,
     "docs": {
         "ports": []

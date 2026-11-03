@@ -1,5 +1,10 @@
 {
     "summary": "Round numbers down",
+    "tags": [
+        "round down",
+        "integer",
+        "truncate"
+    ],
     "issues": "",
     "docs": {
         "ports": [

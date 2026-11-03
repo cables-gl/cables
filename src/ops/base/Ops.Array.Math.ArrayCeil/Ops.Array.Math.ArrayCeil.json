@@ -24,6 +24,11 @@
         }
     ],
     "summary": "Round numbers up",
+    "tags": [
+        "round up",
+        "ceiling",
+        "integer"
+    ],
     "docs": {
         "ports": [
             {

@@ -54,6 +54,14 @@
         ]
     },
     "summary": "Convert HSL to RGB",
+    "tags": [
+        "hue",
+        "saturation",
+        "lightness",
+        "convert",
+        "color space",
+        "hsv"
+    ],
     "docs": {},
     "exampleProjectId": "3fOpvs",
     "isReleased": true,

@@ -1,5 +1,13 @@
 {
     "summary": "increment a number by triggering",
+    "tags": [
+        "counter",
+        "count",
+        "add one",
+        "increment",
+        "step",
+        "+1"
+    ],
     "layout": {
         "portsIn": [
             {

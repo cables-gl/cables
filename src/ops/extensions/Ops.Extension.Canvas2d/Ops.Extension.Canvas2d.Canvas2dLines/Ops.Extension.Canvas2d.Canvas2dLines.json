@@ -50,6 +50,15 @@
     },
     "license": "MIT",
     "summary": "Draws one or more lines from point arrays on a canvas2d, optionally smooth, closed or filled",
+    "tags": [
+        "line",
+        "polyline",
+        "path",
+        "stroke",
+        "points",
+        "connect",
+        "spline"
+    ],
     "isReleased": true,
     "exampleProjectId": "5qMQAy",
     "docs": {

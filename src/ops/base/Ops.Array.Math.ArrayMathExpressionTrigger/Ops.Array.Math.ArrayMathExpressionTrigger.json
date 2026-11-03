@@ -76,6 +76,14 @@
         ]
     },
     "summary": "Calculate a user-defined mathematical expression",
+    "tags": [
+        "formula",
+        "equation",
+        "expression",
+        "calculate",
+        "parser",
+        "on trigger"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

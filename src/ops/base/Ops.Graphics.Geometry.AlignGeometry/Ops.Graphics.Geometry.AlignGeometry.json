@@ -63,6 +63,15 @@
         ]
     },
     "summary": "align a geometry / change its pivot / center / origin point",
+    "tags": [
+        "pivot",
+        "origin",
+        "center",
+        "anchor",
+        "offset",
+        "move to origin",
+        "recenter"
+    ],
     "issues": "",
     "docs": {
         "ports": [

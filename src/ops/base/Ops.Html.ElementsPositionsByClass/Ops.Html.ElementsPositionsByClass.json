@@ -53,6 +53,15 @@
         ]
     },
     "summary": "get html element absolute positions and sizes by classname",
+    "tags": [
+        "bounding boxes",
+        "positions",
+        "sizes",
+        "measure",
+        "multiple",
+        "class",
+        "layout"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

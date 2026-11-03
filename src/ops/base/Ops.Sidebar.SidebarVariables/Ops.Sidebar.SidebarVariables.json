@@ -38,6 +38,15 @@
         }
     ],
     "summary": "show values of all variables in a sidebar",
+    "tags": [
+        "debug",
+        "monitor",
+        "watch",
+        "all variables",
+        "inspect",
+        "gui",
+        "list"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

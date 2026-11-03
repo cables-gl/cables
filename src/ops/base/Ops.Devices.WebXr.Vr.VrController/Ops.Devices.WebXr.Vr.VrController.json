@@ -173,6 +173,16 @@
         ]
     },
     "summary": "tracking of vr hand controller",
+    "tags": [
+        "hand controller",
+        "quest",
+        "oculus",
+        "tracking",
+        "vr input",
+        "buttons",
+        "pose",
+        "wand"
+    ],
     "exampleProjectId": "IzKYx5",
     "docs": {
         "ports": []

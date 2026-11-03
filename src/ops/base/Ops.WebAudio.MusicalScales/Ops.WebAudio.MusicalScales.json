@@ -1,5 +1,15 @@
 {
     "summary": "Outputs a musical scale array (major, minor, ...) as strings, steps and midi notes",
+    "tags": [
+        "notes",
+        "major",
+        "minor",
+        "pentatonic",
+        "harmony",
+        "music theory",
+        "chords",
+        "keys"
+    ],
     "layout": {
         "portsIn": [
             {

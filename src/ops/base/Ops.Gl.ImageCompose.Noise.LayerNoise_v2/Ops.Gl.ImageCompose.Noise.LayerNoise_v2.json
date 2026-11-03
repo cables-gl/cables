@@ -102,6 +102,13 @@
         ]
     },
     "summary": "Multilayer perlin noise variation",
+    "tags": [
+        "perlin",
+        "clouds",
+        "fractal",
+        "octaves",
+        "procedural"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

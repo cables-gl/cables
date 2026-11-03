@@ -82,6 +82,15 @@
     "id": "e4432ebd-d67c-46e2-b302-619d4f97daab",
     "created": 1553854782879,
     "summary": "Displace vertices using perlin noise animation",
+    "tags": [
+        "noise",
+        "displace",
+        "organic",
+        "wobble",
+        "wave",
+        "vertex",
+        "volume"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

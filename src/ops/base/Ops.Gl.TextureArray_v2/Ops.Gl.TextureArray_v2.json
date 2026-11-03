@@ -50,6 +50,14 @@
         ]
     },
     "summary": "Combine multiple textures into an array",
+    "tags": [
+        "combine",
+        "collect",
+        "images",
+        "list",
+        "array",
+        "group"
+    ],
     "docs": {
         "ports": []
     },

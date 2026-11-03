@@ -60,6 +60,13 @@
         }
     ],
     "summary": "Blurs a texture  - cheap and fast",
+    "tags": [
+        "gaussian",
+        "soften",
+        "smooth",
+        "quick blur",
+        "glow"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

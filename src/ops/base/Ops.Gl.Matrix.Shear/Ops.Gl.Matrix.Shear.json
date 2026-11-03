@@ -27,6 +27,13 @@
         ]
     },
     "summary": "displaces each point of a mesh in fixed direction",
+    "tags": [
+        "skew",
+        "slant",
+        "distort",
+        "lean",
+        "deform"
+    ],
     "docs": {
         "ports": []
     },

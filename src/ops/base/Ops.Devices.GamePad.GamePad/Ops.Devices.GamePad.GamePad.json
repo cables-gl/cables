@@ -1,5 +1,15 @@
 {
     "summary": "Outputs the button states of a gamepad",
+    "tags": [
+        "controller",
+        "joypad",
+        "xbox",
+        "playstation",
+        "buttons",
+        "input",
+        "game controller",
+        "joystick"
+    ],
     "authorName": "pandur",
     "id": "3acf39ed-53cc-45eb-8516-43319839d457",
     "created": 1519815830794,

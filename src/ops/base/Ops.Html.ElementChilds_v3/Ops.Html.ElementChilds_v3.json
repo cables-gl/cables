@@ -64,6 +64,16 @@
         "ports": []
     },
     "summary": "add child elements to another HTML Element",
+    "tags": [
+        "children",
+        "append",
+        "nest",
+        "parent",
+        "dom",
+        "hierarchy",
+        "add elements",
+        "appendchild"
+    ],
     "exampleProjectId": "zC9iWh",
     "isReleased": true
 }

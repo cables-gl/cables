@@ -1,5 +1,15 @@
 {
     "summary": "Mix audio signals together",
+    "tags": [
+        "combine",
+        "sum",
+        "blend",
+        "mix audio",
+        "channels",
+        "merge",
+        "summing",
+        "fader"
+    ],
     "layout": {
         "portsIn": [
             {

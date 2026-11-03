@@ -1,5 +1,12 @@
 {
     "summary": "Add two values",
+    "tags": [
+        "add",
+        "plus",
+        "+",
+        "addition",
+        "total"
+    ],
     "layout": {
         "portsIn": [
             {

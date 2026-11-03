@@ -33,6 +33,16 @@
     },
     "isReleased": true,
     "summary": "Edit a simple curve",
+    "tags": [
+        "curve",
+        "envelope",
+        "graph",
+        "spline",
+        "easing",
+        "draw",
+        "bezier",
+        "function"
+    ],
     "docs": {
         "ports": []
     }

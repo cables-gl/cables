@@ -39,6 +39,15 @@
         ]
     },
     "summary": "Replace Words as links in markdown strings",
+    "tags": [
+        "url",
+        "hyperlink",
+        "anchor",
+        "md",
+        "format",
+        "href",
+        "replace words"
+    ],
     "docs": {
         "ports": []
     },

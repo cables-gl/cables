@@ -26,6 +26,17 @@
         ]
     },
     "summary": "Returns the object at the position defined by a path",
+    "tags": [
+        "query",
+        "jsonpath",
+        "nested",
+        "lookup",
+        "get",
+        "object",
+        "path",
+        "access",
+        "dot notation"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

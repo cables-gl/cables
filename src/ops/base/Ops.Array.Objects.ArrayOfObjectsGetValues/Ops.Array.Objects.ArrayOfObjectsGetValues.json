@@ -39,6 +39,15 @@
         ]
     },
     "summary": "Extract values for a given key from an array of objects",
+    "tags": [
+        "json",
+        "pluck",
+        "extract",
+        "column",
+        "property",
+        "objects",
+        "map"
+    ],
     "docs": {},
     "exampleProjectId": "KQGGeT",
     "license": "MIT",

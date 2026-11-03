@@ -40,6 +40,14 @@
         ]
     },
     "summary": "delay the output of a string by n seconds",
+    "tags": [
+        "wait",
+        "timeout",
+        "later",
+        "lag",
+        "postpone",
+        "timer"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

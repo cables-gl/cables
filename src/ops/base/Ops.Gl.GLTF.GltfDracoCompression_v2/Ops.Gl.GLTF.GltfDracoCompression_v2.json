@@ -25,6 +25,14 @@
     "created": 1776069740750,
     "layout": {},
     "summary": "gltf draco compression library",
+    "tags": [
+        "draco",
+        "compressed",
+        "decoder",
+        "mesh compression",
+        "library",
+        "glb"
+    ],
     "youtubeids": [
         "Vo3Hs8-p7_I"
     ],

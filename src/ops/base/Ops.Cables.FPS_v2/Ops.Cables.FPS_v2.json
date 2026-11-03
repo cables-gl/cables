@@ -10,6 +10,15 @@
     "authorName": "pandur",
     "created": 1600117397013,
     "summary": "Show the current frame rate in frames per second and milliseconds",
+    "tags": [
+        "frame rate",
+        "framerate",
+        "performance",
+        "speed",
+        "fps counter",
+        "stats",
+        "frames per second"
+    ],
     "docs": {},
     "layout": {
         "portsOut": [

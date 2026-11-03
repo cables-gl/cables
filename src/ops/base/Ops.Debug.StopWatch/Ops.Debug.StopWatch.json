@@ -1,5 +1,15 @@
 {
     "summary": "Measure the time used to render all child nodes in milliseconds",
+    "tags": [
+        "timing",
+        "measure",
+        "duration",
+        "performance",
+        "profile",
+        "render time",
+        "ms",
+        "benchmark"
+    ],
     "authorName": "pandur",
     "id": "5dd205e6-b475-4a3b-9a3b-d242847f4b81",
     "created": 1519811102851,

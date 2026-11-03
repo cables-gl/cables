@@ -1,5 +1,15 @@
 {
     "summary": "timed switching of trigger",
+    "tags": [
+        "timeline",
+        "schedule",
+        "sequence",
+        "time based",
+        "cue",
+        "steps",
+        "staggered",
+        "delay chain"
+    ],
     "authorName": "pandur",
     "id": "73c892c9-3e81-4ddc-952a-fbe6bf00ef2c",
     "created": 1516308627269,

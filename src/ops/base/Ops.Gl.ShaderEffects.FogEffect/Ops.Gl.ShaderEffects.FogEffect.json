@@ -52,6 +52,14 @@
     "id": "ad61e198-f178-42d0-8be9-cc776365cd3b",
     "created": 1524478605086,
     "summary": "Fog as a shadereffect applied to a material",
+    "tags": [
+        "mist",
+        "haze",
+        "atmosphere",
+        "depth fade",
+        "distance",
+        "shader effect"
+    ],
     "docs": {
         "ports": []
     },

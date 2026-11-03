@@ -29,6 +29,15 @@
         }
     ],
     "summary": "Draw a grid on the floor plane",
+    "tags": [
+        "grid",
+        "ground",
+        "floor",
+        "helper",
+        "reference",
+        "checkerboard",
+        "plane"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

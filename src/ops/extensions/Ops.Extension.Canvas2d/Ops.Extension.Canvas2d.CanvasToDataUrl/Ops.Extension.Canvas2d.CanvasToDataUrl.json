@@ -50,6 +50,16 @@
         ]
     },
     "summary": "Converts a canvas element into a png, jpeg or webp image data url",
+    "tags": [
+        "export",
+        "png",
+        "jpeg",
+        "webp",
+        "data url",
+        "base64",
+        "save image",
+        "screenshot"
+    ],
     "isReleased": true,
     "exampleProjectId": "5wBgAy",
     "docs": {

@@ -55,6 +55,15 @@
         ]
     },
     "summary": "Set a background image of a HTML element",
+    "tags": [
+        "background",
+        "image",
+        "cover",
+        "css",
+        "style",
+        "wallpaper",
+        "picture"
+    ],
     "issues": "",
     "docs": {
         "ports": []

@@ -16,6 +16,16 @@
         ]
     },
     "summary": "cookie of the current website as object",
+    "tags": [
+        "storage",
+        "browser",
+        "session",
+        "read",
+        "write",
+        "preferences",
+        "persist",
+        "tracking"
+    ],
     "license": "MIT",
     "exampleProjectId": "oNMzci",
     "docs": {

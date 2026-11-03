@@ -33,6 +33,14 @@
         ]
     },
     "summary": "Fill an XYZ array with existing duplicate points until it reaches the length ",
+    "tags": [
+        "pad",
+        "repeat",
+        "fill",
+        "duplicates",
+        "resize",
+        "points"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

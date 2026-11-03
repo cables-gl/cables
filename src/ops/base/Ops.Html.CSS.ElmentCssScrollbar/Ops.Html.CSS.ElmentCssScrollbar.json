@@ -78,6 +78,15 @@
         ]
     },
     "summary": "Set CSS properties for scrollbars",
+    "tags": [
+        "scroll bar",
+        "overflow",
+        "scrolling",
+        "css",
+        "style",
+        "thumb",
+        "track"
+    ],
     "docs": {
         "ports": []
     },

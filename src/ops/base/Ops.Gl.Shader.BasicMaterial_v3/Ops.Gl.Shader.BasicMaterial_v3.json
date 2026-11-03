@@ -132,6 +132,17 @@
         ]
     },
     "summary": "A material without shading",
+    "tags": [
+        "unlit",
+        "flat",
+        "color",
+        "texture",
+        "simple",
+        "standard material",
+        "default",
+        "no lighting",
+        "diffuse color"
+    ],
     "issues": "",
     "youtubeids": [
         "F-CUdHq40Pc"

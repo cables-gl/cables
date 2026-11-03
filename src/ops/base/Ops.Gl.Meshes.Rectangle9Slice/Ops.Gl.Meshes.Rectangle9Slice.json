@@ -66,6 +66,16 @@
         ]
     },
     "summary": "nine slice image format texture mapped rectangle ",
+    "tags": [
+        "9-slice",
+        "nine slice",
+        "scale9",
+        "ui",
+        "panel",
+        "button",
+        "border",
+        "stretch"
+    ],
     "docs": {
         "ports": []
     },

@@ -55,6 +55,14 @@
         }
     ],
     "summary": "Reduce a 3D point array by removing every nth point, random points, or near-duplicates",
+    "tags": [
+        "decimate",
+        "thin",
+        "downsample",
+        "simplify",
+        "remove points",
+        "every nth"
+    ],
     "docs": {
         "ports": [
             {

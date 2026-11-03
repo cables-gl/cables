@@ -1,5 +1,14 @@
 {
     "summary": "Is n1 smaller than n2? (lesser, less)",
+    "tags": [
+        "<",
+        "smaller",
+        "lower",
+        "fewer",
+        "test",
+        "condition",
+        "bool"
+    ],
     "layout": {
         "portsIn": [
             {

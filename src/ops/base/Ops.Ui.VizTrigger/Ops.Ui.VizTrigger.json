@@ -57,6 +57,17 @@
         ]
     },
     "summary": "Visualize triggering for debugging reasons",
+    "tags": [
+        "flash",
+        "debug",
+        "visualize",
+        "blink",
+        "indicator",
+        "led",
+        "event",
+        "pulse",
+        "activity"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

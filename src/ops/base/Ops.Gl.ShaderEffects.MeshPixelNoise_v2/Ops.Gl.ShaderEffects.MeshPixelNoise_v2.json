@@ -95,6 +95,15 @@
         "cgl"
     ],
     "summary": "3d space noise for mesh materials",
+    "tags": [
+        "3d noise",
+        "grain",
+        "dirt",
+        "surface noise",
+        "texture",
+        "procedural",
+        "noise"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

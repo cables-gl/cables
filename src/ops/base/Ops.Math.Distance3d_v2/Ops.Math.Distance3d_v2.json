@@ -58,6 +58,13 @@
         ]
     },
     "summary": "distance between two 3d points, calculated when triggered",
+    "tags": [
+        "length",
+        "between points",
+        "xyz",
+        "euclidean",
+        "range"
+    ],
     "docs": {
         "ports": []
     },

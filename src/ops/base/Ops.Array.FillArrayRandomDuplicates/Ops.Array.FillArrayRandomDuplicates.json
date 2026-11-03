@@ -48,6 +48,14 @@
         ]
     },
     "summary": "Fill an array with random duplicates",
+    "tags": [
+        "random",
+        "repeat",
+        "duplicates",
+        "fill",
+        "pad",
+        "noise"
+    ],
     "issues": "",
     "docs": {
         "ports": [

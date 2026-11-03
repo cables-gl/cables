@@ -61,6 +61,15 @@
         ]
     },
     "summary": "Triangulate a 2d path to a flat and filled 3d geometry",
+    "tags": [
+        "fill shape",
+        "polygon",
+        "outline to mesh",
+        "flat shape",
+        "earcut",
+        "2d to 3d",
+        "tessellate"
+    ],
     "docs": {},
     "exampleProjectId": "LzTAeT",
     "license": "MIT",

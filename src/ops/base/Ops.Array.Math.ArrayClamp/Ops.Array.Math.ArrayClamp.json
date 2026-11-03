@@ -34,6 +34,14 @@
         ]
     },
     "summary": "Clamp the values of an array to a min and max value",
+    "tags": [
+        "limit",
+        "min",
+        "max",
+        "constrain",
+        "saturate",
+        "bounds"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

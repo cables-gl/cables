@@ -56,6 +56,16 @@
         ]
     },
     "summary": "create a modal HTML overlay with a darkened background",
+    "tags": [
+        "popup",
+        "dialog",
+        "lightbox",
+        "overlay",
+        "dim",
+        "window",
+        "modal",
+        "curtain"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

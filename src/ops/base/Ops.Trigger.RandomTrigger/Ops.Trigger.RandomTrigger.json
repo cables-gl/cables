@@ -65,6 +65,15 @@
         ]
     },
     "summary": "randomly trigger output ports",
+    "tags": [
+        "random",
+        "chance",
+        "pick",
+        "dice",
+        "choose",
+        "shuffle",
+        "select output"
+    ],
     "docs": {
         "ports": [
             {

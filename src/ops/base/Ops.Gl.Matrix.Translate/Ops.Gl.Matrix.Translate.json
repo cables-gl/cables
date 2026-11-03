@@ -33,6 +33,16 @@
         ]
     },
     "summary": "Translate objects (move / position in 3D space)",
+    "tags": [
+        "move",
+        "position",
+        "offset",
+        "location",
+        "shift",
+        "place",
+        "transform",
+        "xyz"
+    ],
     "docs": {
         "ports": [
             {

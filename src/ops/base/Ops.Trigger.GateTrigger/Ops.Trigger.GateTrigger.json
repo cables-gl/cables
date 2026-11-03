@@ -22,6 +22,16 @@
         ]
     },
     "summary": "Allows a trigger to pass only if the gate is open",
+    "tags": [
+        "pass",
+        "block",
+        "switch",
+        "allow",
+        "if",
+        "conditional",
+        "mute",
+        "open close"
+    ],
     "issues": "",
     "youtubeids": [
         "gT1jXP5As9A"

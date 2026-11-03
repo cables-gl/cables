@@ -26,6 +26,15 @@
         ]
     },
     "summary": "Switches two number values using a boolean",
+    "tags": [
+        "convert",
+        "0 1",
+        "switch",
+        "select",
+        "cast",
+        "ternary",
+        "if else"
+    ],
     "docs": {
         "ports": [
             {

@@ -1,5 +1,13 @@
 {
     "summary": "Generate a mesh of column and row lines",
+    "tags": [
+        "lines",
+        "grid",
+        "bars",
+        "strips",
+        "stripes",
+        "hatch"
+    ],
     "authorName": "pandur",
     "id": "a75265c2-957b-4719-9d03-7bbf00ace364",
     "created": 1519814033280,

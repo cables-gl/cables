@@ -98,6 +98,15 @@
         "ports": []
     },
     "summary": "Render Multiple Layers in a specific order",
+    "tags": [
+        "order",
+        "layers",
+        "z order",
+        "stacking",
+        "sequence",
+        "render order",
+        "priority"
+    ],
     "coreLibs": [
         "cgl"
     ],

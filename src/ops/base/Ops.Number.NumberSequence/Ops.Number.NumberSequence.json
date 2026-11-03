@@ -38,6 +38,15 @@
         ]
     },
     "summary": "Copies the input value to the output ports (value sequence)",
+    "tags": [
+        "order",
+        "flow",
+        "sequence",
+        "chain",
+        "copy",
+        "fan out",
+        "priority"
+    ],
     "docs": {
         "ports": [
             {

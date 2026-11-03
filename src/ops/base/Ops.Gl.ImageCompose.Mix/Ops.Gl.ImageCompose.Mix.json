@@ -1,5 +1,15 @@
 {
     "summary": "simple mix/fade of two input images ",
+    "tags": [
+        "blend",
+        "crossfade",
+        "fade",
+        "dissolve",
+        "lerp",
+        "transition",
+        "combine",
+        "blend mode"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -66,6 +66,14 @@
         ]
     },
     "summary": "Set the width and height of an HTML element",
+    "tags": [
+        "width",
+        "height",
+        "dimensions",
+        "css",
+        "resize",
+        "box"
+    ],
     "docs": {
         "ports": []
     },

@@ -1,5 +1,15 @@
 {
     "summary": "apply simple mathematical functions on pixels color values",
+    "tags": [
+        "math",
+        "add",
+        "subtract",
+        "multiply",
+        "divide",
+        "arithmetic",
+        "operations",
+        "pixels"
+    ],
     "layout": {
         "portsIn": [
             {

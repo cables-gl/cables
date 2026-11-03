@@ -36,6 +36,16 @@
         ]
     },
     "summary": "Measure the time used to execute all child ops / profiling",
+    "tags": [
+        "profile",
+        "timing",
+        "benchmark",
+        "cpu time",
+        "optimize",
+        "ms",
+        "stopwatch",
+        "cost"
+    ],
     "docs": {},
     "isReleased": true,
     "license": "MIT",

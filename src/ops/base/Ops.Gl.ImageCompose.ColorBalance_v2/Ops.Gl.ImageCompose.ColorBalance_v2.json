@@ -38,6 +38,14 @@
     "id": "5af81475-2aa6-451b-a1f3-0980f641a72e",
     "created": 1650967446714,
     "summary": "change intensity of r,g,b channels",
+    "tags": [
+        "grading",
+        "color correction",
+        "rgb",
+        "tint",
+        "white balance",
+        "color cast"
+    ],
     "exampleProjectId": "FGVncy",
     "changelog": [
         {

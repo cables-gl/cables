@@ -182,6 +182,15 @@
         ]
     },
     "summary": "Renders a scene to multiple textures.",
+    "tags": [
+        "framebuffer",
+        "fbo",
+        "mrt",
+        "multiple render targets",
+        "gbuffer",
+        "offscreen",
+        "buffers"
+    ],
     "docs": {
         "ports": []
     },

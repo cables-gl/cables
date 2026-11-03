@@ -96,6 +96,16 @@
         ]
     },
     "summary": "Set the child elements of a parent HTML element",
+    "tags": [
+        "children",
+        "append",
+        "nest",
+        "parent",
+        "dom",
+        "hierarchy",
+        "add elements",
+        "appendchild"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

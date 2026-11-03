@@ -1,5 +1,13 @@
 {
     "summary": "pick a color at x,y coordinates of canvas",
+    "tags": [
+        "color picker",
+        "sample",
+        "read pixel",
+        "eyedropper",
+        "readpixels",
+        "canvas color"
+    ],
     "authorName": "pandur",
     "id": "12de35ad-3f76-496c-9585-b77a87530de3",
     "created": 1518872255395,

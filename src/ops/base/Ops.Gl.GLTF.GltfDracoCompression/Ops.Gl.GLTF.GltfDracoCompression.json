@@ -19,6 +19,14 @@
         "portsOut": []
     },
     "summary": "gltf draco compression library",
+    "tags": [
+        "draco",
+        "compressed",
+        "decoder",
+        "mesh compression",
+        "library",
+        "glb"
+    ],
     "issues": "",
     "youtubeids": [
         "Vo3Hs8-p7_I"

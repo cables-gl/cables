@@ -28,6 +28,15 @@
         ]
     },
     "summary": "triggers when array has changed",
+    "tags": [
+        "change",
+        "detect",
+        "event",
+        "onchange",
+        "listener",
+        "update",
+        "array changed"
+    ],
     "youtubeid": "",
     "issues": "",
     "docs": {

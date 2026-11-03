@@ -299,6 +299,16 @@
         "cgl"
     ],
     "summary": "Generates a texture of Text using one of the font ops",
+    "tags": [
+        "text",
+        "font",
+        "type",
+        "typography",
+        "label",
+        "letters",
+        "string",
+        "write"
+    ],
     "issues": "",
     "youtubeids": [
         "z1Qf9dE67-w"

@@ -48,6 +48,17 @@
         ]
     },
     "summary": "Performs logical comparison operations on two arrays",
+    "tags": [
+        "compare",
+        "greater",
+        "less",
+        "equal",
+        "boolean",
+        "test",
+        "condition",
+        "mask",
+        "two arrays"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

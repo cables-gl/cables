@@ -93,6 +93,16 @@
         ]
     },
     "summary": "use a cubemap or equirectangular texture as a material",
+    "tags": [
+        "skybox",
+        "environment",
+        "reflection",
+        "equirectangular",
+        "hdr",
+        "panorama",
+        "360",
+        "sky"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -21,6 +21,15 @@
         ]
     },
     "summary": "result is true if number1 and number2 are equal",
+    "tags": [
+        "same",
+        "equal",
+        "identical",
+        "==",
+        "test",
+        "condition",
+        "bool"
+    ],
     "docs": {
         "ports": []
     },

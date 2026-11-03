@@ -4,6 +4,16 @@
     "id": "a466bc1f-06e9-4595-8849-bffb9fe22f99",
     "created": 1511171612134,
     "summary": "control the order of execution/triggering",
+    "tags": [
+        "order",
+        "flow",
+        "sequence",
+        "chain",
+        "priority",
+        "execution order",
+        "fan out",
+        "split"
+    ],
     "docs": {
         "ports": []
     },

@@ -62,6 +62,15 @@
         ]
     },
     "summary": "Control a single node from the GLTFscene op",
+    "tags": [
+        "object",
+        "control node",
+        "transform",
+        "find node",
+        "part",
+        "bone",
+        "child"
+    ],
     "issues": "",
     "youtubeids": [
         "QNLw21hSweg"

@@ -1,5 +1,15 @@
 {
     "summary": "get the loading progress, for displaying a loading screen",
+    "tags": [
+        "loading",
+        "preloader",
+        "progress",
+        "percent",
+        "assets",
+        "loading screen",
+        "finished",
+        "ready"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -1,5 +1,12 @@
 {
     "summary": "Increase contrast in midtones",
+    "tags": [
+        "midtones",
+        "local contrast",
+        "sharpen",
+        "detail",
+        "punch"
+    ],
     "authorName": "pandur",
     "id": "37d66c32-5594-4509-bba0-0ba2cbb706d8",
     "created": 1519812712350,

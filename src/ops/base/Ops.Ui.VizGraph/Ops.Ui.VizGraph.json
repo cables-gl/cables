@@ -71,6 +71,17 @@
         "portsOut": []
     },
     "summary": "Displays graphs for the numbers on the input port in the patchfield",
+    "tags": [
+        "plot",
+        "line chart",
+        "debug",
+        "visualize",
+        "history",
+        "oscilloscope",
+        "curve",
+        "number graph",
+        "scope"
+    ],
     "issues": "",
     "youtubeids": [
         "-1vMiU6BcDg"

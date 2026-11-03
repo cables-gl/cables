@@ -1,5 +1,11 @@
 {
     "summary": "invert image colors",
+    "tags": [
+        "negative",
+        "inverse",
+        "reverse colors",
+        "flip colors"
+    ],
     "layout": {
         "portsIn": [
             {

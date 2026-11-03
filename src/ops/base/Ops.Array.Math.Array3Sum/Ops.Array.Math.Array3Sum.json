@@ -32,6 +32,14 @@
         ]
     },
     "summary": "Add number to every XYZ member of array3x",
+    "tags": [
+        "add",
+        "plus",
+        "offset",
+        "translate",
+        "xyz",
+        "move"
+    ],
     "docs": {
         "ports": [
             {

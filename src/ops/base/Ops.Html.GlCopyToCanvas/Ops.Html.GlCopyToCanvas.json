@@ -36,6 +36,14 @@
         ]
     },
     "summary": "Copy GL canvas content to another canvas",
+    "tags": [
+        "mirror",
+        "second canvas",
+        "duplicate",
+        "copy",
+        "webgl to 2d",
+        "preview"
+    ],
     "docs": {
         "ports": []
     },

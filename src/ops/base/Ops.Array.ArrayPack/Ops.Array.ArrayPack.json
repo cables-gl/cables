@@ -52,6 +52,14 @@
         ]
     },
     "summary": "Pack multiple arrays into a new array",
+    "tags": [
+        "combine",
+        "interleave",
+        "stride",
+        "merge",
+        "zip",
+        "channels"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

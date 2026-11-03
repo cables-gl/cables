@@ -64,6 +64,16 @@
         ]
     },
     "summary": "Shows a color-picker in the sidebar",
+    "tags": [
+        "color",
+        "swatch",
+        "ui",
+        "gui",
+        "control panel",
+        "rgb",
+        "system picker",
+        "interface"
+    ],
     "docs": {
         "ports": [
             {

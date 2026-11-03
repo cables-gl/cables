@@ -31,6 +31,15 @@
     "id": "862d2929-41db-42a5-869c-79ef09010150",
     "created": 1772276061004,
     "summary": "merge multiple geometries into one",
+    "tags": [
+        "combine",
+        "join",
+        "add",
+        "union",
+        "concatenate",
+        "many meshes",
+        "attach"
+    ],
     "exampleProjectId": "4gsNve",
     "docs": {
         "ports": []

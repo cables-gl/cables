@@ -24,6 +24,14 @@
         ]
     },
     "summary": "Convert an array of objects into readable string format",
+    "tags": [
+        "json",
+        "stringify",
+        "serialize",
+        "text",
+        "debug",
+        "objects"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

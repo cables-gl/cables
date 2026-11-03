@@ -98,6 +98,15 @@
         ]
     },
     "summary": "manage sidebar presets",
+    "tags": [
+        "snapshot",
+        "save state",
+        "recall",
+        "scenes",
+        "parameters",
+        "store",
+        "gui"
+    ],
     "docs": {
         "ports": []
     },

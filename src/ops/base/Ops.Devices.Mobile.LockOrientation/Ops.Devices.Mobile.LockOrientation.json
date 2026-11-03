@@ -30,6 +30,15 @@
         ]
     },
     "summary": "locks orientation to landscape or portrait mode",
+    "tags": [
+        "landscape",
+        "portrait",
+        "rotate",
+        "screen rotation",
+        "phone",
+        "tablet",
+        "fixed"
+    ],
     "docs": {
         "ports": []
     },

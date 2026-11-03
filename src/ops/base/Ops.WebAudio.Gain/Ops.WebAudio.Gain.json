@@ -26,6 +26,15 @@
         ]
     },
     "summary": "Changes the gain / volume",
+    "tags": [
+        "volume",
+        "loudness",
+        "amplify",
+        "level",
+        "fader",
+        "attenuate",
+        "mute"
+    ],
     "docs": {
         "ports": [
             {

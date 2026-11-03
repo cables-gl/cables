@@ -83,5 +83,15 @@
         "cgl"
     ],
     "license": "MIT",
-    "summary": "Draws text on a canvas2d"
+    "summary": "Draws text on a canvas2d",
+    "tags": [
+        "text",
+        "font",
+        "type",
+        "typography",
+        "fillText",
+        "string",
+        "label",
+        "letters"
+    ]
 }

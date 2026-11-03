@@ -42,6 +42,14 @@
         ]
     },
     "summary": "Get data from a single key in an animation",
+    "tags": [
+        "keyframe",
+        "read",
+        "time",
+        "value",
+        "single key",
+        "curve data"
+    ],
     "docs": {
         "ports": []
     },

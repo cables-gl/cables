@@ -34,6 +34,15 @@
         ]
     },
     "summary": "convert screen pixel coordinates to range 0-1",
+    "tags": [
+        "0-1",
+        "uv",
+        "pixel to uv",
+        "convert",
+        "relative",
+        "percent",
+        "mouse position"
+    ],
     "docs": {
         "ports": []
     },

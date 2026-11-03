@@ -31,6 +31,15 @@
         ]
     },
     "summary": "Visualize numbers as a bar in patch, useful for debugging",
+    "tags": [
+        "meter",
+        "debug",
+        "visualize",
+        "progress bar",
+        "level",
+        "slider display",
+        "gauge"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

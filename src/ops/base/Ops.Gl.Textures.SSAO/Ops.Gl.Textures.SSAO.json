@@ -124,6 +124,15 @@
         ]
     },
     "summary": "screen space ambient occlusion from depth texture",
+    "tags": [
+        "ambient occlusion",
+        "ao",
+        "shadows",
+        "depth",
+        "contact shadows",
+        "post processing",
+        "shading"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

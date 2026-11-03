@@ -62,6 +62,13 @@
     "id": "d2748c53-9ac1-4cd7-8176-66d3eb5d1bb6",
     "created": 1651042831640,
     "summary": "value noise",
+    "tags": [
+        "blocky",
+        "smooth noise",
+        "procedural",
+        "random",
+        "interpolated"
+    ],
     "docs": {
         "ports": []
     },

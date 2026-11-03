@@ -1,5 +1,13 @@
 {
     "summary": "Blur the pixels of an image",
+    "tags": [
+        "gaussian",
+        "soften",
+        "smooth",
+        "defocus",
+        "bokeh",
+        "glow"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -108,6 +108,16 @@
         ]
     },
     "summary": "Trigger a simple pop up notification on the screen",
+    "tags": [
+        "toast",
+        "popup",
+        "message",
+        "alert",
+        "snackbar",
+        "banner",
+        "info",
+        "hint"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -21,6 +21,16 @@
         ]
     },
     "summary": "Create a loading job while input is true",
+    "tags": [
+        "loading",
+        "preloader",
+        "wait",
+        "progress",
+        "asset loading",
+        "job",
+        "async",
+        "loading screen"
+    ],
     "docs": {
         "ports": []
     },

@@ -33,6 +33,14 @@
         ]
     },
     "summary": "Interpolate XYZ coordinates at a fractional index in a 3D point array",
+    "tags": [
+        "sample",
+        "lookup",
+        "fractional index",
+        "lerp",
+        "path position",
+        "xyz"
+    ],
     "docs": {
         "ports": [
             {

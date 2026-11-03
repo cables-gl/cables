@@ -30,6 +30,15 @@
         ]
     },
     "summary": "Parses a string to a JSON object ",
+    "tags": [
+        "parse",
+        "string to json",
+        "deserialize",
+        "json.parse",
+        "convert",
+        "decode",
+        "text to object"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

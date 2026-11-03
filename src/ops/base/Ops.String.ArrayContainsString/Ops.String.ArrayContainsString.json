@@ -15,6 +15,15 @@
     "authorName": "pandur",
     "created": 1591695070465,
     "summary": "Check if an array contains a string which can also be a number (find,search,indexOf)",
+    "tags": [
+        "find",
+        "search",
+        "indexof",
+        "includes",
+        "has",
+        "exists",
+        "test"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -43,6 +43,14 @@
         "cgl"
     ],
     "summary": "Use vertex color as basecolor/diffuse color",
+    "tags": [
+        "vertex colors",
+        "paint",
+        "mesh color",
+        "diffuse",
+        "attribute",
+        "color"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -39,6 +39,14 @@
         ]
     },
     "summary": "Repeat chunks of an array multiple times",
+    "tags": [
+        "repeat",
+        "tile",
+        "copy",
+        "duplicate",
+        "pattern",
+        "loop"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

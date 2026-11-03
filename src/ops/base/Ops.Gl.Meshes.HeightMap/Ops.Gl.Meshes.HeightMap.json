@@ -60,6 +60,15 @@
         ]
     },
     "summary": "generate a rectangular mesh where the height is defined by the luminance of an image",
+    "tags": [
+        "terrain",
+        "displacement",
+        "landscape",
+        "relief",
+        "elevation",
+        "topography",
+        "plane"
+    ],
     "docs": {
         "ports": []
     },

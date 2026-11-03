@@ -21,6 +21,15 @@
         ]
     },
     "summary": "Get URL query parameters",
+    "tags": [
+        "url parameters",
+        "get parameter",
+        "query string",
+        "?param",
+        "read",
+        "arguments",
+        "deep link"
+    ],
     "updated": 1521728915231,
     "authorName": "pandur",
     "id": "c6e90a0b-e3c8-40a1-9d90-fe00c3bdd341",

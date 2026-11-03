@@ -1,5 +1,13 @@
 {
     "summary": "transform RGB values interpreted as XYZ coordinates",
+    "tags": [
+        "xyz",
+        "coordinates",
+        "vector",
+        "matrix",
+        "transform",
+        "positions"
+    ],
     "layout": {
         "portsIn": [
             {

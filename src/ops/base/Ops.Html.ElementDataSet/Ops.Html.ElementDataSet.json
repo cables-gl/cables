@@ -26,6 +26,13 @@
         ]
     },
     "summary": "Get the data-attributes and values of an HTML element",
+    "tags": [
+        "data attributes",
+        "data-*",
+        "dataset",
+        "read",
+        "custom attributes"
+    ],
     "docs": {
         "ports": []
     },

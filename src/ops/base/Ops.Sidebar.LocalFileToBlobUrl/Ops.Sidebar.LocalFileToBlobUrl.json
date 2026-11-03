@@ -105,5 +105,14 @@
             }
         ]
     },
-    "summary": "Add a sidebar file picker that outputs blob URLs and filenames."
+    "summary": "Add a sidebar file picker that outputs blob URLs and filenames.",
+    "tags": [
+        "file picker",
+        "upload",
+        "open file",
+        "load",
+        "choose file",
+        "input",
+        "gui"
+    ]
 }

@@ -25,6 +25,13 @@
         ]
     },
     "summary": "Resets translation, rotation and scale for the canvas2d ops below it",
+    "tags": [
+        "reset",
+        "identity",
+        "restore",
+        "clear transform",
+        "origin"
+    ],
     "license": "MIT",
     "isReleased": true,
     "docs": {

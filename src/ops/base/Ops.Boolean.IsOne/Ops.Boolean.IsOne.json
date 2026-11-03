@@ -16,6 +16,14 @@
         ]
     },
     "summary": "Returns `true` if input value is `1`",
+    "tags": [
+        "equals one",
+        "==1",
+        "test",
+        "check",
+        "bool",
+        "compare"
+    ],
     "docs": {
         "ports": [
             {

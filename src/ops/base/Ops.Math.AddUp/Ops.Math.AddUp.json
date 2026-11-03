@@ -28,6 +28,13 @@
         ]
     },
     "summary": "add up numbers",
+    "tags": [
+        "sum",
+        "add",
+        "plus",
+        "total",
+        "accumulate"
+    ],
     "license": "MIT",
     "exampleProjectId": "cWh78i",
     "docs": {

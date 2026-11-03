@@ -136,6 +136,14 @@
         }
     ],
     "summary": "Worley noise",
+    "tags": [
+        "cellular",
+        "cells",
+        "voronoi",
+        "organic",
+        "procedural",
+        "distance"
+    ],
     "docs": {
         "ports": []
     },

@@ -53,6 +53,14 @@
         ]
     },
     "summary": "Calculate the luminance contrast between two colors",
+    "tags": [
+        "accessibility",
+        "wcag",
+        "readability",
+        "contrast ratio",
+        "a11y",
+        "legibility"
+    ],
     "docs": {
         "ports": []
     },

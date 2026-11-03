@@ -82,6 +82,15 @@
     "authorName": "pandur",
     "created": 1686149050119,
     "summary": "Add Bodies and check if they intersect/collide with each other",
+    "tags": [
+        "collision",
+        "hit test",
+        "overlap",
+        "bodies",
+        "physics",
+        "collider",
+        "register"
+    ],
     "docs": {
         "ports": []
     },

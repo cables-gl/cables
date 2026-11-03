@@ -1,5 +1,14 @@
 {
     "summary": "Clear the render area to a background colour",
+    "tags": [
+        "background",
+        "backdrop",
+        "wipe",
+        "fill",
+        "clear screen",
+        "bg color",
+        "scene color"
+    ],
     "layout": {
         "portsIn": [
             {

@@ -29,6 +29,14 @@
         ]
     },
     "summary": "Trigger the browser to scroll to top or bottom of an element",
+    "tags": [
+        "scroll top",
+        "scroll bottom",
+        "jump",
+        "smooth scroll",
+        "navigate",
+        "anchor"
+    ],
     "docs": {
         "ports": []
     },

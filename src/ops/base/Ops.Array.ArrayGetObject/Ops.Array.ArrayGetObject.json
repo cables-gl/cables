@@ -28,6 +28,14 @@
     "id": "44d34542-174c-47c6-b9c6-adde6fc371ac",
     "created": 1506588207288,
     "summary": "Get an object from an array",
+    "tags": [
+        "element",
+        "index",
+        "item",
+        "json",
+        "access",
+        "lookup"
+    ],
     "docs": {
         "ports": [
             {

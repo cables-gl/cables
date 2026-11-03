@@ -1,5 +1,13 @@
 {
     "summary": "Counts how often the port was triggered",
+    "tags": [
+        "count",
+        "counter",
+        "number of times",
+        "tally",
+        "increment",
+        "clicks"
+    ],
     "layout": {
         "portsIn": [
             {

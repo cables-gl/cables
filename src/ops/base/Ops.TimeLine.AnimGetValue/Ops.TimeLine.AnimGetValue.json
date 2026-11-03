@@ -37,6 +37,14 @@
         ]
     },
     "summary": "get the animated value at time x of an animation object",
+    "tags": [
+        "sample",
+        "evaluate",
+        "read curve",
+        "value at time",
+        "lookup",
+        "keyframes"
+    ],
     "docs": {
         "ports": []
     },

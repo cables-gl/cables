@@ -1,5 +1,12 @@
 {
     "summary": "Divides a number by another",
+    "tags": [
+        "division",
+        "divide",
+        "quotient",
+        "/",
+        "ratio"
+    ],
     "layout": {
         "portsIn": [
             {

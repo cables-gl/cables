@@ -46,6 +46,15 @@
         ]
     },
     "summary": "Set a number at index in an array",
+    "tags": [
+        "write",
+        "replace",
+        "set",
+        "index",
+        "modify",
+        "assign",
+        "change item"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -16,6 +16,16 @@
         ]
     },
     "summary": "Stores a boolean value",
+    "tags": [
+        "checkbox",
+        "toggle",
+        "true",
+        "false",
+        "flag",
+        "switch",
+        "on off",
+        "value"
+    ],
     "docs": {
         "ports": [
             {

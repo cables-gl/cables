@@ -31,6 +31,13 @@
         ]
     },
     "summary": "Create a new array with all sub-array elements concatenated into it",
+    "tags": [
+        "flat",
+        "merge nested",
+        "unnest",
+        "concatenate",
+        "2d to 1d"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -66,6 +66,15 @@
         ]
     },
     "summary": "Player controls for the timeline",
+    "tags": [
+        "transport",
+        "controls",
+        "play pause",
+        "media player",
+        "scrubber",
+        "ui",
+        "seek"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

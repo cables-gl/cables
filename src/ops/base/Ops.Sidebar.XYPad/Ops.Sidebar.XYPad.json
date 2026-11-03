@@ -74,6 +74,17 @@
         ]
     },
     "summary": "2d coordinate input element",
+    "tags": [
+        "2d slider",
+        "joystick",
+        "touchpad",
+        "xy",
+        "position",
+        "pad",
+        "ui",
+        "gui",
+        "controller"
+    ],
     "docs": {
         "ports": [
             {

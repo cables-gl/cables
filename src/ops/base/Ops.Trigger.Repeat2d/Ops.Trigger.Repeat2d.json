@@ -54,6 +54,16 @@
         ]
     },
     "summary": "Triggers all ops underneath Num X * Num Y times",
+    "tags": [
+        "loop",
+        "grid",
+        "for loop",
+        "nested loop",
+        "rows columns",
+        "iterate",
+        "matrix",
+        "x y"
+    ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "79934693-5887-4173-8b48-3e3a18fcf225",

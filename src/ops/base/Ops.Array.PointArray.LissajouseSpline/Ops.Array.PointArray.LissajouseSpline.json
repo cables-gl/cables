@@ -48,6 +48,14 @@
         ]
     },
     "summary": "Generate spline using lissajous formulas",
+    "tags": [
+        "lissajous",
+        "curve",
+        "parametric",
+        "oscilloscope",
+        "spline",
+        "knot"
+    ],
     "docs": {
         "ports": [
             {

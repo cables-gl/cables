@@ -29,6 +29,15 @@
         ]
     },
     "summary": "set current time of timeline",
+    "tags": [
+        "seek",
+        "jump",
+        "scrub",
+        "position",
+        "go to time",
+        "cue",
+        "set position"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

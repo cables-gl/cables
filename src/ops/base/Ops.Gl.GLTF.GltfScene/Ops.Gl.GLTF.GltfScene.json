@@ -105,6 +105,19 @@
         ]
     },
     "summary": "Load GLTF/GLB 3d files",
+    "tags": [
+        "model",
+        "3d model",
+        "glb",
+        "import",
+        "load",
+        "3d file",
+        "mesh",
+        "object",
+        "asset",
+        "blender",
+        "animation"
+    ],
     "issues": "",
     "youtubeids": [
         "QNLw21hSweg"

@@ -1,5 +1,15 @@
 {
     "summary": "Adjust FOV, field of view, and frustum clipping",
+    "tags": [
+        "fov",
+        "field of view",
+        "camera",
+        "projection",
+        "frustum",
+        "near far",
+        "clipping",
+        "lens"
+    ],
     "layout": {
         "portsIn": [
             {

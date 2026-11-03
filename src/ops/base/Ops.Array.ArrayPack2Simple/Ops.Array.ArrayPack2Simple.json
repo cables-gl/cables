@@ -54,6 +54,14 @@
         ]
     },
     "summary": "Pack 2 individual arrays into an array2 - without needing a trigger",
+    "tags": [
+        "combine",
+        "interleave",
+        "xy",
+        "zip",
+        "merge",
+        "stride"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

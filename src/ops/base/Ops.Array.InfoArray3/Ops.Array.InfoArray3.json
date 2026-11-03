@@ -79,6 +79,17 @@
         ]
     },
     "summary": "Min, Max and Average values of an array3",
+    "tags": [
+        "statistics",
+        "min",
+        "max",
+        "average",
+        "mean",
+        "range",
+        "xyz",
+        "bounds",
+        "bounding box"
+    ],
     "docs": {
         "ports": [
             {

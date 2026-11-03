@@ -42,6 +42,15 @@
         ]
     },
     "summary": "set a number value of an object using trigger",
+    "tags": [
+        "write",
+        "key",
+        "property",
+        "set",
+        "on trigger",
+        "json",
+        "number"
+    ],
     "license": "MIT",
     "docs": {
         "ports": []

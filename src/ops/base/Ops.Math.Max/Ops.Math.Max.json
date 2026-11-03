@@ -21,6 +21,12 @@
         ]
     },
     "summary": "Sets the output to the input value which is higher",
+    "tags": [
+        "larger",
+        "maximum",
+        "highest",
+        "bigger of two"
+    ],
     "docs": {
         "ports": [
             {

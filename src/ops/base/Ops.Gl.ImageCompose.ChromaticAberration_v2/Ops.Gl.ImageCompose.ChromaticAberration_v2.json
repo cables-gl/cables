@@ -50,6 +50,14 @@
     "id": "07701f81-1a98-44c0-b1ef-592db3cbb5d3",
     "created": 1650965249635,
     "summary": "simulating lens effect by shifting rgb channels",
+    "tags": [
+        "color fringing",
+        "rgb split",
+        "lens",
+        "glitch",
+        "dispersion",
+        "rgb shift"
+    ],
     "docs": {
         "ports": []
     },

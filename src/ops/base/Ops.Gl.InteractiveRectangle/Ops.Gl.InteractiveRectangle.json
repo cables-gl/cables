@@ -150,6 +150,18 @@
         ]
     },
     "summary": "Make a rectangular area respond to mouse and touch",
+    "tags": [
+        "hit area",
+        "button",
+        "hover",
+        "click",
+        "mouse",
+        "touch",
+        "pointer",
+        "ui",
+        "hotspot",
+        "clickable"
+    ],
     "docs": {
         "ports": []
     },

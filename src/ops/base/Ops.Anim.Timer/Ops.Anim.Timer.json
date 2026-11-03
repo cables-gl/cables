@@ -1,5 +1,16 @@
 {
     "summary": "A timer that can be started, paused and reset by triggering",
+    "tags": [
+        "clock",
+        "stopwatch",
+        "seconds",
+        "time",
+        "count up",
+        "play",
+        "pause",
+        "reset",
+        "elapsed"
+    ],
     "layout": {
         "portsIn": [
             {

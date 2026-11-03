@@ -26,6 +26,14 @@
         ]
     },
     "summary": "translate away from a point in space ",
+    "tags": [
+        "move away",
+        "offset",
+        "push",
+        "radial",
+        "direction",
+        "distance from point"
+    ],
     "docs": {
         "ports": []
     },

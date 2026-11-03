@@ -23,6 +23,13 @@
     "id": "0abfea0f-1aa9-47bf-b540-f54f89a60a6c",
     "created": 1542701445023,
     "summary": "Denoise texture effect - used to smooth out noisy images",
+    "tags": [
+        "noise reduction",
+        "smooth",
+        "clean",
+        "despeckle",
+        "filter"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

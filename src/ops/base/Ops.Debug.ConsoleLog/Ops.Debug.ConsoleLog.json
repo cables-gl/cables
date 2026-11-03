@@ -24,6 +24,16 @@
         ]
     },
     "summary": "Log incoming values to the console/dev tools",
+    "tags": [
+        "log",
+        "print",
+        "console.log",
+        "devtools",
+        "debug",
+        "output",
+        "messages",
+        "inspect"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

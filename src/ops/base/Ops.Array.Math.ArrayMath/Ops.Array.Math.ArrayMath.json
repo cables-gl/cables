@@ -32,6 +32,15 @@
         ]
     },
     "summary": "Pick from multiple mathematical modes which can all be applied to a single array",
+    "tags": [
+        "add",
+        "subtract",
+        "multiply",
+        "divide",
+        "operations",
+        "arithmetic",
+        "calculator"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

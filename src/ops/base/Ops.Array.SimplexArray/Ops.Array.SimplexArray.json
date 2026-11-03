@@ -48,6 +48,14 @@
         ]
     },
     "summary": "Create an array filled with Simplex noise values (Range: -1, 1)",
+    "tags": [
+        "noise",
+        "random",
+        "organic",
+        "smooth",
+        "procedural",
+        "wiggle"
+    ],
     "docs": {
         "ports": [
             {

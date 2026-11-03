@@ -1,5 +1,13 @@
 {
     "summary": "Adjust Hue of current ImageCompose",
+    "tags": [
+        "color shift",
+        "rotate hue",
+        "tint",
+        "color wheel",
+        "colorize",
+        "hsv"
+    ],
     "layout": {
         "portsIn": [
             {

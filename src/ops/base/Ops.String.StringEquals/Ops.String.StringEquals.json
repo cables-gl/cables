@@ -29,6 +29,15 @@
         ]
     },
     "summary": "check if content of two strings is the same",
+    "tags": [
+        "compare",
+        "same",
+        "identical",
+        "==",
+        "test",
+        "match",
+        "bool"
+    ],
     "docs": {
         "ports": []
     },

@@ -18,6 +18,14 @@
         ]
     },
     "summary": "parses a date and time in iso format and outputs a millisecond timestamp",
+    "tags": [
+        "parse",
+        "iso 8601",
+        "convert",
+        "unix time",
+        "epoch",
+        "date string"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

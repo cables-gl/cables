@@ -28,6 +28,17 @@
     },
     "cloneOf": "524b4a3a-0a40-4600-9071-d5a14f926aa8",
     "summary": "Display current Beat index and BPM timing information as beat rectangles on the timeline",
+    "tags": [
+        "beat",
+        "tempo",
+        "music",
+        "rhythm",
+        "metronome",
+        "bars",
+        "display",
+        "debug",
+        "measure"
+    ],
     "docs": {
         "ports": []
     },

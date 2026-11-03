@@ -32,6 +32,14 @@
         ]
     },
     "summary": "set css style properties of a html element ",
+    "tags": [
+        "style",
+        "css",
+        "set property",
+        "element style",
+        "styling",
+        "attribute"
+    ],
     "docs": {
         "ports": []
     },

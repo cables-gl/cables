@@ -22,6 +22,15 @@
         ]
     },
     "summary": "force rendering of meshes using points,lines or triangles",
+    "tags": [
+        "points",
+        "lines",
+        "triangles",
+        "draw mode",
+        "wireframe",
+        "render mode",
+        "topology"
+    ],
     "docs": {
         "ports": [
             {

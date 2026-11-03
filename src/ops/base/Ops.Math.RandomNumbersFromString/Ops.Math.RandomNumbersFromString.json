@@ -36,6 +36,13 @@
     "created": 1730822472048,
     "license": "MIT",
     "summary": "Random number generator from a string seed",
+    "tags": [
+        "random",
+        "seed",
+        "string seed",
+        "hash",
+        "deterministic"
+    ],
     "docs": {
         "ports": []
     },

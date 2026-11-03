@@ -41,6 +41,14 @@
     },
     "isReleased": true,
     "summary": "Overwrite a texture coming from GLTF file",
+    "tags": [
+        "replace texture",
+        "swap texture",
+        "override",
+        "change texture",
+        "material",
+        "custom image"
+    ],
     "docs": {
         "ports": []
     },

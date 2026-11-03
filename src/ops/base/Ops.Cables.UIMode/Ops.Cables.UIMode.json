@@ -1,5 +1,15 @@
 {
     "summary": "Outputs `true` if patch is executed in the cables editor (UI)",
+    "tags": [
+        "editor",
+        "test",
+        "is editor",
+        "runtime",
+        "preview",
+        "exported",
+        "development mode",
+        "detect"
+    ],
     "layout": {
         "portsIn": [],
         "portsOut": [

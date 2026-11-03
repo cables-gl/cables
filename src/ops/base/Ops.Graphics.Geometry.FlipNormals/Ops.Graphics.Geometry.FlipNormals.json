@@ -27,6 +27,14 @@
         ]
     },
     "summary": "flip all normals of a geometry",
+    "tags": [
+        "invert normals",
+        "inside out",
+        "reverse",
+        "backfaces",
+        "shading",
+        "turn inside out"
+    ],
     "docs": {
         "ports": []
     },

@@ -36,6 +36,16 @@
         ]
     },
     "summary": "Allows different mathematical operations to be applied to two numbers",
+    "tags": [
+        "calculator",
+        "add",
+        "subtract",
+        "multiply",
+        "divide",
+        "operations",
+        "arithmetic",
+        "formula"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -27,6 +27,16 @@
         ]
     },
     "summary": "check if string contains another string (find,search,indexOf)",
+    "tags": [
+        "find",
+        "search",
+        "indexof",
+        "includes",
+        "has",
+        "test",
+        "substring",
+        "match"
+    ],
     "docs": {
         "ports": []
     },

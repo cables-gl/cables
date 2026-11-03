@@ -26,6 +26,17 @@
         ]
     },
     "summary": "returns the array at the position defined by a path",
+    "tags": [
+        "query",
+        "jsonpath",
+        "nested",
+        "lookup",
+        "get",
+        "array",
+        "path",
+        "access",
+        "dot notation"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

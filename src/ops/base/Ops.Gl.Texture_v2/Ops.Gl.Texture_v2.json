@@ -127,6 +127,18 @@
         }
     ],
     "summary": "Load an image as a texture",
+    "tags": [
+        "image",
+        "picture",
+        "load",
+        "file",
+        "png",
+        "jpg",
+        "jpeg",
+        "photo",
+        "asset",
+        "bitmap"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -100,6 +100,14 @@
         ]
     },
     "summary": "Creates a hexagonal noise ",
+    "tags": [
+        "hexagons",
+        "honeycomb",
+        "hex",
+        "tiles",
+        "procedural",
+        "pattern"
+    ],
     "docs": {
         "ports": [
             {

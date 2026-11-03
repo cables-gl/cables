@@ -27,5 +27,13 @@
     },
     "isReleased": true,
     "license": "MIT",
-    "summary": "Output of a subpatch, passes a value back to the parent patch"
+    "summary": "Output of a subpatch, passes a value back to the parent patch",
+    "tags": [
+        "subpatch",
+        "output",
+        "port",
+        "return",
+        "result",
+        "interface"
+    ]
 }

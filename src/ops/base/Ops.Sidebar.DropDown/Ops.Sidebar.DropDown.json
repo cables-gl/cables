@@ -51,6 +51,17 @@
         ]
     },
     "summary": "Shows a drop-down (select) element in the sidebar",
+    "tags": [
+        "select",
+        "combo box",
+        "menu",
+        "choose",
+        "list",
+        "options",
+        "ui",
+        "gui",
+        "interface"
+    ],
     "docs": {
         "ports": [
             {

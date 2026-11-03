@@ -32,6 +32,15 @@
         ]
     },
     "summary": "Extract a section of an array by start index and length",
+    "tags": [
+        "slice",
+        "extract",
+        "range",
+        "subset",
+        "section",
+        "trim",
+        "cut"
+    ],
     "docs": {
         "ports": [
             {
