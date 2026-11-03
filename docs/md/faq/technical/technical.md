@@ -28,7 +28,7 @@ Then again a lot of amazing patches run on mobile devices so it's all down to th
 
 #### Can I embed a cables patch in a wordpress page?
 
-- Yes you can. Check the cables-wordpress-plugin [page](https://github.com/cables-gl/cables-wordpress-plugin) to get started.
+- Yes you can. Check [Cables and WordPress](../embedding/cms/wordpress/wordpress) to get started.
 
 #### Can I make my own custom ops?
 
