@@ -3,6 +3,9 @@ const
     inRequest = op.inTriggerButton("Request Permission"),
     next = op.outTrigger("Next"),
     winOrient = op.outNumber("Window Orientation"),
+    outSupported = op.outBool("Supported", false),
+    outActive = op.outBool("Active", false),
+    outError = op.outString("Error Message", ""),
     cgl = op.patch.cgl,
     vCenter = vec3.create(),
     transMatrix = mat4.create(),
@@ -22,6 +25,7 @@ let requesting = false;
 function setError(text, level)
 {
     op.setUiError("permission", text, level);
+    outError.set(text && level > 0 ? text : "");
 }
 
 function addGestureListeners()
@@ -68,6 +72,8 @@ function requestPermission()
 
 function init()
 {
+    outSupported.set(!!window.DeviceOrientationEvent && window.isSecureContext !== false);
+
     if (!window.DeviceOrientationEvent)
     {
         setError("device orientation is not supported by this browser", 1);
@@ -155,6 +161,7 @@ function onOrientationChange(event)
     const beta = (event.beta || 0);
     const gamma = (event.gamma || 0);
 
+    outActive.set(true);
     winOrient.set(window.orientation || 0);
     quatFromEuler(viewDirQuat, alpha, beta, gamma);
 }

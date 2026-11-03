@@ -20,6 +20,20 @@
                 "type": 0,
                 "name": "Window Orientation",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Error Message"
             }
         ]
     },
