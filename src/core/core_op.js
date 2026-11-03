@@ -2029,7 +2029,7 @@ export class Op extends Events
         if (patch.isHeadLoopKey()) return false;
 
         const p = this.getStackCopyPort(headPort);
-        if (p) p.setValueForced(v);
+        if (p) p.set(v);
         return true;
     }
 

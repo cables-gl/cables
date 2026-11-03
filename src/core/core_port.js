@@ -467,11 +467,7 @@ export class Port extends Events
 
         if (this.#op.enabled && !this.crashed)
         {
-            if (this.#op.isStacked && this.direction == Port.DIR_IN)
-            {
-                if (this.#op.routeStackedValue(this, v)) return;
-                if (this.#op.patch.isInLoop()) return this.setValueForced(v);
-            }
+            if (this.#op.isStacked && this.direction == Port.DIR_IN && this.#op.routeStackedValue(this, v)) return;
 
             // in loops every iteration can go to another stack copy, so outputs forward unchanged values too
             if (v !== this.value || this.changeAlways || this.type == Port.TYPE_TEXTURE || this.type == Port.TYPE_ARRAY || (this.direction == Port.DIR_OUT && this.#op.patch.isInLoop()))
