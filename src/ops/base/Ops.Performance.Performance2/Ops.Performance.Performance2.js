@@ -10,12 +10,14 @@ const
 
 let ctx = null;
 let canvas = null;
-let numBars = 120;
+let numBars = 160;
 let height = 50;
 let containerEle = document.body;
 let countersPerFrame = {};
 let countIndex = 0;
 let selectedCounterIndex = "";
+let lastHeavyEvent = "";
+let toHeavyEvent = 0;
 outLog.changeAlways = true;
 
 const pp = op.patch.perfProfiler;
@@ -23,7 +25,11 @@ const pp = op.patch.perfProfiler;
 createCanvas();
 op.patch.cgl.on("heavyEvent", (e) =>
 {
-    outLog.set(e.event + " - " + e.name);
+    lastHeavyEvent = e.event + " - " + e.name;
+    outLog.set(lastHeavyEvent);
+    clearTimeout(toHeavyEvent);
+    toHeavyEvent = setTimeout(() => { lastHeavyEvent = ""; }, 1000);
+
 });
 
 const frameListener = op.patch.on("renderedFrame", (e) =>
@@ -54,7 +60,7 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     updateCanvas();
 });
 
-function drawGraph(name, posy, q, col)
+function drawGraph(name, posy, q, col, heavy)
 {
     let info = "";
     let k = 0;
@@ -97,9 +103,16 @@ function drawGraph(name, posy, q, col)
     }
 
     ctx.globalAlpha = 0.7;
-    ctx.fillText(title, 5, posy + 16);
 
-    if (info) ctx.fillText(info, 5, posy + 32);
+    let str = title;
+    if (info) str = info + " " + str;
+    ctx.fillText(str, 5, posy + 16);
+
+    if (lastHeavyEvent && title.includes("cgl fps"))
+    {
+        ctx.fillStyle = "#FF9900";
+        ctx.fillText("(!) " + lastHeavyEvent, 5, posy + 34);
+    }
 }
 
 function updateCanvas()

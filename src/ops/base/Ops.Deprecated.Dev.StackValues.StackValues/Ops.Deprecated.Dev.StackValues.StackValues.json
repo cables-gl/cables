@@ -5,6 +5,12 @@
             "message": "created op",
             "author": "pandur",
             "date": 1704365200021
+        },
+        {
+            "message": "op Dev.StackValues.StackValues was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793784106755
         }
     ],
     "layout": {

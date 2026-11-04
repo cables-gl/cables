@@ -111,6 +111,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1761901588827
+        },
+        {
+            "message": "op Dev.TestOp was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793783394028
         }
     ],
     "authorName": "pandur",

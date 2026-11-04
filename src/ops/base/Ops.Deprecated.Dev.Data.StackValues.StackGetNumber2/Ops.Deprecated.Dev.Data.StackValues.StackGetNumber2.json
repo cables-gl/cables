@@ -21,6 +21,12 @@
             "message": "cloned op from Ops.Data.StackValues.StackGetNumber",
             "author": "pandur",
             "date": 1711642361925
+        },
+        {
+            "message": "op Dev.Data.StackValues.StackGetNumber2 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793783765159
         }
     ],
     "layout": {

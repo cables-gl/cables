@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1762165166577
+        },
+        {
+            "message": "op Dev.TimeLine.Viz.TimeLineRects was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793784086227
         }
     ],
     "layout": {

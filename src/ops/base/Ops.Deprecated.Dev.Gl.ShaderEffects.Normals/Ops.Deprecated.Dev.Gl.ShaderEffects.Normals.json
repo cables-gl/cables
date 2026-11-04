@@ -25,6 +25,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1741688762470
+        },
+        {
+            "message": "op Dev.Gl.ShaderEffects.Normals was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793784493654
         }
     ],
     "coreLibs": [
