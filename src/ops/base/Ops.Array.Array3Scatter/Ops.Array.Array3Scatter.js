@@ -1,7 +1,8 @@
 const
     points = op.inArray("positions"),
     array = op.inArray("array"),
-    result = op.outArray("result");
+    result = op.outArray("result"),
+    indices = op.outArray("indices");
 
 points.onChange =
     array.onChange = () =>
@@ -9,11 +10,18 @@ points.onChange =
 
         const arrp = points.get();
         const arra = array.get();
-        if (!arrp || !arra) return result.set([]);
+        if (!arrp || !arra)
+        {
+            indices.set([]);
+            return result.set([]);
+        }
 
         let arr = [];
+        const idx = [];
         for (let i = 0; i < arrp.length / 3; i++)
         {
+            for (let j = 0; j < arra.length / 3; j++) idx.push(i);
+
             const copy = structuredClone(arra);
 
             for (let j = 0; j < copy.length / 3; j++)
@@ -26,4 +34,5 @@ points.onChange =
 
         }
         result.setRef(arr);
+        indices.setRef(idx);
     };
