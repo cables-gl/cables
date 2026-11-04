@@ -45,7 +45,7 @@ const valueProps = {
     "pbrRoughness": [inSetRoughness, inRoughness],
     "pbrMetalness": [inSetMetalness, inMetalness],
     "unlit": [inSetUnlit, inUnlit],
-    "texTransform": [inSetTexTrans, inRepeatX, inRepeatY, inOffsetX, inOffsetY],
+    "texTransform": [inSetTexTrans, inRepeatX, inRepeatY, inOffsetX, inOffsetY]
 };
 
 const texProps = {
@@ -54,7 +54,7 @@ const texProps = {
     "metalRoughnessTexture": inTexMetalRough,
     "occlusionTexture": inTexOcclusion,
     "lightmapTexture": inTexLightmap,
-    "emissionTexture": inTexEmission,
+    "emissionTexture": inTexEmission
 };
 
 let currentProps = null; // materialPropUniforms of the last rendered shader, null as long as unknown
