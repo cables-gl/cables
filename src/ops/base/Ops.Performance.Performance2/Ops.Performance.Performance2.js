@@ -10,8 +10,8 @@ const
 
 let ctx = null;
 let canvas = null;
-let numBars = 160;
-let height = 50; // height of one graph
+let numBars = 180;
+let height = 30; // height of one graph
 const NUM_GRAPHS = 3;
 const RESIZE_SIZE = 14;
 let resizing = null;
