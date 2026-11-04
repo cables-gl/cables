@@ -19,29 +19,145 @@
             },
             {
                 "type": 0,
+                "name": "Set Color",
+                "group": "Color",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "r",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "g",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "b",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": 0,
                 "name": "a",
+                "group": "Color",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Roughness",
+                "group": "PBR",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Roughness",
+                "group": "PBR",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Metalness",
+                "group": "PBR",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Metalness",
+                "group": "PBR",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Unlit",
+                "group": "PBR",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Unlit",
+                "group": "PBR",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Set Tex Transform",
+                "group": "Texture Transform",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Repeat X",
+                "group": "Texture Transform",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Repeat Y",
+                "group": "Texture Transform",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset X",
+                "group": "Texture Transform",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset Y",
+                "group": "Texture Transform",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Diffuse Texture",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Normal Texture",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Metal/Roughness Texture",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Occlusion Texture",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Lightmap Texture",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Emission Texture",
+                "group": "Textures",
+                "objType": "texture"
             }
         ],
         "portsOut": [
             {
                 "type": 1,
                 "name": "Next"
+            },
+            {
+                "type": 5,
+                "name": "Supported Properties"
             }
         ]
     }
