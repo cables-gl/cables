@@ -102,5 +102,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Square root"
+    "summary": "Square root",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "square root",
+        "root",
+        "radical"
+    ]
 }

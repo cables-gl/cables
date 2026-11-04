@@ -49,6 +49,15 @@
         "ports": []
     },
     "summary": "Render mesh attribultes as color",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "debug",
+        "normals",
+        "vertex attributes",
+        "visualize",
+        "material"
+    ],
     "coreLibs": [
         "cgp"
     ],

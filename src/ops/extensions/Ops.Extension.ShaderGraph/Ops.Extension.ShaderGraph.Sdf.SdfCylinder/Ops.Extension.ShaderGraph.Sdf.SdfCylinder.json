@@ -54,5 +54,18 @@
             }
         ]
     },
-    "summary": "Cylinder distance field shape"
+    "summary": "Cylinder distance field shape",
+    "tags": [
+        "sdf",
+        "signed distance field",
+        "raymarching",
+        "shader graph",
+        "node",
+        "tube",
+        "pipe",
+        "rod",
+        "column",
+        "shape",
+        "primitive"
+    ]
 }

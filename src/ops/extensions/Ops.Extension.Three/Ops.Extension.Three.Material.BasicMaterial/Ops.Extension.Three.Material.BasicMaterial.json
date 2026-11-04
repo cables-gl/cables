@@ -93,5 +93,15 @@
         "three"
     ],
     "isReleased": true,
-    "summary": "Unlit basic material for Three.js"
+    "summary": "Unlit basic material for Three.js",
+    "tags": [
+        "threejs",
+        "three.js",
+        "unlit",
+        "flat",
+        "simple",
+        "color",
+        "no lighting",
+        "shader"
+    ]
 }

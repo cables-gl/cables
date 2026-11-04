@@ -59,5 +59,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "3D noise from a seed"
+    "summary": "3D noise from a seed",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "noise",
+        "perlin",
+        "simplex",
+        "procedural",
+        "organic",
+        "3d"
+    ]
 }

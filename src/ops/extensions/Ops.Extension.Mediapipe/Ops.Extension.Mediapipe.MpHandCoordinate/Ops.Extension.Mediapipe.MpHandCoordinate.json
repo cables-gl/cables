@@ -56,6 +56,18 @@
         ]
     },
     "summary": "Get individual coordinates of fingers or wrist from an array of mediapipe data",
+    "tags": [
+        "mediapipe",
+        "computer vision",
+        "tracking",
+        "hand",
+        "fingers",
+        "wrist",
+        "position",
+        "coordinates",
+        "webcam",
+        "gesture"
+    ],
     "issues": "",
     "caniusequery": "",
     "relatedops": [

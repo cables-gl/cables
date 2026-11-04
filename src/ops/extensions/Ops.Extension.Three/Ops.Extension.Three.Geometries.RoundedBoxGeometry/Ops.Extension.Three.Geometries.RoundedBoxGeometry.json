@@ -52,6 +52,15 @@
         "three_addons_geometries"
     ],
     "summary": "Create a rounded box/cube geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "cube",
+        "box",
+        "rounded corners",
+        "beveled",
+        "mesh"
+    ],
     "docs": {
         "ports": [
             {

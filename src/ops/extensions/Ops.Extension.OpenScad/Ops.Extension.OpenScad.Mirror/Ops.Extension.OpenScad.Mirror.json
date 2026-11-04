@@ -53,5 +53,14 @@
         }
     ],
     "isReleased": true,
-    "summary": "Mirror an OpenSCAD shape along axes"
+    "summary": "Mirror an OpenSCAD shape along axes",
+    "tags": [
+        "openscad",
+        "cad",
+        "flip",
+        "reflect",
+        "symmetry",
+        "csg",
+        "solid modeling"
+    ]
 }

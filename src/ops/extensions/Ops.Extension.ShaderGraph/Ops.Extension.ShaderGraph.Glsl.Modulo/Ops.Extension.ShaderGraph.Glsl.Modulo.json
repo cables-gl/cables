@@ -65,5 +65,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Modulo of two values"
+    "summary": "Modulo of two values",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "mod",
+        "remainder",
+        "wrap",
+        "%",
+        "repeat"
+    ]
 }

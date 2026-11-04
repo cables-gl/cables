@@ -230,6 +230,13 @@
         ]
     },
     "summary": "Changelog",
+    "tags": [
+        "release notes",
+        "updates",
+        "news",
+        "version history",
+        "whats new"
+    ],
     "docs": {
         "ports": []
     }

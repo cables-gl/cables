@@ -40,5 +40,14 @@
     "coreLibs": [
         "minigpu"
     ],
-    "summary": "WebGPU canvas, reports whether WebGPU is supported"
+    "summary": "WebGPU canvas, reports whether WebGPU is supported",
+    "tags": [
+        "webgpu",
+        "canvas",
+        "support check",
+        "gpu",
+        "start",
+        "context",
+        "render target"
+    ]
 }

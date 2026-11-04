@@ -73,6 +73,16 @@
         ]
     },
     "summary": "Outputs up to 4 numbers from a user defined OSC address",
+    "tags": [
+        "osc",
+        "open sound control",
+        "websocket",
+        "touchosc",
+        "max msp",
+        "network",
+        "controller",
+        "values"
+    ],
     "issues": "",
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"

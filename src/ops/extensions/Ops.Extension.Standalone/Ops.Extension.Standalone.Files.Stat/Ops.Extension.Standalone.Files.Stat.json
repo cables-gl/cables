@@ -48,6 +48,15 @@
         "standalone_electron"
     ],
     "summary": "Get statistics about a file on the local file system",
+    "tags": [
+        "file info",
+        "size",
+        "modified",
+        "date",
+        "attributes",
+        "filesystem",
+        "metadata"
+    ],
     "docs": {
         "ports": []
     },

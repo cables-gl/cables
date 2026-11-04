@@ -119,5 +119,16 @@
     "coreLibs": [
         "cgl"
     ],
-    "summary": "Steer particles toward positions supplied by a target texture."
+    "summary": "Steer particles toward positions supplied by a target texture.",
+    "tags": [
+        "particles",
+        "attract",
+        "steer",
+        "goal",
+        "follow",
+        "morph",
+        "target positions",
+        "seek",
+        "formation"
+    ]
 }

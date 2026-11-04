@@ -51,6 +51,16 @@
         "standalone_electron"
     ],
     "summary": "Create a Web/Http server locally ",
+    "tags": [
+        "web server",
+        "api",
+        "localhost",
+        "listen",
+        "rest",
+        "port",
+        "webhook",
+        "backend"
+    ],
     "docs": {
         "ports": []
     },

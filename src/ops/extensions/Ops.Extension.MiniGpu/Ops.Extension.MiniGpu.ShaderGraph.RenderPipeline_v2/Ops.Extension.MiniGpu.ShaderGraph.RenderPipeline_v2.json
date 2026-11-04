@@ -114,5 +114,14 @@
     "coreLibs": [
         "minigpu"
     ],
-    "summary": "Render pipeline for WebGPU draw calls"
+    "summary": "Render pipeline for WebGPU draw calls",
+    "tags": [
+        "webgpu",
+        "wgsl",
+        "render",
+        "draw",
+        "vertex fragment",
+        "pipeline",
+        "material"
+    ]
 }

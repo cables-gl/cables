@@ -176,5 +176,15 @@
     "docs": {
         "ports": []
     },
-    "summary": "Changes particle velocity in an area."
+    "summary": "Changes particle velocity in an area.",
+    "tags": [
+        "particles",
+        "force field",
+        "zone",
+        "volume",
+        "accelerate",
+        "wind",
+        "gpu particles",
+        "region"
+    ]
 }

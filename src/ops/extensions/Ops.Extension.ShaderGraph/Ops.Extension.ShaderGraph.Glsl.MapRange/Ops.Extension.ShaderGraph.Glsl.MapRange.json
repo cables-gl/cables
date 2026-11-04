@@ -90,5 +90,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Remap a value from one range to another"
+    "summary": "Remap a value from one range to another",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "remap",
+        "scale",
+        "range",
+        "convert",
+        "normalize",
+        "rescale"
+    ]
 }

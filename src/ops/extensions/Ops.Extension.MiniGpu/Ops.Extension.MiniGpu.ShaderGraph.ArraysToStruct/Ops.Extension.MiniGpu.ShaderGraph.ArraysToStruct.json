@@ -108,5 +108,14 @@
             }
         ]
     },
-    "summary": "Combine arrays into a WGSL struct"
+    "summary": "Combine arrays into a WGSL struct",
+    "tags": [
+        "webgpu",
+        "wgsl",
+        "struct",
+        "buffer",
+        "combine",
+        "pack",
+        "data layout"
+    ]
 }

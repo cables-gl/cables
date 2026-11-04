@@ -78,5 +78,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Fractional part of a number"
+    "summary": "Fractional part of a number",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "fractional",
+        "decimal part",
+        "frac",
+        "repeat",
+        "sawtooth"
+    ]
 }

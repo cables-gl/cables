@@ -118,5 +118,18 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Pick one of several vec2 values by index"
+    "summary": "Pick one of several vec2 values by index",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "select",
+        "choose",
+        "index",
+        "multiplexer",
+        "pick",
+        "case",
+        "vector"
+    ]
 }

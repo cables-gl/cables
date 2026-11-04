@@ -49,5 +49,14 @@
         "three"
     ],
     "isReleased": true,
-    "summary": "Normal colour material for Three.js"
+    "summary": "Normal colour material for Three.js",
+    "tags": [
+        "threejs",
+        "three.js",
+        "debug",
+        "normals",
+        "rainbow",
+        "visualize",
+        "shader"
+    ]
 }

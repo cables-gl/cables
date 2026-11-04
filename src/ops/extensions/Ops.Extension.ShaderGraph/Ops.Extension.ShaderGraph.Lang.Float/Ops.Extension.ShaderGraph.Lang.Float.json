@@ -85,5 +85,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Float value for a shader"
+    "summary": "Float value for a shader",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "number",
+        "constant",
+        "value",
+        "scalar",
+        "literal"
+    ]
 }

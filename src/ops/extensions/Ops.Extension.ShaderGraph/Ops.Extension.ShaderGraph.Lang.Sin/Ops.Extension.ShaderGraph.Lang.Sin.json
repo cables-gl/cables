@@ -54,5 +54,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Sine"
+    "summary": "Sine",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "sine",
+        "trigonometry",
+        "wave",
+        "oscillate"
+    ]
 }

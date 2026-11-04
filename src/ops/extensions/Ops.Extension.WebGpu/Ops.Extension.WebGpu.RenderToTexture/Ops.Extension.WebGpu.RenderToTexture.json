@@ -78,5 +78,15 @@
         "ports": []
     },
     "summary": "render into a texture",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "framebuffer",
+        "offscreen",
+        "render target",
+        "buffer",
+        "post processing",
+        "capture scene"
+    ],
     "isReleased": true
 }

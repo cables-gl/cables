@@ -56,5 +56,14 @@
         }
     ],
     "isReleased": true,
-    "summary": "OpenSCAD cylinder shape"
+    "summary": "OpenSCAD cylinder shape",
+    "tags": [
+        "openscad",
+        "cad",
+        "tube",
+        "pipe",
+        "rod",
+        "csg",
+        "solid modeling"
+    ]
 }

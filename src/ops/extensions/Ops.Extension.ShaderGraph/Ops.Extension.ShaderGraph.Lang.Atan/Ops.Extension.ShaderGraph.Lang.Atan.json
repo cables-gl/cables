@@ -71,5 +71,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Arctangent of Y and X"
+    "summary": "Arctangent of Y and X",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "arctangent",
+        "atan2",
+        "angle",
+        "trigonometry",
+        "direction"
+    ]
 }

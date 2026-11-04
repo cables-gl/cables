@@ -70,5 +70,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Draw a rectangle from vertex index"
+    "summary": "Draw a rectangle from vertex index",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "rectangle",
+        "quad",
+        "fullscreen",
+        "vertex shader",
+        "draw",
+        "no buffer"
+    ]
 }

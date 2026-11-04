@@ -63,5 +63,15 @@
         "ports": []
     },
     "isReleased": true,
-    "summary": "Toon material for Three.js"
+    "summary": "Toon material for Three.js",
+    "tags": [
+        "threejs",
+        "three.js",
+        "cel shading",
+        "cartoon",
+        "stylized",
+        "anime",
+        "comic",
+        "non photorealistic"
+    ]
 }

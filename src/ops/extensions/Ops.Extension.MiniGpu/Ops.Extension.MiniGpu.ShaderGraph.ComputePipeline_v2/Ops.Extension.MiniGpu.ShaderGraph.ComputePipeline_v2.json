@@ -97,5 +97,14 @@
     "coreLibs": [
         "minigpu"
     ],
-    "summary": "Run a compute shader on the GPU"
+    "summary": "Run a compute shader on the GPU",
+    "tags": [
+        "webgpu",
+        "compute shader",
+        "gpgpu",
+        "wgsl",
+        "simulation",
+        "parallel",
+        "dispatch"
+    ]
 }

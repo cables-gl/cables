@@ -195,5 +195,16 @@
         "cgl"
     ],
     "isReleased": true,
-    "summary": "Modify particle velocities with point, directional, rotation, vortex, and collision effects."
+    "summary": "Modify particle velocities with point, directional, rotation, vortex, and collision effects.",
+    "tags": [
+        "particles",
+        "collision",
+        "bounce",
+        "walls",
+        "container",
+        "attractor",
+        "repeller",
+        "gpu particles",
+        "forces"
+    ]
 }

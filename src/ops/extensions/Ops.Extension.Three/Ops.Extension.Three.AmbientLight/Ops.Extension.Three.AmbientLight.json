@@ -58,5 +58,13 @@
         "ports": []
     },
     "isReleased": true,
-    "summary": "Ambient light for Three.js scenes"
+    "summary": "Ambient light for Three.js scenes",
+    "tags": [
+        "threejs",
+        "three.js",
+        "light",
+        "global light",
+        "base light",
+        "illumination"
+    ]
 }

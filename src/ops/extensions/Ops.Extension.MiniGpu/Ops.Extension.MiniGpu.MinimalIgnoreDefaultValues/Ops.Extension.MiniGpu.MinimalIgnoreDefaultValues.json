@@ -22,6 +22,14 @@
     },
     "isReleased": false,
     "summary": "sending reduuced patch data to the server by ignoring default values that are unchanged",
+    "tags": [
+        "patch size",
+        "optimize",
+        "server",
+        "sync",
+        "defaults",
+        "reduce data"
+    ],
     "docs": {
         "ports": []
     }

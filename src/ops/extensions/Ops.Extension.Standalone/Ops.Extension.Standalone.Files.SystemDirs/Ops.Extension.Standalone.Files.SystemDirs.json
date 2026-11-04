@@ -50,6 +50,16 @@
         "standalone_electron"
     ],
     "summary": "Get Default System Directories Paths",
+    "tags": [
+        "home",
+        "documents",
+        "desktop",
+        "downloads",
+        "temp",
+        "user folder",
+        "paths",
+        "appdata"
+    ],
     "exampleProjectId": "7hftun",
     "docs": {
         "ports": [

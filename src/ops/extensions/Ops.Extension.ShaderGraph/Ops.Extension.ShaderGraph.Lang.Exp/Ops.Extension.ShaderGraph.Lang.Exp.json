@@ -84,5 +84,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Exponential, e to the power of a number"
+    "summary": "Exponential, e to the power of a number",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "exponent",
+        "euler",
+        "power",
+        "exponential"
+    ]
 }

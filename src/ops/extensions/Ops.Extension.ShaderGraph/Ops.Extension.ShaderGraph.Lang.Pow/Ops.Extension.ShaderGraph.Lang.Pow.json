@@ -65,5 +65,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Raise a number to a power"
+    "summary": "Raise a number to a power",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "power",
+        "exponent",
+        "square",
+        "exponentiation"
+    ]
 }

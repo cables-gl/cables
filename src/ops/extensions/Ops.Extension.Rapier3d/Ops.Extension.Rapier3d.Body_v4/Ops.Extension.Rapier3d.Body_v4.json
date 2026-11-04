@@ -214,5 +214,19 @@
     "isReleased": true,
     "exampleProjectId": "NLFWxn",
     "docs": {},
-    "summary": "Create a physics body with adjustable shape, mass, and friction"
+    "summary": "Create a physics body with adjustable shape, mass, and friction",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "rigid body",
+        "collider",
+        "mass",
+        "shape",
+        "gravity",
+        "dynamic",
+        "static",
+        "box",
+        "sphere"
+    ]
 }

@@ -45,6 +45,15 @@
         ]
     },
     "summary": "get svg path from (OTF) OpentypeFont using the opentype library",
+    "tags": [
+        "font",
+        "text to path",
+        "outline",
+        "svg",
+        "vector text",
+        "glyphs",
+        "typography"
+    ],
     "relatedops": [
         "Ops.Libs.OpenType.OpentypeFont",
         "Ops.Gl.Geometry.SvgPathToGeometry"

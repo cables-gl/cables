@@ -71,5 +71,16 @@
             }
         ]
     },
-    "summary": "Apollonian fractal distance field"
+    "summary": "Apollonian fractal distance field",
+    "tags": [
+        "sdf",
+        "signed distance field",
+        "raymarching",
+        "shader graph",
+        "node",
+        "fractal",
+        "apollonian",
+        "sphere packing",
+        "gasket"
+    ]
 }

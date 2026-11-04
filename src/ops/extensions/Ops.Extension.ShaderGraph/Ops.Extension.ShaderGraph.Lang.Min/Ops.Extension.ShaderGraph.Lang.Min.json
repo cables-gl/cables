@@ -53,5 +53,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Smaller of two values"
+    "summary": "Smaller of two values",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "smaller",
+        "minimum",
+        "lowest"
+    ]
 }

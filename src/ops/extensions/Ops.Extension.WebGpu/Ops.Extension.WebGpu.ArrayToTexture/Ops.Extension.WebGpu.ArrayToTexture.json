@@ -65,6 +65,16 @@
         ]
     },
     "summary": "Convert an array of numbers to a webgpu texture",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "data texture",
+        "array to image",
+        "pixels",
+        "convert",
+        "values",
+        "float texture"
+    ],
     "docs": {
         "ports": []
     },

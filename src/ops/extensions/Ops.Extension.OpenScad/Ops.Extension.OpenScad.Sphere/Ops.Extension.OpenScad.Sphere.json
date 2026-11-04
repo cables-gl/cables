@@ -48,5 +48,14 @@
         }
     ],
     "isReleased": true,
-    "summary": "OpenSCAD sphere shape"
+    "summary": "OpenSCAD sphere shape",
+    "tags": [
+        "openscad",
+        "cad",
+        "ball",
+        "orb",
+        "globe",
+        "csg",
+        "solid modeling"
+    ]
 }

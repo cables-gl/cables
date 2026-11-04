@@ -76,5 +76,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Convert HSV colour to RGB"
+    "summary": "Convert HSV colour to RGB",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "color space",
+        "convert",
+        "hue saturation value",
+        "hsb",
+        "hsl"
+    ]
 }

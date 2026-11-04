@@ -46,5 +46,14 @@
             "date": 1771761219687
         }
     ],
-    "summary": "Rotate an OpenSCAD shape"
+    "summary": "Rotate an OpenSCAD shape",
+    "tags": [
+        "openscad",
+        "cad",
+        "turn",
+        "orient",
+        "angle",
+        "csg",
+        "solid modeling"
+    ]
 }

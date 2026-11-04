@@ -35,6 +35,18 @@
         ]
     },
     "summary": "Check an array colliders of bodies collinging against another array of colliders",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "collision",
+        "hit",
+        "contact",
+        "touch",
+        "overlap",
+        "detect",
+        "bodies"
+    ],
     "docs": {
         "ports": []
     },

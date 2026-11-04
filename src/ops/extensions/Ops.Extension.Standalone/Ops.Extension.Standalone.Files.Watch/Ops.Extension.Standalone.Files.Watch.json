@@ -54,6 +54,15 @@
         "standalone_electron"
     ],
     "summary": "Watch a directory, get a trigger when a file changes",
+    "tags": [
+        "monitor",
+        "file changes",
+        "hot reload",
+        "folder watcher",
+        "detect",
+        "filesystem",
+        "observe"
+    ],
     "docs": {
         "ports": []
     },

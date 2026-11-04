@@ -27,5 +27,16 @@
         ]
     },
     "isReleased": true,
-    "summary": "Compile OpenSCAD code into a mesh"
+    "summary": "Compile OpenSCAD code into a mesh",
+    "tags": [
+        "openscad",
+        "cad",
+        "compile",
+        "solid modeling",
+        "csg",
+        "parametric",
+        "3d print",
+        "mesh",
+        "code"
+    ]
 }

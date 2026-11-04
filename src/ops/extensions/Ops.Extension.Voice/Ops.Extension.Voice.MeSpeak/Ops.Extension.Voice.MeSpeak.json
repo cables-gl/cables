@@ -123,6 +123,16 @@
         "webaudio"
     ],
     "summary": "uses mespeak.js to convert text-to-speech",
+    "tags": [
+        "text to speech",
+        "tts",
+        "speech synthesis",
+        "talk",
+        "say",
+        "voice",
+        "speak",
+        "robot voice"
+    ],
     "docs": {
         "ports": []
     },

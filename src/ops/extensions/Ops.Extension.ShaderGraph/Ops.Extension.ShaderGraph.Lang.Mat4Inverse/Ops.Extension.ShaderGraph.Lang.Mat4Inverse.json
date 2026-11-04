@@ -61,5 +61,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Inverse of a 4x4 matrix"
+    "summary": "Inverse of a 4x4 matrix",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "matrix",
+        "inverse",
+        "invert",
+        "reverse transform",
+        "mat4"
+    ]
 }

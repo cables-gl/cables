@@ -56,6 +56,16 @@
         "standalone_electron"
     ],
     "summary": "Read a text file as string from the local file system",
+    "tags": [
+        "load",
+        "open",
+        "read",
+        "txt",
+        "disk",
+        "import",
+        "filesystem",
+        "string"
+    ],
     "docs": {
         "ports": []
     },

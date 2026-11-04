@@ -120,5 +120,15 @@
         "ports": []
     },
     "summary": "Pre-calculates glyph outlines at axis min and max values, then interpolates coordinates arithmetically at render time — zero fontkit calls per frame.",
+    "tags": [
+        "variable font",
+        "weight",
+        "width",
+        "morph",
+        "typography",
+        "animation",
+        "glyph outlines",
+        "text animation"
+    ],
     "isReleased": true
 }

@@ -111,6 +111,18 @@
         }
     ],
     "summary": "Physics simulation world ",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "gravity",
+        "scene",
+        "engine",
+        "setup",
+        "step",
+        "collision world",
+        "start"
+    ],
     "isReleased": true,
     "credits": [
         {

@@ -72,5 +72,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Pixel position in a WGSL fragment shader"
+    "summary": "Pixel position in a WGSL fragment shader",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "pixel position",
+        "fragcoord",
+        "screen coordinates",
+        "xy",
+        "fragment"
+    ]
 }

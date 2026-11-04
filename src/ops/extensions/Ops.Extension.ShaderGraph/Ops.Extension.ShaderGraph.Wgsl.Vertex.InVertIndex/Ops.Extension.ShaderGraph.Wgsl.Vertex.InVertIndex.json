@@ -90,5 +90,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Vertex index of a WGSL vertex shader"
+    "summary": "Vertex index of a WGSL vertex shader",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "vertex id",
+        "vertex shader",
+        "index",
+        "per vertex"
+    ]
 }

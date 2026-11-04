@@ -43,5 +43,15 @@
             }
         ]
     },
-    "summary": "Load a .ply 3D file as geometry"
+    "summary": "Load a .ply 3D file as geometry",
+    "tags": [
+        "point cloud",
+        "scan",
+        "ply file",
+        "import",
+        "load",
+        "3d file",
+        "mesh",
+        "gaussian splat"
+    ]
 }

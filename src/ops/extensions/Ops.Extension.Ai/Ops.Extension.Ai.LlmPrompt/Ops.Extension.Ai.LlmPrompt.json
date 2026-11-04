@@ -97,5 +97,19 @@
         ]
     },
     "isReleased": true,
-    "summary": "Send a prompt to an AI language model and get the answer"
+    "summary": "Send a prompt to an AI language model and get the answer",
+    "tags": [
+        "llm",
+        "ai",
+        "chatgpt",
+        "gpt",
+        "claude",
+        "prompt",
+        "chatbot",
+        "generate text",
+        "language model",
+        "question",
+        "completion",
+        "gen ai"
+    ]
 }

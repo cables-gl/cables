@@ -84,5 +84,13 @@
         "minigpu"
     ],
     "isReleased": true,
-    "summary": "WGSL shader module with code"
+    "summary": "WGSL shader module with code",
+    "tags": [
+        "webgpu",
+        "wgsl",
+        "shader code",
+        "module",
+        "custom shader",
+        "program"
+    ]
 }

@@ -60,5 +60,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Tangent"
+    "summary": "Tangent",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "tangent",
+        "trigonometry",
+        "slope"
+    ]
 }

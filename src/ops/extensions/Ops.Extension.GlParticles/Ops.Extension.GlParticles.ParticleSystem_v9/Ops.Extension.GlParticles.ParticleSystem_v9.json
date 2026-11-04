@@ -281,6 +281,19 @@
         ]
     },
     "summary": "Simulates particles on the GPU.",
+    "tags": [
+        "particles",
+        "emitter",
+        "gpu",
+        "simulation",
+        "sparks",
+        "smoke",
+        "fire",
+        "dust",
+        "swarm",
+        "effects",
+        "fountain"
+    ],
     "docs": {
         "ports": []
     },

@@ -34,6 +34,17 @@
         ]
     },
     "summary": "Use the Teachable Machines image classifier. Insert the uploaded model URL.",
+    "tags": [
+        "machine learning",
+        "ai",
+        "image recognition",
+        "classify",
+        "teachable machine",
+        "train",
+        "google",
+        "ml",
+        "webcam"
+    ],
     "updated": 0,
     "author": "mick",
     "authorName": "mick",

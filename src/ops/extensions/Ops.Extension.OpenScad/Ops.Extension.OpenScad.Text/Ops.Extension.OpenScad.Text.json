@@ -52,5 +52,15 @@
         }
     ],
     "isReleased": true,
-    "summary": "3D text shape in OpenSCAD"
+    "summary": "3D text shape in OpenSCAD",
+    "tags": [
+        "openscad",
+        "cad",
+        "3d text",
+        "letters",
+        "font",
+        "extrude",
+        "csg",
+        "solid modeling"
+    ]
 }

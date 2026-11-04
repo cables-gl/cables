@@ -67,5 +67,17 @@
         "ports": []
     },
     "summary": "Applies an impulse to bodies",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "push",
+        "kick",
+        "jump",
+        "explosion",
+        "burst",
+        "hit",
+        "move body"
+    ],
     "isReleased": true
 }

@@ -132,5 +132,14 @@
         "three"
     ],
     "isReleased": true,
-    "summary": "Phong material for Three.js"
+    "summary": "Phong material for Three.js",
+    "tags": [
+        "threejs",
+        "three.js",
+        "shaded",
+        "specular",
+        "shiny",
+        "lighting",
+        "glossy"
+    ]
 }

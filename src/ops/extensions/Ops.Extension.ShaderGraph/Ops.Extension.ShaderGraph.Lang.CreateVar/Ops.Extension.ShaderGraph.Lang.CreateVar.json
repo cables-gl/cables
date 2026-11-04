@@ -40,5 +40,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Create a named shader variable"
+    "summary": "Create a named shader variable",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "variable",
+        "declare",
+        "named value",
+        "store",
+        "local",
+        "define"
+    ]
 }

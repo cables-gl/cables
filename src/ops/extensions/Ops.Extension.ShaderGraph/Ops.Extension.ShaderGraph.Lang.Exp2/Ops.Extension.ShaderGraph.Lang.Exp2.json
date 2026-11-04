@@ -90,5 +90,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "2 to the power of a number"
+    "summary": "2 to the power of a number",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "exponent",
+        "power of two",
+        "exponential"
+    ]
 }

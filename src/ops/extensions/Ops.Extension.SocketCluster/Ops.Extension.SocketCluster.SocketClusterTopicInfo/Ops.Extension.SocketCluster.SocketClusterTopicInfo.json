@@ -85,6 +85,16 @@
         ]
     },
     "summary": "get info for clients listening on a socketcluster topic",
+    "tags": [
+        "websocket",
+        "realtime",
+        "network",
+        "clients",
+        "subscribers",
+        "channel",
+        "users online",
+        "debug"
+    ],
     "issues": "",
     "relatedops": [
         "Ops.Net.SocketCluster.SocketCluster"

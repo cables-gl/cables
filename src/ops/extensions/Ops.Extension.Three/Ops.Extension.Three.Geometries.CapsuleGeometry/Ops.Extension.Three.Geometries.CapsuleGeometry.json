@@ -51,6 +51,14 @@
         "three"
     ],
     "summary": "Create a capsule geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "pill",
+        "rounded cylinder",
+        "character",
+        "mesh"
+    ],
     "docs": {
         "ports": [
             {

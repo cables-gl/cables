@@ -72,5 +72,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "2D rectangle shape"
+    "summary": "2D rectangle shape",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "rectangle",
+        "square",
+        "box",
+        "quad",
+        "sdf",
+        "2d shape"
+    ]
 }

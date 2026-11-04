@@ -96,5 +96,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Base 2 logarithm"
+    "summary": "Base 2 logarithm",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "logarithm",
+        "exponent",
+        "power of two"
+    ]
 }

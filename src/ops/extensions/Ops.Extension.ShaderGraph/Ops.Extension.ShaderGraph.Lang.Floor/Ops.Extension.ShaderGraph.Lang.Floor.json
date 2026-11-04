@@ -72,5 +72,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Round down to the previous whole number"
+    "summary": "Round down to the previous whole number",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "round down",
+        "integer",
+        "truncate"
+    ]
 }

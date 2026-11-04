@@ -65,5 +65,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Cross product of two vectors"
+    "summary": "Cross product of two vectors",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "cross product",
+        "vector",
+        "perpendicular",
+        "normal"
+    ]
 }

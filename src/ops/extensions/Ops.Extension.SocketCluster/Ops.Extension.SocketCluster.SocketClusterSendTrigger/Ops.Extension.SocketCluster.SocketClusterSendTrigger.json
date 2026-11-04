@@ -29,6 +29,16 @@
         ]
     },
     "summary": "sends a trigger via socketcluster/websocket",
+    "tags": [
+        "websocket",
+        "realtime",
+        "network",
+        "send",
+        "publish",
+        "messaging",
+        "event",
+        "multiplayer"
+    ],
     "docs": {
         "ports": [
             {

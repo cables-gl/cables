@@ -93,5 +93,14 @@
         "three"
     ],
     "isReleased": true,
-    "summary": "Directional light for Three.js scenes"
+    "summary": "Directional light for Three.js scenes",
+    "tags": [
+        "threejs",
+        "three.js",
+        "sun",
+        "sunlight",
+        "parallel light",
+        "shadows",
+        "lighting"
+    ]
 }

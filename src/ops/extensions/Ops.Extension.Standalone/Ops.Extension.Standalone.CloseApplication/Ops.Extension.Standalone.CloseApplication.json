@@ -31,6 +31,15 @@
         "standalone_electron"
     ],
     "summary": "Close cables standalone on trigger",
+    "tags": [
+        "quit",
+        "exit",
+        "close",
+        "shutdown",
+        "end program",
+        "desktop app",
+        "stop"
+    ],
     "isReleased": true,
     "exampleProjectId": "qKH02q"
 }

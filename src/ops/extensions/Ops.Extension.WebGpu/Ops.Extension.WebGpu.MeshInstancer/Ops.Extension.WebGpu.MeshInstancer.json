@@ -81,5 +81,16 @@
         "ports": []
     },
     "summary": "Draw the same mesh many times very fast",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "instancing",
+        "instances",
+        "copies",
+        "clone",
+        "many",
+        "repeat",
+        "duplicate"
+    ],
     "isReleased": true
 }

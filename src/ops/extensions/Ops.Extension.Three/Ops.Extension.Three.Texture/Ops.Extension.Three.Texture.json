@@ -31,5 +31,16 @@
         ]
     },
     "isReleased": true,
-    "summary": "Load an image as a texture for Three.js"
+    "summary": "Load an image as a texture for Three.js",
+    "tags": [
+        "threejs",
+        "three.js",
+        "image",
+        "picture",
+        "load",
+        "file",
+        "png",
+        "jpg",
+        "map"
+    ]
 }

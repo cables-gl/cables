@@ -59,5 +59,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Larger of two values"
+    "summary": "Larger of two values",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "larger",
+        "maximum",
+        "highest"
+    ]
 }

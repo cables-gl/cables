@@ -62,5 +62,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "For loop in a GLSL shader graph"
+    "summary": "For loop in a GLSL shader graph",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "loop",
+        "repeat",
+        "iterate",
+        "for",
+        "iteration"
+    ]
 }

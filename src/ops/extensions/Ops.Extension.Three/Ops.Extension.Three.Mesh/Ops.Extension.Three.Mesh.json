@@ -48,5 +48,14 @@
         "ports": []
     },
     "isReleased": true,
-    "summary": "Mesh for Three.js, combines geometry and material"
+    "summary": "Mesh for Three.js, combines geometry and material",
+    "tags": [
+        "threejs",
+        "three.js",
+        "object",
+        "model",
+        "3d object",
+        "geometry material",
+        "draw"
+    ]
 }

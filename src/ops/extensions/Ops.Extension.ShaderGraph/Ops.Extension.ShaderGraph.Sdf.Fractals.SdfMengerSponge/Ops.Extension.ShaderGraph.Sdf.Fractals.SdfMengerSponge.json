@@ -76,5 +76,17 @@
             }
         ]
     },
-    "summary": "Menger sponge fractal distance field"
+    "summary": "Menger sponge fractal distance field",
+    "tags": [
+        "sdf",
+        "signed distance field",
+        "raymarching",
+        "shader graph",
+        "node",
+        "fractal",
+        "menger",
+        "sponge",
+        "cube fractal",
+        "sierpinski"
+    ]
 }
