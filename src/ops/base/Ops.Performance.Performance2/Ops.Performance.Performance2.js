@@ -97,7 +97,7 @@ function drawGraph(name, posy, q, col, heavy)
         }
     }
 
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = "#bbbbbb";
     let title = name + " ";
     if (!info && avg)
     {
@@ -149,7 +149,7 @@ function updateCanvas()
 
     // resize corner, top right
     ctx.globalAlpha = 0.8;
-    ctx.fillStyle = "#000000";
+    ctx.fillStyle = "#444444";
     ctx.beginPath();
     ctx.moveTo(canvas.width - RESIZE_SIZE, 0);
     ctx.lineTo(canvas.width, 0);
