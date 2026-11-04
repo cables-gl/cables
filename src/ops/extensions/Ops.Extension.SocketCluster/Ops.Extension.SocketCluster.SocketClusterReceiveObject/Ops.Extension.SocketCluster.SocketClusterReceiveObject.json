@@ -35,6 +35,16 @@
         ]
     },
     "summary": "Receives object from the socketcluster socket/topic",
+    "tags": [
+        "websocket",
+        "realtime",
+        "network",
+        "receive",
+        "listen",
+        "messaging",
+        "json",
+        "multiplayer"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

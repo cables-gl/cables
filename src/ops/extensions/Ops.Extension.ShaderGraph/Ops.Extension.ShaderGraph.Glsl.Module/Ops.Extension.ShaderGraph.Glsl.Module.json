@@ -83,5 +83,17 @@
             }
         ]
     },
-    "summary": "GLSL code module for a shader graph"
+    "summary": "GLSL code module for a shader graph",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "code",
+        "snippet",
+        "custom function",
+        "include",
+        "library",
+        "glsl code"
+    ]
 }

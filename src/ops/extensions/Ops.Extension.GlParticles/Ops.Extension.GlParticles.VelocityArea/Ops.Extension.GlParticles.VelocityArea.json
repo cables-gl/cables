@@ -116,5 +116,15 @@
         "cgl"
     ],
     "license": "MIT",
-    "summary": "Push particles with velocity inside an area"
+    "summary": "Push particles with velocity inside an area",
+    "tags": [
+        "particles",
+        "force field",
+        "zone",
+        "volume",
+        "accelerate",
+        "wind",
+        "gpu particles",
+        "region"
+    ]
 }

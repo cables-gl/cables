@@ -57,6 +57,16 @@
         ]
     },
     "summary": "A texture containing only one color",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "solid color",
+        "fill",
+        "flat",
+        "single color",
+        "swatch",
+        "texture"
+    ],
     "docs": {
         "ports": []
     },

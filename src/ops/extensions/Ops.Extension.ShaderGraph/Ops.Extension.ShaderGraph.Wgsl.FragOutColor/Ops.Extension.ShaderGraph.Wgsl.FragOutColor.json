@@ -46,5 +46,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Output colour of a WGSL fragment shader"
+    "summary": "Output colour of a WGSL fragment shader",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "output",
+        "final color",
+        "result",
+        "pixel color",
+        "rgba",
+        "fragment"
+    ]
 }

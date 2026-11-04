@@ -82,5 +82,19 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Create a vec3 from X, Y and Z"
+    "summary": "Create a vec3 from X, Y and Z",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "vector",
+        "xyz",
+        "rgb",
+        "combine",
+        "pack",
+        "create",
+        "position",
+        "color"
+    ]
 }

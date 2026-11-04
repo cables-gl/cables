@@ -153,5 +153,18 @@
             "date": 1791379918634
         }
     ],
-    "summary": "GPU particle system with lifetime, gravity and velocity"
+    "summary": "GPU particle system with lifetime, gravity and velocity",
+    "tags": [
+        "particles",
+        "emitter",
+        "gpu",
+        "simulation",
+        "sparks",
+        "smoke",
+        "fire",
+        "dust",
+        "swarm",
+        "effects",
+        "fountain"
+    ]
 }

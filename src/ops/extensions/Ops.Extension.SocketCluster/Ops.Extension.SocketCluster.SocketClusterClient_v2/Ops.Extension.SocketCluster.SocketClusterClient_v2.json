@@ -108,6 +108,16 @@
         ]
     },
     "summary": "connect to a socketcluster server and manage the connection",
+    "tags": [
+        "websocket",
+        "realtime",
+        "network",
+        "connect",
+        "client",
+        "messaging",
+        "multiplayer",
+        "pubsub"
+    ],
     "docs": {
         "ports": [
             {

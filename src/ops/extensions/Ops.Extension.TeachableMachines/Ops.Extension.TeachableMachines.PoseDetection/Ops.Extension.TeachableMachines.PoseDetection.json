@@ -48,6 +48,17 @@
         ]
     },
     "summary": "Use the Teachable Machines pose detection with your webcam. Insert the uploaded model URL.",
+    "tags": [
+        "machine learning",
+        "ai",
+        "body",
+        "pose",
+        "teachable machine",
+        "train",
+        "google",
+        "ml",
+        "webcam"
+    ],
     "author": "mick",
     "authorName": "mick",
     "id": "0391393f-c1cd-4cff-b580-bc5eddfa74c5",

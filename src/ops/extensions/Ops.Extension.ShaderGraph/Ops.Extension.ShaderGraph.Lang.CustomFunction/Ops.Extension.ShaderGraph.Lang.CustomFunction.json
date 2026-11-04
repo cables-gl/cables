@@ -39,5 +39,18 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Write your own shader function"
+    "summary": "Write your own shader function",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "code",
+        "glsl",
+        "wgsl",
+        "write shader",
+        "snippet",
+        "function",
+        "programming"
+    ]
 }

@@ -71,5 +71,17 @@
     },
     "caniusequery": "webgpu",
     "summary": "Load an image file as a texture",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "image",
+        "picture",
+        "load",
+        "file",
+        "png",
+        "jpg",
+        "photo",
+        "asset"
+    ],
     "isReleased": true
 }

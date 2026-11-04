@@ -227,6 +227,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1793706365153
+        },
+        {
+            "message": "Share modal popup now shows a button \"exit iframe\" to run the patch without an iframe around (only for published patches)",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1793721148372
         }
     ],
     "isReleased": true,
@@ -255,6 +261,13 @@
         ]
     },
     "summary": "Changelog",
+    "tags": [
+        "release notes",
+        "updates",
+        "news",
+        "version history",
+        "whats new"
+    ],
     "docs": {
         "ports": []
     }

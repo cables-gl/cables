@@ -34,5 +34,19 @@
             }
         ]
     },
-    "summary": "Raymarch SDF shapes into an image"
+    "summary": "Raymarch SDF shapes into an image",
+    "tags": [
+        "sdf",
+        "signed distance field",
+        "raymarching",
+        "shader graph",
+        "node",
+        "render",
+        "raytrace",
+        "ray march",
+        "image",
+        "3d scene",
+        "camera",
+        "shapes"
+    ]
 }

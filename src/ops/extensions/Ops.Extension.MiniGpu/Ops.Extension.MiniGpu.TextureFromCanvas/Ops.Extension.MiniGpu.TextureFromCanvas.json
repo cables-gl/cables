@@ -35,5 +35,14 @@
             }
         ]
     },
-    "summary": "Use a canvas as a WebGPU texture"
+    "summary": "Use a canvas as a WebGPU texture",
+    "tags": [
+        "webgpu",
+        "canvas",
+        "2d canvas",
+        "texture",
+        "upload",
+        "image",
+        "drawing"
+    ]
 }

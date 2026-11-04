@@ -587,6 +587,8 @@ export class Patch extends Events
             op.attribs = opAttribs;
             if (op.attribs.stacked) op.setStacked(true, false);
             uiAttribs = uiAttribs || {};
+            // patches saved before the area id moved to attribs
+            if (uiAttribs.area && uiAttribs.area.id && !op.attribs.areaId) op.attribs.areaId = uiAttribs.area.id;
             uiAttribs.subPatch = uiAttribs.subPatch || Patch.DEFAULT_SUBPATCHID;
             op.setUiAttribs(uiAttribs);
             if (op.onCreate) op.onCreate();
@@ -684,7 +686,7 @@ export class Patch extends Events
         for (let i = 0; i < this.ops.length; i++)
         {
             const ua = this.ops[i].uiAttribs;
-            if (ua.allowStacking && ua.area && ua.area.id == areaId) return this.ops[i];
+            if (ua.allowStacking && this.ops[i].attribs.areaId == areaId) return this.ops[i];
         }
         return null;
     }

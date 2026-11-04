@@ -53,5 +53,17 @@
         }
     ],
     "isReleased": true,
-    "summary": "Physics world for Rapier rigid body simulation"
+    "summary": "Physics world for Rapier rigid body simulation",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "gravity",
+        "scene",
+        "engine",
+        "setup",
+        "step",
+        "collision world",
+        "start"
+    ]
 }

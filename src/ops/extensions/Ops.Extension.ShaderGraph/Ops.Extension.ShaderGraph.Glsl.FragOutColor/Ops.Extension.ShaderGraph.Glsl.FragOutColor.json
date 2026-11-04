@@ -35,5 +35,17 @@
     "docs": {
         "ports": []
     },
-    "summary": "Output colour of a GLSL fragment shader"
+    "summary": "Output colour of a GLSL fragment shader",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "output",
+        "fragcolor",
+        "final color",
+        "result",
+        "pixel color",
+        "rgba"
+    ]
 }

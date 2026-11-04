@@ -1,0 +1,51 @@
+{
+    "id": "ad6e3e6b-9d88-4378-b09f-6b57999d4f91",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1570876567514
+        },
+        {
+            "message": "Ops.Admin.GlPatch renamed to Ops.Dev.GlPatch",
+            "author": "pandur",
+            "date": 1623913974452
+        },
+        {
+            "message": "op Dev.GlPatch was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793783181035
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1570876570684,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 1,
+                "name": "Refresh"
+            },
+            {
+                "type": 1,
+                "name": "debug"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "portsOut": []
+    },
+    "summary": "This render the editor ops in your canvas.",
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "license": "MIT"
+}

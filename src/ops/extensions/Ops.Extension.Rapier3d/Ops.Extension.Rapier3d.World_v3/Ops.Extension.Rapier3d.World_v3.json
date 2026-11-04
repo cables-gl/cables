@@ -131,6 +131,18 @@
         }
     ],
     "summary": "Create and run a 3D physics simulation world",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "gravity",
+        "scene",
+        "engine",
+        "setup",
+        "step",
+        "collision world",
+        "start"
+    ],
     "credits": [
         {
             "title": "Rapier 3d",

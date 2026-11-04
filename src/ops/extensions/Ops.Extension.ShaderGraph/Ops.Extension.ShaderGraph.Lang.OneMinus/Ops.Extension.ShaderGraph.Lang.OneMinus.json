@@ -72,5 +72,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "One minus a number"
+    "summary": "One minus a number",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "invert",
+        "1-x",
+        "complement",
+        "reverse"
+    ]
 }

@@ -59,5 +59,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Elapsed time for animation"
+    "summary": "Elapsed time for animation",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "clock",
+        "seconds",
+        "animation",
+        "elapsed",
+        "uniform",
+        "timer"
+    ]
 }

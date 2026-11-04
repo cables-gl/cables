@@ -60,5 +60,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Length of a vector"
+    "summary": "Length of a vector",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "magnitude",
+        "norm",
+        "vector length",
+        "size"
+    ]
 }

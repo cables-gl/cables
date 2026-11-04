@@ -122,6 +122,18 @@
         ]
     },
     "summary": "Get face mesh from webcam/video using mediapipe library",
+    "tags": [
+        "mediapipe",
+        "computer vision",
+        "tracking",
+        "face",
+        "head",
+        "webcam",
+        "landmarks",
+        "face detection",
+        "ar",
+        "face filter"
+    ],
     "relatedops": [
         "Ops.Libs.Mediapipe.FaceMesh"
     ],

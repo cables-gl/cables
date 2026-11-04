@@ -61,6 +61,16 @@
         ]
     },
     "summary": "show content of last used pipeline for debugging",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "debug",
+        "inspect",
+        "render pipeline",
+        "shader",
+        "wgsl",
+        "state"
+    ],
     "docs": {
         "ports": []
     },

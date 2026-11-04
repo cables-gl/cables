@@ -38,6 +38,16 @@
         "cgp"
     ],
     "summary": "Compute shader GPU buffer storage input",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "compute shader",
+        "wgsl",
+        "storage buffer",
+        "input",
+        "data",
+        "gpgpu"
+    ],
     "docs": {
         "ports": []
     },

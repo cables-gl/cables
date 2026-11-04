@@ -135,10 +135,9 @@
         "textbox",
         "ui",
         "gui",
-        "interface"
+        "interface",
+        ""
     ],
-    "issues": "",
-    "youtubeids": [],
     "docs": {
         "ports": [
             {
@@ -175,7 +174,7 @@
             }
         ]
     },
-    "exampleProjectId": "wa-KH-",
+    "exampleProjectId": "Xkf8Ry",
     "license": "MIT",
     "isReleased": true
 }

@@ -82,5 +82,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Float constant"
+    "summary": "Float constant",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "constant",
+        "number",
+        "value",
+        "literal",
+        "float"
+    ]
 }

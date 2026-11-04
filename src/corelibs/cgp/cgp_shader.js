@@ -487,12 +487,151 @@ export class CgpShader extends CgShader
     }
 
     /**
+     * @param {CgpUniform} uni
+     */
+    _addUniform(uni)
+    {
+        if (!this._uniforms) this._uniforms = [];
+        if (this._uniforms.indexOf(uni) == -1) this._uniforms.push(uni);
+        this.setWhyCompile("add uniform " + uni.getName());
+    }
+
+    /**
+     * @returns {Array<BindingUniform>}
+     */
+    #getUniformBindings()
+    {
+        const arr = [];
+        if (this.defaultUniBindingFrag) arr.push(this.defaultUniBindingFrag);
+        if (this.defaultUniBindingVert) arr.push(this.defaultUniBindingVert);
+        if (this.defaultUniBindingCompute) arr.push(this.defaultUniBindingCompute);
+        return arr;
+    }
+
+    /**
+     * @param {string} name
+     * @returns {CgpUniform|null}
+     */
+    getUniform(name)
+    {
+        const bindings = this.#getUniformBindings();
+        for (let i = 0; i < bindings.length; i++)
+        {
+            const u = bindings[i].getUniform(name);
+            if (u) return u;
+        }
+
+        // textures and samplers live in their own bindings
+        if (this._uniforms)
+            for (let i = 0; i < this._uniforms.length; i++)
+                if (this._uniforms[i].getName() == name) return this._uniforms[i];
+
+        return null;
+    }
+
+    /**
+     * @returns {Array<CgpUniform>}
+     */
+    getUniforms()
+    {
+        return this._uniforms || [];
+    }
+
+    /**
+     * @param {string} type
+     * @param {string} name
+     * @param {any} valueOrPort
+     * @param {any} [p2]
+     * @param {any} [p3]
+     * @param {any} [p4]
+     * @returns {CgpUniform}
+     */
+    addUniformFrag(type, name, valueOrPort, p2, p3, p4)
+    {
+        const uni = new CgpUniform(this, type, name, valueOrPort, p2, p3, p4);
+        uni.shaderType = "frag";
+        return this.addUniform(uni, GPUShaderStage.FRAGMENT);
+    }
+
+    /**
+     * @param {string} type
+     * @param {string} name
+     * @param {any} valueOrPort
+     * @param {any} [p2]
+     * @param {any} [p3]
+     * @param {any} [p4]
+     * @returns {CgpUniform}
+     */
+    addUniformVert(type, name, valueOrPort, p2, p3, p4)
+    {
+        const uni = new CgpUniform(this, type, name, valueOrPort, p2, p3, p4);
+        uni.shaderType = "vert";
+        return this.addUniform(uni, GPUShaderStage.VERTEX);
+    }
+
+    /**
+     * add the same uniform to vertex and fragment stage
+     * @param {string} type
+     * @param {string} name
+     * @param {any} valueOrPort
+     * @param {any} [p2]
+     * @param {any} [p3]
+     * @param {any} [p4]
+     * @returns {CgpUniform}
+     */
+    addUniformBoth(type, name, valueOrPort, p2, p3, p4)
+    {
+        const uniVert = this.addUniformVert(type, name, valueOrPort, p2, p3, p4);
+        if (type != "t" && type != "sampler") this.addUniformFrag(type, name, valueOrPort, p2, p3, p4);
+        return uniVert;
+    }
+
+    /**
+     * @param {string} type
+     * @param {string} name
+     * @param {any} valueOrPort
+     * @param {any} [p2]
+     * @param {any} [p3]
+     * @param {any} [p4]
+     * @returns {CgpUniform}
+     */
+    addUniformCompute(type, name, valueOrPort, p2, p3, p4)
+    {
+        const uni = new CgpUniform(this, type, name, valueOrPort, p2, p3, p4);
+        uni.shaderType = "compute";
+        return this.addUniform(uni, GPUShaderStage.COMPUTE);
+    }
+
+    /**
+     * @param {string} name
+     */
+    removeUniform(name)
+    {
+        this.removeUniformByName(name);
+
+        if (this._uniforms)
+            for (let i = this._uniforms.length - 1; i >= 0; i--)
+                if (this._uniforms[i].getName() == name) this._uniforms.splice(i, 1);
+
+        // texture / sampler bindings
+        for (let i = 0; i < this.bindGroups.length; i++)
+        {
+            const b = this.bindGroups[i].getBindingByName(name);
+            if (b && !(b instanceof BindingUniform)) this.bindGroups[i].removeBinding(b);
+        }
+
+        this.needsPipelineUpdate = "remove uniform";
+        this.setWhyCompile("remove uniform " + name);
+    }
+
+    /**
      * @param {string} name
      */
     removeUniformByName(name)
     {
-        const binding = this.getDefaultUniBinding(null);
-        binding.removeUniformByName(name);
+        const bindings = this.#getUniformBindings();
+        for (let i = 0; i < bindings.length; i++)
+            bindings[i].removeUniformByName(name);
     }
 
     /**
@@ -575,8 +714,17 @@ export class CgpShader extends CgShader
         return o;
     }
 
+    /**
+     * @param {CgpShader} orig
+     */
     copyUniformValues(orig)
     {
-
+        if (!orig || !orig._uniforms) return;
+        for (let i = 0; i < orig._uniforms.length; i++)
+        {
+            const src = orig._uniforms[i];
+            const dst = this.getUniform(src.getName());
+            if (dst && dst !== src && src.getType() != "t" && src.getType() != "sampler") dst.setValue(src.getValue());
+        }
     }
 }

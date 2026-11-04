@@ -94,5 +94,14 @@
         "three"
     ],
     "isReleased": true,
-    "summary": "Perspective camera for Three.js"
+    "summary": "Perspective camera for Three.js",
+    "tags": [
+        "threejs",
+        "three.js",
+        "view",
+        "fov",
+        "projection",
+        "eye",
+        "scene camera"
+    ]
 }

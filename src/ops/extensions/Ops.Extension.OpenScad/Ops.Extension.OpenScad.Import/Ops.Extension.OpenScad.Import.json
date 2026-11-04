@@ -36,5 +36,14 @@
         }
     ],
     "isReleased": true,
-    "summary": "Import a 3D file into OpenSCAD"
+    "summary": "Import a 3D file into OpenSCAD",
+    "tags": [
+        "openscad",
+        "cad",
+        "load",
+        "stl",
+        "3d file",
+        "model",
+        "csg"
+    ]
 }

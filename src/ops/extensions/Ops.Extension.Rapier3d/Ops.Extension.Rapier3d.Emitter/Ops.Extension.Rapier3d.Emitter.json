@@ -147,6 +147,18 @@
         "ports": []
     },
     "summary": "Spawn new physics bodies by triggering",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "spawn",
+        "create bodies",
+        "shooter",
+        "rain",
+        "drop",
+        "generator",
+        "instances"
+    ],
     "coreLibs": [
         "cgl"
     ],

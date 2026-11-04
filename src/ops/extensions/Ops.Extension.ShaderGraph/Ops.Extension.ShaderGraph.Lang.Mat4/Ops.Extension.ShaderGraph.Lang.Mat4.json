@@ -73,5 +73,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Create a 4x4 matrix"
+    "summary": "Create a 4x4 matrix",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "matrix",
+        "4x4",
+        "transform",
+        "create",
+        "mat4"
+    ]
 }

@@ -57,6 +57,15 @@
     },
     "authorName": "stephan",
     "summary": "start a socketcluster server",
+    "tags": [
+        "websocket",
+        "realtime",
+        "server",
+        "network",
+        "messaging",
+        "backend",
+        "pubsub"
+    ],
     "docs": {
         "ports": [
             {

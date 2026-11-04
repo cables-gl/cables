@@ -16,6 +16,15 @@
     "authorName": "pandur",
     "created": 1650464404935,
     "summary": "set css properties",
+    "tags": [
+        "html",
+        "css",
+        "style",
+        "many elements",
+        "array",
+        "set property",
+        "dom"
+    ],
     "docs": {
         "ports": []
     },

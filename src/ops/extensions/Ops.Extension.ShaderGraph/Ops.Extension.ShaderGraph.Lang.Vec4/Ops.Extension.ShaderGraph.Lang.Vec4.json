@@ -81,5 +81,18 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Create a vec4 from X, Y, Z and W"
+    "summary": "Create a vec4 from X, Y, Z and W",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "vector",
+        "xyzw",
+        "rgba",
+        "combine",
+        "pack",
+        "create",
+        "color"
+    ]
 }

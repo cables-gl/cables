@@ -179,7 +179,7 @@ export class CgpUniform extends CgUniform
         if (this._type == "2f") return "vec2f";
         if (this._type == "f") return "f32";
         if (this._type == "f[]") return "array<vec4f>";
-        if (this._type == "i") return "int";
+        if (this._type == "i") return "i32";
         if (this._type == "sampler") return "sampler";
         if (this._type == "t") return "texture_2d<f32>";
         this._log.warn("unknown type getWgslTypeStr", this._type);

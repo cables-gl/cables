@@ -52,5 +52,13 @@
         }
     ],
     "isReleased": true,
-    "summary": "Set the colour of an OpenSCAD shape"
+    "summary": "Set the colour of an OpenSCAD shape",
+    "tags": [
+        "openscad",
+        "cad",
+        "colour",
+        "paint",
+        "solid modeling",
+        "csg"
+    ]
 }

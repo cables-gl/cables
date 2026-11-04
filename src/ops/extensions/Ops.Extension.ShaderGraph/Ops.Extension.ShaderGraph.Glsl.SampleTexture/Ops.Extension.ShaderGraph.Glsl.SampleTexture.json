@@ -35,5 +35,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Read a texture colour at a coordinate"
+    "summary": "Read a texture colour at a coordinate",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "texture2d",
+        "image",
+        "lookup",
+        "sampler",
+        "read pixel",
+        "uv"
+    ]
 }

@@ -66,5 +66,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Pass a texture to a GLSL shader"
+    "summary": "Pass a texture to a GLSL shader",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "uniform",
+        "parameter",
+        "image",
+        "sampler",
+        "texture input",
+        "shader input"
+    ]
 }

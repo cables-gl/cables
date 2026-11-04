@@ -162,5 +162,16 @@
         "ports": []
     },
     "exampleProjectId": "UTlwIw",
-    "summary": "Deformable body simulation"
+    "summary": "Deformable body simulation",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "deformable",
+        "jelly",
+        "cloth",
+        "squishy",
+        "elastic",
+        "wobble"
+    ]
 }

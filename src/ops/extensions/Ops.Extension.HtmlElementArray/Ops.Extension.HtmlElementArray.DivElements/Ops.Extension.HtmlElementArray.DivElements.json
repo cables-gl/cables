@@ -80,6 +80,17 @@
         "ports": []
     },
     "summary": "create an array of div elements",
+    "tags": [
+        "html",
+        "dom",
+        "div",
+        "create many",
+        "list",
+        "grid",
+        "elements",
+        "array",
+        "layout"
+    ],
     "coreLibs": [
         "cgl"
     ],

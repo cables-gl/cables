@@ -91,5 +91,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Default uniforms: MVP, model, view, projection, time"
+    "summary": "Default uniforms: MVP, model, view, projection, time",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "mvp",
+        "matrices",
+        "model view projection",
+        "camera",
+        "uniforms",
+        "transform"
+    ]
 }

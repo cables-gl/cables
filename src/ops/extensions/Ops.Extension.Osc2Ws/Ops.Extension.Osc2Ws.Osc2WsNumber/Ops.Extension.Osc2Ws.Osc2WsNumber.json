@@ -54,6 +54,16 @@
         ]
     },
     "summary": "Outputs a single number from a user defined OSC address",
+    "tags": [
+        "osc",
+        "open sound control",
+        "websocket",
+        "touchosc",
+        "max msp",
+        "network",
+        "controller",
+        "value"
+    ],
     "issues": "",
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"

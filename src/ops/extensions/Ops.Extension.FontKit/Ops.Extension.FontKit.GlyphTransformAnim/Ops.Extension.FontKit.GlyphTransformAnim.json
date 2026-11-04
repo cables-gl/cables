@@ -57,5 +57,14 @@
         "ports": []
     },
     "summary": "Applies geometric transformations per glyph via an array of values. Purely geometric — does not need the font, only Glyph Paths + Glyph Positions.",
+    "tags": [
+        "text animation",
+        "per letter",
+        "glyph",
+        "typography",
+        "kinetic type",
+        "transform",
+        "letters"
+    ],
     "isReleased": true
 }

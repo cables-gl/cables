@@ -1,0 +1,168 @@
+{
+  "ops": [
+    {
+      "opId": "c8fb181e-0b03-4b41-9e55-06b6267bc634",
+      "id": "szd7t4h8j",
+      "uiAttribs": {
+        "mathTitle": true,
+        "title": "+",
+        "subPatch": "no7cgk37e",
+        "translate": {
+          "x": 35.845321229050285,
+          "y": -33.17912011173184
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "number1",
+          "value": 0
+        },
+        {
+          "name": "number2",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "c8fb181e-0b03-4b41-9e55-06b6267bc634",
+      "id": "tlgb0vwwo",
+      "uiAttribs": {
+        "mathTitle": true,
+        "title": "+",
+        "subPatch": "no7cgk37e",
+        "translate": {
+          "x": 57.45286312849163,
+          "y": 42.85439944134078
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "number1",
+          "value": 0
+        },
+        {
+          "name": "number2",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "c8fb181e-0b03-4b41-9e55-06b6267bc634",
+      "id": "ogr46qy8b",
+      "uiAttribs": {
+        "mathTitle": true,
+        "title": "+",
+        "subPatch": "no7cgk37e",
+        "translate": {
+          "x": 175.768156424581,
+          "y": 12.585544692737429
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "number1",
+          "value": 0
+        },
+        {
+          "name": "number2",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "c8fb181e-0b03-4b41-9e55-06b6267bc634",
+      "id": "zog9sp8g4",
+      "uiAttribs": {
+        "mathTitle": true,
+        "title": "+",
+        "subPatch": "no7cgk37e",
+        "translate": {
+          "x": 160.17807262569832,
+          "y": -30.909567039106143
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "number1",
+          "value": 0
+        },
+        {
+          "name": "number2",
+          "value": 0
+        }
+      ],
+      "portsOut": [
+        {
+          "name": "result",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "opId": "c4e4e933-136e-479e-8de8-0b35b75d9217",
+      "id": "5ub4gmnbv",
+      "uiAttribs": {
+        "subPatch": "no7cgk37e",
+        "translate": {
+          "x": 35.845321229050285,
+          "y": -113.17912011173183
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsOut": [
+        {
+          "name": "innerOut_6d97cewid",
+          "value": 0,
+          "title": "result"
+        }
+      ]
+    },
+    {
+      "opId": "02d45073-7936-4830-81ad-59a162febf1f",
+      "id": "fdtfcpvdj",
+      "uiAttribs": {
+        "subPatch": "no7cgk37e",
+        "translate": {
+          "x": 35.845321229050285,
+          "y": 122.85439944134077
+        },
+        "blueprintSubpatch2": true
+      },
+      "storage": {},
+      "portsIn": [
+        {
+          "name": "innerIn_0ng9bkpxi",
+          "value": 0,
+          "title": "value"
+        }
+      ]
+    }
+  ]
+}

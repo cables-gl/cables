@@ -92,5 +92,16 @@
             }
         ]
     },
-    "summary": "Bind an array as a storage buffer"
+    "summary": "Bind an array as a storage buffer",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "storage buffer",
+        "array",
+        "binding",
+        "compute",
+        "gpu data"
+    ]
 }

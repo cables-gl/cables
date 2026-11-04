@@ -94,5 +94,15 @@
     "exampleProjectId": "ALyYKB",
     "caniusequery": "webgpu",
     "summary": "Create a canvas for WebGPU",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "canvas",
+        "start",
+        "context",
+        "render target",
+        "output",
+        "setup"
+    ],
     "isReleased": true
 }

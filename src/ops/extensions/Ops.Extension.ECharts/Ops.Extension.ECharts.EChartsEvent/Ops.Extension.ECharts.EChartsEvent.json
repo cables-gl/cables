@@ -71,6 +71,15 @@
         ]
     },
     "summary": "capture echart-library-events",
+    "tags": [
+        "chart",
+        "click",
+        "hover",
+        "events",
+        "interaction",
+        "listener",
+        "echarts"
+    ],
     "issues": "",
     "relatedops": [
         "Ops.Libs.ECharts.ECharts"

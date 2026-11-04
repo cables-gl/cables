@@ -112,5 +112,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Pick one of several values by index"
+    "summary": "Pick one of several values by index",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "select",
+        "choose",
+        "index",
+        "multiplexer",
+        "pick",
+        "case"
+    ]
 }

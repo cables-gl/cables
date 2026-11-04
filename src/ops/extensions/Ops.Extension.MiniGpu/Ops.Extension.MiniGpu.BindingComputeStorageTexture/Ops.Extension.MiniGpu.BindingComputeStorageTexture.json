@@ -73,5 +73,14 @@
             }
         ]
     },
-    "summary": "Storage texture for compute shaders"
+    "summary": "Storage texture for compute shaders",
+    "tags": [
+        "webgpu",
+        "compute",
+        "storage texture",
+        "wgsl",
+        "image",
+        "gpgpu",
+        "binding"
+    ]
 }

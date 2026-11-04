@@ -60,5 +60,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Normalize a vector to length 1"
+    "summary": "Normalize a vector to length 1",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "unit vector",
+        "length 1",
+        "direction"
+    ]
 }

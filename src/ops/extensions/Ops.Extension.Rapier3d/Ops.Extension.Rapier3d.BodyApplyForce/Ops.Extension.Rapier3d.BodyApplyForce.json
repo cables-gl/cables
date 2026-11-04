@@ -67,5 +67,16 @@
         "ports": []
     },
     "summary": "Applies a force to bodies",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "push",
+        "force",
+        "wind",
+        "accelerate",
+        "thrust",
+        "move body"
+    ],
     "isReleased": true
 }

@@ -82,5 +82,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Read a texture colour at a coordinate"
+    "summary": "Read a texture colour at a coordinate",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "texture",
+        "image",
+        "lookup",
+        "sampler",
+        "read pixel",
+        "uv"
+    ]
 }

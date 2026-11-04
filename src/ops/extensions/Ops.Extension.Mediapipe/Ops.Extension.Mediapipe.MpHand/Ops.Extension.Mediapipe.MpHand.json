@@ -52,6 +52,18 @@
         ]
     },
     "summary": "Get points and lines for left/right hand from mediapipe",
+    "tags": [
+        "mediapipe",
+        "computer vision",
+        "tracking",
+        "hand",
+        "fingers",
+        "skeleton",
+        "points",
+        "lines",
+        "webcam",
+        "gesture"
+    ],
     "issues": "",
     "caniusequery": "",
     "relatedops": [

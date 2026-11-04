@@ -48,5 +48,16 @@
         "ports": []
     },
     "isReleased": true,
-    "summary": "Load a glTF or GLB 3D model into Three.js"
+    "summary": "Load a glTF or GLB 3D model into Three.js",
+    "tags": [
+        "threejs",
+        "three.js",
+        "model",
+        "3d model",
+        "glb",
+        "import",
+        "load",
+        "3d file",
+        "asset"
+    ]
 }

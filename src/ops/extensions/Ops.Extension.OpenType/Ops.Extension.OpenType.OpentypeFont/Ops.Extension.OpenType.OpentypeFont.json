@@ -38,6 +38,16 @@
     "authorName": "pandur",
     "created": 1642189494325,
     "summary": "Load OTF & TTF fonts via OpenType library",
+    "tags": [
+        "font",
+        "typeface",
+        "load font",
+        "otf",
+        "ttf",
+        "typography",
+        "text outlines",
+        "vector font"
+    ],
     "exampleProjectId": "Cp5VS3",
     "docs": {},
     "license": "MIT",

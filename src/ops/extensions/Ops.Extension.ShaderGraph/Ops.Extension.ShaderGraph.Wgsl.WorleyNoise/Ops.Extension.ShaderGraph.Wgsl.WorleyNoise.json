@@ -65,5 +65,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Worley noise from a seed and scale"
+    "summary": "Worley noise from a seed and scale",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "cellular",
+        "cells",
+        "voronoi",
+        "organic",
+        "procedural",
+        "noise"
+    ]
 }

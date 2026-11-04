@@ -69,6 +69,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1788434737480
+        },
+        {
+            "message": "Show heavy events for debugging",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1793797981806
         }
     ],
     "coreLibs": [

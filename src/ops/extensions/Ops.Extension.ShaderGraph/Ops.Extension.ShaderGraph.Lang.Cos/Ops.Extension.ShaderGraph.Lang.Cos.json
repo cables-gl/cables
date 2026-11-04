@@ -60,5 +60,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Cosine"
+    "summary": "Cosine",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "cosine",
+        "trigonometry",
+        "wave",
+        "oscillate"
+    ]
 }

@@ -108,6 +108,17 @@
         "standalone_electron"
     ],
     "summary": "FFmpeg video converter toolbox op",
+    "tags": [
+        "video",
+        "convert",
+        "transcode",
+        "encode",
+        "render",
+        "movie",
+        "mp4",
+        "compress",
+        "command line"
+    ],
     "docs": {
         "ports": []
     },

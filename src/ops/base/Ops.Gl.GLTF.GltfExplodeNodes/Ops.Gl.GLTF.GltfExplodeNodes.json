@@ -1,0 +1,107 @@
+{
+    "id": "5652c2ef-2a9f-48f6-80ef-70e154db04b5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1645815819278,
+            "type": "new op"
+        },
+        {
+            "message": "cleanup dev namespace",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1793783907475
+        },
+        {
+            "message": "Dev.GltfExplodeNodes renamed to Ops.Gl.GLTF.GltfExplodeNodes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1793784313288
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1645815823890,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 5,
+                "name": "Filter"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Axis X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Axis Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Axis Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Random Pivot Offset X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Random Pivot Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Random Pivot Offset Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "number"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT",
+    "isReleased": false,
+    "exampleProjectId": "8JssJY",
+    "docs": {
+        "ports": []
+    }
+}

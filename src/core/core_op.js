@@ -54,6 +54,7 @@ import { showUiErrors } from "./uierrors.js";
  * @property {string[]} [tags] tags
  * @property {string} [area] area
  * @property {boolean} [stacked] op runs a hidden copy for every loop iteration
+ * @property {string} [areaId] id of the area this op spans, children reference it with attribs.area
  */
 
 /**
@@ -1896,9 +1897,9 @@ export class Op extends Events
      */
     updateAreaStacks(depth = 0)
     {
-        if (!this.uiAttribs.area || !this.uiAttribs.area.id || depth > Op.MAX_STACK_DEPTH) return;
+        if (!this.attribs.areaId || depth > Op.MAX_STACK_DEPTH) return;
 
-        const ops = this.patch.getOpsByArea(this.uiAttribs.area.id);
+        const ops = this.patch.getOpsByArea(this.attribs.areaId);
         for (let i = 0; i < ops.length; i++)
         {
             if (ops[i] == this) continue;

@@ -54,5 +54,17 @@
     "coreLibs": [
         "cgl"
     ],
-    "summary": "GLSL material built from a shader graph"
+    "summary": "GLSL material built from a shader graph",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "material",
+        "custom material",
+        "mesh shader",
+        "surface",
+        "render",
+        "node material"
+    ]
 }

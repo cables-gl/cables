@@ -42,5 +42,16 @@
         }
     ],
     "isReleased": true,
-    "summary": "Grow or shrink a 2D OpenSCAD shape by radius"
+    "summary": "Grow or shrink a 2D OpenSCAD shape by radius",
+    "tags": [
+        "openscad",
+        "cad",
+        "grow",
+        "shrink",
+        "expand",
+        "inset",
+        "outline",
+        "2d",
+        "csg"
+    ]
 }

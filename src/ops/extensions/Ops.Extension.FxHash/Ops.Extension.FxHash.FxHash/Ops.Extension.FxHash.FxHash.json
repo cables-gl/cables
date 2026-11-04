@@ -57,6 +57,16 @@
         ]
     },
     "summary": "FxHash simulator / generator of seeded random numbers",
+    "tags": [
+        "nft",
+        "generative art",
+        "seeded random",
+        "deterministic",
+        "blockchain",
+        "tezos",
+        "random seed",
+        "hash"
+    ],
     "issues": "",
     "caniusequery": "",
     "youtubeids": [],

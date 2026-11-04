@@ -116,6 +116,18 @@
         ]
     },
     "summary": "wrapper for echarts-library",
+    "tags": [
+        "chart",
+        "graph",
+        "plot",
+        "data visualization",
+        "diagram",
+        "bars",
+        "pie",
+        "line chart",
+        "statistics",
+        "apache echarts"
+    ],
     "issues": "The ECharts WebGL extension library is not supported (yet).",
     "youtubeids": [
         "moeK10BhmAw"

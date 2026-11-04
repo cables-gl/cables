@@ -47,6 +47,14 @@
         "standalone_electron"
     ],
     "summary": "Choose a file on your hard drive",
+    "tags": [
+        "file picker",
+        "dialog",
+        "browse",
+        "choose file",
+        "filesystem",
+        "open"
+    ],
     "docs": {
         "ports": []
     },

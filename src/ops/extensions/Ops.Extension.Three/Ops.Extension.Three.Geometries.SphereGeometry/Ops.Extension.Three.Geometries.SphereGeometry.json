@@ -61,6 +61,15 @@
         "three"
     ],
     "summary": "Create a sphere geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "ball",
+        "globe",
+        "orb",
+        "planet",
+        "mesh"
+    ],
     "docs": {
         "ports": [
             {

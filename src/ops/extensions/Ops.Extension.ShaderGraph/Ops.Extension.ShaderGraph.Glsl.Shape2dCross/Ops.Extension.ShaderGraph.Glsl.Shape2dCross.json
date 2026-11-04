@@ -96,5 +96,16 @@
         "shadergraph"
     ],
     "dependencies": [],
-    "summary": "2D cross shape"
+    "summary": "2D cross shape",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "plus",
+        "x",
+        "sdf",
+        "2d shape",
+        "symbol"
+    ]
 }

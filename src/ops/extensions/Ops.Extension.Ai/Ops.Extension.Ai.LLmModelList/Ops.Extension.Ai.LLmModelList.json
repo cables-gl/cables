@@ -64,5 +64,17 @@
         ]
     },
     "isReleased": true,
-    "summary": "List of available AI language models"
+    "summary": "List of available AI language models",
+    "tags": [
+        "llm",
+        "ai",
+        "language model",
+        "gpt",
+        "chatgpt",
+        "claude",
+        "models",
+        "list",
+        "available models",
+        "chatbot"
+    ]
 }

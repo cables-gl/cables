@@ -1,0 +1,168 @@
+{
+    "id": "274d0d70-00a0-4a19-88ca-e480b5143715",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1559035867747,
+            "type": "new"
+        },
+        {
+            "message": "Ops.TestOp renamed to Ops.Admin.TestOp",
+            "author": "pandur",
+            "date": 1596094417404
+        },
+        {
+            "message": " added core lib: cgl_wireframes",
+            "author": "pandur",
+            "date": 1596976606704
+        },
+        {
+            "message": "Ops.Admin.TestOp renamed to Ops.Dev.TestOp",
+            "author": "pandur",
+            "date": 1623914595096
+        },
+        {
+            "message": " removed lib: twitterFetcher_min.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695713895975
+        },
+        {
+            "message": " removed lib: webaudio-peaks.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695713901280
+        },
+        {
+            "message": " removed lib: webvr-polyfill.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695715517399
+        },
+        {
+            "message": " removed lib: bodymovin.js",
+            "type": "",
+            "author": "pandur",
+            "date": 1695715529797
+        },
+        {
+            "message": " added core lib: ammodebugdrawer",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674791431
+        },
+        {
+            "message": " removed core lib: ammodebugdrawer",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674799531
+        },
+        {
+            "message": " removed core lib: cgl_wireframes",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674810962
+        },
+        {
+            "message": " added core lib: cgl_wireframes",
+            "type": "",
+            "author": "pandur",
+            "date": 1698674826934
+        },
+        {
+            "message": "csdcdscdscds",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1711551159344
+        },
+        {
+            "message": "cdscdscdscds",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1711551163559
+        },
+        {
+            "message": "asrrsaras",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1761901317022
+        },
+        {
+            "message": "rwqrqwrqw",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1761901320886
+        },
+        {
+            "message": "wqrqwrqwr",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1761901324435
+        },
+        {
+            "message": "trstsrtsr",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1761901337857
+        },
+        {
+            "message": "srsrsr",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1761901588827
+        },
+        {
+            "message": "op Dev.TestOp was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793783394028
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1559035870179,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "name",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "aaabbbbb",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "aaaa",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Test"
+            }
+        ]
+    },
+    "libs": [
+        "cannon.js",
+        "clmtrackr.js"
+    ],
+    "coreLibs": [
+        "cgl_wireframes",
+        "cgl"
+    ],
+    "exampleProjectId": "mSeJ3E",
+    "docs": {
+        "ports": []
+    },
+    "summary": "just testing",
+    "license": "MIT",
+    "isReleased": true
+}

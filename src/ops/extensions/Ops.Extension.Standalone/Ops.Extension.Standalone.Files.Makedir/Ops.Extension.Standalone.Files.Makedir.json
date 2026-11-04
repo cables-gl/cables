@@ -33,6 +33,15 @@
         "standalone_electron"
     ],
     "summary": "Create a directory on the local file system",
+    "tags": [
+        "folder",
+        "mkdir",
+        "directory",
+        "create",
+        "new folder",
+        "disk",
+        "filesystem"
+    ],
     "docs": {
         "ports": []
     },

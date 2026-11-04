@@ -1,0 +1,64 @@
+{
+    "id": "5614f8a5-7267-4ed6-9cf9-b4a3c7531f7d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1669366604638,
+            "type": "new op"
+        },
+        {
+            "message": "Moved out of dev",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1793783525619
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1669366610877,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "WeightMul",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "replace a color with transparency",
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl"
+    ],
+    "license": "MIT"
+}

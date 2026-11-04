@@ -36,6 +36,14 @@
         "three"
     ],
     "summary": "Creates a dodecahedron geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "polyhedron",
+        "platonic solid",
+        "d12",
+        "mesh"
+    ],
     "docs": {
         "ports": [
             {

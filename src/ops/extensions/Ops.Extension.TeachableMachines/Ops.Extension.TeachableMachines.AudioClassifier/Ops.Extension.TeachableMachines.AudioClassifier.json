@@ -30,6 +30,16 @@
         ]
     },
     "summary": "Use the Teachable Machines audio classifier for your microphone. Insert the uploaded model URL.",
+    "tags": [
+        "machine learning",
+        "ai",
+        "sound recognition",
+        "classify",
+        "teachable machine",
+        "train",
+        "google",
+        "ml"
+    ],
     "author": "mick",
     "authorName": "mick",
     "id": "9710eaec-8b4e-43a6-814c-49c87440e0ac",

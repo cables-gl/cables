@@ -64,5 +64,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Limit a value between min and max"
+    "summary": "Limit a value between min and max",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "limit",
+        "min",
+        "max",
+        "constrain",
+        "saturate"
+    ]
 }

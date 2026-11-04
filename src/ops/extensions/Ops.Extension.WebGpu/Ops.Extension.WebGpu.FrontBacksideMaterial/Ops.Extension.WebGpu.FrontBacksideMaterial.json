@@ -76,6 +76,17 @@
         "ports": []
     },
     "summary": "Show direction of faces as color",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "debug",
+        "backface",
+        "face orientation",
+        "winding",
+        "culling",
+        "visualize",
+        "material"
+    ],
     "coreLibs": [
         "cgp"
     ],

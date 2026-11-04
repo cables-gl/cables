@@ -154,5 +154,15 @@
     },
     "isReleased": true,
     "license": "MIT",
-    "summary": "Generate supershape geometry on the GPU"
+    "summary": "Generate supershape geometry on the GPU",
+    "tags": [
+        "supershape",
+        "superformula",
+        "organic",
+        "shell",
+        "flower",
+        "procedural geometry",
+        "math shape",
+        "gielis"
+    ]
 }

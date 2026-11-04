@@ -72,5 +72,17 @@
         "ports": []
     },
     "summary": "Applies an attraction force to a physics body",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "gravity",
+        "magnet",
+        "attract",
+        "pull",
+        "orbit",
+        "force field",
+        "planet"
+    ],
     "isReleased": true
 }

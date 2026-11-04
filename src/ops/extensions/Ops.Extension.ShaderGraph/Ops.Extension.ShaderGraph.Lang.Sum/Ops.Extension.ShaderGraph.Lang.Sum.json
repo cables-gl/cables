@@ -71,5 +71,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Add two numbers"
+    "summary": "Add two numbers",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "add",
+        "plus",
+        "+",
+        "addition",
+        "total"
+    ]
 }

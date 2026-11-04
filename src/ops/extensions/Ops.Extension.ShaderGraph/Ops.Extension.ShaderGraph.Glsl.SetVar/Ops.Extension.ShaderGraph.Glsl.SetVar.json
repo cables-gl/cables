@@ -40,5 +40,17 @@
     "docs": {
         "ports": []
     },
-    "summary": "Set a shader graph variable"
+    "summary": "Set a shader graph variable",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "variable",
+        "assign",
+        "store",
+        "write",
+        "local",
+        "named value"
+    ]
 }

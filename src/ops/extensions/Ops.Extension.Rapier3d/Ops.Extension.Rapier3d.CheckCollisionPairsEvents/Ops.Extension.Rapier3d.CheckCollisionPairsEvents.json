@@ -50,6 +50,19 @@
     },
     "isReleased": true,
     "summary": "Check collision of an array of colliders against another array of colliders from bodies",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "collision",
+        "hit",
+        "contact",
+        "touch",
+        "pairs",
+        "events",
+        "detect",
+        "bodies"
+    ],
     "docs": {
         "ports": []
     }

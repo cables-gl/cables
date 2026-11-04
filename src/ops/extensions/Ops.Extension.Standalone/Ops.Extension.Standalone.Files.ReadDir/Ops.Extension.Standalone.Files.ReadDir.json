@@ -42,6 +42,15 @@
         "standalone_electron"
     ],
     "summary": "Read all entries in a directory",
+    "tags": [
+        "folder",
+        "list files",
+        "directory",
+        "browse",
+        "ls",
+        "filesystem",
+        "contents"
+    ],
     "docs": {
         "ports": []
     },

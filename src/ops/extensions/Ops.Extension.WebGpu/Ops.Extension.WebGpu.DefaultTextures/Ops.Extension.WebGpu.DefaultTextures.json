@@ -47,6 +47,16 @@
         "ports": []
     },
     "summary": "Outputs textures",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "white",
+        "black",
+        "placeholder",
+        "fallback",
+        "textures",
+        "defaults"
+    ],
     "caniusequery": "webgpu",
     "isReleased": true
 }

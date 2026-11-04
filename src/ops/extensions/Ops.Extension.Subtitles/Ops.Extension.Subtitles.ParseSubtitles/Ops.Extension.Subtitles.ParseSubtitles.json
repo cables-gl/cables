@@ -47,6 +47,16 @@
         ]
     },
     "summary": "parse srt/vtt subtitle-files",
+    "tags": [
+        "srt",
+        "vtt",
+        "captions",
+        "closed captions",
+        "video text",
+        "parse",
+        "transcript",
+        "lyrics"
+    ],
     "exampleProjectId": "3rB4t8",
     "isReleased": true
 }

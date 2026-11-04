@@ -54,5 +54,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Absolute value"
+    "summary": "Absolute value",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "absolute",
+        "positive",
+        "magnitude"
+    ]
 }

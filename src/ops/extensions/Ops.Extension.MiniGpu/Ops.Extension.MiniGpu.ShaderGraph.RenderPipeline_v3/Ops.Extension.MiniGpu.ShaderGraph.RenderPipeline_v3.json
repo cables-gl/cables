@@ -124,5 +124,14 @@
         "minigpu",
         "shadergraph"
     ],
-    "summary": "Creates a GPU render pipeline from shader modules."
+    "summary": "Creates a GPU render pipeline from shader modules.",
+    "tags": [
+        "webgpu",
+        "wgsl",
+        "render",
+        "draw",
+        "vertex fragment",
+        "pipeline",
+        "material"
+    ]
 }

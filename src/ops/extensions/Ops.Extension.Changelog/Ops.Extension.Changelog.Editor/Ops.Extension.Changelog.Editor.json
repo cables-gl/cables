@@ -583,6 +583,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1793021621955
+        },
+        {
+            "message": "Ops have tags, those tags are searched and improve the search result score in op search",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1793727001275
         }
     ],
     "isReleased": true,
@@ -590,6 +596,13 @@
         "ports": []
     },
     "summary": "Editor Changelog",
+    "tags": [
+        "release notes",
+        "updates",
+        "news",
+        "version history",
+        "whats new"
+    ],
     "layout": {
         "portsIn": [
             {

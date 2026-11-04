@@ -90,5 +90,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "UV coordinates in a WGSL fragment shader"
+    "summary": "UV coordinates in a WGSL fragment shader",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "texture coordinates",
+        "uv map",
+        "st",
+        "coordinates",
+        "fragment"
+    ]
 }

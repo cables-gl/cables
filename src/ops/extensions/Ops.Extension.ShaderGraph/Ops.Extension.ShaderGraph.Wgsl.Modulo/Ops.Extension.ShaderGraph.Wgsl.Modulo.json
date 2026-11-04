@@ -83,5 +83,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Modulo of two values"
+    "summary": "Modulo of two values",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "mod",
+        "remainder",
+        "wrap",
+        "%",
+        "repeat"
+    ]
 }

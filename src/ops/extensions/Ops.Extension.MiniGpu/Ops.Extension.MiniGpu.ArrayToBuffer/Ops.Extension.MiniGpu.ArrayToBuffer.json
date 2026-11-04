@@ -45,5 +45,14 @@
             }
         ]
     },
-    "summary": "Copy an array into a GPU buffer"
+    "summary": "Copy an array into a GPU buffer",
+    "tags": [
+        "webgpu",
+        "upload",
+        "gpu buffer",
+        "storage buffer",
+        "copy",
+        "array to gpu",
+        "data"
+    ]
 }

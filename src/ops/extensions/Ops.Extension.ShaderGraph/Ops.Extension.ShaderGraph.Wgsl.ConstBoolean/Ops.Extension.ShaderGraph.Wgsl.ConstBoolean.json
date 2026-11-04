@@ -95,5 +95,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Boolean constant"
+    "summary": "Boolean constant",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "constant",
+        "true false",
+        "flag",
+        "literal",
+        "bool"
+    ]
 }

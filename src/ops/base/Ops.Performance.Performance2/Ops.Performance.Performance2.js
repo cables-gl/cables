@@ -10,12 +10,17 @@ const
 
 let ctx = null;
 let canvas = null;
-let numBars = 120;
-let height = 50;
+let numBars = 180;
+let height = 30; // height of one graph
+const NUM_GRAPHS = 3;
+const RESIZE_SIZE = 14;
+let resizing = null;
 let containerEle = document.body;
 let countersPerFrame = {};
 let countIndex = 0;
 let selectedCounterIndex = "";
+let lastHeavyEvent = "";
+let toHeavyEvent = 0;
 outLog.changeAlways = true;
 
 const pp = op.patch.perfProfiler;
@@ -23,7 +28,11 @@ const pp = op.patch.perfProfiler;
 createCanvas();
 op.patch.cgl.on("heavyEvent", (e) =>
 {
-    outLog.set(e.event + " - " + e.name);
+    lastHeavyEvent = e.event + " - " + e.name;
+    outLog.set(lastHeavyEvent);
+    clearTimeout(toHeavyEvent);
+    toHeavyEvent = setTimeout(() => { lastHeavyEvent = ""; }, 1000);
+
 });
 
 const frameListener = op.patch.on("renderedFrame", (e) =>
@@ -54,11 +63,11 @@ const frameListener = op.patch.on("renderedFrame", (e) =>
     updateCanvas();
 });
 
-function drawGraph(name, posy, q, col)
+function drawGraph(name, posy, q, col, heavy)
 {
     let info = "";
     let k = 0;
-    let maxMs = 25;
+    let maxMs = 20;
     if (!q) return;
     if (q[numBars - 1] && q[numBars - 1].num)
     {
@@ -88,7 +97,7 @@ function drawGraph(name, posy, q, col)
         }
     }
 
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = "#bbbbbb";
     let title = name + " ";
     if (!info && avg)
     {
@@ -97,9 +106,17 @@ function drawGraph(name, posy, q, col)
     }
 
     ctx.globalAlpha = 0.7;
-    ctx.fillText(title, 5, posy + 16);
 
-    if (info) ctx.fillText(info, 5, posy + 32);
+    let str = title;
+    if (info) str = info + " " + str;
+    if (numBars < 100) str = info;
+    ctx.fillText(str, 5, posy + 16);
+
+    if (lastHeavyEvent && title.includes("cgl fps"))
+    {
+        ctx.fillStyle = "#FF9900";
+        ctx.fillText("(!) " + lastHeavyEvent, 5, posy + 34);
+    }
 }
 
 function updateCanvas()
@@ -129,6 +146,59 @@ function updateCanvas()
         drawGraph(select3.get(), height * 2, pp.durationsFrames[select3.get()], "#770077");
     else if (pp.countsFrames && pp.countsFrames[select3.get()])
         drawGraph(select3.get(), height * 2, pp.countsFrames[select3.get()], "#555555");
+
+    // resize corner, top right
+    ctx.globalAlpha = 0.8;
+    ctx.fillStyle = "#444444";
+    ctx.beginPath();
+    ctx.moveTo(canvas.width - RESIZE_SIZE, 0);
+    ctx.lineTo(canvas.width, 0);
+    ctx.lineTo(canvas.width, RESIZE_SIZE);
+    ctx.closePath();
+    ctx.fill();
+}
+
+function setCanvasSize(w, h)
+{
+    canvas.width = numBars = Math.round(w);
+    pp.numframes = numBars; // history length follows the width
+    canvas.height = Math.round(h);
+    canvas.style.width = canvas.width + "px";
+    canvas.style.height = canvas.height + "px";
+}
+
+function isInCorner(e)
+{
+    const r = canvas.getBoundingClientRect();
+    return e.clientX > r.right - RESIZE_SIZE && e.clientY < r.top + RESIZE_SIZE;
+}
+
+function onPointerDown(e)
+{
+    if (!isInCorner(e)) return;
+    resizing = { "x": e.clientX, "y": e.clientY, "w": canvas.width, "h": canvas.height };
+    canvas.setPointerCapture(e.pointerId);
+    e.preventDefault();
+}
+
+function onPointerMove(e)
+{
+    if (!resizing)
+    {
+        canvas.style.cursor = isInCorner(e) ? "nesw-resize" : "pointer";
+        return;
+    }
+    const w = Math.max(60, Math.min(2000, resizing.w + (e.clientX - resizing.x)));
+    const h = Math.max(30 * NUM_GRAPHS, Math.min(1500, resizing.h - (e.clientY - resizing.y)));
+    height = Math.round(h / NUM_GRAPHS);
+    setCanvasSize(w, height * NUM_GRAPHS);
+}
+
+function onPointerUp(e)
+{
+    if (!resizing) return;
+    resizing = null;
+    canvas.releasePointerCapture(e.pointerId);
 }
 
 function removeCanvas()
@@ -145,6 +215,7 @@ op.on("init", () =>
 op.on("delete", () =>
 {
     removeCanvas();
+    pp.numframes = 120;
     op.patch.off(frameListener);
 });
 
@@ -153,7 +224,8 @@ function createCanvas()
     canvas = document.createElement("canvas");
     canvas.id = "performance_";
     canvas.width = numBars;
-    canvas.height = height * 3;
+    canvas.height = height * NUM_GRAPHS;
+    pp.numframes = numBars;
     canvas.style.width = numBars + "px";
     canvas.style.height = canvas.height + "px";
     canvas.style.display = "block";
@@ -162,6 +234,9 @@ function createCanvas()
     canvas.style.cursor = "pointer";
     canvas.style.bottom = "0px";
     canvas.style["z-index"] = "10";
+    canvas.addEventListener("pointerdown", onPointerDown);
+    canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("pointerup", onPointerUp);
     containerEle.appendChild(canvas);
     canvas.dataset.op = op.id;
     canvas.classList.add("cablesEle");

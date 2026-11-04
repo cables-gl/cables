@@ -45,6 +45,17 @@
         ]
     },
     "summary": "Create timeline animation form subtitle data",
+    "tags": [
+        "srt",
+        "vtt",
+        "captions",
+        "timeline",
+        "lyrics",
+        "sync",
+        "timing",
+        "transcript",
+        "keyframes"
+    ],
     "exampleProjectId": "3rB4t8",
     "isReleased": true
 }

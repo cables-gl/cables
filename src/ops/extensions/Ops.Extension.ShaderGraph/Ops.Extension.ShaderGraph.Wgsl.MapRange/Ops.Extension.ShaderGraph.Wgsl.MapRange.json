@@ -80,5 +80,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Remap a value from one range to another"
+    "summary": "Remap a value from one range to another",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "remap",
+        "scale",
+        "range",
+        "convert",
+        "normalize",
+        "rescale"
+    ]
 }

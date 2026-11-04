@@ -42,5 +42,17 @@
             }
         ]
     },
-    "summary": "Cube distance field shape"
+    "summary": "Cube distance field shape",
+    "tags": [
+        "sdf",
+        "signed distance field",
+        "raymarching",
+        "shader graph",
+        "node",
+        "box",
+        "block",
+        "dice",
+        "shape",
+        "primitive"
+    ]
 }

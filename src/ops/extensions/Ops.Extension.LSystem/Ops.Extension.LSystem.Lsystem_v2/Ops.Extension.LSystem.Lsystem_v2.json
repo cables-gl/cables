@@ -87,6 +87,17 @@
         ]
     },
     "summary": "Lsystem generator",
+    "tags": [
+        "fractal",
+        "plants",
+        "trees",
+        "grammar",
+        "recursive",
+        "branching",
+        "turtle graphics",
+        "procedural",
+        "lindenmayer"
+    ],
     "issues": "",
     "youtubeids": [
         "UnnFrRX1QEc"

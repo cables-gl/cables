@@ -46,5 +46,18 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Split a vec3 into X, Y and Z"
+    "summary": "Split a vec3 into X, Y and Z",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "vector",
+        "xyz",
+        "rgb",
+        "separate",
+        "components",
+        "unpack",
+        "extract"
+    ]
 }

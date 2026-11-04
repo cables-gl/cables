@@ -76,5 +76,15 @@
         "three"
     ],
     "isReleased": true,
-    "summary": "Position, scale and rotate a Three.js object"
+    "summary": "Position, scale and rotate a Three.js object",
+    "tags": [
+        "threejs",
+        "three.js",
+        "move",
+        "rotate",
+        "scale",
+        "translate",
+        "position",
+        "srt"
+    ]
 }

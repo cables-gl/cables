@@ -37,6 +37,15 @@
         "standalone_electron"
     ],
     "summary": "Create a new empty file on your local harddrive",
+    "tags": [
+        "new file",
+        "touch",
+        "write",
+        "empty file",
+        "disk",
+        "filesystem",
+        "save"
+    ],
     "docs": {
         "ports": []
     },

@@ -59,5 +59,16 @@
         "ports": []
     },
     "summary": "Create a heightfield physics body",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "terrain",
+        "landscape",
+        "heightmap",
+        "ground",
+        "collider",
+        "mountains"
+    ],
     "isReleased": true
 }

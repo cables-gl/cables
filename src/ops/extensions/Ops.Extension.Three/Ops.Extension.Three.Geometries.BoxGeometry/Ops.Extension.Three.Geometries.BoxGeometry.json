@@ -56,6 +56,15 @@
         "three"
     ],
     "summary": "Create a box/cube geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "cube",
+        "box",
+        "dice",
+        "block",
+        "mesh"
+    ],
     "docs": {
         "ports": [
             {

@@ -123,5 +123,16 @@
     "isReleased": true,
     "docs": {
         "ports": []
-    }
+    },
+    "tags": [
+        "particles",
+        "attract",
+        "steer",
+        "goal",
+        "follow",
+        "morph",
+        "target positions",
+        "seek",
+        "formation"
+    ]
 }

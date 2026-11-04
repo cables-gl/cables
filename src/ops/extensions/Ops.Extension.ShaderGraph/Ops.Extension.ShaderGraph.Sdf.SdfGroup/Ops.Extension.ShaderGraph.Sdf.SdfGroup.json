@@ -54,5 +54,19 @@
             }
         ]
     },
-    "summary": "Combine SDF shapes with union, blend or subtract"
+    "summary": "Combine SDF shapes with union, blend or subtract",
+    "tags": [
+        "sdf",
+        "signed distance field",
+        "raymarching",
+        "shader graph",
+        "node",
+        "union",
+        "blend",
+        "smooth min",
+        "subtract",
+        "boolean",
+        "combine shapes",
+        "csg"
+    ]
 }

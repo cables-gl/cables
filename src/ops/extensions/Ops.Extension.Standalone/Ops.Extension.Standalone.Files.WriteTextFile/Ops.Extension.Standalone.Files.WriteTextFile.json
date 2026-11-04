@@ -67,6 +67,15 @@
         "standalone_electron"
     ],
     "summary": "Write a string to a text file on the local file system",
+    "tags": [
+        "save",
+        "write",
+        "txt",
+        "disk",
+        "export",
+        "log",
+        "filesystem"
+    ],
     "docs": {
         "ports": []
     },

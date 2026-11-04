@@ -83,5 +83,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Divide two numbers"
+    "summary": "Divide two numbers",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "division",
+        "/",
+        "quotient",
+        "ratio"
+    ]
 }

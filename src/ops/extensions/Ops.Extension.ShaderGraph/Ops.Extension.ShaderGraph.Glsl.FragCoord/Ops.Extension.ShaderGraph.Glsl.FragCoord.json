@@ -24,5 +24,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Pixel coordinate in a GLSL fragment shader"
+    "summary": "Pixel coordinate in a GLSL fragment shader",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "pixel position",
+        "gl_fragcoord",
+        "screen coordinates",
+        "xy",
+        "fragment"
+    ]
 }

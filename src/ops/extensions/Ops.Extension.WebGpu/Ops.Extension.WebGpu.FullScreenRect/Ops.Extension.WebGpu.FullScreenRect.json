@@ -65,5 +65,15 @@
     },
     "caniusequery": "webgpu",
     "summary": "Render a rectangle that fills the whole canvas",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "fullscreen quad",
+        "screen quad",
+        "background",
+        "post processing",
+        "full screen",
+        "rectangle"
+    ],
     "isReleased": true
 }

@@ -60,5 +60,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "End of a GLSL shader graph for loop"
+    "summary": "End of a GLSL shader graph for loop",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "loop",
+        "repeat",
+        "iterate",
+        "end",
+        "close"
+    ]
 }
