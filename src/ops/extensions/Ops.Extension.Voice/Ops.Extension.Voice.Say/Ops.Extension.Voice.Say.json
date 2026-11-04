@@ -69,6 +69,16 @@
         ]
     },
     "summary": "Text-to-Speech, speaks different languages (speech synthesis)",
+    "tags": [
+        "text to speech",
+        "tts",
+        "speech synthesis",
+        "talk",
+        "speak",
+        "voice",
+        "languages",
+        "narrator"
+    ],
     "docs": {
         "ports": [
             {

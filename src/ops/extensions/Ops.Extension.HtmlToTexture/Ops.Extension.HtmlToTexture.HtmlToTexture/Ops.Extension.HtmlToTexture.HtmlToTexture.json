@@ -50,5 +50,16 @@
         "ports": []
     },
     "isReleased": true,
-    "summary": "Render an HTML element into a texture"
+    "summary": "Render an HTML element into a texture",
+    "tags": [
+        "dom",
+        "webpage",
+        "screenshot",
+        "html in webgl",
+        "css",
+        "text",
+        "rasterize",
+        "render html",
+        "texture"
+    ]
 }

@@ -54,5 +54,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Random number from a seed"
+    "summary": "Random number from a seed",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "rand",
+        "noise",
+        "hash",
+        "seed",
+        "white noise",
+        "chance"
+    ]
 }

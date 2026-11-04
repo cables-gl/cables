@@ -72,5 +72,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Round up to the next whole number"
+    "summary": "Round up to the next whole number",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "round up",
+        "ceiling",
+        "integer"
+    ]
 }

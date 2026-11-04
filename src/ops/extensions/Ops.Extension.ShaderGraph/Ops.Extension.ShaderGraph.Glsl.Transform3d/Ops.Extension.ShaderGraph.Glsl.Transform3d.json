@@ -114,5 +114,18 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Move, rotate and scale 3D coordinates"
+    "summary": "Move, rotate and scale 3D coordinates",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "move",
+        "rotate",
+        "scale",
+        "translate",
+        "coordinates",
+        "position",
+        "3d"
+    ]
 }

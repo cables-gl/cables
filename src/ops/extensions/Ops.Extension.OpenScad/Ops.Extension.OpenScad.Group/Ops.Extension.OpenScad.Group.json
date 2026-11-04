@@ -49,5 +49,14 @@
         }
     ],
     "isReleased": true,
-    "summary": "Group OpenSCAD shapes together"
+    "summary": "Group OpenSCAD shapes together",
+    "tags": [
+        "openscad",
+        "cad",
+        "combine",
+        "union",
+        "csg",
+        "solid modeling",
+        "collection"
+    ]
 }

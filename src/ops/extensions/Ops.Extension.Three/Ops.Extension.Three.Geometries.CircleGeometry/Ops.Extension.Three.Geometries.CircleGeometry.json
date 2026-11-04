@@ -46,6 +46,15 @@
         "three"
     ],
     "summary": "Create a circle geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "disc",
+        "disk",
+        "round",
+        "mesh",
+        "flat"
+    ],
     "docs": {
         "ports": [
             {

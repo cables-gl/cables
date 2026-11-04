@@ -60,5 +60,14 @@
         "ports": []
     },
     "isReleased": true,
-    "summary": "Fog for Three.js scenes"
+    "summary": "Fog for Three.js scenes",
+    "tags": [
+        "threejs",
+        "three.js",
+        "mist",
+        "haze",
+        "atmosphere",
+        "depth fade",
+        "distance"
+    ]
 }

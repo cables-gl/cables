@@ -40,6 +40,16 @@
         ]
     },
     "summary": "Receives trigger from the socketcluster socket/topic",
+    "tags": [
+        "websocket",
+        "realtime",
+        "network",
+        "receive",
+        "listen",
+        "messaging",
+        "event",
+        "multiplayer"
+    ],
     "docs": {
         "ports": [
             {

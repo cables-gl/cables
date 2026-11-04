@@ -36,6 +36,15 @@
         "three"
     ],
     "summary": "Create a icosahedron geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "polyhedron",
+        "d20",
+        "geodesic",
+        "low poly sphere",
+        "mesh"
+    ],
     "docs": {
         "ports": [
             {

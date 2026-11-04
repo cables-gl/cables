@@ -89,6 +89,18 @@
         ]
     },
     "summary": "Get hand data from mediapipe library, use with MpHand",
+    "tags": [
+        "mediapipe",
+        "computer vision",
+        "tracking",
+        "hand",
+        "fingers",
+        "gesture",
+        "webcam",
+        "hand detection",
+        "input",
+        "touchless"
+    ],
     "relatedops": [
         "Ops.Libs.Mediapipe.MpHand",
         "Ops.Libs.Mediapipe.MpHandCoordinate"

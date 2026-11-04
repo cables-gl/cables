@@ -36,6 +36,17 @@
         "ports": []
     },
     "summary": "Vizualize a webgpu texture on the patchfield",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "debug",
+        "preview",
+        "image",
+        "patch",
+        "inspect",
+        "visualize",
+        "thumbnail"
+    ],
     "caniusequery": "webgpu",
     "isReleased": true
 }

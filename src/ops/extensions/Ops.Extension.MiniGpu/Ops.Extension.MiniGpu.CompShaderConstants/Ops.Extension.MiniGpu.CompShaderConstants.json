@@ -35,5 +35,14 @@
         ]
     },
     "isReleased": true,
-    "summary": "Set constant values for a compute shader"
+    "summary": "Set constant values for a compute shader",
+    "tags": [
+        "webgpu",
+        "compute",
+        "wgsl",
+        "constants",
+        "override",
+        "parameters",
+        "gpgpu"
+    ]
 }

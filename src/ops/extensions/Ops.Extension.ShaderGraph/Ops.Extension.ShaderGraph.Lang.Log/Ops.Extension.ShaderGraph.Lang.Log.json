@@ -90,5 +90,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Natural logarithm"
+    "summary": "Natural logarithm",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "logarithm",
+        "ln",
+        "exponent"
+    ]
 }

@@ -28,6 +28,15 @@
         ]
     },
     "summary": "Get wireframe of a geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "wire",
+        "lines",
+        "edges",
+        "outline",
+        "mesh"
+    ],
     "docs": {
         "ports": []
     },

@@ -36,6 +36,14 @@
     ],
     "authorName": "stephan",
     "summary": "convert file-url to path",
+    "tags": [
+        "convert",
+        "file://",
+        "path",
+        "url",
+        "filesystem",
+        "local"
+    ],
     "docs": {
         "ports": []
     },

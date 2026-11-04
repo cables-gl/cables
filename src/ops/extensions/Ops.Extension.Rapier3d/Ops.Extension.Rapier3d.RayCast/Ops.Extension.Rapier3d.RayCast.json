@@ -94,5 +94,17 @@
     "exampleProjectId": "PSX4W8",
     "docs": {},
     "summary": "Detect where a ray intersects physics objects",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "raycast",
+        "line of sight",
+        "picking",
+        "hit test",
+        "laser",
+        "sensor",
+        "intersection"
+    ],
     "isReleased": true
 }

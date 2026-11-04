@@ -134,5 +134,15 @@
     ],
     "isReleased": true,
     "license": "MIT",
-    "summary": "Move particles with a noise field inside an area"
+    "summary": "Move particles with a noise field inside an area",
+    "tags": [
+        "particles",
+        "flow field",
+        "turbulence",
+        "curl noise",
+        "force",
+        "wind",
+        "gpu particles",
+        "swirl"
+    ]
 }

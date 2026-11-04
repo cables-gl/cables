@@ -54,6 +54,16 @@
         "cgp"
     ],
     "summary": "Add a uniform input to a compute shader composition",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "compute shader",
+        "wgsl",
+        "uniform",
+        "parameter",
+        "input",
+        "gpgpu"
+    ],
     "docs": {
         "ports": []
     },

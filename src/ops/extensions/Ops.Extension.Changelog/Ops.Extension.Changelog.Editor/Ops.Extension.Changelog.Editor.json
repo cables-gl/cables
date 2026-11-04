@@ -590,6 +590,13 @@
         "ports": []
     },
     "summary": "Editor Changelog",
+    "tags": [
+        "release notes",
+        "updates",
+        "news",
+        "version history",
+        "whats new"
+    ],
     "layout": {
         "portsIn": [
             {

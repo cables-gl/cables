@@ -31,6 +31,15 @@
         "standalone_electron"
     ],
     "summary": "Answer http requests by sending string to the browser/client",
+    "tags": [
+        "web server",
+        "reply",
+        "respond",
+        "api",
+        "answer",
+        "request",
+        "rest"
+    ],
     "docs": {
         "ports": []
     },

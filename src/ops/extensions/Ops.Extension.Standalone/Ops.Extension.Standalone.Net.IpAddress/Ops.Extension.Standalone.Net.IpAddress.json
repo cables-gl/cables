@@ -37,6 +37,15 @@
         "standalone_electron"
     ],
     "summary": "Outputs your local IP Address",
+    "tags": [
+        "network",
+        "lan",
+        "local ip",
+        "address",
+        "host",
+        "wifi",
+        "ethernet"
+    ],
     "docs": {
         "ports": []
     },

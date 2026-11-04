@@ -36,6 +36,15 @@
         "three"
     ],
     "summary": "Create a octahedron geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "polyhedron",
+        "diamond",
+        "d8",
+        "gem",
+        "mesh"
+    ],
     "docs": {
         "ports": [
             {

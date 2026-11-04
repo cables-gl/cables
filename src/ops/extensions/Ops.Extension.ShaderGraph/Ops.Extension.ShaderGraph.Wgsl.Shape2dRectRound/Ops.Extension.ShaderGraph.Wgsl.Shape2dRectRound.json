@@ -76,5 +76,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "2D rounded rectangle shape"
+    "summary": "2D rounded rectangle shape",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "rounded rectangle",
+        "rounded corners",
+        "pill",
+        "sdf",
+        "2d shape"
+    ]
 }

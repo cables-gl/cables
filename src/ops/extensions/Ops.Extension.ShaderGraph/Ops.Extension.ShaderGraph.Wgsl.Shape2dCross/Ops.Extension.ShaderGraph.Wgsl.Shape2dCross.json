@@ -88,5 +88,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "2D cross shape"
+    "summary": "2D cross shape",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "plus",
+        "x",
+        "sdf",
+        "2d shape",
+        "symbol"
+    ]
 }

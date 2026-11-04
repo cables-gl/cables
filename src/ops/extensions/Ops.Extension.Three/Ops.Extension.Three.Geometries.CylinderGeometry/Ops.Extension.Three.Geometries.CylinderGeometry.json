@@ -66,6 +66,15 @@
         "three"
     ],
     "summary": "Create a cylinder geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "tube",
+        "pipe",
+        "can",
+        "column",
+        "mesh"
+    ],
     "docs": {
         "ports": [
             {

@@ -77,5 +77,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Multiply two numbers"
+    "summary": "Multiply two numbers",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "times",
+        "*",
+        "product",
+        "scale"
+    ]
 }

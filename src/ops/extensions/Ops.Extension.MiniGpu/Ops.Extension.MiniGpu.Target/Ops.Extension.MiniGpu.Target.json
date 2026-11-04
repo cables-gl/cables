@@ -75,5 +75,13 @@
             }
         ]
     },
-    "summary": "Render target for WebGPU output"
+    "summary": "Render target for WebGPU output",
+    "tags": [
+        "webgpu",
+        "render target",
+        "output",
+        "framebuffer",
+        "canvas",
+        "texture target"
+    ]
 }

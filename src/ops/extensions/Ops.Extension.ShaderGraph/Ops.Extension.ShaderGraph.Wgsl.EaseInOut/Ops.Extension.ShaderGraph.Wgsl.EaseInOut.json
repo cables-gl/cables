@@ -66,5 +66,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Ease in and out curve from a seed"
+    "summary": "Ease in and out curve from a seed",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "easing",
+        "curve",
+        "smooth",
+        "animation",
+        "transition",
+        "s-curve"
+    ]
 }

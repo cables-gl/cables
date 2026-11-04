@@ -43,6 +43,20 @@
     },
     "isReleased": true,
     "summary": "Face Landmark positions (chin,eye,brow etc)",
+    "tags": [
+        "mediapipe",
+        "computer vision",
+        "tracking",
+        "face",
+        "landmarks",
+        "eyes",
+        "mouth",
+        "chin",
+        "brow",
+        "nose",
+        "webcam",
+        "points"
+    ],
     "docs": {
         "ports": []
     },

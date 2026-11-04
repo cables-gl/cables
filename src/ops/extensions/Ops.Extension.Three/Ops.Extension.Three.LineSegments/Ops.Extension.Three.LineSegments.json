@@ -44,6 +44,15 @@
         "three"
     ],
     "summary": "A series of lines drawn between pairs of vertices",
+    "tags": [
+        "threejs",
+        "three.js",
+        "lines",
+        "segments",
+        "wireframe",
+        "edges",
+        "pairs of points"
+    ],
     "docs": {
         "ports": [
             {

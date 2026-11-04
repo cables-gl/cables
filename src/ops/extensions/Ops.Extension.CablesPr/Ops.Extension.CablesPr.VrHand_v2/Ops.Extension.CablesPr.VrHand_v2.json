@@ -91,5 +91,15 @@
     ],
     "license": "MIT",
     "summary": "Get webXr detected hand data",
+    "tags": [
+        "hand tracking",
+        "fingers",
+        "joints",
+        "quest",
+        "vr input",
+        "gesture",
+        "skeleton",
+        "webxr"
+    ],
     "isReleased": true
 }

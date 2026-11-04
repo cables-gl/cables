@@ -78,5 +78,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Global invocation ID of a compute shader"
+    "summary": "Global invocation ID of a compute shader",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "compute",
+        "thread id",
+        "index",
+        "gpgpu",
+        "invocation",
+        "parallel"
+    ]
 }

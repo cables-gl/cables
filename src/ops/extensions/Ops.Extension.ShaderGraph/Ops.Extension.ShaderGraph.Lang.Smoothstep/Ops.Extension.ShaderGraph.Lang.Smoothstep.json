@@ -52,5 +52,19 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Smooth transition between two edges"
+    "summary": "Smooth transition between two edges",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "ease",
+        "s-curve",
+        "edge",
+        "threshold",
+        "soft step",
+        "antialias",
+        "transition"
+    ]
 }

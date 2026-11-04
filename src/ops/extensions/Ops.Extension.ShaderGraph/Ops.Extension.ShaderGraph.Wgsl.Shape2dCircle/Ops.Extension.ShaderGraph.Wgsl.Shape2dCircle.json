@@ -76,5 +76,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "2D circle shape"
+    "summary": "2D circle shape",
+    "tags": [
+        "wgsl",
+        "webgpu",
+        "shader graph",
+        "node",
+        "disc",
+        "disk",
+        "round",
+        "sdf",
+        "2d shape",
+        "dot"
+    ]
 }

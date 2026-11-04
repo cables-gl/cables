@@ -70,5 +70,16 @@
         "ports": []
     },
     "summary": "Compose a  compute shader ",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "compute shader",
+        "wgsl",
+        "gpgpu",
+        "parallel",
+        "simulation",
+        "compose",
+        "program"
+    ],
     "isReleased": true
 }

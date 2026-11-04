@@ -41,5 +41,14 @@
         }
     ],
     "isReleased": true,
-    "summary": "Move an OpenSCAD shape"
+    "summary": "Move an OpenSCAD shape",
+    "tags": [
+        "openscad",
+        "cad",
+        "move",
+        "offset",
+        "position",
+        "csg",
+        "solid modeling"
+    ]
 }

@@ -183,5 +183,15 @@
         "cgl"
     ],
     "isReleased": true,
-    "summary": "Apply a procedural noise vector field to particle velocities."
+    "summary": "Apply a procedural noise vector field to particle velocities.",
+    "tags": [
+        "particles",
+        "flow field",
+        "turbulence",
+        "curl noise",
+        "force",
+        "wind",
+        "gpu particles",
+        "swirl"
+    ]
 }

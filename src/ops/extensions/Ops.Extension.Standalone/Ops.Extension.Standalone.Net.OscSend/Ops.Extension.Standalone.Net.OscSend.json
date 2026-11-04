@@ -46,6 +46,15 @@
         "standalone_electron"
     ],
     "summary": "send data to a OSC device",
+    "tags": [
+        "open sound control",
+        "network",
+        "udp",
+        "transmit",
+        "touchosc",
+        "max msp",
+        "controller"
+    ],
     "docs": {
         "ports": []
     },

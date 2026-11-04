@@ -56,6 +56,15 @@
         "three"
     ],
     "summary": "Creates as torus knot",
+    "tags": [
+        "threejs",
+        "three.js",
+        "knot",
+        "twisted",
+        "ring",
+        "donut",
+        "mesh"
+    ],
     "docs": {
         "ports": [
             {

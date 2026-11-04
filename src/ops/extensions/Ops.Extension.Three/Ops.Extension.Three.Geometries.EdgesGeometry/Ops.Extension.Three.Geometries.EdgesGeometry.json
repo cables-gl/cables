@@ -36,6 +36,15 @@
         "three"
     ],
     "summary": "Get the edges of a geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "outline",
+        "edges",
+        "contour",
+        "hard edges",
+        "lines"
+    ],
     "docs": {
         "ports": []
     },

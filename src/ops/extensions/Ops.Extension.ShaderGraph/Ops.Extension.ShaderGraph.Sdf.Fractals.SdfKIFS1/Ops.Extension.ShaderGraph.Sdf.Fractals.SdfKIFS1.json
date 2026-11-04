@@ -76,5 +76,17 @@
             }
         ]
     },
-    "summary": "KIFS fractal distance field"
+    "summary": "KIFS fractal distance field",
+    "tags": [
+        "sdf",
+        "signed distance field",
+        "raymarching",
+        "shader graph",
+        "node",
+        "fractal",
+        "kifs",
+        "kaleidoscopic",
+        "ifs",
+        "folding"
+    ]
 }

@@ -126,6 +126,18 @@
     },
     "isReleased": true,
     "summary": "Grab a body and hold it",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "drag",
+        "mouse",
+        "pick up",
+        "hold",
+        "interact",
+        "move body",
+        "spring"
+    ],
     "docs": {
         "ports": []
     },

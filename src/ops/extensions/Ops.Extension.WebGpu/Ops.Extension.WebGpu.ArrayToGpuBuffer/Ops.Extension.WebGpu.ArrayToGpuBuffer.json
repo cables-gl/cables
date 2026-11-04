@@ -40,6 +40,16 @@
         "ports": []
     },
     "summary": "Upload an array to the GPU as a GpuBuffer",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "upload",
+        "buffer",
+        "storage buffer",
+        "array to gpu",
+        "data",
+        "compute"
+    ],
     "exampleProjectId": "VShX3I",
     "isReleased": true
 }

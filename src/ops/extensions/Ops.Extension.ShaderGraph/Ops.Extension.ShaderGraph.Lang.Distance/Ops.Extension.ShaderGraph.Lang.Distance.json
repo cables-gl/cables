@@ -71,5 +71,16 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Distance between two points"
+    "summary": "Distance between two points",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "length",
+        "between points",
+        "euclidean",
+        "range"
+    ]
 }

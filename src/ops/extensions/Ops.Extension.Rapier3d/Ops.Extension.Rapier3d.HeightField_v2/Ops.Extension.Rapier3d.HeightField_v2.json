@@ -98,6 +98,17 @@
         ]
     },
     "summary": "Heightfield physics body / landscape,heightmap",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "terrain",
+        "landscape",
+        "heightmap",
+        "ground",
+        "collider",
+        "mountains"
+    ],
     "coreLibs": [
         "cgl"
     ]

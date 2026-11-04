@@ -42,6 +42,18 @@
         ]
     },
     "summary": "Output information about WebGPU adapter and implementation",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "adapter",
+        "capabilities",
+        "limits",
+        "features",
+        "support",
+        "info",
+        "hardware",
+        "debug"
+    ],
     "docs": {
         "ports": []
     },

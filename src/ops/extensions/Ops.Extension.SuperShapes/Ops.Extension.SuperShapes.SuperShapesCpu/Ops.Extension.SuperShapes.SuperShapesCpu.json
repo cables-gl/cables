@@ -161,5 +161,15 @@
     },
     "license": "MIT",
     "isReleased": true,
-    "summary": "Generate supershape geometry on the CPU"
+    "summary": "Generate supershape geometry on the CPU",
+    "tags": [
+        "supershape",
+        "superformula",
+        "organic",
+        "shell",
+        "flower",
+        "procedural geometry",
+        "math shape",
+        "gielis"
+    ]
 }

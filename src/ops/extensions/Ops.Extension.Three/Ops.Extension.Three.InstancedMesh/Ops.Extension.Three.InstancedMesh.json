@@ -51,6 +51,16 @@
         "three"
     ],
     "summary": "Instanced rendering of meshes",
+    "tags": [
+        "threejs",
+        "three.js",
+        "instancing",
+        "instances",
+        "copies",
+        "many",
+        "gpu",
+        "repeat"
+    ],
     "exampleProjectId": "6p48N4",
     "docs": {
         "ports": []

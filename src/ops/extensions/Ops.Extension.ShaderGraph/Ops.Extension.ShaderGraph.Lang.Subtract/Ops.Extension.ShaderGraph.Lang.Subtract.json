@@ -77,5 +77,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Subtract two numbers"
+    "summary": "Subtract two numbers",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "minus",
+        "-",
+        "difference"
+    ]
 }

@@ -58,5 +58,14 @@
         }
     ],
     "isReleased": true,
-    "summary": "OpenSCAD cube shape"
+    "summary": "OpenSCAD cube shape",
+    "tags": [
+        "openscad",
+        "cad",
+        "box",
+        "block",
+        "dice",
+        "csg",
+        "solid modeling"
+    ]
 }

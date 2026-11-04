@@ -39,6 +39,14 @@
         "standalone_electron"
     ],
     "summary": "Open the native file manager application using that path",
+    "tags": [
+        "explorer",
+        "finder",
+        "show in folder",
+        "reveal",
+        "open folder",
+        "os"
+    ],
     "docs": {
         "ports": []
     },

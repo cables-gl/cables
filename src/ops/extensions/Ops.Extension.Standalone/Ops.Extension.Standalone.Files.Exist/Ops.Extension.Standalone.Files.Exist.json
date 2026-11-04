@@ -34,6 +34,15 @@
         "standalone_electron"
     ],
     "summary": "Check if a file exists on the local file system",
+    "tags": [
+        "file check",
+        "exists",
+        "path",
+        "test",
+        "disk",
+        "filesystem",
+        "find"
+    ],
     "docs": {
         "ports": []
     },

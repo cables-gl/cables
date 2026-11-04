@@ -56,6 +56,15 @@
         ]
     },
     "summary": "Set css style properties of a html element",
+    "tags": [
+        "html",
+        "css",
+        "style",
+        "many elements",
+        "array",
+        "set property",
+        "dom"
+    ],
     "issues": "",
     "relatedops": [
         "Ops.Html.CSSPropertyString"

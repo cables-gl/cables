@@ -86,5 +86,18 @@
         "ports": []
     },
     "summary": "Simulate a character in a physics worlda",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "player",
+        "walk",
+        "character",
+        "fps",
+        "kinematic",
+        "collision",
+        "game",
+        "movement"
+    ],
     "isReleased": true
 }

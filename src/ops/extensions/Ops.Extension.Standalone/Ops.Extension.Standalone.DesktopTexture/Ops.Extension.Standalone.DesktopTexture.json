@@ -107,6 +107,15 @@
         ]
     },
     "summary": "Capture desktop windows or screens as a texture DesktopTexture",
+    "tags": [
+        "screen capture",
+        "desktop",
+        "window capture",
+        "screenshot",
+        "display",
+        "record screen",
+        "desktop duplication"
+    ],
     "docs": {
         "ports": [
             {

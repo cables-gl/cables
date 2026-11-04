@@ -59,5 +59,18 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Dot product of two vectors"
+    "summary": "Dot product of two vectors",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "dot product",
+        "vector",
+        "angle",
+        "similarity",
+        "projection",
+        "lighting"
+    ]
 }

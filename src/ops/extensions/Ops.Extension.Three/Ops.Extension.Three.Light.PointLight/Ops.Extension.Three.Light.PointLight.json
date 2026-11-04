@@ -86,5 +86,14 @@
         "three"
     ],
     "isReleased": true,
-    "summary": "Point light for Three.js scenes"
+    "summary": "Point light for Three.js scenes",
+    "tags": [
+        "threejs",
+        "three.js",
+        "lamp",
+        "bulb",
+        "omni",
+        "light source",
+        "lighting"
+    ]
 }

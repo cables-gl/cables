@@ -42,5 +42,17 @@
             }
         ]
     },
-    "summary": "Sphere distance field shape"
+    "summary": "Sphere distance field shape",
+    "tags": [
+        "sdf",
+        "signed distance field",
+        "raymarching",
+        "shader graph",
+        "node",
+        "ball",
+        "orb",
+        "globe",
+        "shape",
+        "primitive"
+    ]
 }

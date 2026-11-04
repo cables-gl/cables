@@ -96,5 +96,16 @@
     },
     "caniusequery": "webgpu",
     "summary": "A simple material without shading",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "unlit",
+        "flat",
+        "color",
+        "texture",
+        "simple",
+        "material",
+        "default"
+    ],
     "isReleased": true
 }

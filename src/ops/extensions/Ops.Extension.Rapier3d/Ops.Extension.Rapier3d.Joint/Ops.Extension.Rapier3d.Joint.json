@@ -139,5 +139,18 @@
         "ports": []
     },
     "summary": "Physics Joints: Revolute/Hinge, Prismapic,Spherical/Pendulum",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "hinge",
+        "revolute",
+        "spherical",
+        "prismatic",
+        "constraint",
+        "chain",
+        "connect bodies",
+        "rope"
+    ],
     "isReleased": true
 }

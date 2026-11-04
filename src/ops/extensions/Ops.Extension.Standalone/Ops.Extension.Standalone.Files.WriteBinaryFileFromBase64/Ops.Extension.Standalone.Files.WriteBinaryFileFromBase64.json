@@ -31,6 +31,15 @@
         "standalone_electron"
     ],
     "summary": "Create a binary file on the local file system from a base64 string",
+    "tags": [
+        "save",
+        "write",
+        "binary",
+        "disk",
+        "decode",
+        "export",
+        "filesystem"
+    ],
     "docs": {
         "ports": []
     },

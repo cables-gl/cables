@@ -33,5 +33,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Use an existing shader variable by name"
+    "summary": "Use an existing shader variable by name",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "variable",
+        "read",
+        "reuse",
+        "named value",
+        "get",
+        "reference"
+    ]
 }

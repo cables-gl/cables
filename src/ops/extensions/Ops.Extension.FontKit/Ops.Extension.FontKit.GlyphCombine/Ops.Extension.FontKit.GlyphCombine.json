@@ -53,5 +53,14 @@
         "ports": []
     },
     "summary": "Takes the per-glyph SVG paths and positions arrays and reconstructs a single combined SVG path string, ready for triangulation",
+    "tags": [
+        "text",
+        "svg paths",
+        "layout",
+        "glyph positions",
+        "letters",
+        "typography",
+        "merge"
+    ],
     "isReleased": true
 }

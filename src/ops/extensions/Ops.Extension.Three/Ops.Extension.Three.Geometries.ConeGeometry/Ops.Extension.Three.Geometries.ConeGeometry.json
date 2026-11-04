@@ -61,6 +61,14 @@
         "three"
     ],
     "summary": "Create a cone geometry",
+    "tags": [
+        "threejs",
+        "three.js",
+        "spike",
+        "funnel",
+        "pointy",
+        "mesh"
+    ],
     "docs": {
         "ports": [
             {

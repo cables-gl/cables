@@ -35,6 +35,16 @@
         ]
     },
     "summary": "sends an object via socketcluster/websocket",
+    "tags": [
+        "websocket",
+        "realtime",
+        "network",
+        "send",
+        "publish",
+        "messaging",
+        "json",
+        "multiplayer"
+    ],
     "issues": "",
     "youtubeids": [],
     "docs": {

@@ -274,6 +274,19 @@
         ]
     },
     "summary": "GPU Particle System ",
+    "tags": [
+        "particles",
+        "emitter",
+        "gpu",
+        "simulation",
+        "sparks",
+        "smoke",
+        "fire",
+        "dust",
+        "swarm",
+        "effects",
+        "fountain"
+    ],
     "docs": {
         "ports": []
     },

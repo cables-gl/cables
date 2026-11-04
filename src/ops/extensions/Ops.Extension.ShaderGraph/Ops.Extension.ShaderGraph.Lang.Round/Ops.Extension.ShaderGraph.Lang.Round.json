@@ -66,5 +66,15 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Round to the nearest whole number"
+    "summary": "Round to the nearest whole number",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "nearest",
+        "integer",
+        "rounding"
+    ]
 }

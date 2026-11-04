@@ -29,6 +29,14 @@
         "standalone_electron"
     ],
     "summary": "Resolves a paths into an absolute path",
+    "tags": [
+        "absolute path",
+        "relative path",
+        "normalize",
+        "filesystem",
+        "join",
+        "location"
+    ],
     "docs": {
         "ports": []
     },

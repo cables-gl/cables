@@ -44,5 +44,15 @@
         "ports": []
     },
     "summary": "Convert a GpuBuffer to a CPU Array",
+    "tags": [
+        "webgpu",
+        "gpu",
+        "readback",
+        "download",
+        "buffer",
+        "compute result",
+        "read",
+        "data"
+    ],
     "isReleased": true
 }

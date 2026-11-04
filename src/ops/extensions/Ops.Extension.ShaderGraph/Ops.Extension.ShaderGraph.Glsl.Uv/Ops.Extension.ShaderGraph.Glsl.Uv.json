@@ -28,5 +28,16 @@
     "docs": {
         "ports": []
     },
-    "summary": "UV coordinates in a GLSL shader"
+    "summary": "UV coordinates in a GLSL shader",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "texture coordinates",
+        "uv map",
+        "st",
+        "coordinates",
+        "texcoord"
+    ]
 }

@@ -88,5 +88,17 @@
             }
         ]
     },
-    "summary": "Reorder or pick vector components"
+    "summary": "Reorder or pick vector components",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "reorder",
+        "pick components",
+        "xyzw",
+        "rgba",
+        "rearrange",
+        "vector"
+    ]
 }

@@ -94,6 +94,15 @@
         ]
     },
     "summary": "Play a Lottie animation in a texture",
+    "tags": [
+        "after effects",
+        "bodymovin",
+        "vector animation",
+        "json animation",
+        "motion graphics",
+        "play",
+        "texture"
+    ],
     "docs": {},
     "exampleProjectId": "zW0RFn",
     "coreLibs": [

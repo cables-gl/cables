@@ -77,5 +77,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Create a vec2 from X and Y"
+    "summary": "Create a vec2 from X and Y",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "vector",
+        "xy",
+        "combine",
+        "pack",
+        "create",
+        "uv"
+    ]
 }

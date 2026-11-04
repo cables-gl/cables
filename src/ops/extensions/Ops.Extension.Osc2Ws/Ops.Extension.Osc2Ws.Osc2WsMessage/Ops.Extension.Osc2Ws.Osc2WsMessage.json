@@ -51,6 +51,16 @@
         ]
     },
     "summary": "Shows the current active address of an incoming OSC message",
+    "tags": [
+        "osc",
+        "open sound control",
+        "websocket",
+        "touchosc",
+        "address",
+        "debug",
+        "monitor",
+        "network"
+    ],
     "issues": "",
     "relatedops": [
         "Ops.Net.WebSocket.WebSocket"

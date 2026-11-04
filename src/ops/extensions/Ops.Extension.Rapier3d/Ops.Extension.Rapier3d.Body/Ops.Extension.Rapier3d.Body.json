@@ -161,6 +161,20 @@
         "cgl"
     ],
     "summary": "Create body/bodies in a physics world",
+    "tags": [
+        "rapier",
+        "physics",
+        "simulation",
+        "rigid body",
+        "collider",
+        "mass",
+        "shape",
+        "gravity",
+        "dynamic",
+        "static",
+        "box",
+        "sphere"
+    ],
     "docs": {
         "ports": []
     },

@@ -173,5 +173,15 @@
         "three"
     ],
     "isReleased": true,
-    "summary": "Physical PBR material for Three.js"
+    "summary": "Physical PBR material for Three.js",
+    "tags": [
+        "threejs",
+        "three.js",
+        "pbr",
+        "physically based",
+        "realistic",
+        "metallic",
+        "roughness",
+        "standard"
+    ]
 }

@@ -58,5 +58,17 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "summary": "Blend between two values"
+    "summary": "Blend between two values",
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "math",
+        "lerp",
+        "blend",
+        "interpolate",
+        "crossfade",
+        "transition"
+    ]
 }
