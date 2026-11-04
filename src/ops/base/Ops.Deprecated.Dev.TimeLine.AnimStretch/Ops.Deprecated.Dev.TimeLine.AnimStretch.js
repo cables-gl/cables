@@ -4,7 +4,7 @@ const
     outValue = op.outNumber("Value");
 
 inTime.onChange =
-inAnim.onChange = update;
+    inAnim.onChange = update;
 
 function update()
 {

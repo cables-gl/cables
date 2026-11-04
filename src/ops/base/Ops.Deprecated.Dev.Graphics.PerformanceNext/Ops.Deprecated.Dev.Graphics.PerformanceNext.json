@@ -93,6 +93,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1750064591175
+        },
+        {
+            "message": "op Dev.Graphics.PerformanceNext was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793803092334
         }
     ],
     "coreLibs": [

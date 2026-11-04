@@ -11,8 +11,8 @@ const
 
 animVal.setAnimated(true);
 inKeys.onChange =
-inText.onChange =
-inValues.onChange = update;
+    inText.onChange =
+    inValues.onChange = update;
 let anim = animVal.anim;
 
 inloop.onChange = () =>
@@ -34,8 +34,8 @@ function update()
         for (let i = 0; i < times.length; i++)
         {
             let v = 0;
-            if (values)v = values[i];
-            if (i == times.length - 1)anim.eventsPaused = false;
+            if (values) v = values[i];
+            if (i == times.length - 1) anim.eventsPaused = false;
 
             anim.setValue(times[i], v);
             if (texts)

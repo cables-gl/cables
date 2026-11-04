@@ -56,7 +56,7 @@ const gl = op.patch.cgl.gl;
 const glQueryExt = gl.getExtension("EXT_disjoint_timer_query_webgl2");
 
 inActive.onChange =
-exe.onLinkChanged =
+    exe.onLinkChanged =
     inShow.onChange = () =>
     {
         updateOpened();
@@ -90,8 +90,8 @@ updateVisibility();
 
 op.onDelete = function ()
 {
-    if (canvas)canvas.remove();
-    if (element)element.remove();
+    if (canvas) canvas.remove();
+    if (element) element.remove();
 };
 
 function updatePos()
@@ -166,7 +166,7 @@ function toggleOpened()
 function updateOpened()
 {
     updateText();
-    if (!canvas)createCanvas();
+    if (!canvas) createCanvas();
     if (opened)
     {
         canvas.style.display = "block";
@@ -200,7 +200,7 @@ function updateCanvas()
         if (queue[k] > 60) ctx.fillStyle = colorRAFVeruSlow;
 
         ctx.fillRect(numBars - k, height - queue[k] * hmul, 1, queue[k] * hmul);
-        if (queue[k] > 30)ctx.fillStyle = colorRAF;
+        if (queue[k] > 30) ctx.fillStyle = colorRAF;
     }
 
     for (k = numBars; k >= 0; k--)
@@ -289,7 +289,7 @@ function updateText()
     {
         html += fps + " fps / ";
         html += "CPU: " + Math.round((cgl.profileData.profileOnAnimFrameOps) * 100) / 100 + "ms / ";
-        if (currentTimeGPU)html += "GPU: " + Math.round(currentTimeGPU * 100) / 100 + "ms  ";
+        if (currentTimeGPU) html += "GPU: " + Math.round(currentTimeGPU * 100) / 100 + "ms  ";
     }
 
     if (op.patch.loading.getProgress() != 1.0)
@@ -453,18 +453,18 @@ function render()
     {
         frameCount++;
 
-        if (cgl && glQueryExt && inDoGpu.get() && inShow.get())cgl.profileData.doProfileGlQuery = true;
+        if (cgl && glQueryExt && inDoGpu.get() && inShow.get()) cgl.profileData.doProfileGlQuery = true;
         else cgl.profileData.doProfileGlQuery = false;
 
-        if (fpsStartTime === 0)fpsStartTime = Date.now();
+        if (fpsStartTime === 0) fpsStartTime = Date.now();
         if (Date.now() - fpsStartTime >= 1000)
         {
-        // query=null;
+            // query=null;
             fps = frameCount;
             frameCount = 0;
             // frames = 0;
             outFPS.set(fps);
-            if (inShow.get())updateText();
+            if (inShow.get()) updateText();
 
             fpsStartTime = Date.now();
         }
@@ -488,7 +488,7 @@ function render()
 
             if (opened && !cgl.profileData.pause)
             {
-            // const timeUsed = performance.now() - lastTime;
+                // const timeUsed = performance.now() - lastTime;
                 queue.push(cgl.profileData.profileFrameDelta);
                 queue.shift();
 

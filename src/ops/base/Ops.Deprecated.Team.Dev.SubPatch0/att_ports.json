@@ -1,0 +1,31 @@
+{
+    "ports": [
+        {
+            "id": "6d97cewid",
+            "title": "result",
+            "dir": 0,
+            "type": 0,
+            "value": 0,
+            "order": 0
+        },
+        {
+            "id": "ymb057f5n",
+            "title": "Number Input",
+            "dir": 0,
+            "values": [
+                ""
+            ],
+            "type": 0,
+            "value": 0,
+            "order": 2
+        },
+        {
+            "id": "0ng9bkpxi",
+            "title": "value",
+            "dir": 1,
+            "type": 0,
+            "value": 0,
+            "order": 1001
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "id": "41ead32c-d2a6-4795-9769-f3e93205a734",
+    "created": 1709647800033,
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "created op",
+            "type": "",
+            "author": "pandur",
+            "date": 1709647800085
+        },
+        {
+            "message": " updated core libs: subpatchop",
+            "type": "",
+            "author": "pandur",
+            "date": 1709647800617
+        },
+        {
+            "message": "Ops.Patch.PSFTJ96.SubPatch0 renamed to Ops.Team.Dev.SubPatch0",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1709647878140
+        },
+        {
+            "message": "op Team.Dev.SubPatch0 was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793803124378
+        }
+    ],
+    "coreLibs": [
+        "subpatchop"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "6d97cewid",
+                "uititle": "result",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "ymb057f5n",
+                "uititle": "Number Input",
+                "values": [
+                    ""
+                ],
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "0ng9bkpxi",
+                "uititle": "value",
+                "subType": "number"
+            }
+        ]
+    },
+    "summary": "csdcdscsd",
+    "docs": {
+        "ports": []
+    }
+}

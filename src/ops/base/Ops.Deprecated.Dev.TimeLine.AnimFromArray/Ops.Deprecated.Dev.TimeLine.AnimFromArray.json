@@ -15,6 +15,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1762241800445
+        },
+        {
+            "message": "op Dev.TimeLine.AnimFromArray was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793803198964
         }
     ],
     "layout": {
