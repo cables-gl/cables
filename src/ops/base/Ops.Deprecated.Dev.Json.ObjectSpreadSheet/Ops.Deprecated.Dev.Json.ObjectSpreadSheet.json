@@ -15,6 +15,12 @@
             "message": "Ops.Json.ObjectSpreadSheet renamed to Ops.Dev.Json.ObjectSpreadSheet",
             "author": "pandur",
             "date": 1618469079720
+        },
+        {
+            "message": "op Dev.Json.ObjectSpreadSheet was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793784150144
         }
     ],
     "authorName": "pandur",

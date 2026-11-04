@@ -10,6 +10,12 @@
             "message": "Ops.User.pandur.BranchProfilerBranchEnd renamed to Ops.Dev.BranchProfilerBranchEnd",
             "author": "pandur",
             "date": 1660576772529
+        },
+        {
+            "message": "op Dev.BranchProfilerBranchEnd was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793783782323
         }
     ],
     "authorName": "pandur",

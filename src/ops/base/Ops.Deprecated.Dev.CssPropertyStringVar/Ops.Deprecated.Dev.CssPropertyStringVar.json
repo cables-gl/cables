@@ -9,6 +9,12 @@
             "type": "new op",
             "author": "pandur",
             "date": 1757676064911
+        },
+        {
+            "message": "op Dev.CssPropertyStringVar was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793783588727
         }
     ],
     "layout": {

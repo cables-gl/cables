@@ -13,10 +13,11 @@ updateUi();
 
 function updateUi()
 {
-    spread.setUiAttribs({
-        "display": "spreadsheet",
-        "spread_numColumns": inNumColumns.get()
-    });
+    spread.setUiAttribs(
+        {
+            "display": "spreadsheet",
+            "spread_numColumns": inNumColumns.get()
+        });
     update();
 }
 

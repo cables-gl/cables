@@ -4,12 +4,20 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1645815819278
+            "date": 1645815819278,
+            "type": "new op"
         },
         {
-            "message": "Ops.User.pandur.GltfExplodeNodes renamed to Ops.Dev.GltfExplodeNodes",
+            "message": "cleanup dev namespace",
+            "type": "feature",
             "author": "pandur",
-            "date": 1645816806623
+            "date": 1793783907475
+        },
+        {
+            "message": "Dev.GltfExplodeNodes renamed to Ops.Gl.GLTF.GltfExplodeNodes",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1793784313288
         }
     ],
     "authorName": "pandur",
@@ -90,5 +98,10 @@
     "coreLibs": [
         "cgl"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "isReleased": false,
+    "exampleProjectId": "8JssJY",
+    "docs": {
+        "ports": []
+    }
 }

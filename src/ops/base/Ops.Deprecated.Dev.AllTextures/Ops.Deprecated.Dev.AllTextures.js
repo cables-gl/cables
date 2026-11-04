@@ -28,9 +28,9 @@ exec.onTriggered = () =>
                 (p.get().tex || p.get().cubemap) &&
 
                 // (
-                    p.get().name.indexOf("/assets/") > -1
-                    // op._objName.indexOf("PbrEnvironmentLight")>-1
-            // )
+                p.get().name.indexOf("/assets/") > -1
+                // op._objName.indexOf("PbrEnvironmentLight")>-1
+                // )
             )
             {
                 if (arr.indexOf(p.get()) == -1)

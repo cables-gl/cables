@@ -11,6 +11,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1686132742808
+        },
+        {
+            "message": "op Dev.AllTextures was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793784053731
         }
     ],
     "layout": {

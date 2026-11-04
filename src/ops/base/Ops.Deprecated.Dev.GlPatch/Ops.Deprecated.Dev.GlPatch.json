@@ -10,6 +10,12 @@
             "message": "Ops.Admin.GlPatch renamed to Ops.Dev.GlPatch",
             "author": "pandur",
             "date": 1623913974452
+        },
+        {
+            "message": "op Dev.GlPatch was deprecated",
+            "type": "deprecation",
+            "author": "pandur",
+            "date": 1793783181035
         }
     ],
     "authorName": "pandur",

@@ -7,7 +7,7 @@ updateState();
 
 exec.onTriggered = () =>
 {
-    if (audioCtx && audioCtx.state == "suspended")audioCtx.resume();
+    if (audioCtx && audioCtx.state == "suspended") audioCtx.resume();
     updateState();
     setTimeout(updateState, 100);
 };
