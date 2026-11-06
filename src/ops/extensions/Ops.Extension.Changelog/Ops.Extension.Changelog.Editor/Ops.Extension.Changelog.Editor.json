@@ -589,6 +589,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1793727001275
+        },
+        {
+            "message": "Add option to overwrite current patch with backup",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1793869469079
+        },
+        {
+            "message": "Text editor improvements: New preference for tab width, return uses correct indentation in new line, improved undo, bracket highlighting, auto closing brackets",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1793891777609
         }
     ],
     "isReleased": true,

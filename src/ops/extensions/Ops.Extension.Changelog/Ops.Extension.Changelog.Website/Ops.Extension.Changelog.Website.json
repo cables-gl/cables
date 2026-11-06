@@ -223,10 +223,11 @@
             "date": 1791465513151
         },
         {
-            "message": "Added wordpress iframe integration info to docs - https://cables.gl/docs/faq/embedding/cms/wordpress",
+            "message": "Howto integate cables patches into Wordpress",
             "type": "improvement",
             "author": "stephan",
-            "date": 1793706365153
+            "date": 1793706365153,
+            "url": "https://cables.gl/docs/faq/embedding/cms/wordpress"
         },
         {
             "message": "Share modal popup now shows a button \"exit iframe\" to run the patch without an iframe around (only for published patches)",
