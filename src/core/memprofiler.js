@@ -8,21 +8,22 @@ export class MemProfiler
 
     constructor()
     {
-        setInterval(() =>
-        {
-            let sum = 0;
-            let sumGpu = 0;
-            let count = 0;
-            for (const i in this.items)
+        if (CABLES.UI)
+            setInterval(() =>
             {
-                sumGpu += this.items[i].sizeGpu;
-                sum += this.items[i].size;
-                count++;
-            }
+                let sum = 0;
+                let sumGpu = 0;
+                let count = 0;
+                for (const i in this.items)
+                {
+                    sumGpu += this.items[i].sizeGpu;
+                    sum += this.items[i].size;
+                    count++;
+                }
 
-            this.usageCpu = sum;
-            this.usageGpu = sumGpu;
-        }, 2000);
+                this.usageCpu = sum;
+                this.usageGpu = sumGpu;
+            }, 2000);
 
     }
 
