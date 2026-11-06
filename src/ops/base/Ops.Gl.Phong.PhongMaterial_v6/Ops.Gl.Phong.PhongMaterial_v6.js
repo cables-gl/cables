@@ -511,6 +511,7 @@ function updateEmissiveMaskTexture()
 }
 
 let updateEnvTextureLater = false;
+
 function updateEnvTexture()
 {
     shader.toggleDefine("HAS_TEXTURE_ENV", inEnvTexture.get());
@@ -527,8 +528,8 @@ function updateEnvTexture()
         {
             shader.removeDefine("TEX_FORMAT_EQUIRECT");
             shader.removeDefine("ENVMAP_MATCAP");
-            if (!inEnvMapIntensityUni)inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
-            if (!inEnvMapWidthUni)inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().cubemap.width);
+            if (!inEnvMapIntensityUni) inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
+            if (!inEnvMapWidthUni) inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().cubemap.width);
         }
         else
         {
@@ -536,7 +537,7 @@ function updateEnvTexture()
             shader.toggleDefine("TEX_FORMAT_EQUIRECT", !isSquare);
             shader.toggleDefine("ENVMAP_MATCAP", isSquare);
 
-            if (!inEnvMapIntensityUni)inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
+            if (!inEnvMapIntensityUni) inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
             if (!inEnvMapWidthUni) inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().width);
         }
     }
@@ -809,16 +810,17 @@ function createDefaultUniform()
     };
 }
 
-const DEFAULT_LIGHTSTACK = [{
-    "type": "point",
-    "position": [5, 5, 5],
-    "color": [1, 1, 1],
-    "specular": [1, 1, 1],
-    "intensity": 1,
-    "attenuation": 0,
-    "falloff": 0.5,
-    "radius": 80,
-    "castLight": 1,
+const DEFAULT_LIGHTSTACK = [
+    {
+        "type": "point",
+        "position": [5, 5, 5],
+        "color": [1, 1, 1],
+        "specular": [1, 1, 1],
+        "intensity": 1,
+        "attenuation": 0,
+        "falloff": 0.5,
+        "radius": 80,
+        "castLight": 1,
 }];
 
 const iViewMatrix = mat4.create();
@@ -901,12 +903,11 @@ inTrigger.onTriggered = function ()
         return;
     }
 
-    if (updateEnvTextureLater)updateEnvTexture();
-
-    cgl.pushShader(shader);
+    if (updateEnvTextureLater) updateEnvTexture();
 
     shader.popTextures();
 
+    // textures and light uniforms must be set before pushShader: with forced shader mods (e.g. RenderToTextures) pushShader binds a copy of the shader which copies the texture stack and uniform values
     if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get());
     if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get());
     if (inNormalTexture.get()) shader.pushTexture(normalTextureUniform, inNormalTexture.get());
@@ -926,6 +927,8 @@ inTrigger.onTriggered = function ()
     }
 
     updateLights();
+
+    cgl.pushShader(shader);
 
     outTrigger.trigger();
 

@@ -21,7 +21,7 @@ inR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Color", [inColorize, inR, inG, inB]);
 
 inUseReflection.onChange = inCubemap.onChange =
-inFlipX.onChange = inFlipY.onChange = inFlipZ.onChange = updateMapping;
+    inFlipX.onChange = inFlipY.onChange = inFlipZ.onChange = updateMapping;
 inColorize.onChange = function ()
 {
     shader.toggleDefine("COLORIZE", inColorize.get());
@@ -71,8 +71,8 @@ updateMapping();
 
 function doRender()
 {
-    cgl.pushShader(shader);
     shader.popTextures();
+    // textures must be pushed before pushShader: with forced shader mods (e.g. RenderToTextures) pushShader binds a copy of the shader which copies the texture stack
     if (inCubemap.get())
     {
         if (inCubemap.get().cubemap) shader.pushTexture(inSkyboxUniform, inCubemap.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
@@ -83,6 +83,7 @@ function doRender()
     }
     else shader.pushTexture(inSkyboxUniform, CGL.Texture.getTempTexture(cgl).tex);
 
+    cgl.pushShader(shader);
     trigger.trigger();
     cgl.popShader();
 }

@@ -271,11 +271,12 @@ execute.onTriggered = function ()
         if (cgl.tempData.lightStack.length === 0) op.setUiError("deflight", "Default light is enabled. Please add lights to your patch to make this warning disappear.", 1);
         else op.setUiError("deflight", null);
     }
-    cgl.pushShader(shader);
     shader.popTextures();
+    // textures and light uniforms must be set before pushShader: with forced shader mods (e.g. RenderToTextures) pushShader binds a copy of the shader which copies the texture stack and uniform values
     updateLights();
     if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
 
+    cgl.pushShader(shader);
     next.trigger();
     cgl.popShader();
 };

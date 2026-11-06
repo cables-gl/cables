@@ -58,35 +58,32 @@ doScale.onChange =
     texMaskChan.onChange =
     vertCols.onChange = updateDefines;
 
-
 op.preRender = function ()
 {
-    if (shader)shader.bind();
+    if (shader) shader.bind();
     doRender();
 };
-
 
 function doRender()
 {
     uniWidth.setValue(cgl.canvasWidth);
     uniHeight.setValue(cgl.canvasHeight);
 
-    cgl.pushShader(shader);
     shader.popTextures();
+    // textures must be pushed before pushShader: with forced shader mods (e.g. RenderToTextures) pushShader binds a copy of the shader which copies the texture stack
     if (texture.get()) shader.pushTexture(textureUniform, texture.get().tex);
     if (textureMask.get()) shader.pushTexture(textureMaskUniform, textureMask.get().tex);
     if (textureColorize.get()) shader.pushTexture(textureColorizeUniform, textureColorize.get().tex);
+    cgl.pushShader(shader);
 
-
-    if (preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
+    if (preMultipliedAlpha.get()) cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     trigger.trigger();
 
-    if (preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
+    if (preMultipliedAlpha.get()) cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     cgl.popShader();
 }
-
 
 function updateDefines()
 {

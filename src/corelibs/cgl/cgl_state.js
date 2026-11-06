@@ -75,6 +75,7 @@ export class CglContext extends CgContext
         this._glFrameBufferStack = [];
         this._frameBufferStack = [];
         this._shaderStack = [];
+        this._shaderStackOrig = [];
         this._stackDepthTest = [];
         this.mainloopOp = null;
         this._stackBlendMode = [];
@@ -310,14 +311,14 @@ export class CglContext extends CgContext
             this.setViewPort(this._viewPortStack[this._viewPort.length - 4], this._viewPortStack[this._viewPort.length - 3], this._viewPortStack[this._viewPort.length - 2], this._viewPortStack[this._viewPort.length - 1]);
     }
 
-/**
- * Push a new viewport onto stack.
- *
- * @param {Number} x
- * @param {Number} y
- * @param {Number} w
- * @param {Number} h
- */
+    /**
+     * Push a new viewport onto stack.
+     *
+     * @param {Number} x
+     * @param {Number} y
+     * @param {Number} w
+     * @param {Number} h
+     */
 
     pushViewPort(x, y, w, h)
     {
@@ -465,21 +466,24 @@ export class CglContext extends CgContext
      */
     pushShader(shader)
     {
+        const origShader = shader;
+        let pushedOrig = null;
 
         if (this.tempData.forceShaderMods && !this.tempData.shadowPass)
         {
             for (let i = 0; i < this.tempData.forceShaderMods.length; i++)
             {
-                // if (!currentShader.forcedMod && currentShader != this.tempData.forceShaderMods[i])
-                // {
-                //     currentShader.forcedMod = this.tempData.forceShaderMods[i];
                 shader = this.tempData.forceShaderMods[i].bind(shader, false);
-                // }
-                // return currentShader;
-                // if (this.tempData.forceShaderMods[i].currentShader() && shader != this.tempData.forceShaderMods[i].currentShader().shader)
             }
         }
 
+        if (shader && shader !== origShader && origShader)
+        {
+            origShader.pushedWithForcedMod = (origShader.pushedWithForcedMod || 0) + 1;
+            pushedOrig = origShader;
+        }
+
+        this._shaderStackOrig.push(pushedOrig);
         this._shaderStack.push(shader);
         this._currentShader = shader;
     }
@@ -511,6 +515,8 @@ export class CglContext extends CgContext
 
         if (this._shaderStack.length === 0) throw new Error("Invalid shader stack pop!");
         this._shaderStack.pop();
+        const pushedOrig = this._shaderStackOrig.pop();
+        if (pushedOrig) pushedOrig.pushedWithForcedMod--;
         this._currentShader = this._shaderStack[this._shaderStack.length - 1];
     }
 

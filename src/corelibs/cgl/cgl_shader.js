@@ -215,7 +215,11 @@ class CglShader extends CgShader
         this.popTextures();
         for (let i = 0; i < origShader._textureStackUni.length; i++)
         {
-            this._textureStackUni[i] = origShader._textureStackUni[i];
+            // use the uniform of THIS shader (copy), not the original's - otherwise the sampler slot is set on the wrong program
+            const origUni = origShader._textureStackUni[i];
+            this._textureStackUni[i] = (origUni && this.getUniform(origUni.getName())) || origUni;
+            // the uniform values were just copied from the original (old slot) - set the slot now, _bindTextures runs after uniforms were uploaded
+            if (this._textureStackUni[i]) this._textureStackUni[i].setValue(i);
             this._textureStackTex[i] = origShader._textureStackTex[i];
             this._textureStackType[i] = origShader._textureStackType[i];
             this._textureStackTexCgl[i] = origShader._textureStackTexCgl[i];
@@ -1423,6 +1427,12 @@ class CglShader extends CgShader
 
             this._log.warn("[cgl_shader] invalid texture...", t);
             return;
+        }
+
+        if (this.pushedWithForcedMod > 0 && !this._warnedPushTextureOrder)
+        {
+            this._warnedPushTextureOrder = true;
+            this._log.warn("[shader.pushTexture] texture pushed after cgl.pushShader() while shader mods are forced (e.g. inside RenderToTextures), the texture will be ignored - push textures and set uniforms BEFORE cgl.pushShader()", this._name, uniform.getName());
         }
 
         this._textureStackUni.push(uniform);
