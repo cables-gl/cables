@@ -67,7 +67,6 @@ function doRender()
 {
     setVectorValues();
     if (needsUpdate) updateShader();
-    // textures must be pushed before pushShader: with forced shader mods (e.g. RenderToTextures) pushShader binds a copy of the shader which copies the texture stack
     pushTextures();
     if (asMaterial.get()) cgl.pushShader(shader);
     trigger.trigger();
