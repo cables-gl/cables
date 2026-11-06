@@ -79,7 +79,7 @@ doScale.onChange =
 
 op.preRender = function ()
 {
-    if (shader)shader.bind();
+    if (shader) shader.bind();
     doRender();
 };
 
@@ -88,13 +88,13 @@ function doRender()
     uniWidth.setValue(cgl.canvasWidth);
     uniHeight.setValue(cgl.canvasHeight);
 
-    cgl.pushShader(shader);
     shader.popTextures();
     if (texture.get()) shader.pushTexture(textureUniform, texture.get().tex);
     if (textureMask.get()) shader.pushTexture(textureMaskUniform, textureMask.get().tex);
     if (textureColorize.get()) shader.pushTexture(textureColorizeUniform, textureColorize.get().tex);
     if (textureOpacity.get()) shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
     if (texturePointSize.get()) shader.pushTexture(texturePointSizeUniform, texturePointSize.get().tex);
+    cgl.pushShader(shader);
 
     trigger.trigger();
 

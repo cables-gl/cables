@@ -98,9 +98,7 @@ inToggleFresnel.onChange = function ()
         if (!uniFresnel) uniFresnel = new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel);
         if (!uniFresnelWidthExponent) uniFresnelWidthExponent = new CGL.Uniform(shader, "2f", "inFresnelWidthExponent", inFresnelWidth, inFresnelExponent);
     }
-    else
-    {
-    }
+    else {}
 
     fresnelArr.forEach(function (port) { port.setUiAttribs({ "greyout": !inToggleFresnel.get() }); });
 };
@@ -695,16 +693,17 @@ function createDefaultUniform()
     };
 }
 
-const DEFAULT_LIGHTSTACK = [{
-    "type": "point",
-    "position": [5, 5, 5],
-    "color": [1, 1, 1],
-    "specular": [1, 1, 1],
-    "intensity": 1,
-    "attenuation": 0,
-    "falloff": 0.5,
-    "radius": 80,
-    "castLight": 1,
+const DEFAULT_LIGHTSTACK = [
+    {
+        "type": "point",
+        "position": [5, 5, 5],
+        "color": [1, 1, 1],
+        "specular": [1, 1, 1],
+        "intensity": 1,
+        "attenuation": 0,
+        "falloff": 0.5,
+        "radius": 80,
+        "castLight": 1,
 }];
 
 const iViewMatrix = mat4.create();
@@ -787,8 +786,6 @@ inTrigger.onTriggered = function ()
         return;
     }
 
-    cgl.pushShader(shader);
-
     shader.popTextures();
 
     if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
@@ -809,6 +806,8 @@ inTrigger.onTriggered = function ()
     }
 
     updateLights();
+
+    cgl.pushShader(shader);
 
     outTrigger.trigger();
 

@@ -271,11 +271,11 @@ execute.onTriggered = function ()
         if (cgl.tempData.lightStack.length === 0) op.setUiError("deflight", "Default light is enabled. Please add lights to your patch to make this warning disappear.", 1);
         else op.setUiError("deflight", null);
     }
-    cgl.pushShader(shader);
     shader.popTextures();
     updateLights();
     if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
 
+    cgl.pushShader(shader);
     next.trigger();
     cgl.popShader();
 };

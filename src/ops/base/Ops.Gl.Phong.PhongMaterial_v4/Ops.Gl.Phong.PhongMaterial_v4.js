@@ -155,6 +155,7 @@ inColorizeTexture.onChange = function ()
 {
     shader.toggleDefine("COLORIZE_TEXTURE", inColorizeTexture.get());
 };
+
 function updateDiffuseTexture()
 {
     if (inDiffuseTexture.get())
@@ -381,7 +382,8 @@ const initialUniforms = [
 
 const lightUniforms = [];
 
-const initialLight = new Light({
+const initialLight = new Light(
+{
     "type": "point",
     "color": [0.8, 0.8, 0.8],
     "specular": [1, 1, 1],
@@ -406,7 +408,8 @@ for (let i = 0; i < MAX_LIGHTS; i += 1)
     const spotProperties = [null, null, null];
     const spotPropertiesUniform = new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".spotProperties", spotProperties);
 
-    lightUniforms.push({
+    lightUniforms.push(
+    {
         "color": new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".color", i === 0 ? initialLight.color : [0, 0, 0]),
 
         "specular": new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".specular", i === 0 ? initialLight.specular : [1, 1, 1]),
@@ -442,7 +445,6 @@ const render = function ()
     }
     else
     {
-        cgl.pushShader(shader);
         shader.popTextures();
 
         if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
@@ -452,6 +454,7 @@ const render = function ()
         if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
         if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
 
+        cgl.pushShader(shader);
         outTrigger.trigger();
         cgl.popShader();
     }

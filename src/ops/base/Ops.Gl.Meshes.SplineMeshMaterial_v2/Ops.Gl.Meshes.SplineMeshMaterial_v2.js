@@ -59,11 +59,11 @@ function doRender()
         shader.addUniformFrag("f", "aspect", aspect);
     }
 
-    cgl.pushShader(shader);
     shader.popTextures();
 
     if (uniTex && inTexture.get()) shader.pushTexture(uniTex, inTexture.get().tex);
     if (uniTexMask && inTextureMask.get()) shader.pushTexture(uniTexMask, inTextureMask.get().tex);
+    cgl.pushShader(shader);
 
     trigger.trigger();
 

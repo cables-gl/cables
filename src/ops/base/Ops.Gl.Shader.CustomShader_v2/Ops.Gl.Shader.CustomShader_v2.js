@@ -67,8 +67,8 @@ function doRender()
 {
     setVectorValues();
     if (needsUpdate) updateShader();
-    if (asMaterial.get()) cgl.pushShader(shader);
     pushTextures();
+    if (asMaterial.get()) cgl.pushShader(shader);
     trigger.trigger();
     shader.popTextures();
     if (asMaterial.get()) cgl.popShader();
@@ -80,7 +80,7 @@ function pushTextures()
         if (uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
             shader.pushTexture(uniformTextures[i].uniform, uniformTextures[i].get().tex);
         else
-            shader.pushTexture(uniformTextures[i], CGL.Texture.getEmptyTexture(cgl));
+            shader.pushTexture(uniformTextures[i].uniform, CGL.Texture.getEmptyTexture(cgl));
 }
 
 function bindTextures() // old - should be removed in next version ?
@@ -374,13 +374,13 @@ function updateShader()
     needsUpdate = false;
 
     if (shader.hasErrors()) op.setUiError("compile", "Shader has errors", 2,
+    {
+        "button": "show",
+        "buttonCb": () =>
         {
-            "button": "show",
-            "buttonCb": () =>
-            {
-                CABLES.UI.showShaderError(shader);
-            }
-        });
+            CABLES.UI.showShaderError(shader);
+        }
+    });
     else op.setUiError("compile", null);
 
     outCodeFrag.setUiAttribs({ "editorDiagnostics": shader.diagnosticsFrag });

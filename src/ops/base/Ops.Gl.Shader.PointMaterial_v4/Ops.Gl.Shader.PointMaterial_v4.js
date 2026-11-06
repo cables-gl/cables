@@ -66,7 +66,7 @@ shaderOut.ignoreValueSerialize = true;
 
 render.onTriggered = doRender;
 doScale.onChange =
-inRandAtlas.onChange =
+    inRandAtlas.onChange =
     makeRound.onChange =
     makeRoundAA.onChange =
     texture.onChange =
@@ -87,7 +87,7 @@ updateUi();
 
 op.preRender = function ()
 {
-    if (shader)shader.bind();
+    if (shader) shader.bind();
     doRender();
 };
 
@@ -96,13 +96,13 @@ function doRender()
     uniWidth.setValue(cgl.canvasWidth);
     uniHeight.setValue(cgl.canvasHeight);
 
-    cgl.pushShader(shader);
     shader.popTextures();
     if (texture.get() && !texture.get().deleted) shader.pushTexture(textureUniform, texture.get());
     if (textureMask.get()) shader.pushTexture(textureMaskUniform, textureMask.get());
     if (textureColorize.get()) shader.pushTexture(textureColorizeUniform, textureColorize.get());
     if (textureOpacity.get()) shader.pushTexture(textureOpacityUniform, textureOpacity.get());
     if (texturePointSize.get()) shader.pushTexture(texturePointSizeUniform, texturePointSize.get());
+    cgl.pushShader(shader);
 
     trigger.trigger();
 
