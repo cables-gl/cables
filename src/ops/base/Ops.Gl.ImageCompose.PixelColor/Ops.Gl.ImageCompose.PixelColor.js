@@ -13,12 +13,8 @@ shader.setSource(shader.getDefaultVertexShader(), attachments.pixelate_frag);
 
 const textureMultiplierUniform = new CGL.Uniform(shader, "t", "srcTex", 1);
 const unipos = new CGL.Uniform(shader, "2f", "pixelPos", posX, posY);
+const uniamount = new CGL.Uniform(shader, "f", "amount", amount);
 const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
-
-// srcTex.onChange = function ()
-// {
-//     shader.toggleDefine("PI XELATE_TEXTURE", srcTex.isLinked());
-// };
 
 CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 

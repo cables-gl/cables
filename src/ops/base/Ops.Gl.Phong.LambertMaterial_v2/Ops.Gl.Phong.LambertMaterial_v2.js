@@ -272,6 +272,7 @@ execute.onTriggered = function ()
         else op.setUiError("deflight", null);
     }
     shader.popTextures();
+    // textures and light uniforms must be set before pushShader: with forced shader mods (e.g. RenderToTextures) pushShader binds a copy of the shader which copies the texture stack and uniform values
     updateLights();
     if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
 

@@ -52,7 +52,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Result"
+                "name": "Result",
+                "objType": "geometry"
             }
         ]
     },

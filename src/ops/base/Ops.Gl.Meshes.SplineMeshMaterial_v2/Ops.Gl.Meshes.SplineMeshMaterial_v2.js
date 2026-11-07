@@ -61,6 +61,7 @@ function doRender()
 
     shader.popTextures();
 
+    // textures must be pushed before pushShader: with forced shader mods (e.g. RenderToTextures) pushShader binds a copy of the shader which copies the texture stack
     if (uniTex && inTexture.get()) shader.pushTexture(uniTex, inTexture.get().tex);
     if (uniTexMask && inTextureMask.get()) shader.pushTexture(uniTexMask, inTextureMask.get().tex);
     cgl.pushShader(shader);

@@ -20,7 +20,7 @@ let startX = 0;
 let startY = 0;
 
 inputType.onChange =
-area.onChange = updateArea;
+    area.onChange = updateArea;
 
 updateArea();
 
@@ -106,12 +106,12 @@ function updateArea()
     else if (area.get() == "Document") listenerElement = sizeElement = document;
     else listenerElement = sizeElement = op.patch.cgl.canvas;
 
-    if (active.get())addListener();
+    if (active.get()) addListener();
 }
 
 function addListener()
 {
-    if (!listenerElement)updateArea();
+    if (!listenerElement) updateArea();
 
     if (inputType.get() == "All" || inputType.get() == "Mouse")
     {
@@ -146,7 +146,7 @@ function removeListener()
 
 active.onChange = function ()
 {
-    if (active.get())addListener();
+    if (active.get()) addListener();
     else removeListener();
 };
 

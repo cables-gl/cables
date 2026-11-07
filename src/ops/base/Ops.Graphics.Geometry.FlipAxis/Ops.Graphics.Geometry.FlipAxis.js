@@ -4,7 +4,7 @@ const
     inFlipX = op.inBool("Flip X", false),
     inFlipY = op.inBool("Flip Y", false),
     inFlipZ = op.inBool("Flip Z", false),
-    outGeom = op.outObject("Result");
+    outGeom = op.outObject("Result", null, "geometry");
 
 ax.onChange =
     inFlipX.onChange =

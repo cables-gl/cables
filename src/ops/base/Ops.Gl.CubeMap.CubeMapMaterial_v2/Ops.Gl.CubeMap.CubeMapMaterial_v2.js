@@ -72,6 +72,7 @@ updateMapping();
 function doRender()
 {
     shader.popTextures();
+    // textures must be pushed before pushShader: with forced shader mods (e.g. RenderToTextures) pushShader binds a copy of the shader which copies the texture stack
     if (inCubemap.get())
     {
         if (inCubemap.get().cubemap) shader.pushTexture(inSkyboxUniform, inCubemap.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);

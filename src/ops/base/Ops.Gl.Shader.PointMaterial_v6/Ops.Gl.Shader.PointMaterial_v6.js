@@ -109,6 +109,7 @@ function doRender()
     op.checkGraphicsApi();
 
     shader.popTextures();
+    // textures must be pushed before pushShader: with forced shader mods (e.g. RenderToTextures) pushShader binds a copy of the shader which copies the texture stack
     if (texture.get() && !texture.get().deleted) shader.pushTexture(textureUniform, texture.get());
     if (textureMask.get()) shader.pushTexture(textureMaskUniform, textureMask.get());
     if (textureColorize.get()) shader.pushTexture(textureColorizeUniform, textureColorize.get());
