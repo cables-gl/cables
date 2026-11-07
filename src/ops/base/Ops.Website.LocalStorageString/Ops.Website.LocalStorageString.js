@@ -1,11 +1,11 @@
 const
-    inKey = op.inString("Key"),
     inValue = op.inString("String", ""),
+    inKey = op.inString("Key"),
     inType = op.inSwitch("Storage", ["Local", "Session"], "Local"),
     inStore = op.inTriggerButton("Store"),
     outValue = op.outString("Stored String"),
     outStorage = op.outString("Storage type"),
-    outSupported = op.outBool("Storage Support", true);
+    outSupported = op.outBoolNum("Storage Support", true);
 
 let storage = null;
 let storageSupport = false;

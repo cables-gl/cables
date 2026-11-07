@@ -1,0 +1,75 @@
+{
+    "id": "705426fb-1777-4ec8-9e31-50ab83f83aa6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1611059265857
+        },
+        {
+            "message": "Add support for sessionStorage",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1779895192080
+        },
+        {
+            "message": "cloned op from Ops.Website.LocalStorageString",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1793975647161,
+            "cloneOf": "f908fc2e-70b6-4ca4-8afd-4302b35ff570"
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1793975647160,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Stored String"
+            }
+        ]
+    },
+    "summary": "Store and retrieve a string in browser storage",
+    "tags": [
+        "browser storage",
+        "persist",
+        "save",
+        "remember",
+        "settings",
+        "localstorage",
+        "text",
+        "store"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Key",
+                "text": "storage key"
+            },
+            {
+                "name": "String",
+                "text": "storage value"
+            },
+            {
+                "name": "Store",
+                "text": "trigger to store number"
+            },
+            {
+                "name": "Stored String",
+                "text": "the stored value"
+            },
+            {
+                "name": "Storage Support",
+                "text": "boolean to indicate browser support for localstorage"
+            }
+        ]
+    },
+    "license": "MIT"
+}

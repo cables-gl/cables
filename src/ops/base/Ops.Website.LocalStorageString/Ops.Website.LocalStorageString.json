@@ -19,11 +19,11 @@
         "portsIn": [
             {
                 "type": 5,
-                "name": "Key"
+                "name": "String"
             },
             {
                 "type": 5,
-                "name": "String"
+                "name": "Key"
             },
             {
                 "type": 0,
