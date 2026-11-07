@@ -1,27 +1,18 @@
 const
     inValue = op.inString("String", ""),
-    inKey = op.inString("Key", ""),
     outValue = op.outString("Stored String");
-
-inKey.setUiAttribs({ hidePort: true, hideParam: true })
 
 let storage = null;
 let storageSupport = false;
 updateStorage();
 
 updateOutput();
-inKey.onChange = updateOutput;
 
 inValue.onChange = storeValue;
 
-op.patch.on("localstorageStored", (key, val) =>
-{
-    if (key == inKey.get()) outValue.set(val);
-});
-
 function getKey()
 {
-    return (op.patch.namespace || "") + inKey.get();
+    return op.id;
 }
 
 function updateOutput()
@@ -59,6 +50,5 @@ function storeValue()
         }
     }
     outValue.set(val);
-    if (inKey.get() == "") inKey.set(CABLES.uuid());
-    op.patch.emitEvent("localstorageStored", inKey.get(), val);
+    op.patch.emitEvent("localstorageStored", getKey(), val);
 }
