@@ -2,7 +2,9 @@ const
     inres = op.inObject("Fetch Response"),
     outObje = op.outObject("Result"),
     outTrig = op.outTrigger("Received Result"),
-    outStart = op.outTrigger("Started");
+    outStart = op.outTrigger("Started"),
+    outReceiving = op.outBoolNum("Receiving"),
+    outFinished = op.outTrigger("Finished");
 
 inres.onChange = start;
 let reader;
@@ -24,6 +26,8 @@ function start()
         let done = false;
         clearInterval(iv);
         iv = setInterval(read, 50);
+        outReceiving.set(true)
+
     }
     catch (e) {}
 }
@@ -33,6 +37,7 @@ function read()
     reader.read().then((r) =>
     {
         let done = false;
+        if (r.done) finish();
         if (r.value)
         {
             let chunk = decoder.decode(r.value, { "stream": true }).trim();
@@ -63,6 +68,16 @@ function read()
                     }
                 });
             }
+            if (done) finish();
         }
     });
+}
+
+function finish()
+{
+    if (!iv) return;
+    outReceiving.set(false)
+    clearInterval(iv);
+    iv = 0;
+    outFinished.trigger();
 }

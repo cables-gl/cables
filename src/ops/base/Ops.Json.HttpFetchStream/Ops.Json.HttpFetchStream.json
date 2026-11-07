@@ -30,6 +30,15 @@
             {
                 "type": 1,
                 "name": "Started"
+            },
+            {
+                "type": 0,
+                "name": "Receiving",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Finished"
             }
         ]
     },
