@@ -14,7 +14,7 @@ el.classList.add("cablesEle");
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__text");
 const label = document.createElement("div");
-label.classList.add("sidebar__item-label");
+// label.classList.add("sidebar__item-label");
 const labelText = document.createElement("div"); // document.createTextNode(labelPort.get());
 const inVisible = op.inBool("Visible", true);
 
