@@ -61,7 +61,7 @@ render.onLinkChanged = function ()
 
 render.onTriggered = function ()
 {
-    if (needsRebuild)buildMesh();
+    if (needsRebuild) buildMesh();
     if (inDraw.get() && mesh && meshvalid) mesh.render();
     trigger.trigger();
 };
@@ -69,12 +69,12 @@ render.onTriggered = function ()
 op.preRender = function ()
 {
     buildMesh();
-    if (mesh && cgl)mesh.render();
+    if (mesh && cgl) mesh.render();
 };
 
 function buildMesh()
 {
-    if (!geom)geom = new CGL.Geometry("cubemesh");
+    if (!geom) geom = new CGL.Geometry("cubemesh");
     geom.clear();
 
     let x = width.get();
@@ -116,7 +116,7 @@ function buildMesh()
     if (geom.verticesIndices.length === 0) meshvalid = false;
     else meshvalid = true;
 
-    if (mesh)mesh.dispose();
+    if (mesh) mesh.dispose();
     if (op.patch.cg) mesh = op.patch.cg.createMesh(geom, { "opId": op.id });
 
     geomOut.setRef(geom);
@@ -126,7 +126,7 @@ function buildMesh()
 
 op.onDelete = function ()
 {
-    if (mesh)mesh.dispose();
+    if (mesh) mesh.dispose();
 };
 
 function sideMappedCube(geom, x, y, z)
@@ -173,7 +173,7 @@ function sideMappedCube(geom, x, y, z)
         z * u0, y * v1,
         z * u1, y * v1,
         z * u1, y * v0,
-        z * u0, y * v0,
+        z * u0, y * v0
     ]);
 }
 
