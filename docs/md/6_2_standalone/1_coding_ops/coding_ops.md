@@ -1,7 +1,7 @@
 # Coding Ops
 
-Cables standalone comes with [all the ops](https://cables.gl/ops) on cables.gl, all the [extensions](https://cables.gl/ops/Ops.Extension) and a few [special ops](https://cables.gl/ops/Ops.Extension.Standalone) 
-that only work when using the standalone version.
+Cables standalone comes with [all the ops](https://cables.gl/ops) on cables.gl, all the [extensions](https://cables.gl/ops/Ops.Extension)
+and a few more [special ops](https://cables.gl/ops/Ops.Extension.Standalone) that only work when using the standalone version.
 
 You can use cables standalone to [code your own ops](../../5_writing_ops/coding_ops). A few concepts are slightly different
 from how things work in the browser and on the web. Here is what's different:
@@ -9,18 +9,26 @@ from how things work in the browser and on the web. Here is what's different:
 ## Op directories
 
 One big difference to how things work on [cables.gl](https://cables.gl) is, that you can have ops from different sources
-on your hard disk. You can individually pick different directories, collections of ops and their code per project and
-cables will then load the relevant ops for your.
+on your hard disk.
+
+You can individually pick different directories, collections of ops and their code, cables will then load the relevant ops for your.
+
+Op directories, once added, are shared between all projects on your machine. Every patch also has an individual op directory (`./ops`) which
+is located next to the project file.
 
 ![op dir](img/nav.png)
 
-All the ops in the directories are sorted into a hierarchy, should they have the same name, the "topmost" one wins.
+All the ops in the directories are sorted into a hierarchy, should they have the same name or id, the op in the "topmost" directory wins.
+
 This way you can easily override (for example) core-ops with your own implementation, swap out collections of ops
-with the ones from your colleagues or try out new operators real quick. 
+with the ones from your colleagues or try out new operators real quick.
 
 You can re-order the hierarchy in the "Manage Op Directories"-tab:
 
 ![manage_dirs](img/manage_dirs.png)
+
+Newly created ops will always land in the "topmost" directory in that list. You can pick a different destination folder while
+creating a new op.
 
 ## Using an external editor
 
@@ -29,4 +37,3 @@ the op's JavaScript file in any external editor you can edit the code and see th
 to the op's directory quickly, click on the folder-icon in the "Manage Op"-tab.
 
 ![op dir](img/op_dir.png)
-
