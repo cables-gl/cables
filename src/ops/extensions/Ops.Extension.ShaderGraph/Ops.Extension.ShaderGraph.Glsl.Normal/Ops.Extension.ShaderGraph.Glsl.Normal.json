@@ -1,0 +1,30 @@
+{
+    "id": "0cc19c27-f6f8-4a20-b120-dec01ce3fbd3",
+    "created": 1794241682686,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1794241682700
+        },
+        {
+            "message": "Local.Normal renamed to Ops.Extension.ShaderGraph.Glsl.Normal",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1794241690355
+        }
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "result",
+                "objType": "sg_vec3"
+            }
+        ]
+    }
+}
