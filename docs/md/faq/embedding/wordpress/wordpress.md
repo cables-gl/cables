@@ -1,15 +1,15 @@
-# Cables and WordPress
+# Howto integrate a patch into Wordpress
 
-You can show exported cables patches on a WordPress site with a small shortcode that embeds them in an iframe.
+You can integrate exported cables patches on a WordPress site with a small shortcode that embeds them in an iframe.
 Everything is loaded from your own WordPress installation, nothing is requested from cables.gl.
 
 ## Exporting your patch
 
-[Export your patch to HTML](../../../../4_export_embed/dev_embed/export_zip/export_zip) and unzip the downloaded file.
+[Export your patch to HTML](../../../4_export_embed/dev_embed/export_zip/export_zip) and unzip the downloaded file.
 
 ### Where to put the patch
 
-Upload the unzipped export into the uploads folder of your WordPress, e.g. via SFTP:
+Upload the unzipped export into the uploads folder of your WordPress installation, e.g. via SFTP:
 
 ```text
 wp-content/uploads/cables/my-patch/index.html
