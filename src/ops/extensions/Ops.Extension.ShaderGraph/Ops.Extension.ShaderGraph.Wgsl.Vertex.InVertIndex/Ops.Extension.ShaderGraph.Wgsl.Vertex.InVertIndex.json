@@ -100,5 +100,11 @@
         "vertex shader",
         "index",
         "per vertex"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

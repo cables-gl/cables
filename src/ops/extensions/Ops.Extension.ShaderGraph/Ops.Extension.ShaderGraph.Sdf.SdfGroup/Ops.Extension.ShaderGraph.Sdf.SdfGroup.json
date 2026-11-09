@@ -68,5 +68,14 @@
         "boolean",
         "combine shapes",
         "csg"
+    ],
+    "coreLibs": [
+        "shadergraph"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

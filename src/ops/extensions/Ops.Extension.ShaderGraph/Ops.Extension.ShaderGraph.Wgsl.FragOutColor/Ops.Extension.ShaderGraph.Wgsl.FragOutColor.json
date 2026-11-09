@@ -58,5 +58,11 @@
         "pixel color",
         "rgba",
         "fragment"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

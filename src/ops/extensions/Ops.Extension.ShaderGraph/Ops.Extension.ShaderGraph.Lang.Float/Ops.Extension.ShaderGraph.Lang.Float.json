@@ -96,5 +96,11 @@
         "value",
         "scalar",
         "literal"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

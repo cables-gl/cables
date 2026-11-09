@@ -87,5 +87,11 @@
         "vec",
         "shader input",
         "number"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

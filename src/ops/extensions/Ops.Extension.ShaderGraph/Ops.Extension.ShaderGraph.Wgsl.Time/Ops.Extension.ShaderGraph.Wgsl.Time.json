@@ -71,5 +71,11 @@
         "elapsed",
         "uniform",
         "timer"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

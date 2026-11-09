@@ -82,5 +82,11 @@
         "round down",
         "integer",
         "truncate"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

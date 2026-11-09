@@ -96,5 +96,11 @@
         "create",
         "position",
         "color"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

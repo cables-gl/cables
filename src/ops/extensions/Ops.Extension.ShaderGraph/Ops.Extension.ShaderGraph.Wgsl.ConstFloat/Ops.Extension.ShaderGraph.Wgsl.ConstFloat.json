@@ -93,5 +93,11 @@
         "value",
         "literal",
         "float"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

@@ -76,5 +76,11 @@
         "wrap",
         "%",
         "repeat"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

@@ -64,5 +64,11 @@
         "absolute",
         "positive",
         "magnitude"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

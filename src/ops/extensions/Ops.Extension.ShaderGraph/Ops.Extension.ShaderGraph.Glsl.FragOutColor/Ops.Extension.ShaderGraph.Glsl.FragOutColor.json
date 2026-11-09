@@ -32,9 +32,7 @@
     ],
     "isReleased": false,
     "exampleProjectId": "KFAfnv",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "summary": "Output colour of a GLSL fragment shader",
     "tags": [
         "shader graph",
@@ -47,5 +45,11 @@
         "result",
         "pixel color",
         "rgba"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

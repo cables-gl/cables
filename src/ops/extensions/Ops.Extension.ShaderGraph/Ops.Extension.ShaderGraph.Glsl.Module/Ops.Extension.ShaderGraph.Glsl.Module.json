@@ -95,5 +95,11 @@
         "include",
         "library",
         "glsl code"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

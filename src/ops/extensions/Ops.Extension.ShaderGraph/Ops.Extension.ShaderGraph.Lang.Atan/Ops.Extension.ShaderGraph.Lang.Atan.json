@@ -83,5 +83,11 @@
         "angle",
         "trigonometry",
         "direction"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

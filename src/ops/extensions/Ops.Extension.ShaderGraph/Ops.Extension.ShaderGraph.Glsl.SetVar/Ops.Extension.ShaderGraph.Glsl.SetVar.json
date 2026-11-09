@@ -37,9 +37,7 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "summary": "Set a shader graph variable",
     "tags": [
         "shader graph",
@@ -52,5 +50,11 @@
         "write",
         "local",
         "named value"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

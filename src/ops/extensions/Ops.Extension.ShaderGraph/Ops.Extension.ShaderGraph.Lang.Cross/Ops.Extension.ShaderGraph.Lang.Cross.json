@@ -76,5 +76,11 @@
         "vector",
         "perpendicular",
         "normal"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

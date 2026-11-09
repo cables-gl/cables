@@ -83,5 +83,11 @@
         "screen coordinates",
         "xy",
         "fragment"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

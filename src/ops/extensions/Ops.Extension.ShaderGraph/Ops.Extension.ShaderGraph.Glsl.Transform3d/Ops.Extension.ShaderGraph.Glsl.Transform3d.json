@@ -127,5 +127,11 @@
         "coordinates",
         "position",
         "3d"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

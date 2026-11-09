@@ -103,5 +103,14 @@
         "binding",
         "compute",
         "gpu data"
+    ],
+    "coreLibs": [
+        "shadergraph"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

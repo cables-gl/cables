@@ -88,5 +88,14 @@
         "kaleidoscopic",
         "ifs",
         "folding"
+    ],
+    "coreLibs": [
+        "shadergraph"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

@@ -71,5 +71,11 @@
         "procedural",
         "organic",
         "3d"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

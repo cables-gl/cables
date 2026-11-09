@@ -120,5 +120,11 @@
         "coordinates",
         "uv transform",
         "2d"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

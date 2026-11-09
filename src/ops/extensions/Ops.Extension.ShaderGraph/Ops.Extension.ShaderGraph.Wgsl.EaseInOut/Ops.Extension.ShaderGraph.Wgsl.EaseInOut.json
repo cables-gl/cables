@@ -78,5 +78,11 @@
         "animation",
         "transition",
         "s-curve"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

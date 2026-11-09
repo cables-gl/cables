@@ -72,5 +72,11 @@
         "similarity",
         "projection",
         "lighting"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

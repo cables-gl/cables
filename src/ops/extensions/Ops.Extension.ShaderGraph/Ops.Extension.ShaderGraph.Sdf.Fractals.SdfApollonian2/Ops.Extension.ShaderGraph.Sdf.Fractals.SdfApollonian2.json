@@ -89,5 +89,14 @@
         "apollonian",
         "sphere packing",
         "gasket"
+    ],
+    "coreLibs": [
+        "shadergraph"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

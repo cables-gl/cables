@@ -106,5 +106,11 @@
         "flag",
         "literal",
         "bool"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

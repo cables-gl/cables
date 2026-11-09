@@ -88,5 +88,14 @@
         "sponge",
         "cube fractal",
         "sierpinski"
+    ],
+    "coreLibs": [
+        "shadergraph"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

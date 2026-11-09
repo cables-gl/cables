@@ -95,5 +95,11 @@
         "euler",
         "power",
         "exponential"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

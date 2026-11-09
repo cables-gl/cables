@@ -65,5 +65,11 @@
         "trigonometry",
         "wave",
         "oscillate"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

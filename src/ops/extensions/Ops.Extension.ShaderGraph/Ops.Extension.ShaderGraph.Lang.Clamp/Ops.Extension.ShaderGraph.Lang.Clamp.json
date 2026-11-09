@@ -76,5 +76,11 @@
         "max",
         "constrain",
         "saturate"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

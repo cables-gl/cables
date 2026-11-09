@@ -52,5 +52,11 @@
         "store",
         "local",
         "define"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

@@ -70,5 +70,11 @@
         "tangent",
         "trigonometry",
         "slope"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

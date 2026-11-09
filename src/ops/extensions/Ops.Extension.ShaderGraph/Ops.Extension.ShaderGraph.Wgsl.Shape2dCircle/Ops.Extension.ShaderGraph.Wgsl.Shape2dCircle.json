@@ -88,5 +88,11 @@
         "sdf",
         "2d shape",
         "dot"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

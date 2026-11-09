@@ -72,5 +72,11 @@
         "invert",
         "reverse transform",
         "mat4"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

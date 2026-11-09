@@ -82,5 +82,11 @@
         "round up",
         "ceiling",
         "integer"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

@@ -70,5 +70,11 @@
         "interpolate",
         "crossfade",
         "transition"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

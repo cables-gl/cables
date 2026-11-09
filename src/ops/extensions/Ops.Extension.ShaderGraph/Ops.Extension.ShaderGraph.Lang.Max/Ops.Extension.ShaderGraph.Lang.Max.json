@@ -69,5 +69,11 @@
         "larger",
         "maximum",
         "highest"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

@@ -25,9 +25,7 @@
     ],
     "isReleased": false,
     "exampleProjectId": "YrUfnv",
-    "docs": {
-        "ports": []
-    },
+    "docs": {},
     "summary": "UV coordinates in a GLSL shader",
     "tags": [
         "shader graph",
@@ -39,5 +37,11 @@
         "st",
         "coordinates",
         "texcoord"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

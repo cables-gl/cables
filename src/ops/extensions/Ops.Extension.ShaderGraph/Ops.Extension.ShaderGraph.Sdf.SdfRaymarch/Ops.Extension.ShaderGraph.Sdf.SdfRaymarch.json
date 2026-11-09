@@ -48,5 +48,14 @@
         "3d scene",
         "camera",
         "shapes"
+    ],
+    "coreLibs": [
+        "shadergraph"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

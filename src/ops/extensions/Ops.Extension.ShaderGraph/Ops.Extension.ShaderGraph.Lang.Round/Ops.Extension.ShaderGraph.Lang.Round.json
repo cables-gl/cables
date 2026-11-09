@@ -76,5 +76,11 @@
         "nearest",
         "integer",
         "rounding"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

@@ -58,5 +58,11 @@
         "components",
         "unpack",
         "extract"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

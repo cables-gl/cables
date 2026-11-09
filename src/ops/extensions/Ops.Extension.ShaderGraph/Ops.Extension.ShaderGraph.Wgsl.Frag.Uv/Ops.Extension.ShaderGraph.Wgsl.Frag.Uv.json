@@ -101,5 +101,11 @@
         "st",
         "coordinates",
         "fragment"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

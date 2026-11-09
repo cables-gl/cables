@@ -12,7 +12,6 @@
         }
     ],
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 2,
@@ -35,5 +34,11 @@
         "screen coordinates",
         "xy",
         "fragment"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

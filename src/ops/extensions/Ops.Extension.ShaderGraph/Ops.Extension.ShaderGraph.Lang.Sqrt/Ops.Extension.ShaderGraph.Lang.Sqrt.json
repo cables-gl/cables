@@ -112,5 +112,11 @@
         "square root",
         "root",
         "radical"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

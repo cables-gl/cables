@@ -100,5 +100,11 @@
         "exponent",
         "power of two",
         "exponential"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

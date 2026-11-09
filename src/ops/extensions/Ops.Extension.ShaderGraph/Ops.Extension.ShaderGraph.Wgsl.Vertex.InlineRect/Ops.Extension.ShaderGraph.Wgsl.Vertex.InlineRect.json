@@ -82,5 +82,11 @@
         "vertex shader",
         "draw",
         "no buffer"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

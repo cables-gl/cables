@@ -103,5 +103,11 @@
         "camera",
         "uniforms",
         "transform"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

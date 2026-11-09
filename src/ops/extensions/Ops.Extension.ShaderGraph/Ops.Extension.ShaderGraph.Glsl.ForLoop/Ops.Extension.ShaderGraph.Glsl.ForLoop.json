@@ -73,5 +73,11 @@
         "iterate",
         "for",
         "iteration"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

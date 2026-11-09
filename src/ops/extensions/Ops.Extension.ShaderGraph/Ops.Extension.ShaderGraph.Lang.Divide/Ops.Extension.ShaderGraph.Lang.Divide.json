@@ -94,5 +94,11 @@
         "/",
         "quotient",
         "ratio"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

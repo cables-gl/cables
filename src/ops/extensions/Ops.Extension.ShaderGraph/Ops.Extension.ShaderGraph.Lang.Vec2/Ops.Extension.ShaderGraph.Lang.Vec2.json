@@ -89,5 +89,11 @@
         "pack",
         "create",
         "uv"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

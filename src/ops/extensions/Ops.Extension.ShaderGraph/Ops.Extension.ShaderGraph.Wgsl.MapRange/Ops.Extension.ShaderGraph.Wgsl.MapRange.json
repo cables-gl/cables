@@ -92,5 +92,11 @@
         "convert",
         "normalize",
         "rescale"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

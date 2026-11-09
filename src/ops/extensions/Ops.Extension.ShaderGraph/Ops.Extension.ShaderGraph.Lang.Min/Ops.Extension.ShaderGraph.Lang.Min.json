@@ -63,5 +63,11 @@
         "smaller",
         "minimum",
         "lowest"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

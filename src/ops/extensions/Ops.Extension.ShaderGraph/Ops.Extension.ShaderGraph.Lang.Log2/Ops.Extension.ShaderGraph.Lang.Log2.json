@@ -106,5 +106,11 @@
         "logarithm",
         "exponent",
         "power of two"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

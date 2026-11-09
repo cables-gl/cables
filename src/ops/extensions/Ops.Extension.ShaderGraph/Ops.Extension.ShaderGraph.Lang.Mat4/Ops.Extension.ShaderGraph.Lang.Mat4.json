@@ -84,5 +84,11 @@
         "transform",
         "create",
         "mat4"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

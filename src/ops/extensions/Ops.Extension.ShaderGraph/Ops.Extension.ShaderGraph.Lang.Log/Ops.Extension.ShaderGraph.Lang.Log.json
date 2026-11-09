@@ -100,5 +100,11 @@
         "logarithm",
         "ln",
         "exponent"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

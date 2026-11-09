@@ -87,5 +87,11 @@
         "minus",
         "-",
         "difference"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

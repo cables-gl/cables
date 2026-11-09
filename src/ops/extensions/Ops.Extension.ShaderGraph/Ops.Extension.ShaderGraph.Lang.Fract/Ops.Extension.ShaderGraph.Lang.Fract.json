@@ -90,5 +90,11 @@
         "frac",
         "repeat",
         "sawtooth"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

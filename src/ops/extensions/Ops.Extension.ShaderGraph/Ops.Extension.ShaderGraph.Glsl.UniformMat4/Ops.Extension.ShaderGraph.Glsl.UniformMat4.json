@@ -83,5 +83,11 @@
         "mat4",
         "transform",
         "shader input"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

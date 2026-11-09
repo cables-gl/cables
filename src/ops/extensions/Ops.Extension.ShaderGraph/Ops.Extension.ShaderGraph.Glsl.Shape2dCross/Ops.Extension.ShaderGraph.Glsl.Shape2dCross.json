@@ -95,7 +95,12 @@
     "coreLibs": [
         "shadergraph"
     ],
-    "dependencies": [],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
+    ],
     "summary": "2D cross shape",
     "tags": [
         "shader graph",

@@ -90,5 +90,11 @@
         "gpgpu",
         "invocation",
         "parallel"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

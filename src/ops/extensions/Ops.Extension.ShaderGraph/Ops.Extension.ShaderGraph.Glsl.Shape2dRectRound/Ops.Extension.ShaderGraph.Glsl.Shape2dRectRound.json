@@ -94,5 +94,11 @@
         "pill",
         "sdf",
         "2d shape"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

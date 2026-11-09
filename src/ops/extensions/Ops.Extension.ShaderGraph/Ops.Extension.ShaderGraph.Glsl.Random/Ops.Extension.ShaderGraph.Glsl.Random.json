@@ -72,5 +72,11 @@
         "seed",
         "white noise",
         "chance"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

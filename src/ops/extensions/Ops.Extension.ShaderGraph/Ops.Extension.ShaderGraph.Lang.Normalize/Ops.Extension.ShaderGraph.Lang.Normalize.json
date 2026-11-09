@@ -70,5 +70,11 @@
         "unit vector",
         "length 1",
         "direction"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

@@ -84,5 +84,11 @@
         "binary",
         "0 or 1",
         "cutoff"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

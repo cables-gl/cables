@@ -76,5 +76,11 @@
         "exponent",
         "square",
         "exponentiation"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

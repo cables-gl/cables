@@ -70,5 +70,11 @@
     },
     "coreLibs": [
         "shadergraph"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

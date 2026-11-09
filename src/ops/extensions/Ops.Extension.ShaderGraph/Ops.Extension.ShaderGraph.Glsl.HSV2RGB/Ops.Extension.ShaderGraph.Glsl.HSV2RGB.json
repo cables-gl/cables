@@ -87,5 +87,11 @@
         "hue saturation value",
         "hsb",
         "hsl"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

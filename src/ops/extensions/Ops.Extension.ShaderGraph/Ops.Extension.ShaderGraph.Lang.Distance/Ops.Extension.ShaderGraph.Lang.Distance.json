@@ -82,5 +82,11 @@
         "between points",
         "euclidean",
         "range"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

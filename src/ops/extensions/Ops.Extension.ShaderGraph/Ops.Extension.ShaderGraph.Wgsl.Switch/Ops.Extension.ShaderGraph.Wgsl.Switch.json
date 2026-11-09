@@ -124,5 +124,11 @@
         "multiplexer",
         "pick",
         "case"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

@@ -45,5 +45,11 @@
         "named value",
         "get",
         "reference"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

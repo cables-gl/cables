@@ -94,5 +94,11 @@
         "pack",
         "create",
         "color"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

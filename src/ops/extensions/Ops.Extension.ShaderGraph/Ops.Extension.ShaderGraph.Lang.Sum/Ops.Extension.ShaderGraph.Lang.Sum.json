@@ -83,5 +83,11 @@
         "+",
         "addition",
         "total"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

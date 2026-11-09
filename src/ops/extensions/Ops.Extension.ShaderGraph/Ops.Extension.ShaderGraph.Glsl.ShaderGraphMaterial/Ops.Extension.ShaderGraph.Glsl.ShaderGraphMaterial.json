@@ -66,5 +66,11 @@
         "surface",
         "render",
         "node material"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

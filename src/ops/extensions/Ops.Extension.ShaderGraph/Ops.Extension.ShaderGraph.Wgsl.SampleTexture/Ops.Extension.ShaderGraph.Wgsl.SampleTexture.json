@@ -94,5 +94,11 @@
         "sampler",
         "read pixel",
         "uv"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

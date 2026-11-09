@@ -88,5 +88,11 @@
         "*",
         "product",
         "scale"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

@@ -52,5 +52,11 @@
         "snippet",
         "function",
         "programming"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

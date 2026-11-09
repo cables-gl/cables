@@ -71,5 +71,11 @@
         "norm",
         "vector length",
         "size"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

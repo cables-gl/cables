@@ -131,5 +131,11 @@
         "pick",
         "case",
         "vector"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

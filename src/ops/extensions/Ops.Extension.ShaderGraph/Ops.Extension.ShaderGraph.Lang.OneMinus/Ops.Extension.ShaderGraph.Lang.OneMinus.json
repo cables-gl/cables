@@ -83,5 +83,11 @@
         "1-x",
         "complement",
         "reverse"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

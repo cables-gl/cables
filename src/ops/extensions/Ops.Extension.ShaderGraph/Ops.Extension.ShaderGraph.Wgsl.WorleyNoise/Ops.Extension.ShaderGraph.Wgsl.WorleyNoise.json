@@ -77,5 +77,11 @@
         "organic",
         "procedural",
         "noise"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }

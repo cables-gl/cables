@@ -66,5 +66,11 @@
         "soft step",
         "antialias",
         "transition"
+    ],
+    "dependencies": [
+        {
+            "src": "shadergraph",
+            "type": "corelib"
+        }
     ]
 }
