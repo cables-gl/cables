@@ -77,6 +77,7 @@ function reload(addCachebuster, force = false)
 
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
     op.setUiError("jsonerr", null);
+    op.setUiError("httperr", null);
 
     let httpClient = CABLES.ajax;
     if (jsonp.get()) httpClient = CABLES.jsonp;
@@ -95,36 +96,44 @@ function reload(addCachebuster, force = false)
                 outDuration.set(Math.round(performance.now() - startTime));
                 outData.set(null);
                 outString.set(null);
-                outStatus.set(xhr.status);
+                outStatus.set(xhr ? xhr.status : 0); // jsonp has no xhr
 
-                // if (err)
-                // {
-                //     op.logError(err);
-                //     // op.patch.loading.finished(loadingId);
-                //     // isLoading.set(false);
-                //     // return;
-                // }
-                try
+                op.patch.loading.finished(loadingId);
+                isLoading.set(false);
+
+                if (xhr && xhr.status === 0)
                 {
-                    let data = _data;
-                    if (typeof data === "string" && inParseJson.get())
+                    op.setUiError("httperr", "Request failed: network error, CORS or offline");
+                    return;
+                }
+
+                if (err) op.setUiError("httperr", "HTTP status " + xhr.status, 1);
+
+                let data = _data;
+                if (typeof data === "string")
+                {
+                    outString.set(data);
+                    if (inParseJson.get())
                     {
-                        data = JSON.parse(_data);
+                        if (data.trim().length === 0) data = null; // empty body, e.g. 204 or HEAD
+                        else
+                        {
+                            try
+                            {
+                                data = JSON.parse(data);
+                            }
+                            catch (e)
+                            {
+                                op.setUiError("jsonerr", "Response is not valid JSON: " + e.message);
+                                return;
+                            }
+                        }
                         outData.set(data);
                     }
-                    outString.set(_data);
-                    op.setUiAttribs({ "error": null });
-                    op.patch.loading.finished(loadingId);
-                    outTrigger.trigger();
-                    isLoading.set(false);
                 }
-                catch (e)
-                {
-                    op.logError(e);
-                    op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
-                    op.patch.loading.finished(loadingId);
-                    isLoading.set(false);
-                }
+                else outData.set(data);
+
+                outTrigger.trigger();
             },
             inMethod.get(),
             (body && body.length > 0) ? body : null,
