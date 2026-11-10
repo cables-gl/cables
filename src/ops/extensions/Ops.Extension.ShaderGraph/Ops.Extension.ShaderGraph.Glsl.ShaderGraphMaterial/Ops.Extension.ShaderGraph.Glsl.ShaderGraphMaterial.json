@@ -59,8 +59,7 @@
         "mesh shader",
         "surface",
         "render",
-        "node material",
-        ""
+        "node material"
     ],
     "dependencies": [
         {

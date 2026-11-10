@@ -26,5 +26,17 @@
                 "objType": "sg_vec3"
             }
         ]
-    }
+    },
+    "tags": [
+        "shader graph",
+        "node",
+        "glsl",
+        "visual shader",
+        "normal",
+        "surface normal",
+        "vertex normal",
+        "direction",
+        "lighting",
+        "vec3"
+    ]
 }

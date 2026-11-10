@@ -47,8 +47,7 @@
         "compare",
         "binary",
         "0 or 1",
-        "cutoff",
-        ""
+        "cutoff"
     ],
     "dependencies": [
         {

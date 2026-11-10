@@ -51,8 +51,7 @@
         "blend",
         "interpolate",
         "crossfade",
-        "transition",
-        ""
+        "transition"
     ],
     "dependencies": [
         {

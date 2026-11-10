@@ -47,8 +47,7 @@
         "box",
         "quad",
         "sdf",
-        "2d shape",
-        ""
+        "2d shape"
     ],
     "dependencies": [
         {

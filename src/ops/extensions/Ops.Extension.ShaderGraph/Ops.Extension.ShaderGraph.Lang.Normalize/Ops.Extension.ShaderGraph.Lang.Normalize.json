@@ -39,8 +39,7 @@
         "math",
         "unit vector",
         "length 1",
-        "direction",
-        ""
+        "direction"
     ],
     "dependencies": [
         {

@@ -45,8 +45,7 @@
         "power",
         "exponent",
         "square",
-        "exponentiation",
-        ""
+        "exponentiation"
     ],
     "dependencies": [
         {

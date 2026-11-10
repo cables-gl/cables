@@ -60,8 +60,7 @@
         "rod",
         "column",
         "shape",
-        "primitive",
-        ""
+        "primitive"
     ],
     "coreLibs": [
         "shadergraph"

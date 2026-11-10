@@ -39,8 +39,7 @@
         "math",
         "absolute",
         "positive",
-        "magnitude",
-        ""
+        "magnitude"
     ],
     "dependencies": [
         {

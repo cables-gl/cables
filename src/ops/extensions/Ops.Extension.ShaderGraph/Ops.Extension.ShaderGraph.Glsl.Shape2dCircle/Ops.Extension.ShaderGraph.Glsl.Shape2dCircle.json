@@ -52,8 +52,7 @@
         "round",
         "sdf",
         "2d shape",
-        "dot",
-        ""
+        "dot"
     ],
     "dependencies": [
         {

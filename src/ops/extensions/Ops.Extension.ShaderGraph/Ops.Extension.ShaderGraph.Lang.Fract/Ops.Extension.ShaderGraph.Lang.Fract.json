@@ -41,8 +41,7 @@
         "decimal part",
         "frac",
         "repeat",
-        "sawtooth",
-        ""
+        "sawtooth"
     ],
     "dependencies": [
         {

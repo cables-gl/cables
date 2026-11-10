@@ -46,8 +46,7 @@
         "lookup",
         "sampler",
         "read pixel",
-        "uv",
-        ""
+        "uv"
     ],
     "dependencies": [
         {

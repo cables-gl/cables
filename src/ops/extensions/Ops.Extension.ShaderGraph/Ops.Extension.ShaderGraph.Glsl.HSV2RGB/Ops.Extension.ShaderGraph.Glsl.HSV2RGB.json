@@ -50,8 +50,7 @@
         "convert",
         "hue saturation value",
         "hsb",
-        "hsl",
-        ""
+        "hsl"
     ],
     "dependencies": [
         {

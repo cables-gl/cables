@@ -39,8 +39,7 @@
         "math",
         "round up",
         "ceiling",
-        "integer",
-        ""
+        "integer"
     ],
     "dependencies": [
         {

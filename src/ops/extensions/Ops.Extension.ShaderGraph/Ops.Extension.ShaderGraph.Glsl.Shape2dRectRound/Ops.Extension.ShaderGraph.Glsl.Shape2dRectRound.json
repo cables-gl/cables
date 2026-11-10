@@ -51,8 +51,7 @@
         "rounded corners",
         "pill",
         "sdf",
-        "2d shape",
-        ""
+        "2d shape"
     ],
     "dependencies": [
         {

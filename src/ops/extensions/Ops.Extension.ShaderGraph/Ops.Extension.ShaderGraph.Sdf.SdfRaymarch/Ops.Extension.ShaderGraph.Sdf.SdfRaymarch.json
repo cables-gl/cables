@@ -47,8 +47,7 @@
         "image",
         "3d scene",
         "camera",
-        "shapes",
-        ""
+        "shapes"
     ],
     "coreLibs": [
         "shadergraph"

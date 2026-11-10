@@ -67,8 +67,7 @@
         "subtract",
         "boolean",
         "combine shapes",
-        "csg",
-        ""
+        "csg"
     ],
     "coreLibs": [
         "shadergraph"

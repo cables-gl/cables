@@ -39,8 +39,7 @@
         "math",
         "logarithm",
         "exponent",
-        "power of two",
-        ""
+        "power of two"
     ],
     "dependencies": [
         {

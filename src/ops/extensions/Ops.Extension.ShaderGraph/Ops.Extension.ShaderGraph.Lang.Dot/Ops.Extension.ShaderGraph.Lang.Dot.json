@@ -47,8 +47,7 @@
         "angle",
         "similarity",
         "projection",
-        "lighting",
-        ""
+        "lighting"
     ],
     "dependencies": [
         {

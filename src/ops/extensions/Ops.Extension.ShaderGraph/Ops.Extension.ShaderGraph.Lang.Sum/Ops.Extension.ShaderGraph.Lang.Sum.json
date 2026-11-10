@@ -46,8 +46,7 @@
         "plus",
         "+",
         "addition",
-        "total",
-        ""
+        "total"
     ],
     "dependencies": [
         {

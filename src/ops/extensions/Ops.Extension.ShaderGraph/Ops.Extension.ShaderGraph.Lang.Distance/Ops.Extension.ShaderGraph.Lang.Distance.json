@@ -45,8 +45,7 @@
         "length",
         "between points",
         "euclidean",
-        "range",
-        ""
+        "range"
     ],
     "dependencies": [
         {

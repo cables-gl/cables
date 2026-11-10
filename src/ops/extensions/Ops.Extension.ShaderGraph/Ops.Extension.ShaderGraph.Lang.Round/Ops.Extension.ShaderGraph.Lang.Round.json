@@ -39,8 +39,7 @@
         "math",
         "nearest",
         "integer",
-        "rounding",
-        ""
+        "rounding"
     ],
     "dependencies": [
         {

@@ -51,8 +51,7 @@
         "min",
         "max",
         "constrain",
-        "saturate",
-        ""
+        "saturate"
     ],
     "dependencies": [
         {

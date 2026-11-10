@@ -44,9 +44,7 @@
         "math",
         "smaller",
         "minimum",
-        "lowest",
-        "",
-        ""
+        "lowest"
     ],
     "dependencies": [
         {

@@ -44,8 +44,7 @@
         "math",
         "minus",
         "-",
-        "difference",
-        ""
+        "difference"
     ],
     "dependencies": [
         {

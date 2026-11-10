@@ -53,9 +53,7 @@
         "block",
         "dice",
         "shape",
-        "primitive",
-        "",
-        ""
+        "primitive"
     ],
     "coreLibs": [
         "shadergraph"

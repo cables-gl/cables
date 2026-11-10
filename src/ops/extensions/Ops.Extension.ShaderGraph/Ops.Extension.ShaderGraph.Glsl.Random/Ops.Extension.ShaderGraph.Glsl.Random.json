@@ -41,8 +41,7 @@
         "hash",
         "seed",
         "white noise",
-        "chance",
-        ""
+        "chance"
     ],
     "dependencies": [
         {

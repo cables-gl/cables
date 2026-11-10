@@ -39,8 +39,7 @@
         "math",
         "tangent",
         "trigonometry",
-        "slope",
-        ""
+        "slope"
     ],
     "dependencies": [
         {

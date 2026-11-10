@@ -53,8 +53,7 @@
         "orb",
         "globe",
         "shape",
-        "primitive",
-        ""
+        "primitive"
     ],
     "coreLibs": [
         "shadergraph"

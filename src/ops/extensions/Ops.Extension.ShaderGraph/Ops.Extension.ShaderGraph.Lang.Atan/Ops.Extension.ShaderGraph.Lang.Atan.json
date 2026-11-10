@@ -46,8 +46,7 @@
         "atan2",
         "angle",
         "trigonometry",
-        "direction",
-        ""
+        "direction"
     ],
     "dependencies": [
         {
