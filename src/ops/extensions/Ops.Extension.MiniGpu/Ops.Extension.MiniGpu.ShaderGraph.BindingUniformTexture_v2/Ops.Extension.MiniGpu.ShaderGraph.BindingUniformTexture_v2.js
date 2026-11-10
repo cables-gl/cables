@@ -91,6 +91,6 @@ new CABLES.ShaderGraphOp(this,
         "update": update,
         "title": "name",
         "params": [],
-        "results": [{ "type": "texture", "port": op.outObject("sgtexture") }],,
+        "results": [{ "type": "texture", "port": op.outObject("sgtexture") }],
         "resultVarName": inName.get()
     });

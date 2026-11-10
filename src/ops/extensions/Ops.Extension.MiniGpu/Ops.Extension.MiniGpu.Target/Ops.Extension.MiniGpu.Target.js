@@ -12,6 +12,8 @@ const
 
 r.setUiAttribs({ "colorPick": true });
 let rt = null;
+let rtWidth = 0;
+let rtHeight = 0;
 
 r.onChange =
     g.onChange = // TODO:color change should not resetup the rendertarget........
@@ -27,13 +29,19 @@ r.onChange =
 exec.onTriggered = () =>
 {
     const mgpu = op.patch.frameStore.mgpu;
+    const width = inWidth.get() || mgpu.canvas.width;
+    const height = inHeight.get() || mgpu.canvas.height;
+    if (width != rtWidth || height != rtHeight) rt = null;
+
     if (!rt)
     {
+        rtWidth = width;
+        rtHeight = height;
         rt = new MGPU.RenderTarget(mgpu,
             {
                 "loadOp": loadOp.get(),
-                "width": inWidth.get(),
-                "height": inHeight.get(),
+                "width": width,
+                "height": height,
                 "clearColor": [r.get(), g.get(), b.get(), a.get()]
             });
 

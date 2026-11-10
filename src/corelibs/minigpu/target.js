@@ -104,7 +104,7 @@ export class RenderTarget
         }
 
         const hasTimestampQuery = this.mgpu.device.features.has("timestamp-query");
-        this._measuringGpuTime = hasTimestampQuery && !this._gpuTimerPending;
+        this._measuringGpuTime = this.options.gpuTimer && hasTimestampQuery && !this._gpuTimerPending;
 
         if (this._measuringGpuTime)
         {
@@ -170,6 +170,12 @@ export class RenderTarget
                 });
             });
         }
+    }
+
+    destroy()
+    {
+        if (this._gpuTimer) this._gpuTimer.querySet.destroy();
+        this._gpuTimer = null;
     }
 
     newFrame()

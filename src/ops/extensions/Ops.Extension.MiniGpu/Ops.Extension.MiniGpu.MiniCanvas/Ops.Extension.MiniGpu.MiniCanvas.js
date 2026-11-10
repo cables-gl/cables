@@ -12,6 +12,8 @@ let pipeline = null;
 let mgpu = {};
 let rt = null;
 let lastTs = 0;
+let rafId = null;
+let started = false;
 const devicePixelRatio = window.devicePixelRatio;
 
 document.body.style.margin = "0px";
@@ -47,7 +49,8 @@ CABLES.idleCallback(start);
 
 function start()
 {
-    if (!active.get()) return;
+    if (!active.get() || started) return;
+    started = true;
     if (!navigator.gpu)
     {
         showError("WebGPU is not supported in this browser / make sure of HTTPS");
@@ -86,7 +89,7 @@ function start()
 
                             setSize(canvas.clientWidth, canvas.clientHeight);
                             outEle.setRef(canvas);
-                            requestAnimationFrame(frame);
+                            rafId = requestAnimationFrame(frame);
                         });
             });
 
@@ -100,6 +103,7 @@ function setSize(width, height, mul = devicePixelRatio)
     {
         canvas.width = width * mul;
         canvas.height = height * mul;
+        if (rt) rt.destroy();
         rt = null;
 
         presentationFormat = navigator.gpu.getPreferredCanvasFormat();
@@ -127,6 +131,7 @@ function frame(timestamp)
 {
     if (!CABLES.UI) op.patch.updateAnims(null, timestamp - lastTs || timestamp, timestamp);
 
+    const startTime = performance.now();
     op.patch.renderloop.frameNum++;
 
     /* minimalcore:start */
@@ -159,6 +164,7 @@ function frame(timestamp)
             {
                 "label": "canvasRt",
                 "copyToCanvas": true,
+                "gpuTimer": true,
                 "sampleCount": 1
             // "view": context.getCurrentTexture().createView(),
             //  "resolveTarget": true,
@@ -171,7 +177,7 @@ function frame(timestamp)
 
     device.queue.submit([commandEncoder.finish()]);
 
-    requestAnimationFrame(frame);
+    rafId = requestAnimationFrame(frame);
 
     /* minimalcore:start */
 
@@ -188,7 +194,8 @@ function frame(timestamp)
         frames = 0;
     }
 
-    op.patch.emitEvent("renderedFrame", { "canvas": canvas, "name": "minigpu" });
+    // op.patch.emitEvent("renderedFrame", { "canvas": canvas, "name": "minigpu" });
+    op.patch.emitEvent("renderedFrame", { "ms": performance.now() - startTime, "type": "webgpu", "canvas": mgpu.canvas, "name": "minigpu" });
 
     /* minimalcore:end */
 }
@@ -196,6 +203,7 @@ function frame(timestamp)
 /* minimalcore:start */
 op.onDelete = () =>
 {
+    cancelAnimationFrame(rafId);
     canvas.remove();
 };
 
