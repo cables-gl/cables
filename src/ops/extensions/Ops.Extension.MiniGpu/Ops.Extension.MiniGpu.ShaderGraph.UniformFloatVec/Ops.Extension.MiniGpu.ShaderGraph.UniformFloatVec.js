@@ -28,6 +28,7 @@ inName.onChange =
         updateUi();
         binding = null;
         op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
+        op.tempData.shaderNode.setResultType(inType.get());
     };
 
 function updateUi()
@@ -98,6 +99,6 @@ new CABLES.ShaderGraphOp(this,
         "title": "name",
         "update": update,
         "params": [],
-        "result": { "type": "float", "port": outValue },
+        "results": [{ "type": "float", "port": outValue }],
         "resultVarName": inName.get() || defaultName
     });

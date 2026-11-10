@@ -95,6 +95,6 @@ new CABLES.ShaderGraphOp(this,
         "name": "myfloat",
         "title": "name",
         "params": [],
-        "result": { "type": "float", "port": op.outObject("value") },
+        "results": [{ "type": "float", "port": op.outObject("value") }],
         "resultVarName": "myfloat"
     });

@@ -28,6 +28,7 @@ inName.onChange =
         updateUi();
         binding = null;
         op.tempData.shaderNode.name = op.tempData.shaderNode.resultVarName = inName.get() || defaultName;
+        op.tempData.shaderNode.setResultType(inType.get());
     };
 
 function updateUi()

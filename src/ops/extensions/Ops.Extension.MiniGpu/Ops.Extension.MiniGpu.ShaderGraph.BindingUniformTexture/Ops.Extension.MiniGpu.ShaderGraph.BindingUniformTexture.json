@@ -101,7 +101,8 @@
             },
             {
                 "type": 2,
-                "name": "sgtexture"
+                "name": "sgtexture",
+                "objType": "sg_texture"
             }
         ]
     },
