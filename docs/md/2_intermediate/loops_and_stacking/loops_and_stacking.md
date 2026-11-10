@@ -59,4 +59,3 @@ Without stacking there is only one of it, shared by all iterations. With stackin
 - Ops that only draw or transform, like `Transform` or `Cube`: they run in every iteration anyway
 - Simple math on `Index`, like `Index * 2`
 - Every copy uses memory and runs its own code, so only stack ops that need it
-- Stacking only works for ops inside a loop area, and not for ops with animated ports
