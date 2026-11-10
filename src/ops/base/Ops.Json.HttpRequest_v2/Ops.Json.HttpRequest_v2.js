@@ -98,42 +98,47 @@ function reload(addCachebuster, force = false)
                 outString.set(null);
                 outStatus.set(xhr ? xhr.status : 0); // jsonp has no xhr
 
-                op.patch.loading.finished(loadingId);
-                isLoading.set(false);
+                let success = true;
 
                 if (xhr && xhr.status === 0)
                 {
                     op.setUiError("httperr", "Request failed: network error, CORS or offline");
-                    return;
+                    success = false;
                 }
-
-                if (err) op.setUiError("httperr", "HTTP status " + xhr.status, 1);
-
-                let data = _data;
-                if (typeof data === "string")
+                else
                 {
-                    outString.set(data);
-                    if (inParseJson.get())
-                    {
-                        if (data.trim().length === 0) data = null; // empty body, e.g. 204 or HEAD
-                        else
-                        {
-                            try
-                            {
-                                data = JSON.parse(data);
-                            }
-                            catch (e)
-                            {
-                                op.setUiError("jsonerr", "Response is not valid JSON: " + e.message);
-                                return;
-                            }
-                        }
-                        outData.set(data);
-                    }
-                }
-                else outData.set(data);
+                    if (err) op.setUiError("httperr", "HTTP status " + xhr.status, 1);
 
-                outTrigger.trigger();
+                    let data = _data;
+                    if (typeof data === "string")
+                    {
+                        outString.set(data);
+                        if (inParseJson.get())
+                        {
+                            if (data.trim().length === 0) data = null; // empty body, e.g. 204 or HEAD
+                            else
+                            {
+                                try
+                                {
+                                    data = JSON.parse(data);
+                                }
+                                catch (e)
+                                {
+                                    op.setUiError("jsonerr", "Response is not valid JSON: " + e.message);
+                                    data = null;
+                                    success = false;
+                                }
+                            }
+                            outData.set(data);
+                        }
+                    }
+                    else outData.set(data);
+                }
+
+                op.patch.loading.finished(loadingId);
+                isLoading.set(false);
+
+                if (success) outTrigger.trigger();
             },
             inMethod.get(),
             (body && body.length > 0) ? body : null,
