@@ -6,6 +6,6 @@ new CABLES.ShaderGraphOp(this,
             { "type": "vec3", "port": op.inObject("seed") },
             { "type": "float", "port": op.inObject("scale"), "default": 4 }
         ],
-        "result": { "type": "float", "port": op.outObject("result") },
+        "results": [{ "type": "float", "port": op.outObject("result") }],
         "src": attachments.random_wgsl
     });

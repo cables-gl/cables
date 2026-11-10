@@ -8,6 +8,6 @@ new CABLES.ShaderGraphOp(this,
             { "type": "vec2", "port": op.inObject("size", { "sgDefault": "1.,1." }) },
             { "type": "bool", "port": op.inObject("mulmat") }
         ],
-        "result": { "type": "vertexOutput", "port": op.outObject("result") },
+        "results": [{ "type": "vertexOutput", "port": op.outObject("result") }],
         "src": attachments.rect_wgsl
     });

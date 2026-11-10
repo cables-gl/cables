@@ -7,7 +7,7 @@ new CABLES.ShaderGraphOp(this,
         "params": [
             { "type": "boolean", "port": value }
         ],
-        "result": { "type": "boolean", "port": op.outObject("result") }
+        "results": [{ "type": "boolean", "port": op.outObject("result") }]
     });
 
 op.init =

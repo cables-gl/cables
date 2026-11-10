@@ -9,6 +9,6 @@ new CABLES.ShaderGraphOp(this,
             { "type": "float", "port": op.inObject("min out") },
             { "type": "float", "port": op.inObject("max out") }
         ],
-        "result": { "type": "float", "port": op.outObject("result") },
+        "results": [{ "type": "float", "port": op.outObject("result") }],
         "src": attachments.maprange_wgsl
     });

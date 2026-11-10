@@ -9,7 +9,7 @@ new CABLES.ShaderGraphOp(this,
         "params": [
             { "type": "float", "port": value }
         ],
-        "result": { "type": "float", "port": op.outObject("result") }
+        "results": [{ "type": "float", "port": op.outObject("result") }]
     });
 
 op.init =

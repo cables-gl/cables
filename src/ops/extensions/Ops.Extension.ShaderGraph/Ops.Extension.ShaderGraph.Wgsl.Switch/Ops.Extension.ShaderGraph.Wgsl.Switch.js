@@ -14,6 +14,6 @@ new CABLES.ShaderGraphOp(this,
             { "type": "float", "port": op.inObject("v7") }
             // { "type": "float", "port": op.inObject("v8") },
         ],
-        "result": { "type": "float", "port": op.outObject("result") },
+        "results": [{ "type": "float", "port": op.outObject("result") }],
         "src": attachments.switch_wgsl
     });
