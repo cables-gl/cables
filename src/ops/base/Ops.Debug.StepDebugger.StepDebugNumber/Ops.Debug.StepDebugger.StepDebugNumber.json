@@ -44,7 +44,8 @@
         "step through",
         "inspect change",
         "debug",
-        "change history"
+        "change history",
+        ""
     ],
     "docs": {
         "ports": []

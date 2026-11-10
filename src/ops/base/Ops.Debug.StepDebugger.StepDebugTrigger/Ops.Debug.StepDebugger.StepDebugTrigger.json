@@ -45,7 +45,16 @@
         "step through",
         "inspect trigger",
         "debug",
-        "call stack"
+        "call stack",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
     ],
     "docs": {
         "ports": []
