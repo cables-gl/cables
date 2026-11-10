@@ -371,6 +371,8 @@ export class ShaderGraphProgram extends Events
      */
     compile(options)
     {
+        if (this._compiling) return; // type changes while compiling trigger change events that call compile again
+        this._compiling = true;
 
         const port = this.#port;
 
@@ -410,6 +412,7 @@ export class ShaderGraphProgram extends Events
         port.emitEvent("heavyEvent", { "name": "program" });
         this.srcMain = this._codeLines.join("\n");
         this.srcHeader = this._headSrc + this._headFuncSrc;
+        this._compiling = false;
 
         this.emitEvent("compiled");
     }

@@ -48,10 +48,7 @@ export class ShaderGraphOp
 
         this.listeners[port.name] = port.on("change", () =>
         {
-            this.updateGraph.bind(this);
-
-            const result = this.op.tempData.shaderNode.results[0];
-            result.port.setRef(this.getResultValue(result));
+            this.updateGraph();
         });
 
     }
