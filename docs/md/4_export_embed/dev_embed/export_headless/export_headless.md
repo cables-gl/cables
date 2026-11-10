@@ -1,4 +1,6 @@
-# Export to run patches on the commandline
+# Export to run headless patches
+
+You can run some patches on the cables commandline, in headless mode.
 
 Select the "Headless" option in the export dialog:
 
