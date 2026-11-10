@@ -2,7 +2,7 @@
 
 ## What is Cables Standalone?
 
-Cables [Standalone](https://cables.gl/standalone) is an electron build of the [cables editor](https://github.com/cables-gl/cables_ui), , [cables core](https://github.com/cables-gl/cables) and all the [Ops](https://cables.gl/ops) that make up cables.gl.
+Cables [Standalone](https://cables.gl/standalone) is an electron build of the [cables editor](https://github.com/cables-gl/cables_ui), [cables core](https://github.com/cables-gl/cables) and all the [Ops](https://cables.gl/ops) that make up cables.gl.
 
 Some use-cases for the standalone version are:
 
@@ -15,4 +15,4 @@ Some use-cases for the standalone version are:
 - Keep a certain version of cables next to [your project](../../4_export_embed/dev_embed/export_standalone/export_standalone) for backup purposes.
 
 While the standalone facilitates for offline use and local development of patches, it's still possible to [import](https://dev.cables.gl/mydata#import) your
-work "back" to cables.gl and share it with the community, gather likes and comments and help others to learn via your work.
+work "back" to cables.gl and share it with the community, gather likes, comments and help others to learn via your work.

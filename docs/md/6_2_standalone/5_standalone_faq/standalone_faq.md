@@ -1,4 +1,39 @@
-# Standalone - FAQ
+# FAQ
+
+## How can I run cables standalone in fullscreen/presentation mode?
+
+To start cables standalone in fullscreen and/or open the renderer in fullscreen on start, use the following
+command line arguments.
+
+- `--fullscreen` Open editor in fullscreen window on start
+- `--maximize-renderer` Maximize the renderer to window size on start
+- `--patch=<path>` Open patch from `.cables` file on start
+
+Use `--help` for more info.
+
+## How can I force cables standalone to open on a specific display
+
+To start cables standalone on the first external, any specified display or a certain screen offset, use the following
+command line arguments.
+
+- `--screen=external` Open cables on first external display
+- `--screen="Built-in Retina Display` Open standalone on display named "Built-in Retina Display"
+- `--screen=1` Open standalone on second display (numbering starts at 0)
+- `--screen=200,200` Open standalone on current display 200px from the top left and 200px from the left
+
+This can be combined with the above arguments for presentation mode to always open on a specific display when running
+"on premise" and is handy for startup-scripts. Whenever a display is not found or an argument is not understood, cables
+will fall back to the current display with the current window settings.
+
+## How can I let cables standalone run on my internal GPU instead of the dedicated one?
+
+If you need or want to run cables or patches on the internal GPU of your laptop instead of the dedicated one
+(which is forced by default), there are two commandline arguments to control the behaviour:
+
+- `--force-igpu` Force using integrated GPU when there are multiple GPUs available.
+- `--dont-force-dgpu` DO NOT force using discrete GPU when there are multiple GPUs available.
+
+Use `--help` for more info.
 
 ## Where can I find more information and tutorials to get started?
 
@@ -20,6 +55,6 @@ As a general rule of thumb: Whenever cables uses files, it's using URLs. URLs of
 Notice the forward slashes. To keep this OS-independent, whenever you deal with files, try to use file-url.
 There are ops to convert [back](https://cables.gl/op/Ops.Extension.Standalone.Files.PathToFileUrl) and [forth](https://cables.gl/op/Ops.Extension.Standalone.Files.PathToFileUrl) between URLs and paths.
 
-## How can I support the development of cables and the standalone version?
+## Can I support the development of cables and the standalone version?
 
-Most definitely, check out the general section on [supporting cables](../../faq/faq) . Thank you!
+Most definitely, check out the general section on [supporting cables](../../faq/faq). Thank you!

@@ -2,7 +2,7 @@
 
 ## Export patch from cables.gl to standalone
 
-Any patch that is exported using the "patch" export option has everything needed (ops, assets, ...) to be opened
+Any patch that is exported using the ["patch" export option](../../4_export_embed/dev_embed/export_standalone/export_standalone) has everything needed (ops, assets, ...) to be opened
 in the standalone version. Make sure to have a [recent version](https://cables.gl/standalone) of cables standalone to make sure all the core
 ops are up-to-date.
 
@@ -20,6 +20,3 @@ If you do not want to import to cables.gl but want to collect all your assets ne
 in the standalone version, press `cmd + p` or `ctrl + p` to open up the command palette and execute these two commands:
 
 ![add npm](img/copy_ops.png)
-
-
-

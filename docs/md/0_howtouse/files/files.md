@@ -59,12 +59,6 @@ file ending: `.csv`
 
 convert csv to json
 
-### XML to json
-
-file ending: `.xml`
-
-convert xml to json
-
 ### MIDI to json
 
 file ending: `.mid`
@@ -93,7 +87,7 @@ file ending: `.dae`
 
 extract paths/splines from .dar/collada files
 
-### SDF Font 
+### SDF Font
 
 file ending: `.ttf`
 

@@ -26,7 +26,3 @@ the repository to bring all of the above together to have a running version of t
 with the cables code and ops. runs (and builds/packs) an electron executable that can be
 used to create patches locally, or develop on core and ui features on your local machine.
 
-## [cables_extensionops](https://github.com/undev-studio/cables_extensionops)
-
-a repository containing all the extensions on cables.gl that are not in the core. it is not
-needed for local development but will give you a few more ops to work with.
