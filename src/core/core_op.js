@@ -2074,6 +2074,21 @@ export class Op extends Events
         this.#stackCopies.delete(key);
     }
 
+    /**
+     * in loops stack instances send their cached output values before they trigger,
+     * so ops below get the values of the current iteration, also when the op did not set them again
+     */
+    resendStackOutputs()
+    {
+        for (let i = 0; i < this.portsOut.length; i++)
+        {
+            const p = this.portsOut[i];
+            if (p.type == Port.TYPE_FUNCTION || p.value === null || p.value === undefined) continue;
+            if (p.proxyPort) p.forwardToProxy();
+            else for (let j = 0; j < p.links.length; j++) p.links[j].setValue();
+        }
+    }
+
     #disposeStackCopies()
     {
         if (!this.#stackCopies) return;

@@ -887,6 +887,9 @@ export class Port extends Events
     /** Triggers the linked ports (usually invoked on an output trigger port). */
     trigger()
     {
+        // copies trigger through the head port, so the head only resends at its own key
+        if (this.direction == Port.DIR_OUT && this.#op.patch.isInLoop() && (this.#op.isStackCopy || (this.#op.isStacked && this.#op.patch.isHeadLoopKey()))) this.#op.resendStackOutputs();
+
         if (this.proxyPort)
         {
             const patch = this.#op.patch;
