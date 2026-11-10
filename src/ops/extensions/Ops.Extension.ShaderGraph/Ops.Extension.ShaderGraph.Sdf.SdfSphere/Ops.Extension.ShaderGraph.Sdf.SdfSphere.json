@@ -53,7 +53,8 @@
         "orb",
         "globe",
         "shape",
-        "primitive"
+        "primitive",
+        ""
     ],
     "coreLibs": [
         "shadergraph"
@@ -63,5 +64,10 @@
             "src": "shadergraph",
             "type": "corelib"
         }
-    ]
+    ],
+    "isReleased": false,
+    "exampleProjectId": "wZRluA",
+    "docs": {
+        "ports": []
+    }
 }

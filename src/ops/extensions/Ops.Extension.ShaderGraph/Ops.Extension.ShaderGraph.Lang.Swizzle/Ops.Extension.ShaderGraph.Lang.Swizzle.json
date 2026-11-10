@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1789056390477
-        },
-        {
-            "message": "Team.ShaderGraph.Lang.Swizzle renamed to Ops.Extension.ShaderGraph.Lang.Swizzle",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1789058285235
         }
     ],
     "layout": {

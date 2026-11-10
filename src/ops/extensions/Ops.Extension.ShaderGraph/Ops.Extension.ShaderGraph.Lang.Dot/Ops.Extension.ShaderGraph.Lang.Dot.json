@@ -8,30 +8,6 @@
             "message": "op created",
             "type": "new op",
             "author": "pandur",
-            "date": 1786367312431
-        },
-        {
-            "message": "Patch.PxuvFTr.TestShaderOp renamed to Ops.Extension.MiniGpu.Sg.Smoothstep",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1786367915194
-        },
-        {
-            "message": "Extension.MiniGpu.Sg.Smoothstep renamed to Ops.Extension.ShaderGraph.Lang.Smoothstep",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1786539360303
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1788079930616
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
             "date": 1788080133109
         }
     ],
@@ -71,12 +47,18 @@
         "angle",
         "similarity",
         "projection",
-        "lighting"
+        "lighting",
+        ""
     ],
     "dependencies": [
         {
             "src": "shadergraph",
             "type": "corelib"
         }
-    ]
+    ],
+    "isReleased": false,
+    "exampleProjectId": "tMUruA",
+    "docs": {
+        "ports": []
+    }
 }

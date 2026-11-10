@@ -227,13 +227,19 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1793706365153,
-            "url": "https://cables.gl/docs/faq/embedding/cms/wordpress"
+            "url": "https://cables.gl/docs/faq/embedding/wordpress/wordpress"
         },
         {
             "message": "Share modal popup now shows a button \"exit iframe\" to run the patch without an iframe around (only for published patches)",
             "type": "improvement",
             "author": "pandur",
             "date": 1793721148372
+        },
+        {
+            "message": "Ops now show a visibility icon and the full namespace below the image",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1794300405929
         }
     ],
     "isReleased": true,

@@ -67,7 +67,8 @@
         "subtract",
         "boolean",
         "combine shapes",
-        "csg"
+        "csg",
+        ""
     ],
     "coreLibs": [
         "shadergraph"
@@ -77,5 +78,10 @@
             "src": "shadergraph",
             "type": "corelib"
         }
-    ]
+    ],
+    "isReleased": false,
+    "exampleProjectId": "HXkc9w",
+    "docs": {
+        "ports": []
+    }
 }

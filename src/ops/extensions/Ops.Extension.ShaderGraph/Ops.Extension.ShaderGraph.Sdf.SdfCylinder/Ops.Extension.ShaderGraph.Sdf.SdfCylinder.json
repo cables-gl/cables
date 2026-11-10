@@ -5,12 +5,6 @@
     "authorName": "AdamPartGL",
     "changelog": [
         {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1790250804800
-        },
-        {
             "message": "cloned op from Ops.Extension.ShaderGraph.Sdf.SdfCube",
             "type": "new op",
             "author": "AdamPartGL",
@@ -66,7 +60,8 @@
         "rod",
         "column",
         "shape",
-        "primitive"
+        "primitive",
+        ""
     ],
     "coreLibs": [
         "shadergraph"
@@ -76,5 +71,10 @@
             "src": "shadergraph",
             "type": "corelib"
         }
-    ]
+    ],
+    "isReleased": false,
+    "exampleProjectId": "OBkluA",
+    "docs": {
+        "ports": []
+    }
 }

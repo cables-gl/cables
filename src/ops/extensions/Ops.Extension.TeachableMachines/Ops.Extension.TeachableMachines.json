@@ -4,5 +4,7 @@
     "licence": {
         "name": "Apache License 2.0"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "description": "",
+    "visibility": "unlisted"
 }

@@ -53,7 +53,9 @@
         "block",
         "dice",
         "shape",
-        "primitive"
+        "primitive",
+        "",
+        ""
     ],
     "coreLibs": [
         "shadergraph"
@@ -63,5 +65,10 @@
             "src": "shadergraph",
             "type": "corelib"
         }
-    ]
+    ],
+    "isReleased": false,
+    "exampleProjectId": "LFBkuA",
+    "docs": {
+        "ports": []
+    }
 }

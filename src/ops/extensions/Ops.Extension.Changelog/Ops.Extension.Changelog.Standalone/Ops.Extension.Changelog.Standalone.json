@@ -214,6 +214,18 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1793869870801
+        },
+        {
+            "message": "Project title is now always the filename",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1794300356428
+        },
+        {
+            "message": "Fix navigation items not working",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1794300374374
         }
     ],
     "isReleased": true,

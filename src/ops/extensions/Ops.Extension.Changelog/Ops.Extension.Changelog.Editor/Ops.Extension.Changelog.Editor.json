@@ -601,6 +601,18 @@
             "type": "feature",
             "author": "pandur",
             "date": 1793891777609
+        },
+        {
+            "message": "Enabled select, copy and find in the sourcecode editor when it's in read-only mode",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1793986975526
+        },
+        {
+            "message": "patch summary panel now shows markdown correctly",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1794300470915
         }
     ],
     "isReleased": true,

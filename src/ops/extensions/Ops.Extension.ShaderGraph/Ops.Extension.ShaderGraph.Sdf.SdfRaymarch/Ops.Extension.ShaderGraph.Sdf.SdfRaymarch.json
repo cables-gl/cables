@@ -47,7 +47,8 @@
         "image",
         "3d scene",
         "camera",
-        "shapes"
+        "shapes",
+        ""
     ],
     "coreLibs": [
         "shadergraph"
@@ -57,5 +58,10 @@
             "src": "shadergraph",
             "type": "corelib"
         }
-    ]
+    ],
+    "isReleased": false,
+    "exampleProjectId": "HXkc9w",
+    "docs": {
+        "ports": []
+    }
 }

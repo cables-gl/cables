@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1787818649522
-        },
-        {
-            "message": "Extension.ShaderGraph.ShaderGraphMaterial renamed to Ops.Extension.ShaderGraph.Glsl.ShaderGraphMaterial",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1787820954186
         }
     ],
     "layout": {
@@ -65,12 +59,18 @@
         "mesh shader",
         "surface",
         "render",
-        "node material"
+        "node material",
+        ""
     ],
     "dependencies": [
         {
             "src": "shadergraph",
             "type": "corelib"
         }
-    ]
+    ],
+    "isReleased": false,
+    "exampleProjectId": "f1CIuA",
+    "docs": {
+        "ports": []
+    }
 }

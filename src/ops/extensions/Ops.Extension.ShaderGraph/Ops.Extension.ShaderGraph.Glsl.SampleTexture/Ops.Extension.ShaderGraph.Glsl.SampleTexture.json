@@ -46,12 +46,18 @@
         "lookup",
         "sampler",
         "read pixel",
-        "uv"
+        "uv",
+        ""
     ],
     "dependencies": [
         {
             "src": "shadergraph",
             "type": "corelib"
         }
-    ]
+    ],
+    "isReleased": false,
+    "exampleProjectId": "ZX2PuA",
+    "docs": {
+        "ports": []
+    }
 }

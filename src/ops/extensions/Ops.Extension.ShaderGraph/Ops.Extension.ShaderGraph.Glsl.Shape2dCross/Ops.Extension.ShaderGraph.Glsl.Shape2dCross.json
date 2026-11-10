@@ -5,60 +5,6 @@
     "authorName": "pandur",
     "changelog": [
         {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1786367312431
-        },
-        {
-            "message": "Patch.PxuvFTr.TestShaderOp renamed to Ops.Extension.MiniGpu.Sg.Smoothstep",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1786367915194
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1786433102805
-        },
-        {
-            "message": "Extension.MiniGpu.Sg.Main renamed to Ops.Extension.MiniGpu.Sg.Random",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1786441277694
-        },
-        {
-            "message": "Extension.MiniGpu.Sg.Random renamed to Ops.Extension.ShaderGraph.Wgsl.Random",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1786539331292
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1786733681137
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1786734927681
-        },
-        {
-            "message": "op created",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1786736040894
-        },
-        {
-            "message": "Extension.ShaderGraph.Wgsl.Shape2dPlus renamed to Ops.Extension.ShaderGraph.Wgsl.Shape2dCross",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1786736594412
-        },
-        {
             "message": "cloned op from Ops.Extension.ShaderGraph.Wgsl.Shape2dCross",
             "type": "new op",
             "author": "pandur",
@@ -111,6 +57,12 @@
         "x",
         "sdf",
         "2d shape",
-        "symbol"
-    ]
+        "symbol",
+        ""
+    ],
+    "isReleased": false,
+    "exampleProjectId": "DY5LuA",
+    "docs": {
+        "ports": []
+    }
 }
