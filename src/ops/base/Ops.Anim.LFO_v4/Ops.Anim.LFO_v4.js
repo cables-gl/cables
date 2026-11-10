@@ -65,6 +65,7 @@ function updateUi()
     const mode = inMode.get();
 
     const type = inType.get();
+    op.setUiAttrib({ "extendTitle": type });
     inPulseWidth.setUiAttribs({ "greyout": type != "square" });
     inSeed.setUiAttribs({ "greyout": type != "random" && type != "smooth random" });
     inTime.setUiAttribs({ "greyout": mode != MODE_TIME_INPUT });
