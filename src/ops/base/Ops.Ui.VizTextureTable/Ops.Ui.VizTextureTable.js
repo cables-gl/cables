@@ -15,7 +15,8 @@ let readPixels = true;
 let realTexture = null;
 let texRows = 0;
 let lines = 0;
-let readW = 0, readH = 0;
+let readW = 0,
+    readH = 0;
 let pixelInfo = null;
 const arr = [];
 
@@ -24,7 +25,9 @@ inTex.onLinkChanged = () =>
     op.setUiAttrib({ "extendTitle": "" });
 };
 
-op.patch.cgl.on("beginFrame",
+op.onDelete = () => { op.patch.cgl.off(frameListener); };
+
+const frameListener = op.patch.cgl.on("beginFrame",
     () =>
     {
         const gl = op.patch.cgl.gl;
@@ -41,7 +44,7 @@ op.patch.cgl.on("beginFrame",
 
         let channelType = gl.UNSIGNED_BYTE;
 
-        if (performance.now() - lastRead >= 50)readPixels = true;
+        if (performance.now() - lastRead >= 50) readPixels = true;
         let texChanged = true;
 
         if (readPixels)
@@ -61,8 +64,8 @@ op.patch.cgl.on("beginFrame",
 
             if (
                 lastFloatingPoint != isFloatingPoint ||
-                    lastWidth != realTexture.width ||
-                    lastHeight != realTexture.height)
+                lastWidth != realTexture.width ||
+                lastHeight != realTexture.height)
             {
                 const size = realTexture.width * realTexture.height * numChannels;
                 if (isFloatingPoint) pixelData = new Float32Array(size);
@@ -79,7 +82,7 @@ op.patch.cgl.on("beginFrame",
         texRows = Math.max(1, Math.ceil(lines / realTexture.width));
         texRows = Math.min(texRows, realTexture.height);
         readW = realTexture.width;
-        if (lines / realTexture.width < 1)readW = realTexture.width * lines / realTexture.width;
+        if (lines / realTexture.width < 1) readW = realTexture.width * lines / realTexture.width;
         readH = texRows;
 
         // console.log(readH, readW, realTexture.height - texRows);
@@ -89,7 +92,7 @@ op.patch.cgl.on("beginFrame",
             lastRead = performance.now();
 
             if (!texChanged)
-                pixelReader.read(op.patch.cgl, fb, realTexture.pixelFormat, 0, realTexture.height - texRows - Math.max(0, inRow.get()), readW, readH, (pixel) =>
+                pixelReader.read(op.patch.cgl, fb, realTexture.isFloatingPoint() ? CGL.Texture.PFORMATSTR_RGBA32F : CGL.Texture.PFORMATSTR_RGBA8UB, 0, realTexture.height - texRows - Math.max(0, inRow.get()), readW, readH, (pixel) =>
                 {
                     pixelData = pixel;
                 });
@@ -105,11 +108,11 @@ op.patch.cgl.on("beginFrame",
             //     pixelData
             // );
 
-        // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+            // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
         }
     });
 
-op.renderVizLayerGl = (ctx, layer) =>
+op.renderVizLayer = (ctx, layer) =>
 {
     const gl = op.patch.cgl.gl;
 
@@ -184,7 +187,7 @@ op.renderVizLayerGl = (ctx, layer) =>
                     let v = arr[i + s];
                     let str = "" + v;
 
-                    if (!isFp)v /= 255;
+                    if (!isFp) v /= 255;
                     str = String(Math.round(v * 10000) / 10000);
 
                     ctx.fillText(str, layer.x / layer.scale + indexStrWidth + 40 + s * 55, layer.y / layer.scale + 10 + (i / stride) * 10 + padding);
