@@ -11,7 +11,7 @@ const
 let ctx = null;
 let canvas = null;
 let numBars = 180;
-let height = 30; // height of one graph
+let height = 38; // height of one graph
 const NUM_GRAPHS = 3;
 const RESIZE_SIZE = 14;
 let resizing = null;
@@ -115,7 +115,7 @@ function drawGraph(name, posy, q, col, heavy)
     if (lastHeavyEvent && title.includes("cgl fps"))
     {
         ctx.fillStyle = "#FF9900";
-        ctx.fillText("(!) " + lastHeavyEvent, 5, posy + 34);
+        ctx.fillText("(!) " + lastHeavyEvent, 5, posy + 32);
     }
 }
 

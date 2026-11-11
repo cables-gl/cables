@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1620741256742
+            "date": 1620741256742,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",
@@ -38,5 +39,6 @@
         "ports": []
     },
     "isReleased": true,
-    "license": "MIT"
+    "license": "MIT",
+    "exampleProjectId": "UN11cI"
 }
