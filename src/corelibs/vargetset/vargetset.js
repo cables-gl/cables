@@ -276,6 +276,9 @@ export class VarGetOpWrapper
                 if (vars[i].type == this._type && i != "0")
                     varnames.push(i);
 
+            const current = this._varnamePort.get();
+            if (current && !varnames.includes(current)) varnames.push(current);
+
             this._op.varName.uiAttribs.values = varnames;
         }
     }
