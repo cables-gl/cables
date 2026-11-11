@@ -29,13 +29,8 @@
             "message": "show coordinates of each pixel color table row",
             "type": "improvement",
             "author": "pandur",
-            "date": 1717428609798
-        },
-        {
-            "message": "fix wrong values for non RGBA pixel formats, always output pixels as RGBA",
-            "type": "bugfix",
-            "author": "pandur",
-            "date": 1794401739592
+            "date": 1717428609798,
+            "url": "https://github.com/cables-gl/cables/issues/7358"
         }
     ],
     "authorName": "pandur",
