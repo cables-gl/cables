@@ -1,1 +1,0 @@
-https://threejs.org/docs/?q=ConeGeometry#ConeGeometry
