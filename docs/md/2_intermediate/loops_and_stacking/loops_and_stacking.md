@@ -1,7 +1,7 @@
 # Loops and Stacking
 
 Sometimes you need the same thing many times: 100 cubes, 20 lights, a grid of images.
-Instead of copying ops, you can use a `Loop` to repeat them.
+Instead of copying ops, you can use a `Loop` to repeat them....
 
 ## Try it yourself
 
