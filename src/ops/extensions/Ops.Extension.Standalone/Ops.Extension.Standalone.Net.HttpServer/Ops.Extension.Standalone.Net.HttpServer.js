@@ -13,6 +13,7 @@ let server;
 if (http)
 {
     op.onDelete = stop;
+    inPort.onChange = inHost.onChange = restart;
 
     server = http.createServer((req, res) =>
     {
@@ -21,6 +22,12 @@ if (http)
         outResponse.set(res);
 
         outRequest.trigger();
+    });
+
+    server.on("error", (e) =>
+    {
+        outRunning.set(false);
+        op.setUiError("listen", e.message);
     });
 
     start();
@@ -32,6 +39,7 @@ function start()
     {
         server.listen(inPort.get(), inHost.get(), (e) =>
         {
+            op.setUiError("listen", null);
             outRunning.set(true);
         });
     }
@@ -44,6 +52,12 @@ function start()
 
 function stop()
 {
-    server.close();
+    if (server.listening) server.close();
     outRunning.set(false);
+}
+
+function restart()
+{
+    stop();
+    start();
 }
