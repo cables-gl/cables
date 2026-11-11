@@ -21,6 +21,12 @@
             "type": "rename",
             "author": "pandur",
             "date": 1685951650738
+        },
+        {
+            "message": "added combine mode subtract",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1794398316329
         }
     ],
     "authorName": "pandur",

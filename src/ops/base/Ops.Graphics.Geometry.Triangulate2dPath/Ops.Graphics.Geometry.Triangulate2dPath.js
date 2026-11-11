@@ -1,6 +1,6 @@
 const
     inExec = op.inTriggerButton("Update"),
-    inWinding = op.inDropDown("Combine", ["Positive", "Odd", "Intersect", "Negative"], "Positive"),
+    inWinding = op.inDropDown("Combine", ["Positive", "Odd", "Intersect", "Negative", "Subtract"], "Positive"),
     inPath = op.inArray("2d Point Path"),
     inPath2 = op.inArray("Path 2"),
     inPath3 = op.inArray("Path 3"),
@@ -9,6 +9,25 @@ const
 
 inExec.onTriggered = tess;
 let geom = null;
+
+function signedArea(p)
+{
+    let a = 0;
+    for (let i = 0; i < p.length; i += 2)
+    {
+        const j = (i + 2) % p.length;
+        a += p[i] * p[j + 1] - p[j] * p[i + 1];
+    }
+    return a;
+}
+
+function reversePath(p)
+{
+    const r = [];
+    for (let i = p.length - 2; i >= 0; i -= 2) r.push(p[i], p[i + 1]);
+    return r;
+}
+
 function tess()
 {
     // var Tess2 = require('tess2');
@@ -47,18 +66,26 @@ function tess()
     {
         winding = Tess2.WINDING_ABS_GEQ_TWO;
     }
+    if (inWinding.get() == "Subtract")
+    {
+        // first path counter clockwise, others clockwise
+        winding = Tess2.WINDING_POSITIVE;
+        for (let i = 0; i < contours.length; i++)
+            if ((signedArea(contours[i]) > 0) != (i == 0)) contours[i] = reversePath(contours[i]);
+    }
 
     let res = null;
     try
     {
         // Tesselate
-        res = Tess2.tesselate({
-        	"contours": contours,
-        	"windingRule": winding,
-        	"elementType": Tess2.POLYGONS,
-        	"polySize": 3,
-        	"vertexSize": 2
-        });
+        res = Tess2.tesselate(
+            {
+                "contours": contours,
+                "windingRule": winding,
+                "elementType": Tess2.POLYGONS,
+                "polySize": 3,
+                "vertexSize": 2
+            });
     }
     catch (e) {}
 
