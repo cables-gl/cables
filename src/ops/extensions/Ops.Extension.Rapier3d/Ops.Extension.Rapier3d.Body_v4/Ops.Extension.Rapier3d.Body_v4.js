@@ -77,6 +77,11 @@ const posArray = [];
 const rotArray = [];
 const sizeArray = [];
 
+let prevPos = null;
+let prevRot = null;
+const interpRotA = quat.create();
+const interpRotB = quat.create();
+
 const renderScale = vec3.create();
 const renderPos = vec3.create();
 const renderRot = quat.create();
@@ -200,6 +205,9 @@ exec.onTriggered = () =>
 
     if (needsSetup) setup(world);
 
+    // remember the pose before each physics step, to interpolate between the last two steps
+    if (op.patch.frameStore.rapier.preStep && inType.get() != "Fixed") op.patch.frameStore.rapier.preStep.push(storePrevPoses);
+
     updateOutputs();
 
     if (inRender.get()) renderBodies();
@@ -211,11 +219,31 @@ exec.onTriggered = () =>
     next.trigger();
 };
 
+function storePrevPoses()
+{
+    if (!prevPos || prevPos.length != rigidBodies.length * 3)
+    {
+        prevPos = new Float32Array(rigidBodies.length * 3);
+        prevRot = new Float32Array(rigidBodies.length * 4);
+    }
+
+    for (let i = 0; i < rigidBodies.length; i++)
+    {
+        const pos = rigidBodies[i].translation();
+        const rot = rigidBodies[i].rotation();
+        prevPos.set([pos.x, pos.y, pos.z], i * 3);
+        prevRot.set([rot.x, rot.y, rot.z, rot.w], i * 4);
+    }
+}
+
 function updateOutputs()
 {
     posArray.length = 0;
     rotArray.length = 0;
     sizeArray.length = 0;
+
+    const alpha = op.patch.frameStore.rapier?.alpha ?? 1;
+    const interpolate = alpha < 1 && prevPos && prevPos.length == rigidBodies.length * 3;
 
     let sleepCount = 0;
     for (let i = 0; i < rigidBodies.length; i++)
@@ -225,8 +253,23 @@ function updateOutputs()
 
         const pos = body.translation();
         const rot = body.rotation();
-        posArray.push(pos.x, pos.y, pos.z);
-        rotArray.push(rot.x, rot.y, rot.z, rot.w);
+        if (interpolate)
+        {
+            posArray.push(
+                prevPos[i * 3] + (pos.x - prevPos[i * 3]) * alpha,
+                prevPos[i * 3 + 1] + (pos.y - prevPos[i * 3 + 1]) * alpha,
+                prevPos[i * 3 + 2] + (pos.z - prevPos[i * 3 + 2]) * alpha);
+
+            quat.set(interpRotA, prevRot[i * 4], prevRot[i * 4 + 1], prevRot[i * 4 + 2], prevRot[i * 4 + 3]);
+            quat.set(interpRotB, rot.x, rot.y, rot.z, rot.w);
+            quat.slerp(interpRotA, interpRotA, interpRotB, alpha);
+            rotArray.push(interpRotA[0], interpRotA[1], interpRotA[2], interpRotA[3]);
+        }
+        else
+        {
+            posArray.push(pos.x, pos.y, pos.z);
+            rotArray.push(rot.x, rot.y, rot.z, rot.w);
+        }
         sizeArray.push(bodySizes[i * 3], bodySizes[i * 3 + 1], bodySizes[i * 3 + 2]);
     }
 
@@ -474,6 +517,7 @@ function removeBodies()
 
     rigidBodies.length = 0;
     colliders.length = 0;
+    prevPos = null;
     outCollider.setRef([]);
     outBodies.setRef([]);
     updateOutputs();

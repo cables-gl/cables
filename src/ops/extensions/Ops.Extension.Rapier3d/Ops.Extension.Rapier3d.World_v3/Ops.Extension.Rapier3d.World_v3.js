@@ -29,6 +29,7 @@ const cgl = op.patch.cgl;
 let world = null;
 let eventQueue = null;
 let collisions = {};
+let preStepFuncs = [];
 let needsReset = true;
 let lastTime = -1;
 let accumulator = 0;
@@ -88,6 +89,7 @@ function resetWorld()
     eventQueue = new RAPIER.EventQueue(true);
     outVersion.set(RAPIER.version());
     collisions = {};
+    preStepFuncs = [];
     accumulator = 0;
     lastTime = -1;
     needsReset = false;
@@ -133,10 +135,13 @@ exec.onTriggered = () =>
     if (!world) return;
 
     const steps = getNumSteps();
+    const preStep = preStepFuncs;
+    preStepFuncs = [];
     try
     {
         for (let i = 0; i < steps; i++)
         {
+            for (let j = 0; j < preStep.length; j++) preStep[j](world.timestep);
             world.step(eventQueue);
             drainEvents();
         }
@@ -162,6 +167,8 @@ exec.onTriggered = () =>
         "collisionEvents": collisions,
         "world": world,
         "eventQueue": eventQueue,
+        "preStep": preStepFuncs,
+        "alpha": Math.min(1, accumulator / world.timestep),
         "tools": RapierTools
     };
 
