@@ -212,6 +212,13 @@
             "type": "feature",
             "author": "pandur",
             "date": 1785402414422
+        },
+        {
+            "message": "Fix state problems with other ops that textureEffects corelib, e.g. imagecompose below a renderToTextures op",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1794583888581,
+            "url": "https://github.com/cables-gl/cables/issues/8026"
         }
     ],
     "issues": "requires WebGL2",

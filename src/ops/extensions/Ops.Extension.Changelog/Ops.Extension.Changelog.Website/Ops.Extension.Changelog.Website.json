@@ -240,6 +240,13 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1794300405929
+        },
+        {
+            "message": "Big update of cables-cl (export, upload, import from commandline)",
+            "type": "feature",
+            "author": "stephan",
+            "date": 1794414415757,
+            "url": "https://npmjs.com/package/@cables/cables"
         }
     ],
     "isReleased": true,

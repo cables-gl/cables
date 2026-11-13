@@ -49,5 +49,6 @@
     "coreLibs": [
         "cgl"
     ],
-    "isReleased": true
+    "isReleased": true,
+    "exampleProjectId": "573_4S"
 }

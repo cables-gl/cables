@@ -15,6 +15,12 @@
             "type": "improvement",
             "author": "stephan",
             "date": 1770826088390
+        },
+        {
+            "message": "Extension.Standalone.Net.ReadTextFile renamed to Ops.Extension.Standalone.Files.ReadTextFile",
+            "type": "rename",
+            "author": "stephan",
+            "date": 1794407137293
         }
     ],
     "layout": {

@@ -1,0 +1,58 @@
+{
+    "id": "1a35f640-46f0-4a69-82f4-056b6b28f9af",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.String.StringReplace",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1794470111404,
+            "cloneOf": "4a053e7a-6b00-4e71-bd51-90cdb190994c"
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1794470111403,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 5,
+                "name": "Replace"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ]
+    },
+    "summary": "Replace all non numerical values with another string",
+    "tags": [
+        "numbers",
+        "numerical",
+        "values",
+        "find and replace",
+        "substitute",
+        "swap",
+        "regex",
+        "change text",
+        "search"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "String",
+                "text": "incoming string"
+            },
+            {
+                "name": "Replace",
+                "text": "replace with this string"
+            }
+        ]
+    },
+    "license": "MIT",
+    "isReleased": false
+}

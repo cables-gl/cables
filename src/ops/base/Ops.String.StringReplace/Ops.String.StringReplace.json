@@ -4,12 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1620204690545
-        },
-        {
-            "message": "Ops.User.pandur.StringReplace renamed to Ops.String.StringReplace",
-            "author": "pandur",
-            "date": 1620205093786
+            "date": 1620204690545,
+            "type": "new op"
         }
     ],
     "authorName": "pandur",

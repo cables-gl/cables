@@ -4,23 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1567930392101
-        },
-        {
-            "message": "Ops.Admin.Tess2 renamed to Ops.Mesh.Triangulate2dPath",
-            "author": "pandur",
-            "date": 1571077585233
-        },
-        {
-            "message": "Ops.Mesh.Triangulate2dPath renamed to Ops.Geometry.Triangulate2dPath",
-            "author": "pandur",
-            "date": 1671005295649
-        },
-        {
-            "message": "Ops.Geometry.Triangulate2dPath renamed to Ops.Graphics.Geometry.Triangulate2dPath",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1685951650738
+            "date": 1567930392101,
+            "type": "new op"
         },
         {
             "message": "added combine mode subtract",

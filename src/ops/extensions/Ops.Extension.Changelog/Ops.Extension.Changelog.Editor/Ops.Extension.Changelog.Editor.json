@@ -613,6 +613,25 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1794300470915
+        },
+        {
+            "message": "Missing variables in ports are still in variable dropdown, so they will not change to another variablename on save",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1794398107743
+        },
+        {
+            "message": "Cursor keys activate keyboard navigation and usage",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1794579354171
+        },
+        {
+            "message": "Display of integer numbers and zero values in extended titles",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1794582867077,
+            "url": "https://github.com/cables-gl/cables/issues/8077"
         }
     ],
     "isReleased": true,
