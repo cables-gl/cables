@@ -12,6 +12,7 @@ export class TextureEffect
     imgCompVer = 0;
     aspectRatio = 1;
     _textureTarget = null;
+    _prevForceShaderMods = null;
 
     /**
      * @param {CglContext} cgl
@@ -115,6 +116,10 @@ export class TextureEffect
 
     continueEffect()
     {
+        // forced shader mods (e.g. RenderToTextures) must not be applied to texture effect shaders
+        this._prevForceShaderMods = this.#cgl.tempData.forceShaderMods;
+        this.#cgl.tempData.forceShaderMods = null;
+
         this.#cgl.pushDepthTest(false);
         this.#cgl.pushModelMatrix();
         this.#cgl.pushPMatrix();
@@ -164,6 +169,8 @@ export class TextureEffect
 
         this.#cgl.popPMatrix();
         this.#cgl.popViewPort();
+
+        this.#cgl.tempData.forceShaderMods = this._prevForceShaderMods;
     }
 
     bind()
