@@ -73,10 +73,12 @@ export class CgpMesh extends CgMesh
         this.#numIndices = vi.length;
         this._indicesBuffer = this._createBuffer(this.cgp.device, new Uint32Array(vi), GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST);
 
-        if (geom.texCoords && geom.texCoords.length) this.setAttribute("texCoords", geom.texCoords, 2);
-        if (geom.vertexNormals && geom.vertexNormals.length) this.setAttribute("normals", geom.vertexNormals, 3);
-
-        this.setAttribute("normals", geom.vertexNormals, 3);
+        // order has to match the vertex buffer layout in cgp_renderpipeline
+        const numVerts = geom.vertices.length / 3;
+        this.setAttribute("texCoords", geom.texCoords?.length ? geom.texCoords : new Float32Array(numVerts * 2), 2);
+        this.setAttribute("normals", geom.vertexNormals?.length ? geom.vertexNormals : new Float32Array(numVerts * 3), 3);
+        this.setAttribute("tangents", geom.tangents?.length ? geom.tangents : new Float32Array(numVerts * 3), 3);
+        this.setAttribute("biTangents", geom.biTangents?.length ? geom.biTangents : new Float32Array(numVerts * 3), 3);
     }
 
     #disposeAttributes()

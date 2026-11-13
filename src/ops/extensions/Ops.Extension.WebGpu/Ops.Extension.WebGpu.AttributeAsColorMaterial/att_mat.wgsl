@@ -12,6 +12,8 @@ struct MyVSInput
     @location(0) position: vec3<f32>,
     @location(1) normal: vec3<f32>,
     @location(2) texcoord: vec2<f32>,
+    @location(3) tangent: vec3<f32>,
+    @location(4) bitangent: vec3<f32>,
 };
 
 struct MyVSOutput
@@ -36,7 +38,13 @@ fn myVSMain(v: MyVSInput) -> MyVSOutput
         vsOut.attrCol = vec4f(pos.xyz,1.0);
     #endif
     #ifdef SHOW_NORMAL_MAT
-        vsOut.attrCol =  (vec4f(v.normal,0.0)*uniVert.normalMatrix) ;
+        vsOut.attrCol = vec4f((vec4f(v.normal,1.0)*uniVert.normalMatrix).xyz,1.0);
+    #endif
+    #ifdef SHOW_TANGENTS
+        vsOut.attrCol = vec4f(v.tangent,1.0);
+    #endif
+    #ifdef SHOW_BITANGENTS
+        vsOut.attrCol = vec4f(v.bitangent,1.0);
     #endif
     #ifdef SHOW_NORMALS
         vsOut.attrCol = vec4f(v.normal,1.0);

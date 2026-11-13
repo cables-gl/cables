@@ -14,8 +14,8 @@ function updateDefines()
     shader.toggleDefine("SHOW_TEXCOORDS", inAttr.get() == "TexCoords");
     shader.toggleDefine("SHOW_NORMALS", inAttr.get() == "Normals");
     shader.toggleDefine("SHOW_NORMAL_MAT", inAttr.get() == "Normal Mat");
-    // shader.toggleDefine("SHOW_TANGENTS", inAttr.get() == "Tangents");
-    // shader.toggleDefine("SHOW_BITANGENTS", inAttr.get() == "BiTangents");
+    shader.toggleDefine("SHOW_TANGENTS", inAttr.get() == "Tangents");
+    shader.toggleDefine("SHOW_BITANGENTS", inAttr.get() == "BiTangents");
     // shader.toggleDefine("SHOW_TEXCOORDS1", inAttr.get() == "TexCoords 1");
 
     // shader.toggleDefine("ABS", inAbs.get());

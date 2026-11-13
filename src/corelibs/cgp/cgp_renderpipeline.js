@@ -228,6 +228,20 @@ export class RenderPipeline extends Pipeline
                 "attributes": [
                     { "shaderLocation": 1, "offset": 0, "format": "float32x3" },
                 ],
+            },
+            // tangents
+            {
+                "arrayStride": 3 * 4,
+                "attributes": [
+                    { "shaderLocation": 3, "offset": 0, "format": "float32x3" },
+                ],
+            },
+            // bitangents
+            {
+                "arrayStride": 3 * 4,
+                "attributes": [
+                    { "shaderLocation": 4, "offset": 0, "format": "float32x3" },
+                ],
             }];
 
         /** @type {GPURenderPipelineDescriptor} */

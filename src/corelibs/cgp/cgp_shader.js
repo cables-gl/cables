@@ -196,11 +196,11 @@ export class CgpShader extends CgShader
                 }
             }
 
-            srcVert = preproc(srcVert, defs);
+            if (srcVert) srcVert = preproc(srcVert, defs);
             vs = vs.replace("{{" + this._moduleNames[i] + "}}", srcVert);
         }
 
-        srcHeadVert = preproc(srcHeadVert, defs);
+        if (srcHeadVert) srcHeadVert = preproc(srcHeadVert, defs);
         vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
         return vs;
     }
