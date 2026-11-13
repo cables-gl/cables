@@ -8,6 +8,7 @@ const
     inPointOffset = op.inFloat("Point Offset XY", 0),
     inPointOffsetZ = op.inFloat("Point Offset Z", 0),
     inOffsetRot = op.inFloat("Offset rotation"),
+    inRotation = op.inFloat("Rotate", 0),
     planeSelection = op.inSwitch("Plane", ["XY", "XZ", "YZ"], "XY"),
     inClose = op.inBool("Loop", false),
     rotationDirection = op.inSwitch("Rotation Direction", ["Clockwise", "Anticlockwise"], "Anticlockwise"),
@@ -19,6 +20,7 @@ const
 inOffset.onChange =
     inClose.onChange =
     inOffsetRot.onChange =
+    inRotation.onChange =
     inPointRadOffset.onChange =
     inPointOffset.onChange =
     radius.onChange =
@@ -51,6 +53,7 @@ function calcArray()
         let degInRad = (360 / segs) * (i + progressOffset) * (Math.PI / 180); // Convert degrees to radians
 
         degInRad *= degInRadMul;
+        degInRad += inRotation.get() * (Math.PI / 180);
 
         const posR = r + radiusOff + inPointRadOffset.get() * i; // Effective radius with offsets
         const posx = Math.cos(degInRad) * posR;
@@ -59,20 +62,20 @@ function calcArray()
 
         switch (planeSelection.get())
         {
-        case "XY":
-            rots.push(0, 0, (degInRad - offsetRotRad) * (180 / Math.PI)); // Rotation in degrees, adjusted for offset
-            points.push(posx, posy, posz);
-            break;
-        case "XZ":
-            rots.push(0, -(degInRad - offsetRotRad) * (180 / Math.PI), 0); // Rotation in degrees, adjusted for offset
+            case "XY":
+                rots.push(0, 0, (degInRad - offsetRotRad) * (180 / Math.PI)); // Rotation in degrees, adjusted for offset
+                points.push(posx, posy, posz);
+                break;
+            case "XZ":
+                rots.push(0, -(degInRad - offsetRotRad) * (180 / Math.PI), 0); // Rotation in degrees, adjusted for offset
 
-            points.push(posx, posz, posy);
-            break;
-        case "YZ":
-            rots.push((degInRad - offsetRotRad) * (180 / Math.PI), 0, 0); // Rotation in degrees, adjusted for offset
+                points.push(posx, posz, posy);
+                break;
+            case "YZ":
+                rots.push((degInRad - offsetRotRad) * (180 / Math.PI), 0, 0); // Rotation in degrees, adjusted for offset
 
-            points.push(posz, posx, posy);
-            break;
+                points.push(posz, posx, posy);
+                break;
         }
     }
 
