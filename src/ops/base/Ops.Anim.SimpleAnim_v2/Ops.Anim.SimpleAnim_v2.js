@@ -1,0 +1,98 @@
+const
+    exe = op.inTrigger("exe"),
+    reset = op.inTriggerButton("reset"),
+    rewind = op.inTriggerButton("rewind"),
+    inStart = op.inFloat("start", 0),
+    inEnd = op.inFloat("end", 1),
+    duration = op.inFloat("duration", 0.5),
+    loop = op.inBool("loop"),
+    waitForReset = op.inBool("Wait for Reset", true),
+    next = op.outTrigger("Next"),
+    result = op.outNumber("result"),
+    finished = op.outBoolNum("finished"),
+    finishedTrigger = op.outTrigger("Finished Trigger");
+
+const anim = new CABLES.Anim();
+let resetted = false;
+let currentEasing = -1;
+anim.createPort(op, "easing", init);
+loop.onChange = init;
+init();
+
+duration.onChange = init;
+
+function init()
+{
+    if (anim.keys.length != 3)
+    {
+        anim.setValue(0, 0);
+        anim.setValue(1, 0);
+        anim.setValue(2, 0);
+    }
+
+    anim.keys[0].time = CABLES.now() / 1000.0;
+    anim.keys[0].value = inStart.get();
+    if (anim.defaultEasing != currentEasing) anim.keys[0].setEasing(anim.defaultEasing);
+
+    anim.keys[1].time = duration.get() + CABLES.now() / 1000.0;
+    anim.keys[1].value = inEnd.get();
+
+    if (anim.defaultEasing != currentEasing) anim.keys[1].setEasing(anim.defaultEasing);
+
+    anim.loop = loop.get();
+    if (anim.loop)
+    {
+
+        anim.keys[2].time = anim.keys[1].time;
+        anim.keys[2].value = anim.keys[1].value;
+    }
+    else
+    {
+        anim.keys[2].time = anim.keys[1].time;
+        anim.keys[2].value = anim.keys[1].value;
+        if (anim.defaultEasing != currentEasing) anim.keys[2].setEasing(anim.defaultEasing);
+    }
+    finished.set(false);
+
+    currentEasing = anim.defaultEasing;
+}
+
+reset.onTriggered = function ()
+{
+    resetted = true;
+    init();
+};
+
+rewind.onTriggered = function ()
+{
+    anim.keys[0].time = CABLES.now() / 1000.0;
+    anim.keys[0].value = inStart.get();
+
+    anim.keys[1].time = CABLES.now() / 1000.0;
+    anim.keys[1].value = inStart.get();
+
+    anim.keys[2].time = CABLES.now() / 1000.0;
+    anim.keys[2].value = inStart.get();
+
+    result.set(inStart.get());
+};
+
+exe.onTriggered = function ()
+{
+    if (waitForReset.get() && !resetted)
+    {
+        result.set(inStart.get());
+        next.trigger();
+        return;
+    }
+    let t = CABLES.now() / 1000;
+    let v = anim.getValue(t);
+    result.set(v);
+    if (anim.hasEnded(t) && !loop.get())
+    {
+        if (!finished.get()) finishedTrigger.trigger();
+        finished.set(true);
+    }
+
+    next.trigger();
+};
