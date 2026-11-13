@@ -1,0 +1,139 @@
+{
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "ee94a1b8-bc80-416a-9501-7f86dbc43d52",
+    "created": 1794569344083,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Error Correction index",
+                "values": [
+                    "L",
+                    "M",
+                    "Q",
+                    "H"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Dark R",
+                "group": "Dark Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dark G",
+                "group": "Dark Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dark B",
+                "group": "Dark Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dark A",
+                "group": "Dark Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Light R",
+                "group": "Light Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Light G",
+                "group": "Light Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Light B",
+                "group": "Light Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Light A",
+                "group": "Light Color",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Image",
+                "objType": "element"
+            }
+        ]
+    },
+    "summary": "Generate a qr code as a texture",
+    "tags": [
+        "qr",
+        "barcode",
+        "link",
+        "scan",
+        "code",
+        "url",
+        "generate"
+    ],
+    "exampleProjectId": "QjlEo-",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.QrCode",
+            "author": "pandur",
+            "date": 1652087190355,
+            "type": "new op"
+        },
+        {
+            "message": "Rework: outputs canvas image, adds no dom elements, added size/colors/error correction parameter ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1794569367464
+        }
+    ],
+    "docs": {},
+    "coreLibs": [
+        "cgl"
+    ],
+    "dependencies": [
+        {
+            "src": "./qrcode.js",
+            "type": "commonjs"
+        }
+    ],
+    "credits": [
+        {
+            "title": "qrcode.js",
+            "author": "davidshimjs",
+            "url": "https://davidshimjs.github.io/qrcodejs/",
+            "licence": "MIT",
+            "version": "",
+            "username": "stephan",
+            "date": 1790182360956
+        }
+    ],
+    "license": "MIT"
+}
