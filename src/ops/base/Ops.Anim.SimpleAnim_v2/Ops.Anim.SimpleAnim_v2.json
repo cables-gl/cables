@@ -140,7 +140,8 @@
             "message": "Fixed loop timing and output finished when in loop mode",
             "type": "improvement",
             "author": "pandur",
-            "date": 1794579885453
+            "date": 1794579885453,
+            "url": "https://github.com/cables-gl/cables/issues/8809"
         }
     ]
 }
