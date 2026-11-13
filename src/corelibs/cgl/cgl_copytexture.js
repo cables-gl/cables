@@ -105,6 +105,7 @@ export class CopyTexture
                     "numRenderBuffers": this._options.numRenderBuffers || 1,
                     "filter": filter,
                     "wrap": wrap,
+                    "anisotropic": this._options.anisotropic || 0,
                 };
 
             if (cgl.glVersion == 1) this.fb = new CGL.Framebuffer(cgl, w, h, options);

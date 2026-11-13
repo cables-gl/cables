@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Execute"),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
+    aniso = op.inSwitch("Anisotropic", ["0", "1", "2", "4", "8", "16"], "0"),
     twrap = op.inDropDown("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     inPixel = op.inDropDown("Pixel Format", CGL.Texture.PIXELFORMATS, CGL.Texture.PFORMATSTR_RGBA8UB),
 
@@ -44,7 +45,6 @@ inSrcRDefault.onChange =
     inTexR.onChange =
     inTexG.onChange =
     inTexB.onChange =
-    inPixel.onChange =
     inTexA.onChange = () =>
     {
         currentSize = getSize();
@@ -67,6 +67,8 @@ inTexR.onLinkChanged =
 
 inSize.onChange =
     tfilter.onChange =
+    aniso.onChange =
+    inPixel.onChange =
     twrap.onChange = () => { tc = null; };
 
 function getSize()
@@ -144,14 +146,19 @@ function initShader()
     if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
     if (tfilter.get() == "mipmap") filter = CGL.Texture.FILTER_MIPMAP;
 
-    if (tc)tc.dispose();
+    aniso.setUiAttribs({ "greyout": filter != CGL.Texture.FILTER_MIPMAP });
+
+    if (tc) tc.dispose();
 
     currentSize = getSize();
 
-    tc = new CGL.CopyTexture(cgl, "combinetextures", {
+    tc = new CGL.CopyTexture(cgl, "combinetextures",
+    {
         "shader": attachments.rgbe2fp_frag,
         "isFloatingPointTexture": inPixel.get() == CGL.Texture.PFORMATSTR_RGBA32F,
+        "pixelFormat": inPixel.get(),
         "filter": filter,
+        "anisotropic": filter == CGL.Texture.FILTER_MIPMAP ? parseFloat(aniso.get()) : 0,
         "wrap": wrap,
         "width": currentSize[0],
         "height": currentSize[1]
@@ -230,7 +237,7 @@ exec.onTriggered = () =>
 {
     if (!tc || needsUpdate && !op.patch.cgl.tempData.shadowPass)
     {
-        if (!tc)initShader();
+        if (!tc) initShader();
         tc.bgShader.popTextures();
 
         if (inTexR.get()) tc.bgShader.pushTexture(unitexR, inTexR.get().tex);

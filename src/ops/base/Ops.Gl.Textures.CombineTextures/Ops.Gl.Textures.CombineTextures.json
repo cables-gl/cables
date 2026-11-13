@@ -2,49 +2,23 @@
     "id": "5f33dd4a-a553-4f0f-b3b1-66a80cd240a7",
     "changelog": [
         {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1642868426174
-        },
-        {
-            "message": " added core lib: cgl_texturecopy",
-            "author": "pandur",
-            "date": 1642868439042
-        },
-        {
-            "message": " added core lib: cgl_copytexture",
-            "author": "pandur",
-            "date": 1642869069922
-        },
-        {
-            "message": "Ops.User.pandur.Rgbe2HdrTexture renamed to Ops.Dev.Rgbe2HdrTexture",
-            "author": "pandur",
-            "date": 1642869809458
-        },
-        {
-            "message": "cloned op from Ops.Dev.Rgbe2HdrTexture",
-            "author": "pandur",
-            "date": 1643797752609
-        },
-        {
-            "message": "Ops.User.pandur.TextureToCoordinateGrid renamed to Ops.Dev.TextureToCoordinateGrid",
-            "author": "pandur",
-            "date": 1643797942632
-        },
-        {
             "message": "cloned op from Ops.Dev.TextureToCoordinateGrid",
             "author": "pandur",
-            "date": 1643798809254
+            "date": 1643798809254,
+            "type": "new op"
         },
         {
-            "message": "Ops.User.pandur.CombineTextures renamed to Ops.Dev.CombineTextures",
+            "message": "added anisotropic filtering option",
+            "type": "feature",
             "author": "pandur",
-            "date": 1643801154556
+            "date": 1794586345309,
+            "url": "https://github.com/cables-gl/cables/issues/7344"
         },
         {
-            "message": "Ops.Dev.CombineTextures renamed to Ops.Gl.Textures.CombineTextures",
+            "message": "fixed pixel format not being applied",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1644228725597
+            "date": 1794586345876
         }
     ],
     "coreLibs": [
@@ -62,6 +36,24 @@
             {
                 "type": 0,
                 "name": "Filter index",
+                "values": [
+                    "nearest",
+                    "linear",
+                    "mipmap"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Anisotropic index",
+                "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "4",
+                    "8",
+                    "16"
+                ],
                 "subType": "integer"
             },
             {
@@ -77,6 +69,14 @@
             {
                 "type": 0,
                 "name": "Size index",
+                "values": [
+                    "Biggest",
+                    "Smallest",
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
                 "subType": "integer"
             },
             {
@@ -88,12 +88,22 @@
             {
                 "type": 0,
                 "name": "R Source index",
+                "values": [
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
                 "group": "Red",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "R Value index",
+                "values": [
+                    "Source",
+                    "Invert"
+                ],
                 "group": "Red",
                 "subType": "integer"
             },
@@ -112,12 +122,22 @@
             {
                 "type": 0,
                 "name": "G Source index",
+                "values": [
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
                 "group": "Green",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "G Value index",
+                "values": [
+                    "Source",
+                    "Invert"
+                ],
                 "group": "Green",
                 "subType": "integer"
             },
@@ -136,12 +156,22 @@
             {
                 "type": 0,
                 "name": "B Source index",
+                "values": [
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
                 "group": "Blue",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "B Value index",
+                "values": [
+                    "Source",
+                    "Invert"
+                ],
                 "group": "Blue",
                 "subType": "integer"
             },
@@ -160,12 +190,22 @@
             {
                 "type": 0,
                 "name": "A Source index",
+                "values": [
+                    "R",
+                    "G",
+                    "B",
+                    "A"
+                ],
                 "group": "Alpha",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "A Value index",
+                "values": [
+                    "Source",
+                    "Invert"
+                ],
                 "group": "Alpha",
                 "subType": "integer"
             },
