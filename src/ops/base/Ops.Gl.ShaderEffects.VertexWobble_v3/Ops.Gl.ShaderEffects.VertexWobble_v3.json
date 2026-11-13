@@ -1,0 +1,153 @@
+{
+    "authorName": "pandur",
+    "id": "0d4b4aba-c7b3-4040-b1fd-e5f4ad95d88e",
+    "created": 1794585120867,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Source index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "amount",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "axisX",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "axisY",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "axisZ",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Range index",
+                "values": [
+                    "-1 to 1",
+                    "0 to 1"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Area index",
+                "group": "Area",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Size",
+                "group": "Area",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Falloff",
+                "group": "Area",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "x",
+                "group": "Area",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "y",
+                "group": "Area",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "z",
+                "group": "Area",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "WorldSpace",
+                "group": "Area",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Invert",
+                "group": "Area",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            }
+        ]
+    },
+    "summary": "sine wave vertex displacement",
+    "tags": [
+        "wave",
+        "ripple",
+        "jelly",
+        "sine",
+        "wavy",
+        "displace",
+        "flag",
+        "cloth"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.VertexSinusWobble",
+            "author": "pandur",
+            "date": 1634817129350,
+            "type": "new op"
+        },
+        {
+            "message": "Fix: Invert checkbox was not updating the shader",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1790665704727
+        },
+        {
+            "message": "New version v3: Fix invert problem, add wireframe helper meshes and gizmo overlay, also fix size not being halfsize, falloff is added on top",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1794585120868,
+            "url": "https://github.com/cables-gl/cables/issues/7548"
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier",
+        "cgl"
+    ],
+    "exampleProjectId": "0PxhuO",
+    "license": "MIT"
+}
