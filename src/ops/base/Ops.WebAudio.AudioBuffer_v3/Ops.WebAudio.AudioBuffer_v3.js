@@ -20,9 +20,7 @@ let urlToLoadNext = null;
 let clearAfterLoad = false;
 let fromData = false;
 let fromDataNew = false;
-let fileReader = new FileReader();
-let arrayBuffer = null;
-let loadingIdDataURL = 0;
+let loadId = 0;
 
 inUrlPort.onChange = () =>
 {
@@ -58,7 +56,10 @@ inActive.onChange = function ()
     }
     else
     {
+        loadId++;
         isLoading = false;
+        urlToLoadNext = null;
+        clearAfterLoad = false;
         invalidateOutPorts();
         outLoading.set(isLoading);
         currentBuffer = null;
@@ -67,6 +68,10 @@ inActive.onChange = function ()
 
 function loadAudioFile(url, loadFromData)
 {
+    const id = ++loadId;
+    const finished = (buffer) => { if (id === loadId) onLoadFinished(buffer); };
+    const failed = (e) => { if (id === loadId) onLoadFailed(e); };
+
     currentFileUrl = url;
     isLoading = true;
     outLoading.set(isLoading);
@@ -85,7 +90,7 @@ function loadAudioFile(url, loadFromData)
             op.setUiError("wavFormat", null);
         }
 
-        CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed, inLoadingTask.get(), op);
+        CABLES.WEBAUDIO.loadAudioFile(op.patch, url, finished, failed, inLoadingTask.get(), op);
     }
     else
     {
@@ -100,12 +105,20 @@ function loadAudioFile(url, loadFromData)
             op.setUiError("wavFormat", null);
         }
 
+        let loadingIdDataURL = null;
         if (inLoadingTask.get())
         {
             loadingIdDataURL = cgl.patch.loading.start("audiobuffer from data-url " + op.id, url, op);
             if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingIdDataURL, "title": " loading audio data url (" + op.id + ")" });
         }
 
+        const fileReader = new FileReader();
+        fileReader.onloadend = () =>
+        {
+            cgl.patch.loading.finished(loadingIdDataURL);
+            if (cgl.patch.isEditorMode()) gui.jobs().finish("loadaudio" + loadingIdDataURL);
+            if (fileReader.result) audioCtx.decodeAudioData(fileReader.result, finished, failed);
+        };
         fileReader.readAsArrayBuffer(fileBlob);
     }
 }
@@ -176,19 +189,6 @@ function load()
         op.setUiError("wavFormat", null);
         op.setUiError("failedLoading", null);
     }
-}
-
-fileReader.onloadend = () =>
-{
-    arrayBuffer = fileReader.result;
-    cgl.patch.loading.finished(loadingIdDataURL);
-    if (cgl.patch.isEditorMode()) gui.jobs().finish("loadaudio" + loadingIdDataURL);
-    loadFromDataURL();
-};
-
-function loadFromDataURL()
-{
-    if (arrayBuffer) audioCtx.decodeAudioData(arrayBuffer, onLoadFinished, onLoadFailed);
 }
 
 function onLoadFinished(buffer)
