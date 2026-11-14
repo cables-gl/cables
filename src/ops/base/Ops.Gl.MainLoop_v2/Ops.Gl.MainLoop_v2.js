@@ -120,8 +120,6 @@ function render(time, frame, delta)
 
     setPixelDensity();
 
-    // if (hdpi.get())op.patch.cgl.pixelDensity = window.devicePixelRatio;
-
     const startTime = performance.now();
 
     op.patch.config.fpsLimit = getFpsLimit();
