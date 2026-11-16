@@ -9,15 +9,9 @@
             "type": "new op",
             "author": "pandur",
             "date": 1794835495858
-        },
-        {
-            "message": "Local.ConsoleTimeStamp renamed to Ops.Performance.ConsoleTimeStamp",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1794835501126
         }
     ],
-    "summary": "Show the time used by child ops as a track in the browser dev tools performance profiler",
+    "summary": "Show time used by child ops in the browser dev tools performance profiler",
     "layout": {
         "portsIn": [
             {
@@ -48,5 +42,9 @@
                 "name": "Next"
             }
         ]
+    },
+    "isReleased": false,
+    "docs": {
+        "ports": []
     }
 }

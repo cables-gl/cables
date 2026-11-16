@@ -10,5 +10,7 @@ inExec.onTriggered = () =>
 {
     const start = performance.now();
     outNext.trigger();
-    console.timeStamp(inLabel.get(), start, performance.now(), inTrack.get() || undefined, inGroup.get() || undefined, inColor.get());
+
+    if (console.timeStamp)
+        console.timeStamp(inLabel.get(), start, performance.now(), inTrack.get() || undefined, inGroup.get() || undefined, inColor.get());
 };
