@@ -4,7 +4,7 @@ You can run some patches on the cables commandline, in headless mode.
 This will run the cables patch in the context and with the full permissions of
 the current terminal-session.
 
-As the headless runner has no WebGGL, DOM or most of the things a browser comes
+As the headless runner has no WebGL, DOM or most of the things a browser comes
 with it's mostly usable for background tasks, servers or calculations.
 See example usecases on the [Headless Examples Patchlist](https://cables.gl/patchlist/headless).
 
