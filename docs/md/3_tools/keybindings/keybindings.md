@@ -1,6 +1,6 @@
 # Custom Key Bindings
 
-You can bind your own keys to any command, or change the keys of existing shortcuts.
+You can assign your own keyboard shortcuts to any command or customize existing ones.
 
 Open **Keybindings** in the editor menu, or open the command palette (`[mod] + p`) and enter `Keybindings`.
 
