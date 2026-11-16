@@ -50,7 +50,7 @@ we cannot really do anything about that...sorry...
 
 As a general rule of thumb: Whenever cables uses files, it's using URLs. URLs of local files look like this:
 
-`file:/home/cables/myfile.txt` or `file:/C:/Users/cables/myfile.txt`
+`file:///home/cables/myfile.txt` or `file:///C:/Users/cables/myfile.txt`
 
 Notice the forward slashes. To keep this OS-independent, whenever you deal with files, try to use file-url.
 There are ops to convert [back](https://cables.gl/op/Ops.Extension.Standalone.Files.PathToFileUrl) and [forth](https://cables.gl/op/Ops.Extension.Standalone.Files.PathToFileUrl) between URLs and paths.
