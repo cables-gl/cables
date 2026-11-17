@@ -1,9 +1,9 @@
 # Standalone - Commandline Options
 
-Some behaviour of cables can be controlled or overridden using comandline options. Add
+Some behaviour of cables can be controlled or overridden using commandline options. Add
 them when calling the executable from any shell
 
-For all systems: Open a shell and change into the direcory containing cables standalone (App, AppImage or .exe)
+For all systems: Open a shell and change into the directory containing cables standalone (App, AppImage or .exe)
 
 ## Windows
 
