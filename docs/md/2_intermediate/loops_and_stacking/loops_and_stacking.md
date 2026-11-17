@@ -31,7 +31,7 @@ Stacking duplicates an op for every iteration of the loop, so each iteration has
 
 ![](img/stack_patch.png)
 
-In this case the circle op is stacked. Without stacking in every frame every circle mesh would be generataed again. With stacking every circle has its own mesh and it stays the same until changed.
+In this case the circle op is stacked. Without stacking in every frame every circle mesh would be generated again. With stacking every circle has its own mesh and it stays the same until changed.
 
 ## Performance Tip
 

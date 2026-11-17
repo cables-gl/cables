@@ -22,7 +22,7 @@ In this example we compose a new image / texture out of one image and some 2d ef
 
 ![](img/example_imgcomp_c_new.png)
 
-- `DrawImage` has a a slot called `imageAlpha`
+- `DrawImage` has a slot called `imageAlpha`
 - Create a new `texture` op and connect it to the `imageAlpha` port of the `drawImage` op.
 - Select it and now click `file` in the main panel. Browse through the library until you find an image like this.
 
