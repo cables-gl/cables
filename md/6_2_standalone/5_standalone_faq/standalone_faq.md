@@ -42,7 +42,7 @@ topics, if you think something is missing or subscribe to the channel to get not
 
 ## I am having issues playing videos in cables standalone
 
-Most of the videos around should play fine. If you encounter error-messages containing "ffmpg" that video format is likely
+Most of the videos around should play fine. If you encounter error-messages containing "ffmpeg" that video format is likely
 not supported by cables, electron and/or your operating system. This then is an issue with proprietary video codecs, and
 we cannot really do anything about that...sorry...
 
