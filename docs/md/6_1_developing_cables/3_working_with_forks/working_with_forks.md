@@ -4,7 +4,7 @@ It is a common workflow using git/GitHub to [create forks before you submit a pu
 
 This describes the steps needed to work with your fork of any of the cables repos.
 
-You should first run through the [quick start](../README.md) to install the cables dev environment.
+You should first run through the [quick start](../1_setup_dev_env/setup_dev_env) to install the cables dev environment.
 
 ## Create a fork
 - Create a fork on GitHub (e.g. for [cables_ui](https://github.com/cables-gl/cables_ui/fork))

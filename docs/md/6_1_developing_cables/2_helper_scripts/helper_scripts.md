@@ -15,7 +15,7 @@ if you do not authenticate to github via public key, add `https` as a parameter
 
 reads the current nodeversion vom .nvmrc and walks the repositories,
 pulls upstream changes and merges develop into the current branch, also rebuilds with npm if there
-are changes in the remore repositories.
+are changes in the remote repositories.
 
 if given a branch, like `update_repos.sh develop` tries to switch all the repositories to that
 branch before then merging develop and building.
