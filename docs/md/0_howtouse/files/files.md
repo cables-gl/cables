@@ -73,7 +73,7 @@ converts midi to json
 
 file ending:`.glb`
 
-`.glb` 3d scene files can be automativally compressed using Draco compression. You'll need to then use the Draco library to use the compressed scene in your project. Check out our documentation and tutorial [here](https://cables.gl/op/Ops.Gl.GLTF.GltfDracoCompression).
+`.glb` 3d scene files can be automatically compressed using Draco compression. You'll need to then use the Draco library to use the compressed scene in your project. Check out our documentation and tutorial [here](https://cables.gl/op/Ops.Gl.GLTF.GltfDracoCompression).
 
 ### SVG path points
 
