@@ -34,7 +34,7 @@ Create an [access token](https://app.netlify.com/user/applications) and copy it 
 - click on button
 - wait for the two buttons to appear
 - click on "View Deployment" to visit your website on netlify
-- click on "Deploments overview" to see your former deployments to this site on netlify
+- click on "Deployments overview" to see your former deployments to this site on netlify
 
 ## CAVEATS
 - your site can only host one cables patch, it will also overwrite everything that was on that site before
@@ -58,12 +58,12 @@ these files included in the export.
 ### Package
 
 - Single Javascript File: packages and minifies everything into one single javascript file to include
-- Multiple Files: will keep the patch configuration, your code, and core code in seperate files
+- Multiple Files: will keep the patch configuration, your code, and core code in separate files
 
 ### Export without subdirectories
 
 - Should you need the directory structure of your patch to be "flat" (no js/ or assets/ subdirectory) you can select this option.
-    - This will ususally not be needed, some platforms do not allow for accessing subdirectories tough, and some setups of frameworks like react/vue also behave weirdly with subdirectories.
+    - This will usually not be needed, some platforms do not allow for accessing subdirectories tough, and some setups of frameworks like react/vue also behave weirdly with subdirectories.
 
 ### Minify Code
 
