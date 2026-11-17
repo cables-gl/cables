@@ -27,7 +27,7 @@ inBoolean.onChange = update;
 // this function runs every time the input port changes
 function update()
 {
-    // set the ouput port to the value of the input port
+    // set the output port to the value of the input port
     outBoolean.set(inBoolean.get());
 }
 ```

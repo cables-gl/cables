@@ -144,7 +144,7 @@ An object can contain basically anything, e.g.:
 
 ## Port linking
 
-Once a port is linked with another port `myPort.onLinkChanged` is executed. When it is executed the port may not have a value yet, it just sais: «There is a new connection». Later on `myPort.onLinkChanged` is called and you can get the new value with `myPort.get()`.
+Once a port is linked with another port `myPort.onLinkChanged` is executed. When it is executed the port may not have a value yet, it just says: «There is a new connection». Later on `myPort.onLinkChanged` is called and you can get the new value with `myPort.get()`.
 
 ```javascript
 const myPort = op.inFloat("My Port");

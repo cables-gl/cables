@@ -48,7 +48,7 @@ better to create a team and use their ops (will "pollute" your op selection less
 - Only the author of the op will be able to [rename](../../5_writing_ops/dev_renaming) the op
 
 ### Publishing patches
-- Publising patches with userops is not possible as it would mean all the clones would need the author as a collaborator for them to work
+- Publishing patches with userops is not possible as it would mean all the clones would need the author as a collaborator for them to work
 - Convert your userops to patchops (use "clone op code") to publish patches
 - This will also let you sleep better, as you can make changes to your userops without the fear of breaking patches that were cloned at one point
 
@@ -86,7 +86,7 @@ Secondly you can group ops together that share a common theme, implement the sam
 ## Extension Ops - `Ops.Extension.`
 
 Extensions are a way to add code to cables and make it available to ALL users of [cables.gl](https://cables.gl). They can be understood as packages of ops that are mature and stable. 
-If you feel your ops fall into this categoy [contact us on Discord](https://discord.gg/cablesgl) and we will provide you with an appropriate namespace.
+If you feel your ops fall into this category [contact us on Discord](https://discord.gg/cablesgl) and we will provide you with an appropriate namespace.
 
 Extensions are bound to [teams](../2_teams/teams) and responsibility of the code, it's quality and stability is entirely on the owner and the members of the
 team. So before applying for an extension namespace, create a team, make it public, and [move](../../5_writing_ops/dev_renaming) your ops to the teams namespace.

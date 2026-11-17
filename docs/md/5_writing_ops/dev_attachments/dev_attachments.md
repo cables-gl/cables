@@ -35,7 +35,7 @@ console.log(attachments.my_attachment);
 
 ### Using "Include JS"
 
-The contents of the attachment will be included (and executed) before your op code. This can be useful to stucture your code,
+The contents of the attachment will be included (and executed) before your op code. This can be useful to structure your code,
 branch things out into classes or just to have less "boilerplate" code visible in the op editor.
 
 Given an attachment named `context.js` with the following code:

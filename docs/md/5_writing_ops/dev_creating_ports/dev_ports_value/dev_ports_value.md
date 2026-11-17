@@ -1,6 +1,6 @@
 # Floating Point Number Ports
 
-This page will explain how to create an input and ouput port of the type `Number`<br>
+This page will explain how to create an input and output port of the type `Number`<br>
 ![Button](../img/creating_ports_value_port_color.png)<br>
 Click this [link](https://cables.gl/edit/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 

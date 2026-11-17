@@ -27,7 +27,7 @@ There are a few special namespaces, see their use:
 
 ### Special namespaces
 
-- Any op that has `.Dev.` as any part of it's namespace will only be usable on [https://dev.cables.gl](dev.cables.gl)
+- Any op that has `.Dev.` as any part of it's namespace will only be usable on [https://dev.cables.gl](https://dev.cables.gl)
 - Any op that has `.Deprecated.` as any part of it's namespace will not be visible in new patches and show a warning in old ones
 
 ## Creating a new version

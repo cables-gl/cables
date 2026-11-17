@@ -1,6 +1,6 @@
 # Object Ports
 
-This page will explain how to create an input and ouput port of the type `Object`<br>
+This page will explain how to create an input and output port of the type `Object`<br>
 ![Button](../img/creating_ports_object_port_color.png) <br>
 
 Click this [link](https://cables.gl/edit/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
@@ -60,4 +60,4 @@ function update()
 Follow this [link](../../dev_callbacks/dev_callbacks) for more information on Callbacks
 
 
-For Outputting Objects, you should use `port.setRef()` instead of just `port.set()`. This way cables will always register a change of value and the updated Object is outputed.
+For Outputting Objects, you should use `port.setRef()` instead of just `port.set()`. This way cables will always register a change of value and the updated Object is output.

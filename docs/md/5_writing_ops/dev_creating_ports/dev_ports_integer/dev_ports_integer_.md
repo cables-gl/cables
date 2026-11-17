@@ -1,6 +1,6 @@
 # Integer Number Ports
 
-This page will explain how to create an input and ouput port of the type `Integer`
+This page will explain how to create an input and output port of the type `Integer`
 
 Click this [link](https://cables.gl/edit/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 
