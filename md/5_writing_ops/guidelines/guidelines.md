@@ -3,7 +3,7 @@ This is a set of rules that will help you to develop ops inside of cables.
 
 All example files for new ops should be made public else they're not available to all users
 
-Every op that draws/renders a mesh should have a geometry ouput<br>
+Every op that draws/renders a mesh should have a geometry output<br>
 Every material op should output a shader <br>
 Every op that draws something should have a checkbox called "Render". Disabling this stops the shape appearing on screen.
 

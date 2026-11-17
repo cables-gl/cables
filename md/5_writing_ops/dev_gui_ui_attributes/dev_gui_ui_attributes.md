@@ -32,7 +32,7 @@ The number in the last part of the function defines what kind of error is shown
 1 - warning / orange color
 2 - error / red color / this will also place a red dot on the right hand side of the op
 <br>
-![Button](../dev_callbacks/img/dev_callbacks_error_UI_example.png)
+![Button](../dev_callbacks/img/dev_callbacks_error_ui_example.png)
 <br>
 example code to show an error:
 ```javascript

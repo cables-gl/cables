@@ -65,7 +65,7 @@ In case you have some initialisation code for your op you can place it inside an
 the op-code outside of any callbacks or functions.
 
 When you inspect existing ops by pressing the `View Code` button in the op parameters, you will notice that most ops don’t use this function, as
-op init is done asynchronously and most of the time it's better to just initalize outside of callbacks and handle port-value-changes in
+op init is done asynchronously and most of the time it's better to just initialize outside of callbacks and handle port-value-changes in
 the corresponding `onChange`;
 
 Please be aware that this function will be called twice on patch load. If you need to initialize a variable global to the op,
@@ -136,7 +136,7 @@ switch1.onChange=function()
 ## Logging
 
 To debug your ops you can press **ctrl+shift+i** (in chrome) to open the developer tools
-The following line of of code will print 'hello world' to the console
+The following line of code will print 'hello world' to the console
 
 ```javascript
 op.log( 'hello world' );

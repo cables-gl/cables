@@ -89,7 +89,7 @@ GLSL 3.0 for example uses the qualifier `out` to declare varying data (data that
 
 To counter these differences in syntax when shaders are compiled, cables uses its own layout qualifiers for these types of attributes: `IN`, `OUT` and `UNI`.
 
-The correct qualifiers get injected at compile-time depending on which WebGL version is used in the patch. Thus it is possible to write one shader for both WebGL versions. You can of course still use the original qualifiers, but your shader might not work in both WebGL versions. Please see the following tables for all availible layout qualifiers in cables:
+The correct qualifiers get injected at compile-time depending on which WebGL version is used in the patch. Thus it is possible to write one shader for both WebGL versions. You can of course still use the original qualifiers, but your shader might not work in both WebGL versions. Please see the following tables for all available layout qualifiers in cables:
 
 
 
@@ -372,7 +372,7 @@ Modules or ShaderEffects are shader code snippets that get injected at module in
 
 #### Injection points
 
-The following injection points are availible:
+The following injection points are available:
 
 #### Vertex Shader
 
