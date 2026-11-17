@@ -1,0 +1,18 @@
+name: 'webhook live'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  webhook-dev:
+    runs-on: ubuntu-latest
+    steps:
+    - name: notify dev
+      uses: distributhor/workflow-webhook@v2
+      env:
+        webhook_type: "json-extended"
+        webhook_url: "https://cables.gl/api/webhooks/updatedocs?secret=${{ secrets.WEBHOOK_SECRET }}"
+        webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
