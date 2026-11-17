@@ -1,5 +1,5 @@
 
-# Offline Audio Visualization & Analyzation
+# Offline Audio Visualization & Analysis
 
 Cables offers two operators to extract visual data from an [AudioBuffer](https://cables.gl/op/Ops.WebAudio.AudioBuffer_v2).
 

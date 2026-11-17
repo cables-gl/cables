@@ -20,7 +20,7 @@ The following materials are able to receive light:
 
 ![basiclightsetup](img/01_minimal_setup.png)
 
-In the screenshot above you see the minimum amount of operators needed to get shadows on the screen. [The patch for the screenshot is availible here](https://cables.gl/p/5f2285864ce3652062e817b5). In this example, a Directional Light is used. You can use any of the above mentioned operators to add lighting to a scene.
+In the screenshot above you see the minimum amount of operators needed to get shadows on the screen. [The patch for the screenshot is available here](https://cables.gl/p/5f2285864ce3652062e817b5). In this example, a Directional Light is used. You can use any of the above mentioned operators to add lighting to a scene.
 
 ## Multiple Lights
 

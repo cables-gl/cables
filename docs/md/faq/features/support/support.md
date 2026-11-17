@@ -33,7 +33,7 @@ We'd love to show it to the world.
 
 ## Let us know what's missing!
 
-Bugs bugs bugs, they are everywhere... if you don't bring our attention to them!
+Bugs, bugs, bugs, they are everywhere... if you don't bring our attention to them!
 Please report bugs and take part/help others in the discussion [forum](https://github.com/cables-gl/cables/issues) and [discord](https://discord.gg/cablesgl).
 
 Help us by documenting and sharing patches that illustrate the issues, this makes it easy for us to squash them and not wander around looking for them!

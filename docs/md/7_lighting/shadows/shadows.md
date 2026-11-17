@@ -17,7 +17,7 @@ The following op(s) allow to receive shadows:
 
 - [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2)
 
-in conjuction with any material.
+in conjunction with any material.
 
 Before we dive into creating shadows, we need to cover the basic terminology first:
 
@@ -49,7 +49,7 @@ Okay, enough with the theory, let's dive into creating shadows!
 
 ![shadowminimalmage](img/01_minimal_patch_shadows.png)
 
-In the screenshot above you see the minimum amount of operators needed to get shadows on the screen. [The patch for the screenshot is availible here](https://cables.gl/p/J4R3_e).
+In the screenshot above you see the minimum amount of operators needed to get shadows on the screen. [The patch for the screenshot is available here](https://cables.gl/p/J4R3_e).
 
 You can add multiple [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) before meshes to enable or disable shadow casting.
 
@@ -68,7 +68,7 @@ It is possible that multiple lights cast shadows.
 
 Whenever you are using multiple lights in a scene, make sure to tame parameters like `Intensity` to get a more natural look.
 
-[The patch for this screenshot is availible here](https://cables.gl/p/5f2aad23565f4e7e4d42ff23).
+[The patch for this screenshot is available here](https://cables.gl/p/5f2aad23565f4e7e4d42ff23).
 
 ### Shadow Map Settings
 
@@ -87,7 +87,7 @@ The camera settings for these 2 lights differ a little bit.
 
 The [Point Light](https://cables.gl/op/Ops.Gl.Phong.PointLight_v5) renders its shadow information into a cubemap instead of a texture. You can only set the `Near` and `Far` values and they will be applied to each side of the cubemap. Currently it is not possible to set different `Near` and `Far` values per side.
 
-The [Spot Light](https://cables.gl/op/Ops.Gl.Phong.SpotLight_v5)'s shadow camera exposes `Near` and `Far` values aswell, but does not expose `LR-Bottom-Top`. Instead, the FOV of the camera is defined by the spot light's `Cone Angle` property.
+The [Spot Light](https://cables.gl/op/Ops.Gl.Phong.SpotLight_v5)'s shadow camera exposes `Near` and `Far` values as well, but does not expose `LR-Bottom-Top`. Instead, the FOV of the camera is defined by the spot light's `Cone Angle` property.
 
 ## Algorithms
 
@@ -100,7 +100,7 @@ The default shadow algorithm is only able to produce hard shadows. This algorith
 
 ### PCF (Percentage-Closer-Filtering)
 
-The *PCF*, or *Percentage-Cl oser-Filtering*, algorithm is an extension of the default algorithm. It is able to produce *soft shadows* by linearly interpolating between the pixels of the shadow map. We are able to set the amount of sampling with the parameter `Sample Amount` featured in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op.
+The *PCF*, or *Percentage-Closer Filtering*, algorithm is an extension of the default algorithm. It is able to produce *soft shadows* by linearly interpolating between the pixels of the shadow map. We are able to set the amount of sampling with the parameter `Sample Amount` featured in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op.
 The higher the `Sample Amount`, the more expensive the calculations become. Most of the time, an amount of **4** samples should be enough to soften the shadows' edges.
 
 #### A note on the [Point Light](https://cables.gl/op/Ops.Gl.Phong.PointLight_v5) op:

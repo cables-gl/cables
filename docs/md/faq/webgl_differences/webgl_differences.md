@@ -2,7 +2,7 @@
 
 ## A little overview
 
-The underlying interface that allows 3D graphics on the web to be rendered natively is called WebGL. WebGL was first released in 2011 with WebGL1. WebGL2, the next iteration of WebGL, was made availible in 2017. WebGL2 features new features. If you are interested in the details of the specification & differences, have a look [here](https://webgl2fundamentals.org/webgl/lessons/webgl2-whats-new.html).
+The underlying interface that allows 3D graphics on the web to be rendered natively is called WebGL. WebGL was first released in 2011 with WebGL1. WebGL2, the next iteration of WebGL, was made available in 2017. WebGL2 features new features. If you are interested in the details of the specification & differences, have a look [here](https://webgl2fundamentals.org/webgl/lessons/webgl2-whats-new.html).
 
 ## Why would this matter to you, the user?
 

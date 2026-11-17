@@ -1,4 +1,4 @@
-# Howto use my patch in React / Vue
+# How to use my patch in React / Vue
 
 You can integrate exported cables patches into React or View using simple components.
 Find example integrations and instructions in these repositories:
