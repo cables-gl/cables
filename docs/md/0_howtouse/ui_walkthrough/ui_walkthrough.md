@@ -27,7 +27,7 @@ To **add an op in between two ops** just press the circle in the middle of the c
 <br />
 
 
-To **change one of the op-parameters** first select the op by clicking on it, then you will see the the op-settings in the pane on the right. To change one of the number value inputs click and drag up or down.
+To **change one of the op-parameters** first select the op by clicking on it, then you will see the op-settings in the pane on the right. To change one of the number value inputs click and drag up or down.
 
 ![alt text](video/d_change_op_parameter.gif)
 <br />
