@@ -40,12 +40,6 @@
     "license": "MIT",
     "changelog": [
         {
-            "message": "created as a new version of Ops.Math.Average",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1792757537112
-        },
-        {
             "message": "new version v2: fixed formula and other problems/renamed influence to smooth",
             "type": "bugfix",
             "author": "pandur",

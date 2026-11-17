@@ -102,13 +102,7 @@
     "license": "MIT",
     "changelog": [
         {
-            "message": "created as a new version of Ops.Date.DateAndTime",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1792043384854
-        },
-        {
-            "message": "Months output is now 1 based, as other ops",
+            "message": "New version v2: Months output is now 1 based, as other ops",
             "type": "improvement",
             "author": "pandur",
             "date": 1792043421274

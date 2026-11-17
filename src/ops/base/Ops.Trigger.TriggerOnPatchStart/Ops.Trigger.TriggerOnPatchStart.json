@@ -9,16 +9,9 @@
             "type": "new op",
             "author": "pandur",
             "date": 1792916311377
-        },
-        {
-            "message": "Trigger.TriggerOnPatchLoad renamed to Ops.Trigger.TriggerOnPatchStart",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1792916860366
         }
     ],
     "layout": {
-        "portsIn": [],
         "portsOut": [
             {
                 "type": 1,
@@ -36,5 +29,10 @@
         "begin",
         "once",
         "boot"
-    ]
+    ],
+    "isReleased": false,
+    "summary": "Trigger one time, when the patch is started",
+    "docs": {
+        "ports": []
+    }
 }

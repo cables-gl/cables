@@ -4,7 +4,8 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1587710036528
+            "date": 1587710036528,
+            "type": "new op"
         },
         {
             "message": "New version v2: Port will now show an arrow indicating which value is used",

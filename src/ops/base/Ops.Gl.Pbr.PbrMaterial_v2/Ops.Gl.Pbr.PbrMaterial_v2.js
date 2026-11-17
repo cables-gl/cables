@@ -447,7 +447,7 @@ function doRender()
     if ((!cgl.tempData.pbrEnvStack || cgl.tempData.pbrEnvStack.length == 0) && !inLightmap.isLinked() && numLights == 0)
     {
         useDefaultLight = true;
-        op.setUiError("deflight", "Default light is enabled. Please add lights or PBREnvironmentLights to your patch to make this warning disappear.", 1);
+        op.setUiError("deflight", "Default light is enabled. Please add lights or PBREnvironmentLights to your patch to make this warning disappear.", 0);
     }
     else op.setUiError("deflight", null);
 

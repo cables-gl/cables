@@ -228,5 +228,8 @@
         "static",
         "box",
         "sphere"
+    ],
+    "coreLibs": [
+        "cgl"
     ]
 }

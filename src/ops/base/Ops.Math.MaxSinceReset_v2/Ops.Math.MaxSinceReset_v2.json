@@ -34,12 +34,5 @@
         ]
     },
     "license": "MIT",
-    "changelog": [
-        {
-            "message": "created as a new version of Ops.Math.MaxSinceReset",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1792915811014
-        }
-    ]
+    "changelog": []
 }

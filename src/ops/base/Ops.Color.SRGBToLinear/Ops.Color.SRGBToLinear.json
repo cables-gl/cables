@@ -54,5 +54,10 @@
         "linear",
         "convert",
         "tone"
-    ]
+    ],
+    "isReleased": false,
+    "summary": "Color in SRGB color space to linear",
+    "docs": {
+        "ports": []
+    }
 }

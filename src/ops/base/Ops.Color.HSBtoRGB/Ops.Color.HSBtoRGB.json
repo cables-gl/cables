@@ -55,5 +55,10 @@
         "convert",
         "color space",
         "hsl"
-    ]
+    ],
+    "isReleased": false,
+    "summary": "HSB (hue/saturation/brightness) to RGB conversion",
+    "docs": {
+        "ports": []
+    }
 }

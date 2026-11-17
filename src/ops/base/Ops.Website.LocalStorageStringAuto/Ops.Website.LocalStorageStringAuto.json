@@ -2,7 +2,7 @@
     "id": "705426fb-1777-4ec8-9e31-50ab83f83aa6",
     "changelog": [
         {
-            "message": "cloned op from Ops.Website.LocalStorageString",
+            "message": "op created",
             "type": "new op",
             "author": "pandur",
             "date": 1793975647161,
@@ -25,7 +25,7 @@
             }
         ]
     },
-    "summary": "Store and retrieve a string in browser local storage",
+    "summary": "Store and retrieve a string in browser local storage without any setup",
     "tags": [
         "browser storage",
         "persist",
@@ -34,9 +34,7 @@
         "settings",
         "localstorage",
         "text",
-        "store",
-        "",
-        ""
+        "store"
     ],
     "docs": {
         "ports": [

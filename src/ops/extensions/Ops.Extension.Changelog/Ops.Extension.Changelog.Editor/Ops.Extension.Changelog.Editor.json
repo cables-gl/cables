@@ -632,6 +632,18 @@
             "author": "pandur",
             "date": 1794582867077,
             "url": "https://github.com/cables-gl/cables/issues/8077"
+        },
+        {
+            "message": "Improve size of cables editor when opening and lazyloading of text editor ",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1794657344902
+        },
+        {
+            "message": "Export: enable minify for glsl code as a default",
+            "type": "improvement",
+            "author": "stephan",
+            "date": 1794910029594
         }
     ],
     "isReleased": true,

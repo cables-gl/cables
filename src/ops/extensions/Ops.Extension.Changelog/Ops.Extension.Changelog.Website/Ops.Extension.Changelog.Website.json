@@ -247,6 +247,12 @@
             "author": "stephan",
             "date": 1794414415757,
             "url": "https://npmjs.com/package/@cables/cables"
+        },
+        {
+            "message": "Link to \"emergency op\" editor  on my data - ops page",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1794905552696
         }
     ],
     "isReleased": true,

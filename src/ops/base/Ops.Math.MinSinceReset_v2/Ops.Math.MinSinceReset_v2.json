@@ -34,12 +34,5 @@
         "ports": []
     },
     "license": "MIT",
-    "changelog": [
-        {
-            "message": "created as a new version of Ops.Math.MinSinceReset",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1792915818039
-        }
-    ]
+    "changelog": []
 }

@@ -38,13 +38,7 @@
     "license": "MIT",
     "changelog": [
         {
-            "message": "created as a new version of Ops.Math.ButterflyCurve",
-            "type": "new op",
-            "author": "pandur",
-            "date": 1792744696311
-        },
-        {
-            "message": "fixed formula to match the butterfly curve: no squaring, sin(t/12)^5, x uses sin and y uses cos",
+            "message": "new version v2: fixed formula to match the butterfly curve",
             "type": "bugfix",
             "author": "pandur",
             "date": 1792745146407

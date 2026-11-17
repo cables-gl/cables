@@ -111,5 +111,10 @@
     ],
     "coreLibs": [
         "cgl"
-    ]
+    ],
+    "isReleased": true,
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "k6NCV8"
 }

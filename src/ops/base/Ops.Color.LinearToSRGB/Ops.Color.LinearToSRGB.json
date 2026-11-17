@@ -9,12 +9,6 @@
             "type": "new op",
             "author": "pandur",
             "date": 1793359825493
-        },
-        {
-            "message": "Local.LinearToSRGB renamed to Ops.Color.LinearToSRGB",
-            "type": "rename",
-            "author": "pandur",
-            "date": 1793359849580
         }
     ],
     "layout": {
@@ -60,5 +54,10 @@
         "linear",
         "convert",
         "tone"
-    ]
+    ],
+    "isReleased": false,
+    "summary": "Color in linear color space to SRGB",
+    "docs": {
+        "ports": []
+    }
 }
