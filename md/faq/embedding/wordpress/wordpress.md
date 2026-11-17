@@ -1,4 +1,4 @@
-# Howto integrate a patch into Wordpress
+# How to integrate a patch into Wordpress
 
 You can integrate exported cables patches on a WordPress site with a small shortcode that embeds them in an iframe.
 Everything is loaded from your own WordPress installation, nothing is requested from cables.gl.

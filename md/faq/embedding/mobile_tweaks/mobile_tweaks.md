@@ -1,4 +1,4 @@
-# Mobile tipps
+# Mobile tips
 
 ## blue on touch outline/filled elements
 

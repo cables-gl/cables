@@ -8,7 +8,7 @@ Then again a lot of amazing patches run on mobile devices so it's all down to th
 
 #### Do I need a good graphics card (GPU) to use cables?
 
-- We'd advise having the equivalent of a **Nvdia 970M** for any serious graphics work.
+- We'd advise having the equivalent of a **Nvidia 970M** for any serious graphics work.
 
 #### What kind of input devices can I use with cables?
 
@@ -28,11 +28,11 @@ Then again a lot of amazing patches run on mobile devices so it's all down to th
 
 #### Can I embed a cables patch in a wordpress page?
 
-- Yes you can. Check [Cables and WordPress](../embedding/cms/wordpress/wordpress) to get started.
+- Yes you can. Check [Cables and WordPress](../embedding/wordpress/wordpress) to get started.
 
 #### Can I make my own custom ops?
 
-- Yes you can. We have a [youtube playlist](https://www.youtube.com/watch?v=vJ47_rYdezU&list=PLYimpE2xWgBvKQg65p9q5sa2jJaHGO7Ka&index=2&t=0s) with lots of entry level turorials and a github repo called [coding with cables](https://github.com/cables-gl/coding-with-cables).
+- Yes you can. We have a [youtube playlist](https://www.youtube.com/watch?v=vJ47_rYdezU&list=PLYimpE2xWgBvKQg65p9q5sa2jJaHGO7Ka&index=2&t=0s) with lots of entry level tutorials and a github repo called [coding with cables](https://github.com/cables-gl/coding-with-cables).
 You can also click on any cables op and press the **e** key to see the op code.
 
 #### How do I download assets from a patch to my computer?
