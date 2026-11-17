@@ -51,7 +51,7 @@ Enter your generated [access token](https://github.com/settings/tokens) that has
 - Click on button
 - Wait for the two buttons to appear
 - Click on "View Deployment" to visit your website on github
-- Click on "Deploments overview" to see your repository on github
+- Click on "Deployments overview" to see your repository on github
 
 ## CAVEATS
 - This will not work if there are any merge conflicts, so do not change any cables files from outside cables

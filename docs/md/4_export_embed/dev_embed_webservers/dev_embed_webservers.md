@@ -50,11 +50,11 @@ In order to preview the cables patch, we need a local web server, which you can 
 
 - [Anvil](https://anvilformac.com) (very user-friendly, Mac only)
 - [XAMPP](https://www.apachefriends.org/de/index.html) (harder to use, cross-platform)
-- [http-server](https://www.npmjs.com/package/http-server) (node.js module, Terminal use required, cross-paltform, easy to use if you know how)
+- [http-server](https://www.npmjs.com/package/http-server) (node.js module, Terminal use required, cross-platform, easy to use if you know how)
 
 #### Previewing with Anvil (Mac)
 
-First download and install [Anvill](https://anvilformac.com/), then click on menu bar icon and install the required dependency Pow.
+First download and install [Anvil](https://anvilformac.com/), then click on menu bar icon and install the required dependency Pow.
 
 Now you can just drag the patch folder (the root folder including all the extracted files) onto the anvil-icon and anvil will create a local .dev-domain for you. Click the newly created dev-domain and your patch should be visible in your browser.
 

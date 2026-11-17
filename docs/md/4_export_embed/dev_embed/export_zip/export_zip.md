@@ -31,13 +31,13 @@ these files included in the export.
 ### Package
 
 - Single Javascript File: packages and minifies everything into one single javascript file to include
-- Multiple Files: will keep the patch configuration, your code, and core code in seperate files
+- Multiple Files: will keep the patch configuration, your code, and core code in separate files
 
 
 ### Export without subdirectories
 
 - Should you need the directory structure of your patch to be "flat" (no js/ or assets/ subdirectory) you can select this option.
-    - This will ususally not be needed, some platforms do not allow for accessing subdirectories tough, and some setups of frameworks like react/vue also behave weirdly with subdirectories.
+    - This will usually not be needed, some platforms do not allow for accessing subdirectories tough, and some setups of frameworks like react/vue also behave weirdly with subdirectories.
 
 ### Minify Code
 

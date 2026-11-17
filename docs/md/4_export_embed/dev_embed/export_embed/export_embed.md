@@ -5,7 +5,7 @@ Select the "EMBED" option in the export dialog:
 ![Button](../img/export_embed.png)
 
 Just copy the code in the textarea to any webpage or CMS you are using. This will run the patch
-in an iframe accessing the cables servers everytime it is loaded. 
+in an iframe accessing the cables servers every time it is loaded. 
 
 This means that whenever your change anything in your patch (or we change something in cables) that version will be displayed.
 

@@ -3,7 +3,7 @@
 ## Variables
 
 To work with variables in cables you can use the ops `SetVariable` / `SetVariableString` and `Variable`.
-Variables are handy if you need the same values in many locations in your patch and don’t neet to see the connections or if you want to set a variable from outside cables.
+Variables are handy if you need the same values in many locations in your patch and don’t need to see the connections or if you want to set a variable from outside cables.
 
 ![Button](img/vars.png)
 
@@ -56,7 +56,7 @@ if(myVar) {
 }
 ```
 
-### pre initializing variables for embeded patch
+### pre initializing variables for embedded patch
 
 you can overwrite the initial value of a variable in the patch config:
 

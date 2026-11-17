@@ -56,16 +56,16 @@ Access-Control-Allow-Origin: *
 
 So, let's assume you are using [HttpRequest](https://cables.gl/op/Ops.Json.HttpRequest_v3). Check that you do not have
 the JSONP-Checkbox toggled on. Once that is on, all the above does not cause any problems, but your browser is loading
-the external ressouce as if it were a JavaScript-File. We cannot control these requests and we also cannot send any
+the external resource as if it were a JavaScript-File. We cannot control these requests and we also cannot send any
 additional headers with them.
 
 Next thing to check is your network tab in the dev-tools of the browser you are using. Is there any request failing?
-If there is, check wether or not the "method" is given as "OPTIONS". Then fix these errors.
+If there is, check whether or not the "method" is given as "OPTIONS". Then fix these errors.
 
 ## OPTIONS?!
 
 Before any CORS request the browser is advised to do an additional request (a so-called ["preflight"](https://livebook.manning.com/book/cors-in-action/chapter-4/)), using the HTTP 
-"OPTIONS" method (instead of "GET" for example). If that fails, the browser will not attempt to "GET" the requested ressouce.
+"OPTIONS" method (instead of "GET" for example). If that fails, the browser will not attempt to "GET" the requested resource.
 
 Make sure that the/your API you are talking to answers properly to preflight requests. If you are dealing with PHP, a very
 hacky way of doing this is something like:
