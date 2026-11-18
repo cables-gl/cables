@@ -1,0 +1,207 @@
+{
+    "id": "146b997f-47ff-413e-9068-0bc658f6407a",
+    "created": 1794488369363,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1794488369376
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 3,
+                "name": "Chassis Body"
+            },
+            {
+                "type": 0,
+                "name": "Steering",
+                "group": "Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Throttle",
+                "group": "Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Brake",
+                "group": "Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max Steering Angle",
+                "group": "Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Engine Force",
+                "group": "Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Brake Force",
+                "group": "Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Drive index",
+                "values": [
+                    "Front",
+                    "Rear",
+                    "All"
+                ],
+                "group": "Controls",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Half Track Width",
+                "group": "Wheels",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Front Axle Z",
+                "group": "Wheels",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rear Axle Z",
+                "group": "Wheels",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Wheel Y",
+                "group": "Wheels",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Wheel Radius",
+                "group": "Wheels",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Wheel Width",
+                "uititle": "Wheel Width (visual only)",
+                "group": "Wheels",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Suspension Rest Length",
+                "group": "Suspension",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max Suspension Travel",
+                "group": "Suspension",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Suspension Stiffness",
+                "group": "Suspension",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Suspension Compression",
+                "group": "Suspension",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Suspension Relaxation",
+                "group": "Suspension",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Friction Slip",
+                "group": "Suspension",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Side Friction Stiffness",
+                "group": "Suspension",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Heading",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Wheels On Ground",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Wheel Positions"
+            },
+            {
+                "type": 3,
+                "name": "Wheel Rotations"
+            },
+            {
+                "type": 3,
+                "name": "Wheel Scalings"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl"
+    ]
+}
