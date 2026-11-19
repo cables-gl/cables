@@ -1413,7 +1413,7 @@ class CglShader extends CgShader
     {
         if (!uniform)
         {
-            // this._log.log("pushtexture: no uniform given to texturestack", "shader:"+this._name,uniform,t,type);
+            this._log.log("pushtexture: no uniform given to texturestack", "shader:" + this._name, uniform, t, type);
             return;
         }
         if (!t)
