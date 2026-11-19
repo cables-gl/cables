@@ -1,0 +1,172 @@
+{
+    "id": "1e06629d-434b-4923-b67f-8b53a3e9b63a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1599663936812
+        },
+        {
+            "message": "Fix problems with positioning when using forceCanvasSize",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1712913031408
+        },
+        {
+            "message": "created as a new version of Ops.Gl.InteractiveRectangle_v2",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1795092304438
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1795092304437,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger in"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "ID"
+            },
+            {
+                "type": 5,
+                "name": "Class"
+            },
+            {
+                "type": 0,
+                "name": "Pivot x index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Pivot y index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Axis index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Is Interactive",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Render Rectangle",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show Boundings",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Cursor index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Render",
+                "uititle": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger out"
+            },
+            {
+                "type": 2,
+                "name": "geometry"
+            },
+            {
+                "type": 0,
+                "name": "Pointer Hover",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Pointer Down",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Pointer X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Pointer Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Top",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Left",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Right",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Bottom",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Left Click"
+            },
+            {
+                "type": 2,
+                "name": "Dom Element"
+            }
+        ]
+    },
+    "summary": "Make a rectangular area respond to mouse and touch",
+    "tags": [
+        "hit area",
+        "button",
+        "hover",
+        "click",
+        "mouse",
+        "touch",
+        "pointer",
+        "ui",
+        "hotspot",
+        "clickable"
+    ],
+    "issues": "",
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "exampleProjectId": "P_SED0",
+    "license": "MIT",
+    "coreLibs": [
+        "cgl"
+    ]
+}
