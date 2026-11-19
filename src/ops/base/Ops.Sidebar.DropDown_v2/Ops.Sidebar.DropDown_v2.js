@@ -2,6 +2,7 @@
 const parentPort = op.inObject("Link");
 const labelPort = op.inString("Text", "Value");
 const valuesPort = op.inArray("Values");
+const titlesPort = op.inArray("Titles");
 const defaultValuePort = op.inString("Default", "");
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
@@ -77,7 +78,8 @@ labelPort.onChange = onLabelTextChanged;
 defaultValuePort.onChange = onDefaultValueChanged;
 op.onDelete = onDelete;
 
-valuesPort.onChange = onValuesPortChange;
+valuesPort.onChange =
+    titlesPort.onChange = onValuesPortChange;
 
 let options = [];
 // functions
@@ -106,10 +108,11 @@ function onValuesPortChange()
         input.removeChild(input.lastChild);
 
     options = valuesPort.get();
+    const titles = titlesPort.get() || [];
     const defaultValue = defaultValuePort.get();
     if (options)
     {
-        options.forEach(function (option)
+        options.forEach(function (option, i)
         {
             const optionEl = document.createElement("option");
 
@@ -118,7 +121,7 @@ function onValuesPortChange()
             {
                 optionEl.setAttribute("selected", "");
             }
-            const textEl = document.createTextNode(option);
+            const textEl = document.createTextNode(titles[i] ?? option);
             optionEl.appendChild(textEl);
             input.appendChild(optionEl);
         });

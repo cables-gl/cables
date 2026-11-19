@@ -30,6 +30,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1760299977225
+        },
+        {
+            "message": "added optional titles array for option labels",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1795086362964
         }
     ],
     "authorName": "tim",
@@ -47,6 +53,10 @@
             {
                 "type": 3,
                 "name": "Values"
+            },
+            {
+                "type": 3,
+                "name": "Titles"
             },
             {
                 "type": 5,
