@@ -56,15 +56,15 @@ function updateRatioPreset()
 {
     const pr = inPresets.get();
     if (pr == "Custom") return;
-    else if (pr == "16:9")inRatio.set(16 / 9);
-    else if (pr == "4:3")inRatio.set(4 / 3);
-    else if (pr == "16:10")inRatio.set(16 / 10);
-    else if (pr == "21:9")inRatio.set(21 / 9);
-    else if (pr == "2:1")inRatio.set(2);
-    else if (pr == "1:1")inRatio.set(1);
-    else if (pr == "9:16")inRatio.set(9 / 16);
-    else if (pr == "1:2")inRatio.set(0.5);
-    else if (pr == "iPhoneXr Vert")inRatio.set(9 / 19.5);
+    else if (pr == "16:9") inRatio.set(16 / 9);
+    else if (pr == "4:3") inRatio.set(4 / 3);
+    else if (pr == "16:10") inRatio.set(16 / 10);
+    else if (pr == "21:9") inRatio.set(21 / 9);
+    else if (pr == "2:1") inRatio.set(2);
+    else if (pr == "1:1") inRatio.set(1);
+    else if (pr == "9:16") inRatio.set(9 / 16);
+    else if (pr == "1:2") inRatio.set(0.5);
+    else if (pr == "iPhoneXr Vert") inRatio.set(9 / 19.5);
 }
 
 op.on("delete", () =>
@@ -79,7 +79,7 @@ inRatio.onChange = () =>
 
 inActive.onChange = function ()
 {
-    if (!inActive.get())removeStyles();
+    if (!inActive.get()) removeStyles();
 };
 
 function updateUi()
@@ -97,15 +97,16 @@ function updateUi()
     if (!forceRes)
     {
         const strAlign = inStretch.get();
-        if (strAlign == "Width")align = ALIGN_WIDTH;
-        else if (strAlign == "Height")align = ALIGN_HEIGHT;
-        else if (strAlign == "Both")align = ALIGN_BOTH;
-        else if (strAlign == "Auto")align = ALIGN_AUTO;
+        if (strAlign == "Width") align = ALIGN_WIDTH;
+        else if (strAlign == "Height") align = ALIGN_HEIGHT;
+        else if (strAlign == "Both") align = ALIGN_BOTH;
+        else if (strAlign == "Auto") align = ALIGN_AUTO;
     }
 }
 
 function removeStyles()
 {
+    cgl.canvas.forcedSize = false;
     cgl.canvas.style["margin-top"] = "";
     cgl.canvas.style["margin-left"] = "";
     cgl.canvas.styleMarginLeft = 0;
@@ -127,7 +128,13 @@ function removeStyles()
 
 inTrigger.onTriggered = function ()
 {
-    if (!inActive.get()) return next.trigger();
+    if (!inActive.get())
+    {
+        // another ForceCanvasSize may have forced the size and is no longer triggered
+        if (cgl.canvas.forcedSize) removeStyles();
+        return next.trigger();
+    }
+    cgl.canvas.forcedSize = true;
 
     let w = inWidth.get();
     let h = inHeight.get();

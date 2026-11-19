@@ -4,12 +4,15 @@
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1579874058022
+            "date": 1579874058022,
+            "type": "new op"
         },
         {
-            "message": "Ops.User.pandur.ForceCanvasSize renamed to Ops.Gl.ForceCanvasSize",
+            "message": "toggling active will correctly fill the container ",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1579877217407
+            "date": 1795092980706,
+            "url": "https://github.com/cables-gl/cables/issues/7508"
         }
     ],
     "authorName": "pandur",
