@@ -13,10 +13,11 @@
             "date": 1712913031408
         },
         {
-            "message": "created as a new version of Ops.Gl.InteractiveRectangle_v2",
-            "type": "new op",
+            "message": "Fix bugs when using op with forceCanvasSize",
+            "type": "bugfix",
             "author": "pandur",
-            "date": 1795092304438
+            "date": 1795092304438,
+            "url": "https://github.com/cables-gl/cables/issues/8409"
         }
     ],
     "authorName": "pandur",
