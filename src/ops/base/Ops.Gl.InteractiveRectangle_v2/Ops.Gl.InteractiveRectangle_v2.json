@@ -10,7 +10,8 @@
             "message": "Fix problems with positioning when using forceCanvasSize",
             "type": "bugfix",
             "author": "pandur",
-            "date": 1712913031408
+            "date": 1795093342030,
+            "url": "https://github.com/cables-gl/cables/issues/8409"
         }
     ],
     "authorName": "pandur",
