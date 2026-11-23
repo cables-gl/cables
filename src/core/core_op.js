@@ -169,7 +169,7 @@ export class Op extends Events
     static UI_ERRORLEVEL_HINT = 0;
     static UI_ERRORLEVEL_WARNING = 1;
     static UI_ERRORLEVEL_ERROR = 2;
-    static UI_ERRORLEVEL_NOTWORKING = 1;
+    static UI_ERRORLEVEL_NOTWORKING = 2;
 
     #objName = "";
     #log = new Logger("core_op");

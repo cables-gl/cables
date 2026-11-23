@@ -1285,7 +1285,7 @@ class CglShader extends CgShader
                     err.message = lines[i];
                     arr.push(err);
                 }
-                else console.log("unknown error ?parts", parts);
+                else console.log("unknown error ?parts", parts, this.finalShaderFrag);
             }
         }
     }

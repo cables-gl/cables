@@ -45,7 +45,7 @@ let needInit = true;
 
 const mesh = CGL.MESHES.getSimpleRect(cgl, "shader2texture rect");
 
-op.toWorkPortsNeedToBeLinked(inShader);
+op.toWorkPortsNeedToBeLinked(exec, inShader);
 
 tfilter.set("nearest");
 
@@ -87,12 +87,12 @@ function resetShader()
 function initFb()
 {
     needInit = false;
-    if (fb)fb.delete();
+    if (fb) fb.delete();
 
     const oldLen = drawBuffArr.length;
     numTextures = parseInt(inNumTex.get());
     drawBuffArr.length = 0;
-    for (let i = 0; i < numTextures; i++)drawBuffArr[i] = true;
+    for (let i = 0; i < numTextures; i++) drawBuffArr[i] = true;
 
     if (oldLen != drawBuffArr.length)
     {
@@ -123,33 +123,33 @@ function initFb()
     if (cgl.glVersion >= 2)
     {
         fb = new CGL.Framebuffer2(cgl, w, h,
-            {
-                "anisotropic": cgl_aniso,
-                // "isFloatingPointTexture": inFloatingPoint.get(),
-                "pixelFormat": inPixelFormat.get(),
-                "multisampling": false,
-                "numRenderBuffers": numTextures,
-                "wrap": selectedWrap,
-                "filter": filter,
-                "depth": true,
-                "multisamplingSamples": 0,
-                "clear": true
-            });
+        {
+            "anisotropic": cgl_aniso,
+            // "isFloatingPointTexture": inFloatingPoint.get(),
+            "pixelFormat": inPixelFormat.get(),
+            "multisampling": false,
+            "numRenderBuffers": numTextures,
+            "wrap": selectedWrap,
+            "filter": filter,
+            "depth": true,
+            "multisamplingSamples": 0,
+            "clear": true
+        });
     }
     else
     {
         fb = new CGL.Framebuffer(cgl, inWidth.get(), inHeight.get(),
-            {
-                "isFloatingPointTexture": inFloatingPoint.get(),
-                "filter": filter,
-                "wrap": selectedWrap
-            });
+        {
+            "isFloatingPointTexture": inFloatingPoint.get(),
+            "filter": filter,
+            "wrap": selectedWrap
+        });
     }
 }
 
 exec.onTriggered = function ()
 {
-    if (!fb || needInit)initFb();
+    if (!fb || needInit) initFb();
 
     if (
         inSize.get() == "Manual" &&

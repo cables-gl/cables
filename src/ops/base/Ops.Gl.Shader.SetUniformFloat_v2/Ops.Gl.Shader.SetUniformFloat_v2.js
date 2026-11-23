@@ -1,5 +1,3 @@
-// should be called setuniformfloat ?
-
 const
     inRender = op.inTrigger("Render"),
     inSelect = op.inDropDown("Uniform"),
@@ -17,6 +15,8 @@ let doSetupUniform = true;
 let uniform = null;
 let shaderLastCompile = -1;
 let unis = [];
+
+op.toWorkPortsNeedToBeLinked(inRender);
 
 inRender.onTriggered = function ()
 {
@@ -68,7 +68,7 @@ function setupUniform()
 
         if (!uniform)
         {
-            op.setUiError("nouni", "uniform unknown", 1);// op.setUiAttribs({ "error": "uniform unknown. maybe shader changed" });
+            op.setUiError("nouni", "uniform unknown", 1); // op.setUiAttribs({ "error": "uniform unknown. maybe shader changed" });
             outFound.set(false);
         }
         else
