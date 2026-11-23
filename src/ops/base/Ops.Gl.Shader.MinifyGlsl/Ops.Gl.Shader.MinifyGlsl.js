@@ -15,17 +15,16 @@ inStr.onChange = () =>
     {
         const token = tokens[i];
 
+        if (token.type == "line-comment" && !token.data.includes("\n")) continue;
+
+        if (token.type == "block-comment")
+        {
+            token.type = "whitespace";
+            token.data = " ";
+        }
+
         if (i > 0)
         {
-
-            if (token.type == "line-comment" && !token.data.includes("\n")) continue;
-
-            if (token.type == "block-comment")
-            {
-                token.type = "whitespace";
-                token.data = " ";
-            }
-
             if (token.type == "whitespace" && token.data == "\n" && tokens[i - 1].type == "line-comment" && !tokens[i - 1].data.includes("\n") && (i < 2 || tokens[i - 2].data.includes("\n"))) continue;
 
             if (token.type == "whitespace")
