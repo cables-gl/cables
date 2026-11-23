@@ -305,12 +305,9 @@ export class Texture extends CgTexture
         this._fromData = true;
         this.deleted = false;
 
-        if (this.height > this._cgl.maxTexSize || this.width > this._cgl.maxTexSize)
+        this.tooBig = this.height > this._cgl.maxTexSize || this.width > this._cgl.maxTexSize;
+        if (this.tooBig)
         {
-            const t = CGL.Texture.getTempTexture(this._cgl);
-            this.width = t.width;
-            this.height = t.height;
-            this.tex = t.tex;
             this._log.warn("[cgl_texture] texture size too big!", this.width, this.height, this._cgl.maxTexSize);
             return;
         }
@@ -388,15 +385,10 @@ export class Texture extends CgTexture
 
         if (filter !== null) this.filter = filter; // todo: can we remove this filter param?
 
-        if (img.height > this._cgl.maxTexSize || img.width > this._cgl.maxTexSize)
+        this.tooBig = img.height > this._cgl.maxTexSize || img.width > this._cgl.maxTexSize;
+        if (this.tooBig)
         {
-            const t = CGL.Texture.getTempTexture(this._cgl);
-            this.width = t.width;
-            this.height = t.height;
-            this.tex = t.tex;
             this._log.warn("[cgl_texture] texture size too big!", img.width, img.height, this._cgl.maxTexSize);
-
-            this.updateMemory();
             return;
         }
 

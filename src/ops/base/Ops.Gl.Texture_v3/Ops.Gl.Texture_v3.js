@@ -136,6 +136,17 @@ function realReload(nocache)
                     return;
                 }
 
+                if (newTex.tooBig)
+                {
+                    textureOut.setRef(CGL.Texture.getErrorTexture(cgl));
+                    op.setUiError("urlerror", "texture is bigger than max texture size (" + cgl.maxTexSize + ")", 2);
+                    newTex.delete();
+                    tex = null;
+                    loading.set(false);
+                    loadingId = op.patch.loading.finished(loadingId);
+                    return;
+                }
+
                 width.set(newTex.width);
                 height.set(newTex.height);
                 ratio.set(newTex.width / newTex.height);
