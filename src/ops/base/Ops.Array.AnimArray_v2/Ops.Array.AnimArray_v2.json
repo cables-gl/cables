@@ -1,6 +1,14 @@
 {
     "id": "048e852b-62ea-4314-b6f2-9ac5e7cbb066",
-    "changelog": [],
+    "changelog": [
+        {
+            "message": "Fix when there was no old value",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1795525236200,
+            "url": "https://github.com/cables-gl/cables/issues/8823"
+        }
+    ],
     "authorName": "pandur",
     "created": 1629276576965,
     "layout": {

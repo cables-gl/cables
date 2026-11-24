@@ -21,6 +21,7 @@ inDur.onChange = inArr.onChange = init;
 
 inTrigger.onTriggered = () =>
 {
+    firsttime = false;
     let t = CABLES.now() / 1000;
     const perc = anim.getValue(t);
     if (arr1 && arr2) ipArr(perc);
@@ -42,6 +43,7 @@ function copyArray(a)
 function init()
 {
     if (!inArr.get()) return;
+    if (inArr.get() == lastArr && !firsttime) return;
 
     lastArr = inArr.get();
     startTime = performance.now();
@@ -52,7 +54,8 @@ function init()
     if (cycle == 1) cycle = 0;
     else cycle = 1;
 
-    if (result.length != lastArr.length) result = copyArray(lastArr);
+    // values set before the first update start without animation, the first one is only a placeholder from the linked op
+    if (firsttime || result.length != lastArr.length) result = copyArray(lastArr);
 
     if (cycle == 0)
     {
@@ -66,8 +69,6 @@ function init()
     }
 
     anim.setValue(inDur.get() + CABLES.now() / 1000.0, cycle);
-
-    firsttime = false;
 }
 
 function ip(val1, val2, perc)
