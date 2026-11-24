@@ -67,6 +67,12 @@
             "message": "Ops.Exp.Gl.SplineDeform_v2 renamed to Ops.Gl.ShaderEffects.SplineDeform_v2",
             "author": "pandur",
             "date": 1610524155828
+        },
+        {
+            "message": "shows an error when there are more points than the GPU supports",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1795526428854
         }
     ],
     "coreLibs": [
