@@ -49,6 +49,8 @@ op.setPortGroup(
     Object.keys(OUTPUTS).map((key) => { return key !== "Event" && OUTPUTS[key]; }).filter(Boolean)
 );
 
+const outFound = op.outBoolNum("Device Found", false);
+
 /* http://www.indiana.edu/~emusic/etext/MIDI/chapter3_MIDI3.shtml */
 const NOTE_VALUES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
@@ -220,6 +222,8 @@ function onMIDIMessage(_event)
         return;
     }
 
+    if (learning && _event.target.name !== deviceSelect.get()) deviceSelect.set(_event.target.name);
+
     const deviceName = deviceSelect.get();
     const channel = getMIDIChannel(statusByte);
 
@@ -304,6 +308,7 @@ function onMIDIMessage(_event)
             }
         }
         learning = false;
+        setDevice();
         if (dia) dia.close();
         dia = null;
     }
@@ -330,16 +335,19 @@ function setDevice()
 
     op.setUiAttrib({ "extendTitle": name });
 
+    let found = false;
     const inputs = midi.inputs.values();
     for (let input = inputs.next(); input && !input.done; input = inputs.next())
     {
         if (input.value.name === name)
         {
+            found = true;
             input.value.onmidimessage = onMIDIMessage;
             outputDevice = midi.inputs.get(input.value.id);
         }
         else if (input.value.onmidimessage === onMIDIMessage) input.value.onmidimessage = null;
     }
+    outFound.set(found);
     op.setUiError("invalidswitch", null);
 }
 
@@ -371,7 +379,11 @@ function onMIDISuccess(midiAccess)
     midi = midiAccess;
     op.setUiError("nomidi", null);
 
-    midiAccess.onstatechange = deviceList;
+    midiAccess.onstatechange = () =>
+    {
+        deviceList();
+        setDevice();
+    };
     deviceList();
 
     setDevice();
@@ -397,8 +409,15 @@ function request()
 
 learn.onTriggered = () =>
 {
-    if (!outputDevice) return;
+    if (!midi) return;
     learning = true;
+
+    if (deviceSelect.get() === "none")
+    {
+        const inputs = midi.inputs.values();
+        for (let input = inputs.next(); input && !input.done; input = inputs.next())
+            input.value.onmidimessage = onMIDIMessage;
+    }
 
     if (!CABLES.UI) return;
 
@@ -408,8 +427,9 @@ learn.onTriggered = () =>
         "text": "Just rotate a knob or press a button on your midi device"
     });
 
-    dia.on("close", () =>
+    dia.on("onClose", () =>
     {
         learning = false;
+        setDevice();
     });
 };
