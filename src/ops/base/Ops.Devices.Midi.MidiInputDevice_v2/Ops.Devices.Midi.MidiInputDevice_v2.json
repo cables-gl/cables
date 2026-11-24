@@ -38,6 +38,11 @@
             {
                 "type": 2,
                 "name": "Clock"
+            },
+            {
+                "type": 0,
+                "name": "Device Found",
+                "subType": "boolean"
             }
         ]
     },
@@ -110,6 +115,18 @@
             "type": "improvement",
             "author": "pandur",
             "date": 1765284460334
+        },
+        {
+            "message": "added Device Found output",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1795536253722
+        },
+        {
+            "message": "learn button will also set the device,not only create value ops",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1795536502509
         }
     ],
     "caniusequery": "Web MIDI API",
