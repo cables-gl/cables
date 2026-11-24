@@ -48,6 +48,12 @@
             "type": "feature",
             "author": "pandur",
             "date": 1772469794185
+        },
+        {
+            "message": "By default show checkerboard background pattern / Add Alpha channel view",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1795519883513
         }
     ],
     "authorName": "pandur",
@@ -86,6 +92,16 @@
             },
             {
                 "type": 0,
+                "name": "Background index",
+                "values": [
+                    "Dark",
+                    "Bright",
+                    "Black"
+                ],
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "Convert RGBE",
                 "subType": "boolean"
             },
@@ -96,7 +112,8 @@
                     "RGB",
                     "R",
                     "G",
-                    "B"
+                    "B",
+                    "A"
                 ],
                 "subType": "integer"
             },

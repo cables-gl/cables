@@ -3,9 +3,10 @@ const
     inShowInfo = op.inBool("Show Info", false),
     inVizRange = op.inSwitch("Visualize outside 0-1", ["Off", "Anim", "Modulo"], "Anim"),
     inAlpha = op.inSwitch("Alpha", ["A", "1", "1-A"], "A"),
+    inBackground = op.inSwitch("Background", ["Dark", "Bright", "Black"], "Dark"),
     inRgbe = op.inBool("Convert RGBE", false),
 
-    inRGB = op.inSwitch("Channels", ["RGB", "R", "G", "B"], "RGB"),
+    inRGB = op.inSwitch("Channels", ["RGB", "R", "G", "B", "A"], "RGB"),
     inType = op.inSwitch("Type", ["Automatic", "Default", "Depth", "Cubemap"], "Automatic"),
 
     inPickColor = op.inBool("Show Color", false),
@@ -79,6 +80,7 @@ function updateDefines()
     shader.toggleDefine("MONO_R", inRGB.get() == "R");
     shader.toggleDefine("MONO_G", inRGB.get() == "G");
     shader.toggleDefine("MONO_B", inRGB.get() == "B");
+    shader.toggleDefine("MONO_A", inRGB.get() == "A");
 }
 
 let canvas = null;
@@ -125,6 +127,13 @@ function drawImageContained(ctx, img, maxWidth, maxHeight, offsetX = 0, offsetY 
 
     const x = offsetX + (maxWidth - drawWidth) / 2;
     const y = offsetY + (maxHeight - drawHeight) / 2;
+
+    if (inBackground.get() == "Black")
+    {
+        ctx.fillStyle = "#000";
+        ctx.fillRect(x, y, drawWidth, drawHeight);
+    }
+    else layer.vizLayer.drawCheckerboard(ctx, x, y, drawWidth, drawHeight, inBackground.get() == "Bright");
 
     ctx.drawImage(img, x, y, drawWidth, drawHeight);
 
@@ -274,47 +283,15 @@ if (CABLES.UI)
 
             ctx.imageSmoothingEnabled = !small || !scaledDown;
 
-            ctx.fillStyle = "#ffffff";
-            ctx.fillRect(layer.x, layer.y - 10, 10, 10);
-            ctx.fillStyle = "#000000";
-            ctx.fillRect(layer.x, layer.y - 10, 5, 5);
-            ctx.fillRect(layer.x + 5, layer.y - 10 + 5, 5, 5);
-
-            let layerHeight = layer.height;
-            let numX = (10 * layer.width / layerHeight * layer.scale) * 2;
-            let numY = (numX * layer.height / layer.width);
-            let stepY = (layerHeight / numY);
-            let stepX = (layer.width / numX);
-
-            for (let x = 0; x < numX + 1; x++)
-                for (let y = 0; y < numY + 1; y++)
-                {
-                    if ((x + y) % 2 == 0) ctx.fillStyle = "#333333";
-                    else ctx.fillStyle = "#393939";
-                    ctx.fillRect(layer.x - layer.x % stepX * 2 + stepX * x, layer.y - layer.y % stepX * 2 + stepY * y, stepX, stepY);
-                }
-
-            ctx.fillStyle = "#222";
-            const borderLeft = (layer.width - sizeImg[0]) / 2;
-            const borderTop = (layerHeight - sizeImg[1]) / 2;
-
-            let imgPosX = layer.x + (layer.width - sizeImg[0]) / 2;
-            let imgPosY = layer.y + (layerHeight - sizeImg[1]) / 2;
+            const layerHeight = layer.height;
             let imgSizeW = sizeImg[0];
             let imgSizeH = sizeImg[1];
 
             if (layerHeight - sizeImg[1] < 0)
             {
-                imgPosX = layer.x + (layer.width - sizeImg[0] * layerHeight / sizeImg[1]) / 2;
-                imgPosY = layer.y;
                 imgSizeW = sizeImg[0] * layerHeight / sizeImg[1];
                 imgSizeH = layerHeight;
             }
-
-            ctx.fillRect(layer.x, layer.y, imgPosX - layer.x, layerHeight);
-            ctx.fillRect(layer.x + imgSizeW + imgPosX - layer.x, layer.y, imgSizeW, layerHeight);
-            ctx.fillRect(layer.x, layer.y, layer.width, borderTop);
-            ctx.fillRect(layer.x, layer.y + sizeImg[1] + borderTop, layer.width, borderTop);
 
             if (cgl.canvas && cgl.canvasWidth > 0 && cgl.canvasHeight > 0 && cgl.canvas.width > 0 && cgl.canvas.height > 0)
             {

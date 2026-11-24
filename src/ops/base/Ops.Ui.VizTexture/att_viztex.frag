@@ -38,6 +38,10 @@ void main()
      colTex.rgb=vec3(colTex.b);
     #endif
 
+    #ifdef MONO_A
+     colTex.rgb=vec3(colTex.a);
+    #endif
+
     if(type==1.0)
     {
         vec4 depth=vec4(0.);
@@ -158,6 +162,11 @@ void main()
         colTex= vec4(decodeRGBE8(colTex),1.0);
     #endif
 
+
+    // the alpha view itself has to be opaque, otherwise transparent areas would hide it
+    #ifdef MONO_A
+        colTex.a=1.0;
+    #endif
 
     outColor = mix(col,colTex,colTex.a);
 }
