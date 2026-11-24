@@ -6,6 +6,13 @@
             "author": "pandur",
             "date": 1615991773550,
             "type": "new op"
+        },
+        {
+            "message": "Fix when there was no old value",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1795525743941,
+            "url": "https://github.com/cables-gl/cables/issues/8823"
         }
     ],
     "authorName": "pandur",
