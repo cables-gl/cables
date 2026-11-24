@@ -1,0 +1,81 @@
+{
+    "authorName": "pandur",
+    "id": "f9757cd7-1510-402c-8fae-5d2f17d97a09",
+    "created": 1795526936480,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 3,
+                "name": "Points"
+            },
+            {
+                "type": 0,
+                "name": "Loop",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Mesh Length",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Start",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Length",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ]
+    },
+    "summary": "Deform a mesh along a spline",
+    "tags": [
+        "curve",
+        "bend along",
+        "follow path",
+        "tube",
+        "warp",
+        "path deform"
+    ],
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "op created",
+            "author": "pandur",
+            "date": 1559038680000,
+            "type": "new op"
+        },
+        {
+            "message": "New version v3: Points in a float texture instead of array - many more points possible now",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1795527038510
+        },
+        {
+            "message": "Better rotation / fix normals, better mapping and loop option",
+            "type": "feature",
+            "author": "pandur",
+            "date": 1795527463846
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier",
+        "cgl"
+    ],
+    "exampleProjectId": "F-UNZ4",
+    "license": "MIT"
+}
