@@ -30,6 +30,7 @@ let result = mat4.create();
 
 inTrigger.onTriggered = () =>
 {
+    firsttime = false;
     let t = CABLES.now() / 1000;
 
     let perc = anim.getValue(t);
@@ -89,6 +90,9 @@ function init()
     if (cycle == 1) cycle = 0;
     else cycle = 1;
 
+    // values set before the first update start without animation instead of animating from identity
+    if (firsttime) mat4.copy(result, inMat.get());
+
     if (cycle == 0)
     {
         arr1 = inMat.get();
@@ -106,8 +110,6 @@ function init()
     {
         // result=outArr.get();
     });
-
-    firsttime = false;
 }
 
 function ip(val1, val2, perc)
