@@ -200,6 +200,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1791663215639
+        },
+        {
+            "message": "Stop calculating / animating after a while when op is not triggered",
+            "type": "improvement",
+            "author": "pandur",
+            "date": 1795530718834
         }
     ],
     "license": "MIT",

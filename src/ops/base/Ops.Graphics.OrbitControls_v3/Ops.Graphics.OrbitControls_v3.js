@@ -61,7 +61,9 @@ let eye = vec3.create(),
     element = null,
     initializing = true,
     eyeTargetCoord = [0, 0, 0, 0, 0, 0],
-    lastPy = 0;
+    lastPy = 0,
+    lastRender = 0,
+    idleInterval = null;
 
 op.onDelete = unbind;
 smoothness.onChange = updateSmoothness;
@@ -120,6 +122,7 @@ render.onTriggered = function ()
     const cgl = op.patch.cg;
     if (!cgl) return;
 
+    lastRender = performance.now();
     if (!element)
     {
         setElement(cgl.canvas);
@@ -165,14 +168,6 @@ render.onTriggered = function ()
     finalCenter[0] = ip(finalCenter[0], tempCenter[0]);
     finalCenter[1] = ip(finalCenter[1], tempCenter[1]);
     finalCenter[2] = ip(finalCenter[2], tempCenter[2]);
-
-    // eyeTargetCoord[0] = finalEye[0];
-    // eyeTargetCoord[1] = finalEye[1];
-    // eyeTargetCoord[2] = finalEye[2];
-    // eyeTargetCoord[3] = finalCenter[0];
-    // eyeTargetCoord[4] = finalCenter[1];
-    // eyeTargetCoord[5] = finalCenter[2];
-    // outCoords.setRef(eyeTargetCoord);
 
     const empty = vec3.create();
 
@@ -356,13 +351,22 @@ function bind()
     element.addEventListener("pointerup", onMouseUp);
     element.addEventListener("pointerleave", onMouseUp);
     element.addEventListener("pointerenter", onMouseEnter);
-    element.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    element.addEventListener("contextmenu", onContextMenu);
     element.addEventListener("wheel", onMouseWheel, { "passive": true });
+
+    clearInterval(idleInterval);
+    idleInterval = setInterval(() =>
+    {
+        if (performance.now() - lastRender < 500) return;
+        unbind();
+        element = null;
+    }, 500);
 }
 
 function unbind()
 {
     mouseDown = false;
+    clearInterval(idleInterval);
     if (!element) return;
 
     element.removeEventListener("pointermove", onmousemove);
@@ -371,4 +375,7 @@ function unbind()
     element.removeEventListener("pointerleave", onMouseUp);
     element.removeEventListener("pointerenter", onMouseEnter);
     element.removeEventListener("wheel", onMouseWheel);
+    element.removeEventListener("contextmenu", onContextMenu);
 }
+
+function onContextMenu(e) { e.preventDefault(); }
