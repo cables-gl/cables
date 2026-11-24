@@ -80,6 +80,12 @@
             "type": "bugfix",
             "author": "pandur",
             "date": 1774384570819
+        },
+        {
+            "message": "rotation now also rotates normals, tangents and bitangents",
+            "type": "bugfix",
+            "author": "pandur",
+            "date": 1795527309530
         }
     ],
     "coreLibs": [

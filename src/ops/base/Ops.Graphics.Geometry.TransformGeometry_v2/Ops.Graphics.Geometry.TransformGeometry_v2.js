@@ -27,6 +27,22 @@ const emptyVec = vec3.create();
 const transVec = vec3.create();
 const centerVec = vec3.create();
 
+function rotateDirections(arr)
+{
+    for (let i = 0; i < arr.length; i += 3)
+    {
+        vec3.set(rotVec, arr[i + 0], arr[i + 1], arr[i + 2]);
+
+        vec3.rotateZ(rotVec, rotVec, emptyVec, rotZ.get() * CGL.DEG2RAD);
+        vec3.rotateY(rotVec, rotVec, emptyVec, rotY.get() * CGL.DEG2RAD);
+        vec3.rotateX(rotVec, rotVec, emptyVec, rotX.get() * CGL.DEG2RAD);
+
+        arr[i + 0] = rotVec[0];
+        arr[i + 1] = rotVec[1];
+        arr[i + 2] = rotVec[2];
+    }
+}
+
 function update()
 {
     const oldGeom = geometry.get();
@@ -62,6 +78,10 @@ function update()
             geom.vertices[i + 1] = rotVec[1];
             geom.vertices[i + 2] = rotVec[2];
         }
+
+        rotateDirections(geom.vertexNormals);
+        rotateDirections(geom.tangents);
+        rotateDirections(geom.biTangents);
 
         outGeom.setRef(geom);
     }
