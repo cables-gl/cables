@@ -34,24 +34,7 @@ inputGreenPort.ignoreValueSerialize =
 const el = document.createElement("div");
 el.dataset.op = op.id;
 el.classList.add("cablesEle");
-el.addEventListener("dblclick", function ()
-{
-    let defaultValue = defaultValuePort.get();
-    input.setAttribute("value", defaultValue);
-    if (defaultValue)
-    {
-        if (defaultValue.length === 6 && defaultValue.charAt(0) !== "#")
-        {
-            defaultValue = "#" + defaultValue;
-        }
-        if (defaultValue.length === 7)
-        {
-            input.value = defaultValue;
-            colorInput.value = defaultValue;
-            setColorOutPorts(defaultValue);
-        }
-    }
-});
+el.addEventListener("dblclick", onDefaultValueChanged);
 
 inVisible.onChange = function ()
 {
@@ -88,29 +71,29 @@ colorInput.style.backgroundColor = defaultValuePort.get();
 colorInput.addEventListener("click", function ()
 {
     const cr = new ColorRick(
+    {
+        "ele": this,
+        "color": this.style.backgroundColor || "#ff0000",
+        "opacity": inputOpaPort.get(),
+        "showOpacity": showOpacity.get(),
+        "onChange": (col, opacity) =>
         {
-            "ele": this,
-            "color": this.style.backgroundColor || "#ff0000",
-            "opacity": inputOpaPort.get(),
-            "showOpacity": showOpacity.get(),
-            "onChange": (col, opacity) =>
+            if (opacity != undefined)
             {
-                if (opacity != undefined)
-                {
-                    inputOpaPort.set(opacity);
-                    outOpa.set(opacity);
-                }
-                const hex = col.hex();
-                this.style.backgroundColor = hex;
-                setColorOutPorts(hex);
-
-                input.value = hex;
-                outHex.set(hex);
-                setInputsByHex(hex);
-
-                op.refreshParams();
+                inputOpaPort.set(opacity);
+                outOpa.set(opacity);
             }
-        });
+            const hex = col.hex();
+            this.style.backgroundColor = hex;
+            setColorOutPorts(hex);
+
+            input.value = hex;
+            outHex.set(hex);
+            setInputsByHex(hex);
+
+            op.refreshParams();
+        }
+    });
     outEle.setRef(cr._elContainer);
 });
 
@@ -243,7 +226,8 @@ function onDefaultValueChanged()
         if (defaultValue.length === 7)
         {
             input.value = defaultValue;
-            colorInput.value = defaultValue;
+            colorInput.style.backgroundColor = defaultValue;
+            setInputsByHex(defaultValue);
             setColorOutPorts(defaultValue);
         }
     }
