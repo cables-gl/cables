@@ -28,23 +28,27 @@
                 "type": 2,
                 "name": "Childs_0",
                 "longPort": 4,
-                "group": "Childs"
+                "group": "Childs",
+                "objType": "element"
             },
             {
                 "type": 2,
                 "name": "Childs_1",
-                "group": "Childs"
+                "group": "Childs",
+                "objType": "element"
             },
             {
                 "type": 2,
                 "name": "Childs_2",
-                "group": "Childs"
+                "group": "Childs",
+                "objType": "element"
             },
             {
                 "type": 2,
                 "name": "Childs_3",
                 "uititle": "add port",
-                "group": "Childs"
+                "group": "Childs",
+                "objType": "element"
             }
         ],
         "portsOut": [
