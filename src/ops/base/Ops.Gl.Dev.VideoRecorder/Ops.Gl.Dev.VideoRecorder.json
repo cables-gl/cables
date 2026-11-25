@@ -1,0 +1,120 @@
+{
+    "id": "e6c081f2-e2d1-4f17-aad4-562fb1054d0f",
+    "created": 1795510831016,
+    "license": "MIT",
+    "authorName": "pandur",
+    "changelog": [
+        {
+            "message": "op created",
+            "type": "new op",
+            "author": "pandur",
+            "date": 1795510831029
+        },
+        {
+            "message": "Local.Gl.VideoRecorder renamed to Ops.Gl.Dev.VideoRecorder",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1795616135962
+        }
+    ],
+    "dependencies": [
+        {
+            "src": "./lib_mediabunny.module.js",
+            "type": "module",
+            "export": "mediabunny"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "Codec index",
+                "group": "Encoding",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Container index",
+                "values": [
+                    "MP4",
+                    "WebM"
+                ],
+                "group": "Encoding",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Quality index",
+                "group": "Encoding",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "FPS",
+                "group": "Encoding",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Start",
+                "group": "Recording"
+            },
+            {
+                "type": 1,
+                "name": "Stop",
+                "group": "Recording"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Supported",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "Error"
+            },
+            {
+                "type": 0,
+                "name": "Recording",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Frames",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dropped Frames",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Duration",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Blob URL"
+            },
+            {
+                "type": 2,
+                "name": "Report"
+            },
+            {
+                "type": 1,
+                "name": "Finished"
+            }
+        ]
+    }
+}
