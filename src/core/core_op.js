@@ -344,7 +344,8 @@ export class Op extends Events
 
     /** @returns {Port} */
     getFirstPortOut() { return null; }
-    isInBlueprint2() { return false; }
+    isInBlueprint2() { return false; } // keep for compatibility
+    isInSubpatchop() { return false; }
 
     /** @returns {string} */
     getSubPatch() { return Patch.DEFAULT_SUBPATCHID; }

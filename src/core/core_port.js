@@ -5,6 +5,8 @@ import { Anim } from "./anim.js";
 import { PatchVariable } from "./core_variable.js";
 import { Op } from "./core_op.js";
 
+// nsrtetsrneisrt
+
 /**
  * @typedef PortUiAttribs
  * @property  {String} [title] overwrite title of port (by default this is portname)
@@ -700,9 +702,9 @@ export class Port extends Events
 
                 const otherp = this.links[i].getOtherPort(this);
                 // check if functions exist, are defined in core_extend_ops code in ui
-                if (otherp.op.isInBlueprint2 && this.op.isInBlueprint2)
+                if (otherp.op.isInSubpatchop && this.op.isInSubpatchop)
                 {
-                    if (otherp.op.isInBlueprint2() && !this.op.isInBlueprint2())
+                    if (otherp.op.isInSubpatchop() && !this.op.isInSubpatchop())
                     {
                         obj.links = obj.links || [];
                         obj.links.push(this.links[i].getSerialized());
@@ -1241,5 +1243,5 @@ export class Port extends Events
 
         /* minimalcore:end */
     }
-
+// rtsnetsrneisrt
 }
