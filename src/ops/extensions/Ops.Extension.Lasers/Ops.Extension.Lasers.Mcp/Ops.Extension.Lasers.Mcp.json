@@ -1,0 +1,87 @@
+{
+    "id": "69dd3972-7864-4e52-9fe6-4d1157d13389",
+    "created": 1785567425892,
+    "license": "MIT",
+    "authorName": "pandur",
+    "flags": "genAi",
+    "dependencies": [
+        {
+            "src": "@modelcontextprotocol/sdk",
+            "type": "npm"
+        },
+        {
+            "src": "zod",
+            "type": "npm"
+        },
+        {
+            "src": "./lib_zod.module.js",
+            "type": "module",
+            "export": "zod"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Restart Server"
+            },
+            {
+                "type": 1,
+                "name": "Stop Server"
+            },
+            {
+                "type": 1,
+                "name": "Show Log"
+            },
+            {
+                "type": 2,
+                "name": "Request"
+            },
+            {
+                "type": 1,
+                "name": "Handle Request"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Started",
+                "subType": "boolean"
+            },
+            {
+                "type": 2,
+                "name": "Last Request Data"
+            },
+            {
+                "type": 5,
+                "name": "Log"
+            },
+            {
+                "type": 2,
+                "name": "Stats"
+            },
+            {
+                "type": 2,
+                "name": "Response"
+            },
+            {
+                "type": 1,
+                "name": "Response Ready"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Mcp.McpServer renamed to Ops.Team.Lasers.Mcp",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1795783603722
+        },
+        {
+            "message": "Team.Lasers.Mcp renamed to Ops.Extension.Lasers.Mcp",
+            "type": "rename",
+            "author": "pandur",
+            "date": 1795783660290
+        }
+    ]
+}
